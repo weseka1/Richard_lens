@@ -1,6 +1,6 @@
 # RICHARD LENS — Tienda + Panel. Cómo lanzar (5 minutos)
 
-## Arrancar
+## Arrancar (producción local)
 
 ```
 cd "08_TIENDA_ONLINE"
@@ -10,7 +10,19 @@ node server.js
 - **Tienda** → http://localhost:5250
 - **Panel** → http://localhost:5250/panel
 
-Cero dependencias: no hay `npm install`, no hay base de datos que configurar. Todo vive en `data/*.json`.
+El server es Node puro sin dependencias y sirve el build de React ya compilado en `dist/` (viene commiteado: clonás y corre). Los datos viven en `data/*.json` — sin base de datos que configurar.
+
+## Desarrollar (tocar la web)
+
+```
+cd "08_TIENDA_ONLINE"
+node server.js            # terminal 1: la API en :5250
+cd app && npm install     # solo la primera vez
+npm run dev               # terminal 2: Vite con hot-reload en :5173
+```
+
+Editás componentes en `app/src/` y ves los cambios al instante. Cuando esté listo:
+`npm run build` → regenera `dist/` → `node server.js` sirve la versión nueva.
 
 ## Lo único que falta conectar (en orden)
 
@@ -43,10 +55,10 @@ Cero dependencias: no hay `npm install`, no hay base de datos que configurar. To
 
 | Qué | Dónde |
 |---|---|
-| Server + API + IA | `server.js` (Node puro, puerto 5250) |
+| Server + API + IA (sin dependencias) | `server.js` (puerto 5250, sirve `dist/` con fallback SPA) |
 | Catálogo, config, ventas, eventos | `data/*.json` (editables a mano si hace falta) |
-| Tienda | `public/` — HTML por página + módulos en `public/js/` (`base` común, `card` NFT, `efectos3d` Three.js, `chat` RICH) |
-| Panel | `panel/` — `index.html` + `app.js` + `panel.css` |
+| App React (Vite) | `app/src/` — `pages/` (Home, Catalogo, Producto), `components/` (TiendaLayout, CardProducto NFT, Gafas3D, ChatRich), `panel/` (Tablero, Productos, Ventas, Consultas, Config), `lib/` (api + hooks), `styles/` |
+| Build compilado (lo que sirve el server) | `dist/` — se regenera con `cd app && npm run build` |
 | Fotos de producto | `../07_CATALOGO/imagenes/<id-producto>/` (servidas en `/fotos/...`) |
 
-Reglas del código: sin frameworks, sin build, sin dependencias. Cada página es un módulo que importa lo común de `base.js`. Para agregar una página nueva: HTML en `public/` + módulo en `public/js/`.
+Reglas del código: React + Vite, rutas con react-router, el panel entra como chunk lazy aparte (el cliente nunca lo baja) igual que Three.js. Para una página nueva: componente en `app/src/pages/` + ruta en `App.jsx`.

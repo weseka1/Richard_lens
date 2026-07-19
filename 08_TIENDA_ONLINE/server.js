@@ -95,9 +95,11 @@ function cerebroLocal(mensaje, cfg, productos) {
   const m = mensaje.toLowerCase();
   const wa = `wa.me/${cfg.whatsapp}`;
   const enStock = productos.filter(p => p.estado === 'disponible');
-  const busca = productos.filter(p =>
-    (p.marca + ' ' + p.modelo + ' ' + p.codigo).toLowerCase().includes(m.replace(/[¿?¡!.,]/g, '').trim())
-  );
+  const palabras = m.replace(/[¿?¡!.,]/g, ' ').split(/\s+/).filter(w => w.length > 3);
+  const busca = productos.filter(p => {
+    const txt = (p.marca + ' ' + p.modelo + ' ' + p.codigo).toLowerCase();
+    return palabras.some(w => txt.includes(w));
+  });
   if (/precio|cu[aá]nto|sale|valor|cuota/.test(m))
     return `Los precios se pasan por WhatsApp según modelo y forma de pago (hay ${cfg.cuotas} cuotas y ${cfg.descuento_transferencia}% off por transferencia). Escribinos y en minutos tenés precio y stock: ${wa}`;
   if (/original|truch|r[eé]plica|falso|aut[eé]ntic/.test(m))
@@ -304,20 +306,20 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(404); return res.end();
     }
 
-    // ---- estáticos: /panel y tienda ----
-    let base = 'public', rel = p;
-    if (p === '/panel' || p.startsWith('/panel/')) {
-      base = 'panel'; rel = p.replace(/^\/panel/, '') || '/';
+    // ---- app React (dist/ del build de Vite) con fallback SPA ----
+    const DIST = path.join(ROOT, 'dist');
+    const rel = p.split('/').filter(x => x && x !== '..');
+    let file = path.join(DIST, ...rel);
+    if (!path.extname(file) || !fs.existsSync(file) || !fs.statSync(file).isFile()) {
+      file = path.join(DIST, 'index.html'); // rutas de la SPA (/catalogo, /producto/x, /panel...)
     }
-    if (rel === '/') rel = '/index.html';
-    if (!path.extname(rel)) rel += '.html';
-    const file = path.join(ROOT, base, ...rel.split('/').filter(x => x && x !== '..'));
-    if (fs.existsSync(file) && fs.statSync(file).isFile()) {
-      res.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream' });
+    if (fs.existsSync(file)) {
+      const cache = /\/assets\//.test(p) ? 'max-age=31536000, immutable' : 'no-cache';
+      res.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Cache-Control': cache });
       return fs.createReadStream(file).pipe(res);
     }
-    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end('<h1 style="font-family:sans-serif">404 — esa página no existe. <a href="/">Volver a la tienda</a></h1>');
+    res.writeHead(503, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end('<h1 style="font-family:sans-serif;color:#F2EDE3;background:#0E0D0B;padding:40px">Falta el build: corré <code>cd app && npm run build</code></h1>');
   } catch (e) {
     json(res, 500, { error: String(e.message || e) });
   }

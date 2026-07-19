@@ -1,0 +1,75 @@
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { linkWA, track } from '../lib/api.js';
+import { useConfig } from '../lib/hooks.js';
+import ChatRich from './ChatRich.jsx';
+
+const ConfigContext = createContext(null);
+export const useCfg = () => useContext(ConfigContext);
+
+function BotonWA({ cfg, texto, className, children }) {
+  if (!cfg) return null;
+  return (
+    <a
+      className={className}
+      href={linkWA(cfg, texto)}
+      target="_blank" rel="noopener noreferrer"
+      onClick={() => track('whatsapp_click', location.pathname + ' → ' + (texto || 'general'))}
+    >{children}</a>
+  );
+}
+export { BotonWA };
+
+export default function TiendaLayout() {
+  const cfg = useConfig();
+  const [menu, setMenu] = useState(false);
+  const [chat, setChat] = useState(false);
+  const loc = useLocation();
+
+  useEffect(() => { window.scrollTo(0, 0); setMenu(false); }, [loc.pathname]);
+
+  return (
+    <ConfigContext.Provider value={cfg}>
+      <header>
+        <div className="header-in">
+          <Link to="/" className="logo-text"><b>RICH</b>ARD LENS</Link>
+          <button className="menu-btn" aria-label="Menú" onClick={() => setMenu(m => !m)}>☰</button>
+          <nav className={menu ? 'abierta' : ''}>
+            <NavLink to="/" end className={({ isActive }) => isActive ? 'activa' : ''}>Inicio</NavLink>
+            <NavLink to="/catalogo" className={({ isActive }) => isActive ? 'activa' : ''}>Catálogo</NavLink>
+            <Link to="/catalogo?canal=WEB">La Caja Fuerte</Link>
+            <a href="/#por-que">Por qué nosotros</a>
+            <BotonWA cfg={cfg} className="btn-wa-mini">WhatsApp</BotonWA>
+          </nav>
+        </div>
+      </header>
+
+      <Outlet />
+
+      {cfg && (
+        <footer>
+          <div className="wrap footer-in">
+            <div>
+              <div className="logo-text" style={{ marginBottom: 8 }}><b>RICH</b>ARD LENS</div>
+              <p>Anteojos 100% originales · Envíos a todo el país<br />{cfg.textos.garantia}</p>
+            </div>
+            <div className="footer-links">
+              <Link to="/catalogo">Catálogo</Link>
+              <a href={`https://instagram.com/${cfg.instagram}`} target="_blank" rel="noopener noreferrer">Instagram</a>
+              <BotonWA cfg={cfg}>WhatsApp {cfg.whatsapp_display}</BotonWA>
+            </div>
+          </div>
+        </footer>
+      )}
+
+      <div className="fab-stack">
+        <button className="fab fab-rich" title="Hablar con RICH (IA)" onClick={() => setChat(true)}>R</button>
+        <BotonWA cfg={cfg} className="fab fab-wa">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-2-1.2 7.4 7.4 0 0 1-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5a.6.6 0 0 0 0-.5c0-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5 5 0 0 0 1 2.7 11.4 11.4 0 0 0 4.4 3.9 15 15 0 0 0 1.5.5 3.6 3.6 0 0 0 1.6.1 2.7 2.7 0 0 0 1.7-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.2-.2-.4-.3Z" /></svg>
+        </BotonWA>
+      </div>
+
+      {cfg && <ChatRich cfg={cfg} abierto={chat} onCerrar={() => setChat(false)} />}
+    </ConfigContext.Provider>
+  );
+}

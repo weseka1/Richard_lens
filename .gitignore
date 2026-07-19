@@ -6,3 +6,5 @@
 node_modules/
 chrome-profile/
 .env
+
+# dist/ SÍ va al repo: clonás y `node server.js` corre sin build
