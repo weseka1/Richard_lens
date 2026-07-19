@@ -1,12 +1,10 @@
-import React, { useEffect, lazy, Suspense } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { track } from '../lib/api.js';
 import { useProductos, useReveals } from '../lib/hooks.js';
 import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
 import CardProducto from '../components/CardProducto.jsx';
-
-// three.js pesa ~600KB: entra lazy, la tienda carga primero y el 3D aparece después
-const Gafas3D = lazy(() => import('../components/Gafas3D.jsx'));
+import HeroCollage, { BilletesFondo } from '../components/HeroCollage.jsx';
 
 const MARCAS = ['RAY-BAN', 'OAKLEY', 'PRADA', 'GUCCI', 'LOUIS VUITTON', 'BALENCIAGA', 'FENDI', 'VERSACE', 'DOLCE & GABBANA'];
 
@@ -42,23 +40,23 @@ export default function Home() {
 
   return (
     <main>
-      {/* HERO */}
+      {/* HERO COLLAGE */}
       <section className="hero">
-        <Suspense fallback={null}><Gafas3D /></Suspense>
-        <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
-          <p className="hero-kicker">Anteojos 100% originales · Envíos a todo el país</p>
-          <h1>SE TE NOTA<br />LO <span className="oro">RICH</span>
-            <span className="tag-graffiti" style={{ fontSize: '.25em', verticalAlign: 'super', marginLeft: '.3em' }}>desde el nombre</span>
-          </h1>
-          <p className="hero-sub">Ray-Ban y Oakley con entrega inmediata. Prada, Gucci, Louis Vuitton, Balenciaga y Fendi directo a tu puerta — sin vidriera, sin verso, con garantía de autenticidad doble.</p>
-          <div className="hero-ctas">
-            <Link to="/catalogo" className="btn btn-oro">Ver el catálogo</Link>
-            <BotonWA cfg={cfg} className="btn btn-linea" texto="Hola, quiero ver modelos y precios.">Escribir por WhatsApp</BotonWA>
+        <BilletesFondo />
+        <div className="wrap hero-grid">
+          <div>
+            <p className="hero-kicker">Anteojos 100% originales · Envíos a todo el país</p>
+            <h1>SE TE NOTA<br />LO <span className="relleno-verde">RICH</span>
+              <span className="tag-graffiti t-rojo" style={{ fontSize: '.24em', verticalAlign: 'super', marginLeft: '.3em' }}>desde el nombre</span>
+            </h1>
+            <p className="hero-sub">Ray-Ban y Oakley con entrega inmediata. Prada, Gucci, Louis Vuitton, Balenciaga y Fendi directo a tu puerta — sin vidriera, sin verso, con garantía de autenticidad doble.</p>
+            <div className="hero-ctas">
+              <Link to="/catalogo" className="btn btn-oro">Ver el catálogo</Link>
+              <BotonWA cfg={cfg} className="btn btn-linea" texto="Hola, quiero ver modelos y precios.">Escribir por WhatsApp</BotonWA>
+            </div>
           </div>
+          <HeroCollage />
         </div>
-        <svg className="drip" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0,0 L1440,0 L1440,18 C1380,18 1370,55 1340,55 C1310,55 1315,18 1260,18 C1180,18 1190,72 1150,72 C1110,72 1120,18 1040,18 C940,18 950,48 905,48 C860,48 870,18 760,18 C660,18 670,85 620,85 C570,85 580,18 470,18 C390,18 400,40 350,40 C300,40 310,18 210,18 C140,18 150,60 110,60 C70,60 80,18 0,18 Z" fill="#D4AF37" opacity=".9" />
-        </svg>
       </section>
 
       {/* MARQUEE */}

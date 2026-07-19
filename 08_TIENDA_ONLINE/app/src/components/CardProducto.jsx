@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { plata, getFotos } from '../lib/api.js';
 
@@ -6,6 +6,14 @@ export const MONOS = {
   'Ray-Ban': 'RB', 'Oakley': 'O', 'Prada': 'P', 'Gucci': 'GG', 'Dolce & Gabbana': 'D&G',
   'Louis Vuitton': 'LV', 'Balenciaga': 'BB', 'Fendi': 'FF', 'Versace': 'V', 'RICH': 'R$'
 };
+
+/* cada producto tiene SU color pleno (estable por id) — la gramática PFP */
+const POP = ['#1F8A4C', '#E23B2E', '#2A6FE8', '#F25CA2', '#F07F13', '#7C4DE0', '#D4AF37'];
+export function popColor(id) {
+  let h = 0;
+  for (const c of String(id)) h = (h * 31 + c.charCodeAt(0)) % 997;
+  return POP[h % POP.length];
+}
 
 export function Badge({ p, estatico }) {
   const style = estatico ? { position: 'static' } : undefined;
@@ -20,37 +28,21 @@ export function TileMarca({ p, nota }) {
     <div className="tile-marca">
       <span className="mono">{MONOS[p.marca] || p.marca[0]}</span>
       <span className="marca-nombre">{p.marca}</span>
-      {nota && <span style={{ fontSize: '.7rem', color: 'var(--hueso-35)', marginTop: 10 }}>{nota}</span>}
+      {nota && <span style={{ fontSize: '.7rem', opacity: .65, marginTop: 10, fontWeight: 600 }}>{nota}</span>}
     </div>
   );
 }
 
 export default function CardProducto({ p, i = 0, cfg }) {
   const [foto, setFoto] = useState(null);
-  const ref = useRef(null);
-
   useEffect(() => { getFotos(p.foto_codigo).then(fs => setFoto(fs[0] || null)); }, [p.foto_codigo]);
 
-  /* tilt 3D suave (solo mouse) */
-  useEffect(() => {
-    if (matchMedia('(pointer: coarse)').matches) return;
-    const card = ref.current;
-    if (!card) return;
-    const move = e => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      card.style.transform = `translateY(-6px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg)`;
-      card.style.transition = 'transform .1s';
-    };
-    const leave = () => { card.style.transform = ''; card.style.transition = 'transform .5s cubic-bezier(.22,1,.36,1)'; };
-    card.addEventListener('mousemove', move);
-    card.addEventListener('mouseleave', leave);
-    return () => { card.removeEventListener('mousemove', move); card.removeEventListener('mouseleave', leave); };
-  }, []);
-
   return (
-    <Link ref={ref} className="card" to={`/producto/${p.id}`} style={{ transitionDelay: `${(i % 4) * 70}ms` }}>
+    <Link
+      className="card"
+      to={`/producto/${p.id}`}
+      style={{ transitionDelay: `${(i % 4) * 60}ms`, '--pop': popColor(p.id) }}
+    >
       <span className="card-num">{p.codigo}</span>
       <Badge p={p} />
       <div className="card-foto">

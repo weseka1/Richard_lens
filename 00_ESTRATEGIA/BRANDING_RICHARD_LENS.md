@@ -67,6 +67,14 @@ siempre impecable en el medio.
 
 ## 4. Sistema visual
 
+> **⚠️ Decisión de Juani (20-jul, para la WEB):** el negro+oro total le pareció "muy hecho con IA"
+> (el cliché de lujo). La web va **POP GRAFITI**: pared crema `#F2EBDD`, tinta negra brutal `#16140F`,
+> colores saturados como información (rojo `#E23B2E`, azul `#2A6FE8`, verde billete `#1F8A4C`,
+> rosa `#F25CA2`, naranja `#F07F13`, violeta `#7C4DE0`), bordes negros 3px + sombras duras (estética
+> sticker), cada card de producto con su fondo de color pleno (gramática PFP/NFT). El **negro+oro
+> queda SOLO para La Caja Fuerte (sección LUX), el panel interno y piezas "vault"** — el contraste
+> entre pop y vault es parte del sistema. La paleta de abajo sigue vigente para esas piezas oscuras.
+
 ### Paleta (restringida, no arcoíris)
 | Rol | Color | Hex |
 |---|---|---|

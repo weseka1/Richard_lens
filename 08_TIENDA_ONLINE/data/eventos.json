@@ -1,1 +1,52 @@
-﻿[]
+[
+  {
+    "fecha": "2026-07-19T14:55:21.686Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-19T14:55:06.076Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-19T14:54:38.163Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-19T14:42:28.898Z",
+    "tipo": "chat_abierto",
+    "detalle": "/"
+  },
+  {
+    "fecha": "2026-07-19T14:41:58.143Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-19T14:41:47.164Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-19T14:41:42.706Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-19T14:41:41.271Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-19T14:41:30.539Z",
+    "tipo": "chat_abierto",
+    "detalle": "/"
+  },
+  {
+    "fecha": "2026-07-19T14:41:09.515Z",
+    "tipo": "visita",
+    "detalle": "home"
+  }
+]

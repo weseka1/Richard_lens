@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { plata, track, getFotos } from '../lib/api.js';
 import { useProductos, useReveals } from '../lib/hooks.js';
 import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
-import CardProducto, { Badge, TileMarca } from '../components/CardProducto.jsx';
+import CardProducto, { Badge, TileMarca, popColor } from '../components/CardProducto.jsx';
 
 export default function Producto() {
   const { id } = useParams();
@@ -40,7 +40,7 @@ export default function Producto() {
     <main className="wrap">
       <div className="producto-layout">
         <div>
-          <div className="galeria-principal">
+          <div className="galeria-principal" style={{ '--pop': popColor(p.id) }}>
             {fotos.length
               ? <img src={fotos[fotoActiva]} alt={`${p.marca} ${p.modelo}`} />
               : <TileMarca p={p} nota="Fotos reales por WhatsApp — pedilas" />}
