@@ -31,8 +31,21 @@ export default function TiendaLayout() {
   return (
     <ConfigContext.Provider value={cfg}>
       <header>
+        <div className="anuncio" aria-hidden="true">
+          <div className="anuncio-in">
+            {[0, 1].map(v => (
+              <span key={v}>ENVÍO GRATIS A TODO EL PAÍS<i>●</i> 100% ORIGINALES CON GARANTÍA DOBLE<i>●</i> DROP 001 ABIERTO<i>●</i> CUOTAS + DESCUENTO POR TRANSFERENCIA<i>●</i></span>
+            ))}
+          </div>
+        </div>
+        <div className="header-bar">
         <div className="header-in">
-          <Link to="/" className="logo-text"><b>RICH</b>ARD LENS</Link>
+          <Link to="/" className="logo-text" aria-label="Richard Lens">
+            {'RICHARD LENS'.split('').map((l, i) => l === ' '
+              ? <span key={i}>&nbsp;</span>
+              : <span key={i} className="lt" style={{ color: ['#FF3E8A', '#29D9F5', '#FFD52E', '#9BE22E', '#9B5CFF'][i % 5] }}>{l}</span>
+            )}
+          </Link>
           <button className="menu-btn" aria-label="Menú" onClick={() => setMenu(m => !m)}>☰</button>
           <nav className={menu ? 'abierta' : ''}>
             <NavLink to="/" end className={({ isActive }) => isActive ? 'activa' : ''}>Inicio</NavLink>
@@ -42,6 +55,7 @@ export default function TiendaLayout() {
             <BotonWA cfg={cfg} className="btn-wa-mini">WhatsApp</BotonWA>
           </nav>
         </div>
+        </div>
       </header>
 
       <Outlet />
@@ -50,7 +64,12 @@ export default function TiendaLayout() {
         <footer>
           <div className="wrap footer-in">
             <div>
-              <div className="logo-text" style={{ marginBottom: 8 }}><b>RICH</b>ARD LENS</div>
+              <div className="logo-text" style={{ marginBottom: 8 }}>
+                {'RICHARD LENS'.split('').map((l, i) => l === ' '
+                  ? <span key={i}>&nbsp;</span>
+                  : <span key={i} className="lt" style={{ color: ['#FF3E8A', '#29D9F5', '#FFD52E', '#9BE22E', '#9B5CFF'][i % 5] }}>{l}</span>
+                )}
+              </div>
               <p>Anteojos 100% originales · Envíos a todo el país<br />{cfg.textos.garantia}</p>
             </div>
             <div className="footer-links">

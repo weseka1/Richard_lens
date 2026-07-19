@@ -4,7 +4,7 @@ import { track } from '../lib/api.js';
 import { useProductos, useReveals } from '../lib/hooks.js';
 import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
 import CardProducto from '../components/CardProducto.jsx';
-import HeroCollage, { BilletesFondo } from '../components/HeroCollage.jsx';
+import HeroCollage from '../components/HeroCollage.jsx';
 
 const MARCAS = ['RAY-BAN', 'OAKLEY', 'PRADA', 'GUCCI', 'LOUIS VUITTON', 'BALENCIAGA', 'FENDI', 'VERSACE', 'DOLCE & GABBANA'];
 
@@ -40,22 +40,24 @@ export default function Home() {
 
   return (
     <main>
-      {/* HERO COLLAGE */}
+      {/* HERO: panel gradiente que muta de color + RICH modelando */}
       <section className="hero">
-        <BilletesFondo />
-        <div className="wrap hero-grid">
-          <div>
-            <p className="hero-kicker">Anteojos 100% originales · Envíos a todo el país</p>
-            <h1>SE TE NOTA<br />LO <span className="relleno-verde">RICH</span>
-              <span className="tag-graffiti t-rojo" style={{ fontSize: '.24em', verticalAlign: 'super', marginLeft: '.3em' }}>desde el nombre</span>
-            </h1>
-            <p className="hero-sub">Ray-Ban y Oakley con entrega inmediata. Prada, Gucci, Louis Vuitton, Balenciaga y Fendi directo a tu puerta — sin vidriera, sin verso, con garantía de autenticidad doble.</p>
-            <div className="hero-ctas">
-              <Link to="/catalogo" className="btn btn-oro">Ver el catálogo</Link>
-              <BotonWA cfg={cfg} className="btn btn-linea" texto="Hola, quiero ver modelos y precios.">Escribir por WhatsApp</BotonWA>
+        <div className="wrap">
+          <div className="hero-panel">
+            <div>
+              <p className="hero-kicker">Anteojos 100% originales · Envíos a todo el país</p>
+              <h1>
+                <span className="l1">Se te nota</span>
+                <span className="l2">LO RICH</span>
+              </h1>
+              <p className="hero-sub">Ray-Ban y Oakley con entrega inmediata. Prada, Gucci, Louis Vuitton, Balenciaga y Fendi directo a tu puerta — sin vidriera, sin verso, con garantía doble.</p>
+              <div className="hero-ctas">
+                <Link to="/catalogo" className="btn-brush">Ver el catálogo</Link>
+                <BotonWA cfg={cfg} className="btn-pill" texto="Hola, quiero ver modelos y precios.">WhatsApp</BotonWA>
+              </div>
             </div>
+            <HeroCollage />
           </div>
-          <HeroCollage />
         </div>
       </section>
 
@@ -138,12 +140,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA FINAL */}
+      {/* CTA FINAL: panel gradiente rosa→violeta */}
       <section className="cta-final">
-        <h2>EL QUE QUIERE,<br /><span style={{ color: 'var(--oro)' }}>PUEDE.</span></h2>
-        <p className="tag-graffiti">y al que puede, se le nota</p>
-        <div>
-          <BotonWA cfg={cfg} className="btn btn-oro" texto="Hola, quiero mis lentes. ¿Qué tenés en stock?">Quiero mis lentes</BotonWA>
+        <div className="cta-panel">
+          <h2>EL QUE QUIERE,<br />PUEDE.</h2>
+          <p className="tag-graffiti">y al que puede, se le nota</p>
+          <div>
+            <BotonWA cfg={cfg} className="btn-brush" texto="Hola, quiero mis lentes. ¿Qué tenés en stock?">Quiero mis lentes</BotonWA>
+          </div>
         </div>
       </section>
     </main>

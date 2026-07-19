@@ -67,13 +67,18 @@ siempre impecable en el medio.
 
 ## 4. Sistema visual
 
-> **⚠️ Decisión de Juani (20-jul, para la WEB):** el negro+oro total le pareció "muy hecho con IA"
-> (el cliché de lujo). La web va **POP GRAFITI**: pared crema `#F2EBDD`, tinta negra brutal `#16140F`,
-> colores saturados como información (rojo `#E23B2E`, azul `#2A6FE8`, verde billete `#1F8A4C`,
-> rosa `#F25CA2`, naranja `#F07F13`, violeta `#7C4DE0`), bordes negros 3px + sombras duras (estética
-> sticker), cada card de producto con su fondo de color pleno (gramática PFP/NFT). El **negro+oro
-> queda SOLO para La Caja Fuerte (sección LUX), el panel interno y piezas "vault"** — el contraste
-> entre pop y vault es parte del sistema. La paleta de abajo sigue vigente para esas piezas oscuras.
+> **⚠️ DIRECCIÓN FINAL de Juani (20-jul, para la WEB) — referencia: sex9ine.com ("esta página
+> entendió todo mi gusto"):** estética **CANDY TRAP**. Base negra `#0B0B0D` + **paneles con gradiente
+> ANIMADO que muta de color** (gradmove + hue-rotate infinito) + tipografía **bubble multicolor**
+> (Titan One) y **caps de marcador** (Luckiest Guy) + candy: rosa `#FF3E8A`, cian `#29D9F5`, lima
+> `#9BE22E`, amarillo `#FFD52E`, violeta `#9B5CFF`, teal `#2EC4B6`. Botones = brochazo negro con
+> texto marcador. Marquee-anuncio rosa arriba de todo (estilo FLASH SALE). Logo con letras de
+> colores alternados. **EL PERSONAJE RICH (avatar SVG propio)** modela los lentes en el hero:
+> corona torcida, Wayfarer puestos (ojos nunca visibles), sonrisa con diente de oro, cadena con
+> medallón $, hoodie — es el asset de marca, gramática PFP/NFT. Cards de producto con fondo de
+> color pleno + sombras del mismo color. El **negro+oro queda SOLO para La Caja Fuerte, el panel
+> interno y piezas "vault"**. (La iteración anterior "pop grafiti crema" quedó descartada para la
+> web; la paleta negro/oro de abajo sigue para las piezas vault.)
 
 ### Paleta (restringida, no arcoíris)
 | Rol | Color | Hex |
