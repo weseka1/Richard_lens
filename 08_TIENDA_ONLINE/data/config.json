@@ -1,0 +1,22 @@
+{
+  "negocio": "RICHARD LENS",
+  "tagline": "Se te nota lo rich.",
+  "whatsapp": "5492915512515",
+  "whatsapp_display": "+54 9 291 551-2515",
+  "instagram": "richardlens.ar",
+  "cuotas": 6,
+  "descuento_transferencia": 10,
+  "envio_gratis_desde": 0,
+  "meta_pares_dia": 4,
+  "meta_facturacion_dia": 500000,
+  "ia": {
+    "proveedor": "claude",
+    "modelo": "claude-haiku-4-5-20251001",
+    "nota": "Setear ANTHROPIC_API_KEY como variable de entorno para activar el cerebro Claude. Sin key, el asistente responde con el cerebro local (FAQ + catalogo)."
+  },
+  "textos": {
+    "garantia": "Garantía de autenticidad. Si no es original, te devolvemos el doble.",
+    "envios": "Envíos asegurados a todo el país por Andreani / OCA.",
+    "cambios": "Cambios dentro de los 30 días. El lente tiene que gustarte de verdad."
+  }
+}

@@ -1,0 +1,8 @@
+# fuentes pesadas de diseño (los JPG/PNG exportados sí van al repo)
+*.psd
+*.psb
+
+# runtime
+node_modules/
+chrome-profile/
+.env

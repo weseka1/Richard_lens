@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RICHARD LENS — Se te nota lo rich</title>
+<meta name="description" content="Ray-Ban originales y RICH line. 3 cuotas sin interés. Envío gratis a todo el país. El rich estaba en el nombre.">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E0D0B;
+    --ink:#F2EDE3;
+    --gold:#D4AF37;
+    --gold-hi:#F0D060;
+    --bill:#2E7D52;
+    --hair:rgba(212,175,55,.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:initial}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'General Sans',system-ui,sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold);color:#0E0D0B}
+  a{color:inherit;text-decoration:none}
+  .display{font-family:'Clash Display',sans-serif;font-weight:600;letter-spacing:-.03em;text-transform:uppercase}
+  .tag{font-family:'Permanent Marker',cursive;text-transform:none}
+
+  /* ---------- grano ---------- */
+  .grain{
+    position:fixed;inset:-50%;width:200%;height:200%;
+    pointer-events:none;z-index:120;opacity:.055;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grain 8s steps(10) infinite;
+  }
+  @keyframes grain{
+    0%,100%{transform:translate(0,0)}10%{transform:translate(-2%,-3%)}30%{transform:translate(3%,-1%)}
+    50%{transform:translate(-1%,2%)}70%{transform:translate(2%,3%)}90%{transform:translate(-3%,1%)}
+  }
+
+  /* ---------- cursor ---------- */
+  .cursor,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:130;border-radius:50%;transform:translate(-50%,-50%)}
+  .cursor{width:6px;height:6px;background:var(--gold)}
+  .cursor-ring{width:34px;height:34px;border:1px solid var(--hair);transition:width .35s,height .35s,border-color .35s}
+  .cursor-ring.is-hover{width:64px;height:64px;border-color:var(--gold)}
+  @media (hover:none){.cursor,.cursor-ring{display:none}}
+
+  /* ---------- preloader ---------- */
+  .loader{position:fixed;inset:0;z-index:200;background:#0A0908;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem}
+  .loader-name{font-size:clamp(2rem,7vw,5rem);overflow:hidden;display:flex}
+  .loader-name span{display:inline-block;transform:translateY(110%)}
+  .loader-name .rich{color:var(--gold)}
+  .loader-count{font-size:.8rem;letter-spacing:.4em;color:var(--gold);font-variant-numeric:tabular-nums}
+
+  /* ---------- header ---------- */
+  header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 2rem;mix-blend-mode:difference}
+  .logo-mini{font-family:'Clash Display',sans-serif;font-weight:600;letter-spacing:.05em;font-size:.95rem}
+  .logo-mini b{color:var(--gold);font-weight:600}
+  header nav{display:flex;gap:2rem;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase}
+  header nav a{opacity:.7;transition:opacity .3s}
+  header nav a:hover{opacity:1}
+  @media (max-width:720px){header nav{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{min-height:100svh;position:relative;display:flex;flex-direction:column;justify-content:center;padding:0 4vw;overflow:hidden}
+  .hero-crest{position:absolute;right:6vw;top:50%;transform:translateY(-50%);width:min(38vw,480px);opacity:.9}
+  .hero-h1{font-size:clamp(3.4rem,11.5vw,11.5rem);line-height:.92;position:relative;z-index:2}
+  .hero-h1 .line{display:block;overflow:hidden}
+  .hero-h1 .line>span{display:inline-block;transform:translateY(115%)}
+  .hero-h1 .rich-word{color:var(--gold)}
+  .hero-sub{margin-top:2.6rem;max-width:32ch;font-size:clamp(.95rem,1.3vw,1.15rem);line-height:1.6;opacity:0;color:#CFC8B8}
+  .hero-sub b{color:var(--gold);font-weight:600}
+  .hero-tag{position:absolute;z-index:3;left:38vw;top:24%;font-size:clamp(1.2rem,2.6vw,2.4rem);color:var(--gold-hi);transform:rotate(-8deg);opacity:0}
+  .scroll-hint{position:absolute;bottom:6.5rem;left:4vw;font-size:.72rem;letter-spacing:.35em;text-transform:uppercase;opacity:.5}
+  @media (max-width:720px){
+    .hero-crest{position:relative;right:auto;top:auto;transform:none;width:62vw;margin:7rem auto 0;order:-1}
+    .hero{padding-top:4rem;justify-content:flex-start;gap:1rem}
+    .hero-tag{left:8vw;top:auto;bottom:30%}
+  }
+
+  /* ---------- marquee ---------- */
+  .marquee{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);overflow:hidden;padding:.9rem 0;background:rgba(212,175,55,.03)}
+  .marquee-track{display:flex;gap:3rem;width:max-content;animation:marq 26s linear infinite}
+  .marquee-track span{font-family:'Clash Display',sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:.85rem;white-space:nowrap}
+  .marquee-track span i{font-style:normal;color:var(--gold)}
+  @keyframes marq{to{transform:translateX(-50%)}}
+  .hero .marquee{position:absolute;bottom:0;left:0;right:0}
+
+  /* ---------- manifiesto ---------- */
+  .manifesto{min-height:110svh;display:flex;align-items:center;padding:14vh 4vw;position:relative}
+  .manifesto-inner{max-width:1100px}
+  .manifesto p{font-size:clamp(2rem,5.4vw,5rem);line-height:1.08;font-family:'Clash Display',sans-serif;font-weight:500;letter-spacing:-.02em;color:#5d574a}
+  .manifesto p .w{display:inline-block;margin-right:.28em;transition:color .3s}
+  .manifesto p .gold{color:#5d574a}
+  .manifesto .foot{margin-top:3.4rem;display:flex;gap:1.2rem;align-items:center;opacity:.55;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase}
+  .manifesto .foot::before{content:"";display:block;width:64px;height:1px;background:var(--gold)}
+
+  /* ---------- drops (horizontal) ---------- */
+  .drops{position:relative}
+  .drops-head{padding:10vh 4vw 6vh;display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+  .drops-head h2{font-size:clamp(2.6rem,7vw,6.5rem);line-height:.95}
+  .drops-head h2 em{font-style:normal;color:var(--gold)}
+  .drops-head .note{max-width:28ch;font-size:.95rem;line-height:1.6;color:#CFC8B8;padding-bottom:.8rem}
+  .drops-rail{display:flex;gap:3.5vw;padding:0 4vw 12vh;align-items:stretch}
+  .card{
+    flex:0 0 auto;width:min(78vw,460px);border:1px solid var(--hair);
+    background:linear-gradient(160deg,#14120E 0%,#0E0D0B 70%);
+    padding:2.4rem 2.2rem 2rem;position:relative;display:flex;flex-direction:column;gap:1.6rem;
+    transition:border-color .4s;
+  }
+  .card:hover{border-color:var(--gold)}
+  .card .num{font-size:.72rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase}
+  .card svg.glasses{width:100%;height:auto;display:block;margin:1.2rem 0}
+  .card h3{font-size:clamp(1.6rem,2.4vw,2.2rem);line-height:1}
+  .card .desc{font-size:.92rem;line-height:1.55;color:#BDB5A4;min-height:3em}
+  .card .row{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--hair);padding-top:1.2rem;margin-top:auto}
+  .card .cuotas{font-size:.8rem;letter-spacing:.08em;color:var(--gold)}
+  .card .cta{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid var(--gold);padding:.7rem 1.2rem;transition:background .3s,color .3s}
+  .card .cta:hover{background:var(--gold);color:#0E0D0B}
+  .card .sticker{
+    position:absolute;top:-14px;right:18px;background:var(--ink);color:#0E0D0B;
+    font-family:'Permanent Marker',cursive;font-size:.85rem;padding:.35rem .8rem;
+    transform:rotate(4deg);box-shadow:0 2px 0 rgba(0,0,0,.4);
+  }
+  .card .sticker.gold{background:var(--gold)}
+  @media (max-width:820px){.drops-rail{flex-direction:column;align-items:center;gap:2.2rem}.card{width:100%}}
+
+  /* ---------- fotos reales (prints pegados) ---------- */
+  .fotos{padding:16vh 4vw;border-top:1px solid var(--hair);position:relative}
+  .fotos-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:8vh}
+  .fotos-head h2{font-size:clamp(2.4rem,6.5vw,6rem);line-height:.95}
+  .fotos-head h2 em{font-style:normal;color:var(--gold)}
+  .fotos-head .note{max-width:30ch;font-size:.95rem;line-height:1.6;color:#CFC8B8;padding-bottom:.6rem}
+  .prints{display:flex;justify-content:center;gap:4vw;flex-wrap:wrap}
+  .print{
+    background:#F5F1E8;padding:.9rem .9rem 1rem;max-width:330px;flex:1 1 260px;
+    transform:rotate(var(--r,0deg));position:relative;
+    box-shadow:0 24px 60px rgba(0,0,0,.55);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .print:hover{transform:rotate(0) scale(1.03)}
+  .print img{width:100%;display:block}
+  .print figcaption{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#3a362e;padding-top:.8rem;text-align:center}
+  .print .tape{
+    position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(var(--tr,-2deg));
+    width:110px;height:30px;background:rgba(212,175,55,.75);
+    box-shadow:0 2px 6px rgba(0,0,0,.3);
+  }
+  .fotos .tag-cross{
+    position:absolute;right:8vw;bottom:6vh;font-size:clamp(1.2rem,2.4vw,2.2rem);
+    color:var(--gold-hi);transform:rotate(-6deg);
+  }
+
+  /* ---------- marcas outline ---------- */
+  .brands{padding:16vh 0;border-top:1px solid var(--hair);overflow:hidden}
+  .brands .big-track{display:flex;gap:4rem;width:max-content;animation:marq 32s linear infinite}
+  .brands .big-track span{
+    font-family:'Clash Display',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-.02em;
+    font-size:clamp(4rem,10vw,9rem);line-height:1;color:transparent;
+    -webkit-text-stroke:1px rgba(242,237,227,.35);white-space:nowrap;transition:color .4s;
+  }
+  .brands .big-track span:hover{color:var(--gold);-webkit-text-stroke:1px var(--gold)}
+  .brands .legal{text-align:center;margin-top:3rem;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;opacity:.4}
+
+  /* ---------- la banda ---------- */
+  .banda{padding:16vh 4vw;display:grid;grid-template-columns:1fr 1fr;gap:6vw;border-top:1px solid var(--hair);align-items:start}
+  .banda h2{font-size:clamp(2.4rem,6vw,5.5rem);line-height:.95;position:sticky;top:18vh}
+  .banda h2 em{font-style:normal;color:var(--gold)}
+  .banda h2 .tag{display:block;font-size:clamp(1.1rem,2vw,1.8rem);color:var(--gold-hi);transform:rotate(-3deg);margin-top:1.4rem}
+  .quotes{display:flex;flex-direction:column;gap:4rem}
+  .quote{border-left:1px solid var(--gold);padding-left:2rem}
+  .quote p{font-size:clamp(1.15rem,1.8vw,1.5rem);line-height:1.5;font-weight:500}
+  .quote .who{margin-top:1rem;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  @media (max-width:820px){.banda{grid-template-columns:1fr}.banda h2{position:static}}
+
+  /* ---------- CTA ---------- */
+  .final{min-height:90svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3.5rem;padding:14vh 4vw;text-align:center;position:relative;border-top:1px solid var(--hair)}
+  .final h2{font-size:clamp(2.2rem,6vw,5.5rem);line-height:1}
+  .final h2 em{font-style:normal;color:var(--gold)}
+  .wa-btn{
+    display:inline-flex;align-items:center;gap:1.2rem;
+    font-family:'Clash Display',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+    font-size:clamp(1.2rem,3vw,2.4rem);color:#0E0D0B;background:var(--gold);
+    padding:1.4em 2.2em;border-radius:999px;position:relative;overflow:hidden;
+    transition:background .3s;will-change:transform;
+  }
+  .wa-btn:hover{background:var(--gold-hi)}
+  .final .mini{font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;opacity:.5}
+
+  /* ---------- footer ---------- */
+  footer{padding:10vh 4vw 3rem;overflow:hidden}
+  .foot-links{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;opacity:.6;margin-bottom:6rem}
+  .foot-name{font-family:'Clash Display',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(3.4rem,13.5vw,13rem);line-height:.85;text-align:center;white-space:nowrap}
+  .foot-name b{color:var(--gold);font-weight:700}
+  .foot-base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:3rem;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;opacity:.4}
+
+  .reveal{opacity:0;transform:translateY(60px)}
+  @media (prefers-reduced-motion:reduce){
+    .grain,.marquee-track,.big-track{animation:none}
+    .reveal,.hero-sub,.hero-tag{opacity:1 !important;transform:none !important}
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<!-- PRELOADER -->
+<div class="loader">
+  <div class="loader-name display">
+    <span class="rich">R</span><span class="rich">I</span><span class="rich">C</span><span class="rich">H</span><span>A</span><span>R</span><span>D</span><span>&nbsp;</span><span>L</span><span>E</span><span>N</span><span>S</span>
+  </div>
+  <div class="loader-count">00</div>
+</div>
+
+<header>
+  <div class="logo-mini"><b>RICH</b>ARD LENS</div>
+  <nav>
+    <a href="#drops" data-hover>Drops</a>
+    <a href="#marcas" data-hover>Marcas</a>
+    <a href="#banda" data-hover>La banda</a>
+    <a href="#contacto" data-hover>WhatsApp</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Escudo RL intervenido: heráldica original + drip de oro -->
+  <svg class="hero-crest" viewBox="0 0 400 460" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Escudo Richard Lens">
+    <defs>
+      <linearGradient id="goldgrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#F0D060"/><stop offset="1" stop-color="#D4AF37"/>
+      </linearGradient>
+    </defs>
+    <!-- escudo doble línea -->
+    <path d="M200 18 L232 44 L288 30 L306 74 L368 84 C368 84 366 250 340 330 C314 402 200 448 200 448 C200 448 86 402 60 330 C34 250 32 84 32 84 L94 74 L112 30 L168 44 Z"
+          stroke="#F2EDE3" stroke-width="3.5"/>
+    <path d="M200 44 L226 64 L274 52 L290 90 L344 99 C344 99 342 246 320 316 C299 380 200 420 200 420 C200 420 101 380 80 316 C58 246 56 99 56 99 L110 90 L126 52 L174 64 Z"
+          stroke="#F2EDE3" stroke-width="2"/>
+    <!-- monograma RL -->
+    <text x="200" y="248" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="150" fill="#F2EDE3" letter-spacing="-18">RL</text>
+    <!-- flor de lis -->
+    <text x="200" y="352" text-anchor="middle" font-family="Georgia, serif" font-size="44" fill="#F2EDE3">⚜</text>
+    <!-- estrella -->
+    <text x="200" y="92" text-anchor="middle" font-family="Georgia, serif" font-size="30" fill="#F2EDE3">✦</text>
+    <!-- DRIP DE ORO (la intervención new rich) -->
+    <g class="drip">
+      <path d="M116 30 C120 30 122 32 122 36 L122 88 C122 96 112 96 112 88 L112 42 C112 34 112 30 116 30 Z" fill="url(#goldgrad)"/>
+      <path d="M162 44 C166 44 168 46 168 50 L168 132 C168 141 157 141 157 132 L157 52 C157 46 158 44 162 44 Z" fill="url(#goldgrad)"/>
+      <path d="M243 55 C247 55 249 57 249 61 L249 172 C249 181 238 181 238 172 L238 62 C238 57 239 55 243 55 Z" fill="url(#goldgrad)"/>
+      <path d="M296 74 C300 74 302 76 302 80 L302 118 C302 126 292 126 292 118 L292 82 C292 76 292 74 296 74 Z" fill="url(#goldgrad)"/>
+      <circle cx="117" cy="94" r="6" fill="url(#goldgrad)"/>
+      <circle cx="162.5" cy="140" r="6.5" fill="url(#goldgrad)"/>
+      <circle cx="243.5" cy="180" r="7" fill="url(#goldgrad)"/>
+      <circle cx="297" cy="124" r="5.5" fill="url(#goldgrad)"/>
+    </g>
+  </svg>
+
+  <h1 class="hero-h1 display">
+    <span class="line"><span>SE TE</span></span>
+    <span class="line"><span>NOTA</span></span>
+    <span class="line"><span class="rich-word">LO RICH.</span></span>
+  </h1>
+  <p class="hero-sub">Ray-Ban originales y la <b>RICH line</b> propia. 3 cuotas sin interés, envío gratis a todo el país y un paquete que da más placer abrir que usar.</p>
+  <div class="hero-tag tag">el rich estaba en el nombre</div>
+  <div class="scroll-hint">Scroll — despacio, que esto se disfruta</div>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Ray-Ban originales <i>✦</i></span><span>3 cuotas sin interés <i>✦</i></span><span>Envío gratis a todo el país <i>✦</i></span><span>Garantía real <i>✦</i></span><span>Drops numerados <i>✦</i></span>
+      <span>Ray-Ban originales <i>✦</i></span><span>3 cuotas sin interés <i>✦</i></span><span>Envío gratis a todo el país <i>✦</i></span><span>Garantía real <i>✦</i></span><span>Drops numerados <i>✦</i></span>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFIESTO -->
+<section class="manifesto">
+  <div class="manifesto-inner">
+    <p id="manifesto-text">Antes éramos Richard. Elegantes, calladitos, escudo heráldico. Un día caímos en la cuenta: la palabra rich estaba adentro del nombre desde el principio. Así que dejamos de susurrar.</p>
+    <div class="foot">Richard Lens · segunda temporada</div>
+  </div>
+</section>
+
+<!-- DROPS -->
+<section class="drops" id="drops">
+  <div class="drops-head">
+    <h2 class="display reveal">Los <em>drops</em></h2>
+    <p class="note reveal">Poco stock a propósito. Cuando un modelo se va, se va. Pedí el catálogo completo por WhatsApp.</p>
+  </div>
+  <div class="drops-rail">
+
+    <article class="card">
+      <span class="sticker gold">el clásico</span>
+      <span class="num">Ray-Ban · RB2140</span>
+      <svg class="glasses" viewBox="0 0 400 120" fill="none">
+        <path d="M20 30 L180 26 L186 34 L214 34 L220 26 L380 30 L376 44 L364 96 C362 104 356 108 348 108 L248 108 C240 108 234 104 232 96 L222 48 L178 48 L168 96 C166 104 160 108 152 108 L52 108 C44 108 38 104 36 96 L24 44 Z"
+              stroke="#D4AF37" stroke-width="3" fill="rgba(212,175,55,.06)"/>
+        <path d="M20 30 L4 42 M380 30 L396 42" stroke="#D4AF37" stroke-width="3"/>
+      </svg>
+      <h3 class="display">Wayfarer negro mate</h3>
+      <p class="desc">El que te imaginás. Ese. Original, con estuche, paño y garantía.</p>
+      <div class="row"><span class="cuotas">3 cuotas sin interés</span><a class="cta" data-hover href="https://wa.me/5492915512515?text=Quiero%20el%20Wayfarer%20negro%20mate">Lo quiero</a></div>
+    </article>
+
+    <article class="card">
+      <span class="num">Ray-Ban · RB3025</span>
+      <svg class="glasses" viewBox="0 0 400 120" fill="none">
+        <path d="M60 30 C110 22 150 34 158 52 C166 74 152 102 116 106 C80 110 52 92 48 62 C46 44 50 32 60 30 Z" stroke="#D4AF37" stroke-width="3" fill="rgba(212,175,55,.06)"/>
+        <path d="M340 30 C290 22 250 34 242 52 C234 74 248 102 284 106 C320 110 348 92 352 62 C354 44 350 32 340 30 Z" stroke="#D4AF37" stroke-width="3" fill="rgba(212,175,55,.06)"/>
+        <path d="M158 46 C180 34 220 34 242 46" stroke="#D4AF37" stroke-width="3"/>
+        <path d="M158 52 C180 42 220 42 242 52" stroke="#D4AF37" stroke-width="2"/>
+        <path d="M48 44 L10 36 M352 44 L390 36" stroke="#D4AF37" stroke-width="3"/>
+      </svg>
+      <h3 class="display">Aviator dorado</h3>
+      <p class="desc">Marco dorado, vidrio verde G-15. El de los que no piden permiso.</p>
+      <div class="row"><span class="cuotas">3 cuotas sin interés</span><a class="cta" data-hover href="https://wa.me/5492915512515?text=Quiero%20el%20Aviator%20dorado">Lo quiero</a></div>
+    </article>
+
+    <article class="card">
+      <span class="num">Ray-Ban · RB3447</span>
+      <svg class="glasses" viewBox="0 0 400 120" fill="none">
+        <circle cx="110" cy="66" r="44" stroke="#D4AF37" stroke-width="3" fill="rgba(212,175,55,.06)"/>
+        <circle cx="290" cy="66" r="44" stroke="#D4AF37" stroke-width="3" fill="rgba(212,175,55,.06)"/>
+        <path d="M154 56 C176 40 224 40 246 56" stroke="#D4AF37" stroke-width="3"/>
+        <path d="M66 56 L26 44 M334 56 L374 44" stroke="#D4AF37" stroke-width="3"/>
+      </svg>
+      <h3 class="display">Round metal</h3>
+      <p class="desc">Redondo, fino, de artista caro. Para caras con opinión.</p>
+      <div class="row"><span class="cuotas">3 cuotas sin interés</span><a class="cta" data-hover href="https://wa.me/5492915512515?text=Quiero%20el%20Round%20metal">Lo quiero</a></div>
+    </article>
+
+    <article class="card">
+      <span class="sticker">quedan 12</span>
+      <span class="num">RICH line · Drop 001</span>
+      <svg class="glasses" viewBox="0 0 400 120" fill="none">
+        <path d="M70 34 L140 30 L166 48 L162 84 L132 106 L72 102 L46 76 L50 46 Z" stroke="#F0D060" stroke-width="3" fill="rgba(240,208,96,.08)"/>
+        <path d="M330 34 L260 30 L234 48 L238 84 L268 106 L328 102 L354 76 L350 46 Z" stroke="#F0D060" stroke-width="3" fill="rgba(240,208,96,.08)"/>
+        <path d="M166 52 C186 44 214 44 234 52" stroke="#F0D060" stroke-width="3"/>
+        <path d="M46 54 L8 44 M354 54 L392 44" stroke="#F0D060" stroke-width="3"/>
+      </svg>
+      <h3 class="display">"El Heredero"</h3>
+      <p class="desc">Hexagonal, marca propia, numerado del 1 al 50. Nadie más lo tiene.</p>
+      <div class="row"><span class="cuotas">3 cuotas sin interés</span><a class="cta" data-hover href="https://wa.me/5492915512515?text=Quiero%20El%20Heredero%20del%20Drop%20001">Lo quiero</a></div>
+    </article>
+
+  </div>
+</section>
+
+<!-- FOTOS REALES -->
+<section class="fotos" id="fotos">
+  <div class="fotos-head">
+    <h2 class="display reveal">En mano.<br><em>Sin filtro.</em></h2>
+    <p class="note reveal">El producto real, fotografiado en casa. Antes de pagar te mandamos la foto de TU par por WhatsApp.</p>
+  </div>
+  <div class="prints">
+    <figure class="print reveal" style="--r:-3.5deg;--tr:-4deg">
+      <span class="tape"></span>
+      <img src="assets/wayfarer-par.jpg" alt="Ray-Ban Wayfarer negro mate, par" loading="lazy">
+      <figcaption>Wayfarer negro mate · el par</figcaption>
+    </figure>
+    <figure class="print reveal" style="--r:2.5deg;--tr:3deg">
+      <span class="tape"></span>
+      <img src="assets/wayfarer-34.jpg" alt="Ray-Ban Wayfarer tres cuartos" loading="lazy">
+      <figcaption>Perfil tres cuartos · acetato brillante</figcaption>
+    </figure>
+    <figure class="print reveal" style="--r:-2deg;--tr:2deg">
+      <span class="tape"></span>
+      <img src="assets/wayfarer-lateral.jpg" alt="Ray-Ban Wayfarer lateral, Hand Made in Italy" loading="lazy">
+      <figcaption>"Hand Made in Italy" · se lee, se verifica</figcaption>
+    </figure>
+  </div>
+  <div class="tag-cross tag">esa es la real</div>
+</section>
+
+<!-- MARCAS -->
+<section class="brands" id="marcas">
+  <div class="big-track">
+    <span>Ray-Ban</span><span>✦</span><span>Oakley</span><span>✦</span><span>Gucci</span><span>✦</span><span>Prada</span><span>✦</span><span>Versace</span><span>✦</span><span>Cartier</span><span>✦</span>
+    <span>Ray-Ban</span><span>✦</span><span>Oakley</span><span>✦</span><span>Gucci</span><span>✦</span><span>Prada</span><span>✦</span><span>Versace</span><span>✦</span><span>Cartier</span><span>✦</span>
+  </div>
+  <p class="legal">Línea LUX · solo por acá y por WhatsApp · no la busques en MercadoLibre</p>
+</section>
+
+<!-- LA BANDA -->
+<section class="banda" id="banda">
+  <h2 class="display">Acá no se ven<br>los ojos.<br>Se ven <em>los lentes.</em>
+    <span class="tag">bienvenido a la banda</span>
+  </h2>
+  <div class="quotes">
+    <div class="quote reveal">
+      <p>"Me llegó en 48 horas a Salta. La caja es tan linda que la tengo en el escritorio."</p>
+      <div class="who">Gonza · Aviator dorado</div>
+    </div>
+    <div class="quote reveal">
+      <p>"Pedí precio un martes a la noche. Respuesta en cinco minutos, con foto del par en mano."</p>
+      <div class="who">Meli · Wayfarer</div>
+    </div>
+    <div class="quote reveal">
+      <p>"El Heredero número 7 es mío. No me saco más los lentes ni adentro."</p>
+      <div class="who">Fran · RICH line 001</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="final" id="contacto">
+  <h2 class="display reveal">Los ojos no se muestran.<br><em>Se cubren.</em></h2>
+  <a class="wa-btn" id="magnetic" data-hover href="https://wa.me/5492915512515?text=Quiero%20el%20cat%C3%A1logo%20RICH">
+    Pedí el catálogo →
+  </a>
+  <p class="mini">Respondemos en minutos · foto real del par antes de pagar</p>
+</section>
+
+<footer>
+  <div class="foot-links">
+    <a href="#drops" data-hover>Drops</a>
+    <a href="#marcas" data-hover>Marcas</a>
+    <a href="https://instagram.com" data-hover>Instagram</a>
+    <a href="https://wa.me/5492915512515" data-hover>WhatsApp</a>
+  </div>
+  <div class="foot-name"><b>RICH</b>ARD LENS</div>
+  <div class="foot-base">
+    <span>© 2026 Richard Lens</span>
+    <span>El rich estaba en el nombre.</span>
+    <span>Hecho por WESEKA</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Lenis ---------- */
+if(!reduced){
+  const lenis = new Lenis({ lerp:.1, smoothWheel:true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t*1000));
+  gsap.ticker.lagSmoothing(0);
+}
+
+/* ---------- cursor ---------- */
+const dot = document.querySelector('.cursor');
+const ring = document.querySelector('.cursor-ring');
+if(matchMedia('(hover:hover)').matches){
+  window.addEventListener('mousemove', e=>{
+    gsap.to(dot,{x:e.clientX,y:e.clientY,duration:.12,ease:'power2.out'});
+    gsap.to(ring,{x:e.clientX,y:e.clientY,duration:.5,ease:'power3.out'});
+  });
+  document.querySelectorAll('[data-hover]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>ring.classList.add('is-hover'));
+    el.addEventListener('mouseleave',()=>ring.classList.remove('is-hover'));
+  });
+}
+
+/* ---------- preloader ---------- */
+const counter = document.querySelector('.loader-count');
+const letters = document.querySelectorAll('.loader-name span');
+const tl = gsap.timeline();
+tl.to(letters,{y:0,duration:.9,ease:'expo.out',stagger:.04})
+  .to({v:0},{v:100,duration:1.4,ease:'power2.inOut',onUpdate:function(){
+    counter.textContent = String(Math.round(this.targets()[0].v)).padStart(2,'0');
+  }},'<')
+  .to('.loader',{clipPath:'inset(0 0 100% 0)',duration:1,ease:'expo.inOut'},'+=.15')
+  .set('.loader',{display:'none'})
+  /* hero in */
+  .to('.hero-h1 .line>span',{y:0,duration:1.2,ease:'expo.out',stagger:.09},'-=.7')
+  .to('.hero-sub',{opacity:1,duration:.9,ease:'power2.out'},'-=.6')
+  .to('.hero-tag',{opacity:1,duration:.6,ease:'power2.out'},'-=.4')
+  .from('.hero-crest',{x:80,opacity:0,duration:1.4,ease:'expo.out'},'-=1.1')
+  .from('.drip path',{scaleY:0,transformOrigin:'top center',duration:1.3,ease:'power3.inOut',stagger:.14},'-=.9')
+  .from('.drip circle',{scale:0,opacity:0,transformOrigin:'center',duration:.45,ease:'back.out(2.2)',stagger:.14},'-=1');
+gsap.set('.loader',{clipPath:'inset(0 0 0% 0)'});
+
+/* ---------- crest parallax con mouse ---------- */
+if(matchMedia('(hover:hover)').matches){
+  window.addEventListener('mousemove', e=>{
+    const rx = (e.clientX/innerWidth - .5), ry = (e.clientY/innerHeight - .5);
+    gsap.to('.hero-crest',{x:rx*24,y:ry*18,rotate:rx*2,duration:1.2,ease:'power3.out'});
+  });
+}
+
+/* ---------- manifiesto: palabras que se encienden ---------- */
+const mp = document.getElementById('manifesto-text');
+mp.innerHTML = mp.textContent.trim().split(/\s+/).map(w=>{
+  const g = /rich/i.test(w) ? ' gold-target' : '';
+  return `<span class="w${g}">${w}</span>`;
+}).join(' ');
+gsap.to('.manifesto p .w',{
+  color:'#F2EDE3',stagger:.6,ease:'none',
+  scrollTrigger:{trigger:'.manifesto',start:'top 70%',end:'bottom 65%',scrub:1}
+});
+gsap.to('.manifesto p .gold-target',{
+  color:'#D4AF37',ease:'none',
+  scrollTrigger:{trigger:'.manifesto',start:'40% 70%',end:'bottom 65%',scrub:1}
+});
+
+/* ---------- drops: rail horizontal en desktop ---------- */
+ScrollTrigger.matchMedia({
+  '(min-width: 821px)': function(){
+    const rail = document.querySelector('.drops-rail');
+    const scroll = rail.scrollWidth - innerWidth;
+    gsap.to(rail,{x:-scroll,ease:'none',
+      scrollTrigger:{trigger:'.drops',start:'top top',end:()=>'+='+scroll,pin:true,scrub:1}
+    });
+  }
+});
+
+/* ---------- reveals genéricos ---------- */
+document.querySelectorAll('.reveal').forEach(el=>{
+  gsap.to(el,{opacity:1,y:0,duration:1.1,ease:'expo.out',
+    scrollTrigger:{trigger:el,start:'top 85%'}
+  });
+});
+
+/* ---------- botón magnético ---------- */
+const mag = document.getElementById('magnetic');
+if(mag && matchMedia('(hover:hover)').matches){
+  mag.addEventListener('mousemove',e=>{
+    const r = mag.getBoundingClientRect();
+    gsap.to(mag,{x:(e.clientX-r.left-r.width/2)*.3,y:(e.clientY-r.top-r.height/2)*.3,duration:.4,ease:'power3.out'});
+  });
+  mag.addEventListener('mouseleave',()=>gsap.to(mag,{x:0,y:0,duration:.7,ease:'elastic.out(1,.4)'}));
+}
+</script>
+</body>
+</html>

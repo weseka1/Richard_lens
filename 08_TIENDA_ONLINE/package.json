@@ -1,0 +1,9 @@
+{
+  "name": "richardlens-tienda",
+  "version": "1.0.0",
+  "description": "RICHARD LENS — tienda multimarca + panel + IA. Cero dependencias.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel — RICHARD LENS</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/panel/panel.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="side-logo"><b>RICH</b>ARD LENS<span>panel</span></div>
+  <nav>
+    <button class="side-link activo" data-vista="dashboard">Tablero</button>
+    <button class="side-link" data-vista="productos">Productos</button>
+    <button class="side-link" data-vista="pedidos">Ventas</button>
+    <button class="side-link" data-vista="consultas">Consultas</button>
+    <button class="side-link" data-vista="config">Config</button>
+  </nav>
+  <a class="side-tienda" href="/" target="_blank">Ver la tienda →</a>
+</aside>
+
+<main>
+  <!-- TABLERO -->
+  <section id="vista-dashboard" class="vista activa">
+    <h1>Tablero</h1>
+    <div class="kpis">
+      <div class="kpi kpi-meta">
+        <small>Facturación hoy</small>
+        <div class="kpi-valor" id="kpi-fact">$0</div>
+        <div class="barra"><div class="barra-fill" id="barra-fact"></div></div>
+        <span class="kpi-nota" id="kpi-fact-meta"></span>
+      </div>
+      <div class="kpi">
+        <small>Pares últimos 7 días</small>
+        <div class="kpi-valor" id="kpi-pares">0</div>
+        <span class="kpi-nota" id="kpi-pares-meta"></span>
+      </div>
+      <div class="kpi">
+        <small>Ventas por cerrar</small>
+        <div class="kpi-valor" id="kpi-nuevos">0</div>
+        <span class="kpi-nota">pedidos en estado nuevo</span>
+      </div>
+      <div class="kpi">
+        <small>Clicks a WhatsApp</small>
+        <div class="kpi-valor" id="kpi-wa">0</div>
+        <span class="kpi-nota"><span id="kpi-ia">0</span> consultas al asistente</span>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <h2>Últimos 7 días</h2>
+      <div class="grafico" id="grafico"></div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS -->
+  <section id="vista-productos" class="vista">
+    <div class="vista-head">
+      <h1>Productos</h1>
+      <div class="acciones">
+        <button class="btn-sec" id="btn-sync">Importar STOCK.csv</button>
+        <a class="btn-sec" href="/api/export-shopify.csv" download style="text-decoration:none;display:inline-block">Exportar a Shopify</a>
+        <button class="btn-oro" id="btn-nuevo-prod">+ Producto</button>
+      </div>
+    </div>
+    <p class="ayuda">El flujo: completás <code>07_CATALOGO/STOCK.csv</code> → "Importar" → ajustás precio acá. Precio 0 = "Consultar por WhatsApp" en la tienda.</p>
+    <div class="tarjeta"><table id="tabla-productos"></table></div>
+  </section>
+
+  <!-- VENTAS -->
+  <section id="vista-pedidos" class="vista">
+    <div class="vista-head">
+      <h1>Ventas</h1>
+      <button class="btn-oro" id="btn-nueva-venta">+ Registrar venta</button>
+    </div>
+    <p class="ayuda">Cada venta cerrada por WhatsApp/IG/MELI se registra acá — esto alimenta la facturación del tablero.</p>
+    <div class="tarjeta"><table id="tabla-pedidos"></table></div>
+  </section>
+
+  <!-- CONSULTAS -->
+  <section id="vista-consultas" class="vista">
+    <h1>Consultas y actividad</h1>
+    <p class="ayuda">Todo lo que pasa en la tienda: clicks a WhatsApp, preguntas al asistente, visitas a productos.</p>
+    <div class="tarjeta"><table id="tabla-eventos"></table></div>
+  </section>
+
+  <!-- CONFIG -->
+  <section id="vista-config" class="vista">
+    <h1>Config</h1>
+    <div class="tarjeta form-config">
+      <label>WhatsApp (con 549, sin +)<input id="cfg-wa" placeholder="5492915512515"></label>
+      <label>WhatsApp visible<input id="cfg-wa-disp" placeholder="+54 9 291 551-2515"></label>
+      <label>Instagram (sin @)<input id="cfg-ig"></label>
+      <label>Cuotas<input id="cfg-cuotas" type="number" min="1" max="18"></label>
+      <label>% off transferencia<input id="cfg-transf" type="number" min="0" max="50"></label>
+      <label>Meta pares/día<input id="cfg-meta-pares" type="number" min="1"></label>
+      <label>Meta facturación/día ($)<input id="cfg-meta-fact" type="number" step="10000"></label>
+      <button class="btn-oro" id="btn-guardar-cfg">Guardar</button>
+      <p class="ayuda" id="cfg-estado"></p>
+    </div>
+  </section>
+</main>
+
+<!-- modal genérico -->
+<div class="modal-fondo" id="modal">
+  <div class="modal-caja">
+    <h2 id="modal-titulo"></h2>
+    <div id="modal-campos"></div>
+    <div class="modal-botones">
+      <button class="btn-sec" id="modal-cancelar">Cancelar</button>
+      <button class="btn-oro" id="modal-ok">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="/panel/app.js"></script>
+</body>
+</html>
