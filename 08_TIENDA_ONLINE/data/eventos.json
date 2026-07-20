@@ -1,5 +1,20 @@
 [
   {
+    "fecha": "2026-07-20T21:56:48.091Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T21:46:25.126Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T21:46:09.624Z",
+    "tipo": "visita_producto",
+    "detalle": "ve4361"
+  },
+  {
     "fecha": "2026-07-20T21:43:49.844Z",
     "tipo": "visita",
     "detalle": "home"

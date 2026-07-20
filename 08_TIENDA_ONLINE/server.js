@@ -12,6 +12,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const meli = require('./meli.js');
+const supa = require('./supa.js');
 
 const ROOT = __dirname;
 const DATA = p => path.join(ROOT, 'data', p);
@@ -180,8 +181,10 @@ const server = http.createServer(async (req, res) => {
       if (mProd && req.method === 'PUT') {
         const i = productos.findIndex(x => x.id === mProd[1]);
         if (i < 0) return json(res, 404, { error: 'no existe' });
-        productos[i] = { ...productos[i], ...(await body(req)), id: mProd[1] };
+        const cambios = await body(req);
+        productos[i] = { ...productos[i], ...cambios, id: mProd[1] };
         guardar('productos.json', productos);
+        if (supa.activo()) { const { variantes, ...campos } = cambios; if (Object.keys(campos).length) supa.actualizar('productos', mProd[1], campos); }
         return json(res, 200, { ok: true });
       }
       if (mProd && req.method === 'DELETE') {
@@ -207,8 +210,10 @@ const server = http.createServer(async (req, res) => {
       if (p === '/api/pedidos' && req.method === 'POST') {
         const pedidos = leer('pedidos.json', []);
         const b = await body(req);
-        pedidos.unshift({ id: 'P' + Date.now(), fecha: new Date().toISOString(), estado: 'nuevo', ...b });
+        const nuevo = { id: 'P' + Date.now(), fecha: new Date().toISOString(), estado: 'nuevo', ...b };
+        pedidos.unshift(nuevo);
         guardar('pedidos.json', pedidos);
+        if (supa.activo()) supa.insertar('pedidos', { producto: nuevo.producto, cantidad: nuevo.cantidad, monto: nuevo.monto, canal: nuevo.canal, cliente: nuevo.cliente, estado: nuevo.estado, detalle: { local_id: nuevo.id } });
         return json(res, 200, { ok: true });
       }
       const mPed = p.match(/^\/api\/pedidos\/([\w-]+)$/);
@@ -233,6 +238,7 @@ const server = http.createServer(async (req, res) => {
         if (!subs.some(s => s.email === email.toLowerCase())) {
           subs.unshift({ email: email.toLowerCase(), fecha: new Date().toISOString(), origen: 'web' });
           guardar('suscriptores.json', subs);
+          if (supa.activo()) supa.insertar('suscriptores', { email: email.toLowerCase(), origen: 'web' });
         }
         return json(res, 200, { ok: true });
       }
@@ -372,6 +378,10 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, HOST, () => {
+  if (supa.activo()) {
+    supa.pullCatalogo().then(n => console.log(`  Supabase: catálogo sincronizado (${n} productos)`)).catch(e => console.error('  Supabase pull:', e.message));
+    setInterval(() => supa.pullCatalogo().catch(() => {}), 5 * 60 * 1000);
+  }
   console.log(`\n  RICHARD LENS corriendo:`);
   console.log(`  Tienda → http://localhost:${PORT}`);
   console.log(`  Panel  → http://localhost:${PORT}/panel`);

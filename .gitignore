@@ -7,7 +7,8 @@ node_modules/
 chrome-profile/
 .env
 
-# credenciales MELI (jamás al repo)
+# credenciales MELI y Supabase (jamás al repo)
 08_TIENDA_ONLINE/data/meli.json
+08_TIENDA_ONLINE/data/supabase.json
 
 # dist/ SÍ va al repo: clonás y `node server.js` corre sin build
