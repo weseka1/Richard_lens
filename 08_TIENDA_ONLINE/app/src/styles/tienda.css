@@ -78,6 +78,41 @@ nav a:hover, nav a.activa { color: var(--rosa); }
 }
 .btn-wa-mini:hover { transform: scale(1.05); box-shadow: 0 0 0 5px rgba(255, 62, 138, .35); }
 .menu-btn { display: none; background: none; border: 2px solid rgba(250, 247, 242, .3); color: var(--blanco); padding: 7px 12px; font-size: 1rem; border-radius: 8px; }
+/* botón CARRITO del header (estilo CART de la referencia) */
+.btn-cart-head {
+  background: var(--blanco); color: var(--rosa); font-family: var(--display); font-weight: 700;
+  font-size: .8rem; letter-spacing: .06em; padding: 10px 18px; border: 3px solid var(--rosa);
+  border-radius: 6px; transition: transform .15s, box-shadow .2s;
+}
+.btn-cart-head:hover { transform: scale(1.05); box-shadow: 0 0 0 4px rgba(255, 62, 138, .3); }
+
+/* ---------- drawer del carrito ---------- */
+.cart-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 300; width: min(400px, 100vw);
+  background: var(--negro-2); border-left: 3px solid var(--rosa);
+  display: flex; flex-direction: column; transform: translateX(105%);
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1); box-shadow: -20px 0 60px rgba(0, 0, 0, .6);
+}
+.cart-drawer.abierto { transform: translateX(0); }
+.cart-head { background: var(--rosa); color: var(--blanco); padding: 16px 20px; font-family: var(--bubble); text-transform: uppercase; letter-spacing: .04em; display: flex; justify-content: space-between; align-items: center; }
+.cart-head button { background: none; border: none; font-size: 1.4rem; color: var(--blanco); }
+.cart-items { flex: 1; overflow-y: auto; padding: 18px 20px; }
+.cart-vacio { color: var(--blanco-60); text-align: center; padding: 50px 0; font-weight: 500; line-height: 2; }
+.cart-item { display: flex; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(250, 247, 242, .08); font-size: .9rem; }
+.cart-var { font-size: .78rem; color: var(--blanco-35); }
+.cart-precio { font-size: .82rem; color: var(--amarillo); font-weight: 700; margin-top: 2px; }
+.cart-cant { display: flex; align-items: center; gap: 8px; }
+.cart-cant button { width: 26px; height: 26px; border-radius: 50%; border: 2px solid rgba(250, 247, 242, .25); background: none; color: var(--blanco); font-weight: 700; }
+.cart-cant button:hover { border-color: var(--cian); color: var(--cian); }
+.cart-quitar { background: none; border: none; color: var(--blanco-35); font-size: 1.15rem; }
+.cart-quitar:hover { color: var(--rojo); }
+.cart-pie { padding: 18px 20px 22px; border-top: 2px solid rgba(250, 247, 242, .1); }
+.cart-total { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--bubble); font-size: 1.2rem; }
+.cart-total b { color: var(--amarillo); font-size: 1.5rem; }
+.cart-nota { font-size: .74rem; color: var(--blanco-35); margin: 6px 0 14px; font-weight: 500; }
+.cart-cerrar { display: block; width: 100%; border: none; background: none; cursor: pointer; }
+.cart-vaciar { display: block; margin: 14px auto 0; background: none; border: none; color: var(--blanco-35); font-size: .76rem; text-decoration: underline; cursor: pointer; }
+.cart-vaciar:hover { color: var(--rojo); }
 
 /* ---------- HERO: panel gradiente que muta de color ---------- */
 .hero { padding: 150px 0 60px; }
@@ -135,7 +170,7 @@ nav a:hover, nav a.activa { color: var(--rosa); }
 .pill-claro:hover { background: rgba(250, 247, 242, .08); border-color: var(--cian); color: var(--cian); }
 
 /* avatar RICH + stickers */
-.hero-avatar { position: relative; display: flex; justify-content: center; align-items: flex-end; height: 100%; }
+.hero-avatar { position: relative; display: flex; justify-content: center; align-items: flex-end; align-self: stretch; /* estira la columna: el modelo SIEMPRE apoyado en el piso del panel */ }
 .hero-avatar svg { width: min(100%, 460px); height: auto; animation: respira 5s ease-in-out infinite; }
 /* el modelo real (foto/render IA recortado): grande, saliéndose apenas del panel como en la referencia */
 .hero-modelo {
@@ -198,14 +233,28 @@ nav a:hover, nav a.activa { color: var(--rosa); }
 .tile-marca { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
 .tile-marca .mono { font-family: var(--bubble); font-size: 4.4rem; color: var(--tinta); line-height: 1; text-shadow: 4px 4px 0 rgba(255, 255, 255, .35); }
 .tile-marca .marca-nombre { font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; font-weight: 700; color: var(--tinta); opacity: .8; }
-.card-info { padding: 16px 18px 18px; }
-.card-marca { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--pop, var(--rosa)); margin-bottom: 5px; }
-.card-modelo { font-family: var(--display); font-weight: 700; font-size: 1.12rem; text-transform: uppercase; color: var(--blanco); }
-.card-detalle { font-size: .8rem; color: var(--blanco-35); margin-top: 4px; font-weight: 500; }
-.card-precio { margin-top: 13px; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
-.precio { font-family: var(--bubble); font-size: 1.25rem; color: var(--amarillo); }
+/* etiqueta estilo sex9ine: todo centrado, nombre en marcador, tachado + oferta, brochazo */
+.card-info { padding: 16px 18px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.card-marca { font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--pop, var(--rosa)); margin-bottom: 5px; }
+.card-modelo { font-family: var(--marker); font-size: 1.25rem; text-transform: uppercase; color: var(--blanco); letter-spacing: .03em; line-height: 1.1; }
+.card-detalle { font-size: .78rem; color: var(--blanco-35); margin-top: 5px; font-weight: 500; }
+.card-precios { margin-top: 12px; }
+.precio-lista { font-family: var(--marker); font-size: .95rem; color: var(--blanco-35); text-decoration: line-through; text-decoration-thickness: 2px; margin-right: 8px; }
+.precio { font-family: var(--marker); font-size: 1.35rem; color: var(--amarillo); letter-spacing: .02em; }
 .precio-consultar { font-size: .82rem; font-weight: 700; color: var(--cian); letter-spacing: .02em; }
-.cuotas { font-size: .72rem; color: var(--blanco-35); font-weight: 500; }
+.cuotas { font-size: .72rem; color: var(--blanco-35); font-weight: 500; margin-top: 2px; }
+/* botón brochazo de la card (alterna cyan/rosa vía --cart) */
+.btn-cart {
+  position: relative; margin-top: 14px; padding: 13px 26px; border: none; background: none;
+  font-family: var(--marker); font-size: .95rem; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--cart-texto, var(--tinta)); transition: transform .15s; z-index: 1;
+}
+.btn-cart::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; background: var(--cart, var(--cian));
+  border-radius: 12px 22px 10px 26px / 26px 10px 24px 12px; transform: rotate(-1.4deg);
+  box-shadow: 3px 4px 0 rgba(0, 0, 0, .45);
+}
+.btn-cart:hover { transform: scale(1.06) rotate(-1deg); }
 
 /* ---------- LA CAJA FUERTE: negro+oro (la herencia intacta) ---------- */
 .vault { background: #060605; border-top: 1px solid rgba(212, 175, 55, .3); border-bottom: 1px solid rgba(212, 175, 55, .3); color: var(--hueso); }

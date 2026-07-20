@@ -4,6 +4,7 @@ import { plata, track, getFotos } from '../lib/api.js';
 import { useProductos, useReveals } from '../lib/hooks.js';
 import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
 import CardProducto, { Badge, TileMarca, popColor } from '../components/CardProducto.jsx';
+import { agregar, precioLista } from '../lib/carrito.js';
 
 const PILL_STOCK = {
   'STOCK': ['Stock ya', 'var(--lima)', 'var(--tinta)'],
@@ -114,6 +115,7 @@ export default function Producto() {
 
           {p.precio_web > 0 && cfg ? (
             <div className="prod-precio-box">
+              <span className="precio-lista" style={{ fontSize: '1.1rem' }}>{plata(precioLista(p.precio_web))}</span>
               <div className="prod-precio">{plata(p.precio_web)}</div>
               <div className="prod-cuotas">{cfg.cuotas} cuotas de {plata(Math.round(p.precio_web / cfg.cuotas))}</div>
               <div className="prod-transfer">{cfg.descuento_transferencia}% off por transferencia: {plata(Math.round(p.precio_web * (1 - cfg.descuento_transferencia / 100)))}</div>
@@ -126,10 +128,20 @@ export default function Producto() {
           )}
 
           <div className="hero-ctas">
-            <BotonWA cfg={cfg} className="btn-brush brush-rosa" texto={msgWA}>
-              {p.estado === 'a_pedido' ? 'Encargar este par' : 'Quiero este par'}
-            </BotonWA>
-            <Link to="/catalogo" className="btn-pill pill-claro">Ver más modelos</Link>
+            {p.precio_web > 0 && p.estado === 'disponible' ? (
+              <button
+                className="btn-brush brush-rosa"
+                onClick={() => agregar({
+                  id: p.id, marca: p.marca, modelo: p.modelo, precio: p.precio_web,
+                  sku: v?.sku, color: v?.color, codigo: v?.codigo, talle: v?.talle
+                })}
+              >Agregar al carrito</button>
+            ) : (
+              <BotonWA cfg={cfg} className="btn-brush brush-rosa" texto={msgWA}>
+                {p.estado === 'a_pedido' ? 'Encargar este par' : 'Quiero este par'}
+              </BotonWA>
+            )}
+            <BotonWA cfg={cfg} className="btn-pill pill-claro" texto={msgWA}>Consultar por WhatsApp</BotonWA>
           </div>
         </div>
       </div>

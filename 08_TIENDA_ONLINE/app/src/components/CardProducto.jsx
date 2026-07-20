@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { plata, getFotos } from '../lib/api.js';
+import { plata, getFotos, track } from '../lib/api.js';
+import { agregar, precioLista } from '../lib/carrito.js';
 
 export const MONOS = {
   'Ray-Ban': 'RB', 'Oakley': 'O', 'Prada': 'P', 'Gucci': 'GG', 'Dolce & Gabbana': 'D&G',
@@ -36,13 +37,29 @@ export function TileMarca({ p, nota }) {
 
 export default function CardProducto({ p, i = 0, cfg }) {
   const [foto, setFoto] = useState(null);
+  const [agregado, setAgregado] = useState(false);
   useEffect(() => { getFotos(p.foto_codigo).then(fs => setFoto(fs[0] || null)); }, [p.foto_codigo]);
+
+  function alCarrito(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const v = (p.variantes || []).find(x => x.stock === 'STOCK' || x.stock === 'POCO STOCK');
+    agregar({
+      id: p.id, marca: p.marca, modelo: p.modelo, precio: p.precio_web,
+      sku: v?.sku, color: v?.color, codigo: v?.codigo, talle: v?.talle
+    });
+    track('carrito_agregar', `${p.marca} ${p.modelo}`);
+    setAgregado(true);
+    setTimeout(() => setAgregado(false), 1400);
+  }
+
+  const comprable = p.precio_web > 0 && p.estado === 'disponible';
 
   return (
     <Link
       className="card"
       to={`/producto/${p.id}`}
-      style={{ transitionDelay: `${(i % 4) * 60}ms`, '--pop': popColor(p.id) }}
+      style={{ transitionDelay: `${(i % 4) * 60}ms`, '--pop': popColor(p.id), '--cart': i % 2 ? 'var(--rosa)' : 'var(--cian)', '--cart-texto': i % 2 ? 'var(--blanco)' : 'var(--tinta)' }}
     >
       <span className="card-num">{p.codigo}</span>
       <Badge p={p} />
@@ -53,16 +70,20 @@ export default function CardProducto({ p, i = 0, cfg }) {
         <div className="card-marca">{p.marca}</div>
         <div className="card-modelo">{p.modelo}</div>
         <div className="card-detalle">{p.color} · {p.cristal}</div>
-        <div className="card-precio">
-          {p.precio_web > 0 && cfg ? (
-            <div>
-              <span className="precio">{plata(p.precio_web)}</span>
-              <div className="cuotas">{cfg.cuotas} cuotas de {plata(Math.round(p.precio_web / cfg.cuotas))}</div>
-            </div>
-          ) : (
-            <span className="precio-consultar">Precio por WhatsApp →</span>
-          )}
-        </div>
+        {p.precio_web > 0 && cfg ? (
+          <div className="card-precios">
+            <span className="precio-lista">{plata(precioLista(p.precio_web))}</span>
+            <span className="precio">{plata(p.precio_web)}</span>
+            <div className="cuotas">{cfg.cuotas} cuotas de {plata(Math.round(p.precio_web / cfg.cuotas))}</div>
+          </div>
+        ) : (
+          <div className="card-precios"><span className="precio-consultar">Precio por WhatsApp →</span></div>
+        )}
+        {comprable && (
+          <button className="btn-cart" onClick={alCarrito}>
+            {agregado ? '✓ En el carrito' : 'Agregar al carrito'}
+          </button>
+        )}
       </div>
     </Link>
   );

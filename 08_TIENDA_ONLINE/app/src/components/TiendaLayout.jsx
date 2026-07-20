@@ -3,6 +3,8 @@ import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { linkWA, track } from '../lib/api.js';
 import { useConfig } from '../lib/hooks.js';
 import ChatRich from './ChatRich.jsx';
+import CartDrawer from './CartDrawer.jsx';
+import { useCarrito } from '../lib/carrito.js';
 
 const ConfigContext = createContext(null);
 export const useCfg = () => useContext(ConfigContext);
@@ -24,7 +26,11 @@ export default function TiendaLayout() {
   const cfg = useConfig();
   const [menu, setMenu] = useState(false);
   const [chat, setChat] = useState(false);
+  const [carrito, setCarrito] = useState(false);
+  const { cantidad } = useCarrito();
   const loc = useLocation();
+
+  useEffect(() => { if (cantidad > 0) setCarrito(true); }, [cantidad]);
 
   useEffect(() => { window.scrollTo(0, 0); setMenu(false); }, [loc.pathname]);
 
@@ -53,10 +59,15 @@ export default function TiendaLayout() {
             <Link to="/catalogo?canal=WEB">La Caja Fuerte</Link>
             <a href="/#por-que">Por qué nosotros</a>
             <BotonWA cfg={cfg} className="btn-wa-mini">WhatsApp</BotonWA>
+            <button className="btn-cart-head" onClick={() => setCarrito(true)}>
+              CARRITO ({cantidad})
+            </button>
           </nav>
         </div>
         </div>
       </header>
+
+      <CartDrawer cfg={cfg} abierto={carrito} onCerrar={() => setCarrito(false)} />
 
       <Outlet />
 
