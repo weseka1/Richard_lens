@@ -184,11 +184,12 @@ const server = http.createServer(async (req, res) => {
         const cambios = await body(req);
         productos[i] = { ...productos[i], ...cambios, id: mProd[1] };
         guardar('productos.json', productos);
-        if (supa.activo()) { const { variantes, ...campos } = cambios; if (Object.keys(campos).length) supa.actualizar('rl_productos', mProd[1], campos); }
+        if (supa.activo()) { const { variantes, ...campos } = cambios; if (Object.keys(campos).length) supa.actualizarProducto(mProd[1], campos); }
         return json(res, 200, { ok: true });
       }
       if (mProd && req.method === 'DELETE') {
         guardar('productos.json', productos.filter(x => x.id !== mProd[1]));
+        if (supa.activo()) supa.borrarProducto(mProd[1]);
         return json(res, 200, { ok: true });
       }
 
@@ -221,12 +222,15 @@ const server = http.createServer(async (req, res) => {
         const pedidos = leer('pedidos.json', []);
         const i = pedidos.findIndex(x => x.id === mPed[1]);
         if (i < 0) return json(res, 404, { error: 'no existe' });
-        pedidos[i] = { ...pedidos[i], ...(await body(req)), id: mPed[1] };
+        const cambios = await body(req);
+        pedidos[i] = { ...pedidos[i], ...cambios, id: mPed[1] };
         guardar('pedidos.json', pedidos);
+        if (supa.activo()) supa.pedidoUpdate(mPed[1], cambios);
         return json(res, 200, { ok: true });
       }
       if (mPed && req.method === 'DELETE') {
         guardar('pedidos.json', leer('pedidos.json', []).filter(x => x.id !== mPed[1]));
+        if (supa.activo()) supa.pedidoDelete(mPed[1]);
         return json(res, 200, { ok: true });
       }
 
@@ -290,6 +294,17 @@ const server = http.createServer(async (req, res) => {
       }
 
       if (p === '/api/sync-csv' && req.method === 'POST') return json(res, 200, syncCsv());
+
+      // sube el espejo local COMPLETO a Supabase (usar tras importar_proveedor / asignar_precios)
+      if (p === '/api/push-nube' && req.method === 'POST') {
+        if (!supa.activo()) return json(res, 400, { error: 'Supabase no configurado' });
+        const todos = leer('productos.json', []);
+        const filasP = [...new Map(todos.map(({ variantes, ...x }) => [x.id, x])).values()];
+        const filasV = [...new Map(todos.flatMap(x => (x.variantes || []).map(v => [String(v.sku), { sku: String(v.sku), producto_id: x.id, codigo: v.codigo, color: v.color, talle: v.talle, stock: v.stock }]))).values()];
+        for (let i = 0; i < filasP.length; i += 500) await supa.upsertProductos(filasP.slice(i, i + 500));
+        for (let i = 0; i < filasV.length; i += 500) await supa.upsertVariantes(filasV.slice(i, i + 500));
+        return json(res, 200, { ok: true, productos: filasP.length, variantes: filasV.length });
+      }
 
       // export listo para importar en Shopify (Products > Import)
       if (p === '/api/export-shopify.csv') {

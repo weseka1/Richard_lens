@@ -40,12 +40,18 @@ async function pullCatalogo() {
   return productos.length;
 }
 
-/* escrituras espejo → Supabase (best effort: si falla, queda log y el local sigue) */
+/* escrituras espejo → Supabase (best effort: si falla, queda log y el local sigue).
+ * Las de administración van por RPC con clave secreta (SECURITY DEFINER en la base). */
 const seguro = fn => (...args) => fn(...args).catch(e => console.error('[supabase]', e.message));
+const rpc = (fn, args) => rest(`rpc/${fn}`, 'POST', { ...args, clave: cfg().clave });
 module.exports = {
   activo,
   pullCatalogo,
   insertar: seguro((tabla, fila) => rest(tabla, 'POST', fila, 'resolution=merge-duplicates')),
-  actualizar: seguro((tabla, id, campos, clave = 'id') => rest(`${tabla}?${clave}=eq.${encodeURIComponent(id)}`, 'PATCH', campos)),
-  borrar: seguro((tabla, id, clave = 'id') => rest(`${tabla}?${clave}=eq.${encodeURIComponent(id)}`, 'DELETE'))
+  actualizarProducto: seguro((id, campos) => rpc('rl_admin_update_producto', { p_id: id, campos })),
+  upsertProductos: seguro(filas => rpc('rl_admin_upsert_productos', { filas })),
+  upsertVariantes: seguro(filas => rpc('rl_admin_upsert_variantes', { filas })),
+  borrarProducto: seguro(id => rpc('rl_admin_delete_producto', { p_id: id })),
+  pedidoUpdate: seguro((localId, campos) => rpc('rl_admin_pedido_update', { p_local: localId, campos })),
+  pedidoDelete: seguro(localId => rpc('rl_admin_pedido_delete', { p_local: localId }))
 };
