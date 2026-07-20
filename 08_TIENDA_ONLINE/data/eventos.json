@@ -1,5 +1,15 @@
 [
   {
+    "fecha": "2026-07-20T21:09:27.901Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T21:09:02.926Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-20T21:07:38.887Z",
     "tipo": "visita",
     "detalle": "catalogo"
