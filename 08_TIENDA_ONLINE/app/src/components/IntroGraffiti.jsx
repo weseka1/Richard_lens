@@ -18,6 +18,14 @@ export default function IntroGraffiti() {
 
   return (
     <div className={'intro-graffiti' + (fase === 'saliendo' ? ' saliendo' : '')}>
+      {/* fondo: el escudo drip de la casa + lluvia de $ estilo Alec (flow propio, sin IP ajena) */}
+      <img src="/img/logo-drip.png" alt="" className="intro-logo-fondo" aria-hidden="true" />
+      <div className="intro-billetes" aria-hidden="true">
+        {[['6%', '14%', '-14deg', '2.6rem'], ['88%', '10%', '10deg', '3.4rem'], ['12%', '78%', '8deg', '3rem'],
+          ['82%', '74%', '-10deg', '2.4rem'], ['26%', '32%', '12deg', '1.8rem'], ['70%', '30%', '-8deg', '2rem']].map(([l, t, r, s], i) => (
+          <span key={i} style={{ left: l, top: t, fontSize: s, transform: `rotate(${r})`, animationDelay: (0.3 + i * 0.18) + 's' }}>$</span>
+        ))}
+      </div>
       <svg viewBox="0 0 900 260" className="intro-tag">
         <defs>
           {/* borde rugoso de spray */}

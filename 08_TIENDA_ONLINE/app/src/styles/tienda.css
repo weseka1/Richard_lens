@@ -435,6 +435,12 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
   transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1);
 }
 .intro-graffiti.saliendo { opacity: 0; transform: translateY(-3%); pointer-events: none; }
+.intro-logo-fondo { position: absolute; width: min(52vw, 560px); opacity: .07; filter: grayscale(1); pointer-events: none; }
+.intro-billetes { position: absolute; inset: 0; pointer-events: none; }
+.intro-billetes span {
+  position: absolute; font-family: 'Permanent Marker', cursive; color: #FF3E8A; opacity: 0;
+  animation: rellenar .5s ease forwards;
+}
 .intro-tag { width: min(88vw, 900px); overflow: visible; }
 .intro-texto { font-family: 'Permanent Marker', cursive; font-size: 104px; letter-spacing: .01em; }
 /* niebla del overspray: gorda, difusa, se pinta junto al trazo */

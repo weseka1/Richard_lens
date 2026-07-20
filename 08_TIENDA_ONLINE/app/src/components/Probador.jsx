@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 /* Probador virtual v1: subís tu selfie y te ponés el modelo encima.
  * Ajuste manual fino (arrastrar / tamaño / rotación) + descarga de la foto.
@@ -6,6 +6,10 @@ import React, { useRef, useState } from 'react';
 
 export default function Probador({ abierto, onCerrar, fotoGafas, nombre }) {
   const [selfie, setSelfie] = useState(null);
+  const [gafasSrc, setGafasSrc] = useState(fotoGafas);
+  useEffect(() => setGafasSrc(fotoGafas), [fotoGafas]);
+  // si este modelo aún no tiene recorte propio, cae al Wayfarer genérico
+  const alFallarGafas = () => { if (gafasSrc !== '/img/tryon/rb2140-901.png') setGafasSrc('/img/tryon/rb2140-901.png'); };
   const [pos, setPos] = useState({ x: 50, y: 38 });      // % del lienzo
   const [escala, setEscala] = useState(0.55);
   const [rot, setRot] = useState(0);
@@ -50,7 +54,7 @@ export default function Probador({ abierto, onCerrar, fotoGafas, nombre }) {
     ctx.drawImage(base, 0, 0);
     const gafas = new Image();
     gafas.crossOrigin = 'anonymous';
-    gafas.src = fotoGafas;
+    gafas.src = gafasSrc;
     await new Promise(ok => { gafas.onload = ok; });
     const w = canvas.width * escala * 0.9;
     const h = w * (gafas.naturalHeight / gafas.naturalWidth);
@@ -89,10 +93,11 @@ export default function Probador({ abierto, onCerrar, fotoGafas, nombre }) {
             >
               <img src={selfie} alt="Tu selfie" draggable={false} />
               <img
-                src={fotoGafas}
+                src={gafasSrc}
                 alt="Gafas"
                 className="probador-gafas"
                 draggable={false}
+                onError={alFallarGafas}
                 onPointerDown={alBajar}
                 style={{
                   left: pos.x + '%', top: pos.y + '%',

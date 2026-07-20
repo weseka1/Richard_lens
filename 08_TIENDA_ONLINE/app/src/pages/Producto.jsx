@@ -7,9 +7,6 @@ import CardProducto, { Badge, TileMarca, popColor } from '../components/CardProd
 import { agregar, precioLista } from '../lib/carrito.js';
 import Probador from '../components/Probador.jsx';
 
-/* modelos con PNG transparente para el probador; el resto usa el wayfarer genérico */
-const TRYON = { 'rb3025-l0205': '/img/tryon/rb3025-l0205.png', 'rb2140-901': '/img/tryon/rb2140-901.png' };
-
 const PILL_STOCK = {
   'STOCK': ['Stock ya', '#C6A75E', '#0A0A0B'],
   'POCO STOCK': ['Quedan pocos', '#F4F1EA', '#0A0A0B'],
@@ -153,7 +150,7 @@ export default function Producto() {
           <Probador
             abierto={probador}
             onCerrar={() => setProbador(false)}
-            fotoGafas={TRYON[p.id] || '/img/tryon/rb2140-901.png'}
+            fotoGafas={`/img/tryon/${p.id}.png`}
             nombre={`${p.marca} ${p.modelo}`}
           />
         </div>
