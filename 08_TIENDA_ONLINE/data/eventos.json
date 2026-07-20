@@ -1,5 +1,45 @@
 [
   {
+    "fecha": "2026-07-20T20:23:58.383Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:23:53.808Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:23:48.123Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T20:22:44.215Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T20:22:34.406Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:22:30.562Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:22:05.111Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:21:49.639Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-20T20:18:24.432Z",
     "tipo": "visita",
     "detalle": "home"

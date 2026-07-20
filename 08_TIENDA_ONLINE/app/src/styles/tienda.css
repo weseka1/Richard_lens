@@ -435,12 +435,15 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
   transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1);
 }
 .intro-graffiti.saliendo { opacity: 0; transform: translateY(-3%); pointer-events: none; }
-.intro-logo-fondo { position: absolute; width: min(52vw, 560px); opacity: .07; filter: grayscale(1); pointer-events: none; }
-.intro-billetes { position: absolute; inset: 0; pointer-events: none; }
-.intro-billetes span {
-  position: absolute; font-family: 'Permanent Marker', cursive; color: #FF3E8A; opacity: 0;
-  animation: rellenar .5s ease forwards;
+.intro-logo-fondo { position: absolute; width: min(52vw, 560px); opacity: .06; filter: grayscale(1); pointer-events: none; }
+.intro-doodles { position: absolute; inset: 0; pointer-events: none; }
+.intro-doodles svg { position: absolute; overflow: visible; }
+.intro-doodle-trazo {
+  fill: none; stroke: #1D1D1F; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  opacity: .5; stroke-dasharray: 420; stroke-dashoffset: 420;
+  animation: doodle-intro 1.4s cubic-bezier(.4, 0, .3, 1) forwards;
 }
+@keyframes doodle-intro { to { stroke-dashoffset: 0; } }
 .intro-tag { width: min(88vw, 900px); overflow: visible; }
 .intro-texto { font-family: 'Permanent Marker', cursive; font-size: 104px; letter-spacing: .01em; }
 /* niebla del overspray: gorda, difusa, se pinta junto al trazo */
@@ -569,6 +572,22 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
   100% { stroke-dashoffset: 420; opacity: 0; }
 }
 main, header, footer, .cart-drawer, .chat-panel, .fab-stack { position: relative; z-index: 2; }
+
+/* ---------- sección Instagram: el reel en un teléfono ---------- */
+.ig-in { display: grid; grid-template-columns: 1.1fr .9fr; gap: 50px; align-items: center; }
+.ig-telefono {
+  display: block; width: min(320px, 100%); margin: 0 auto; border-radius: 34px; overflow: hidden;
+  background: #000; border: 1px solid var(--linea-suave);
+  box-shadow: 0 30px 70px -28px rgba(0, 0, 0, .35); transition: transform .3s, box-shadow .3s;
+}
+.ig-telefono:hover { transform: translateY(-4px); box-shadow: 0 40px 80px -28px rgba(0, 0, 0, .45); }
+.ig-chrome { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: #fff; }
+.ig-avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: contain; background: #F5F5F7; padding: 3px; }
+.ig-chrome b { display: block; font-size: .82rem; color: var(--hueso); font-weight: 600; line-height: 1.2; }
+.ig-chrome span { display: block; font-size: .68rem; color: var(--gris-label); }
+.ig-chrome em { margin-left: auto; font-style: normal; font-size: .74rem; font-weight: 600; color: #0066CC; }
+.ig-telefono video { width: 100%; aspect-ratio: 9 / 15; object-fit: cover; display: block; }
+@media (max-width: 800px) { .ig-in { grid-template-columns: 1fr; gap: 30px; } }
 
 /* ---------- bloque SEO del pie ---------- */
 .seo-bloque { max-width: 880px; }

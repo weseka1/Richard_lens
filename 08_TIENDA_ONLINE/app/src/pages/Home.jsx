@@ -182,6 +182,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* INSTAGRAM: el reel en un teléfono, click → perfil */}
+      <section className="seccion" style={{ paddingBottom: 40 }}>
+        <div className="wrap ig-in">
+          <div className="reveal">
+            <p className="sec-kicker">@{cfg?.instagram || 'richardlens.ar'}</p>
+            <h2 className="sec-titulo">La casa, en movimiento.</h2>
+            <p className="sec-bajada" style={{ marginBottom: 26 }}>Drops, llegadas y el detrás de escena, todos los días en Instagram.</p>
+            <a className="btn-brush" href={`https://instagram.com/${cfg?.instagram || 'richardlens.ar'}`} target="_blank" rel="noopener noreferrer">Seguir en Instagram</a>
+          </div>
+          <a
+            className="ig-telefono reveal"
+            href={`https://instagram.com/${cfg?.instagram || 'richardlens.ar'}`}
+            target="_blank" rel="noopener noreferrer"
+            aria-label="Abrir el Instagram de Richard Lens"
+          >
+            <div className="ig-chrome">
+              <img src="/img/logo-drip.png" alt="" className="ig-avatar" />
+              <div>
+                <b>{cfg?.instagram || 'richardlens.ar'}</b>
+                <span>Eyewear House · Argentina</span>
+              </div>
+              <em>Seguir</em>
+            </div>
+            <video src="/img/ig.mp4" autoPlay muted loop playsInline />
+          </a>
+        </div>
+      </section>
+
       {/* NEWSLETTER */}
       <Newsletter />
 
