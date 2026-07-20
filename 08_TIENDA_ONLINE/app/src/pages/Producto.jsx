@@ -5,6 +5,10 @@ import { useProductos, useReveals } from '../lib/hooks.js';
 import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
 import CardProducto, { Badge, TileMarca, popColor } from '../components/CardProducto.jsx';
 import { agregar, precioLista } from '../lib/carrito.js';
+import Probador from '../components/Probador.jsx';
+
+/* modelos con PNG transparente para el probador; el resto usa el wayfarer genérico */
+const TRYON = { 'rb3025-l0205': '/img/tryon/rb3025-l0205.png', 'rb2140-901': '/img/tryon/rb2140-901.png' };
 
 const PILL_STOCK = {
   'STOCK': ['Stock ya', '#C6A75E', '#0A0A0B'],
@@ -21,6 +25,7 @@ export default function Producto() {
   const [fotos, setFotos] = useState([]);
   const [fotoActiva, setFotoActiva] = useState(0);
   const [variante, setVariante] = useState(null);
+  const [probador, setProbador] = useState(false);
 
   const p = (productos || []).find(x => x.id === id);
 
@@ -142,7 +147,15 @@ export default function Producto() {
               </BotonWA>
             )}
             <BotonWA cfg={cfg} className="btn-pill pill-claro" texto={msgWA}>Consultar por WhatsApp</BotonWA>
+            <button className="btn-pill pill-claro" onClick={() => setProbador(true)}>Probátelas con tu selfie</button>
           </div>
+
+          <Probador
+            abierto={probador}
+            onCerrar={() => setProbador(false)}
+            fotoGafas={TRYON[p.id] || '/img/tryon/rb2140-901.png'}
+            nombre={`${p.marca} ${p.modelo}`}
+          />
         </div>
       </div>
 

@@ -1,5 +1,100 @@
 [
   {
+    "fecha": "2026-07-20T19:29:22.173Z",
+    "tipo": "visita_producto",
+    "detalle": "ve4361"
+  },
+  {
+    "fecha": "2026-07-20T19:28:16.260Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:27:50.277Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:25:31.316Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:23:22.593Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:22:24.328Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T19:22:12.346Z",
+    "tipo": "whatsapp_click",
+    "detalle": "/ → Hola, quiero mis lentes. ¿Qué tenés en stock?"
+  },
+  {
+    "fecha": "2026-07-20T19:22:06.240Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:19:03.485Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:18:57.679Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T19:16:46.588Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:16:22.533Z",
+    "tipo": "visita_producto",
+    "detalle": "wayfarer-classic-2140"
+  },
+  {
+    "fecha": "2026-07-20T19:16:19.192Z",
+    "tipo": "whatsapp_click",
+    "detalle": "/ → general"
+  },
+  {
+    "fecha": "2026-07-20T19:16:18.320Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:16:09.082Z",
+    "tipo": "visita",
+    "detalle": "catalogo:promo"
+  },
+  {
+    "fecha": "2026-07-20T19:15:59.694Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:15:53.889Z",
+    "tipo": "chat_abierto",
+    "detalle": "/catalogo"
+  },
+  {
+    "fecha": "2026-07-20T19:15:45.150Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T19:15:29.441Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-20T19:10:01.711Z",
     "tipo": "visita",
     "detalle": "home"

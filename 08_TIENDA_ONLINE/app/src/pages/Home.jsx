@@ -4,17 +4,14 @@ import { track, api } from '../lib/api.js';
 import { useProductos, useReveals } from '../lib/hooks.js';
 import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
 import CardProducto from '../components/CardProducto.jsx';
-import HeroCollage from '../components/HeroCollage.jsx';
-
-// el lente girando entra lazy (three.js no pesa en el primer paint)
-const Gafas360 = lazy(() => import('../components/Gafas360.jsx'));
+import HeroCine from '../components/HeroCine.jsx';
 
 const MARCAS = ['RAY-BAN', 'OAKLEY', 'PRADA', 'GUCCI', 'DIOR', 'LOUIS VUITTON', 'CARTIER', 'SAINT LAURENT', 'BALENCIAGA', 'FENDI', 'VERSACE', 'CELINE', 'TOM FORD', 'MIU MIU', 'OFF-WHITE'];
 
 /* la lógica Nike: categorías arriba, lo que queremos vender primero */
 const CATEGORIAS = [
-  { titulo: 'Gafas Hombre', href: '/catalogo?genero=hombre', foto: '/fotos/rb2140-901/01.jpg' },
-  { titulo: 'Gafas Mujer', href: '/catalogo?genero=mujer', foto: '/fotos/rb4171-865-13/02.jpg' },
+  { titulo: 'Gafas Hombre', href: '/catalogo?genero=hombre', foto: '/img/cat-hombre.jpg' },
+  { titulo: 'Gafas Mujer', href: '/catalogo?genero=mujer', foto: '/img/cat-mujer.jpg' },
   { titulo: 'Más Vendidos', href: '/catalogo?orden=vendidos', foto: '/fotos/rb3025-l0205/01.jpg' },
   { titulo: 'En Promoción', href: '/catalogo?promo=1', foto: '/fotos/rb3016-w0365/01.jpg' }
 ];
@@ -76,26 +73,8 @@ export default function Home() {
 
   return (
     <main>
-      {/* HERO editorial + panel de vidrio */}
-      <section className="hero">
-        <div className="wrap">
-          <div className="hero-panel">
-            <div>
-              <p className="hero-kicker">Anteojos 100% originales · Envíos a todo el país</p>
-              <h1>
-                <span className="l1">Se te nota</span>
-                <span className="l2">lo rich.</span>
-              </h1>
-              <p className="hero-sub">Ray-Ban con entrega inmediata. Dior, Prada, Gucci, Louis Vuitton y Cartier directo a tu puerta — sin vidriera, sin verso, con garantía doble.</p>
-              <div className="hero-ctas">
-                <Link to="/catalogo" className="btn-brush">Ver la colección</Link>
-                <BotonWA cfg={cfg} className="btn-pill" texto="Hola, quiero ver modelos y precios.">WhatsApp</BotonWA>
-              </div>
-            </div>
-            <HeroCollage drop={drop} cfg={cfg} />
-          </div>
-        </div>
-      </section>
+      {/* HERO: video real si existe /img/hero.mp4, si no producto flotante */}
+      <HeroCine drop={drop} cfg={cfg} />
 
       {/* TICKER MARCAS */}
       <div className="marquee" aria-hidden="true">
@@ -163,9 +142,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* RICH 001 — el lente girando */}
+      {/* RICH 001 — la línea propia (el 3D vuelve cuando haya modelo real: gafas.glb) */}
       <section className="rich3d">
-        <Suspense fallback={null}><Gafas360 /></Suspense>
         <div className="rich3d-texto">
           <p className="sec-kicker reveal">Próximamente</p>
           <h2 className="sec-titulo reveal">RICH 001</h2>
@@ -210,10 +188,10 @@ export default function Home() {
       {/* CTA FINAL */}
       <section className="cta-final">
         <div className="cta-panel">
-          <h2>El que quiere, <span>puede.</span></h2>
-          <p className="tag-graffiti">y al que puede, se le nota</p>
+          <h2>Richard Lens <span>&amp; Co.</span></h2>
+          <p className="tag-graffiti" style={{ fontStyle: 'normal', fontFamily: 'var(--texto)', fontSize: '.78rem', letterSpacing: '.28em', textTransform: 'uppercase', color: 'var(--gris-label)' }}>Buenos Aires · Madrid · Miami · Milano</p>
           <div>
-            <BotonWA cfg={cfg} className="btn-brush" texto="Hola, quiero mis lentes. ¿Qué tenés en stock?">Quiero mis lentes</BotonWA>
+            <BotonWA cfg={cfg} className="btn-brush" texto="Hola, quiero mis lentes. ¿Qué tenés en stock?">Hablar con la casa</BotonWA>
           </div>
         </div>
       </section>

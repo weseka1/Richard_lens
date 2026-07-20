@@ -428,6 +428,52 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
 .news-ok { font-size: .82rem; color: var(--verde); font-weight: 500; }
 @media (max-width: 800px) { .news-in { grid-template-columns: 1fr; gap: 30px; } .glass-widget { left: 0; bottom: 4%; width: 190px; } }
 
+/* ---------- hero CINE (video real) + foto editorial ---------- */
+.hero-cine {
+  position: relative; border-radius: 28px; overflow: hidden; min-height: 620px;
+  background: #0B0B0C; display: flex; align-items: center; justify-content: center;
+}
+.hero-cine video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .85; }
+.hero-cine-velo { position: absolute; inset: 0; background: radial-gradient(80% 70% at 50% 45%, transparent 30%, rgba(0, 0, 0, .55) 100%); }
+.hero-cine-contenido { position: relative; z-index: 2; text-align: center; max-width: 640px; padding: 60px 24px; }
+.hero-cine .glass-widget { left: auto; right: 4%; bottom: 8%; background: rgba(20, 20, 22, .5); border-color: rgba(255, 255, 255, .18); }
+.hero-cine .glass-nombre, .hero-cine .glass-precio { color: #fff; }
+.hero-cine .glass-kicker { color: rgba(255, 255, 255, .55); }
+.hero-cine .glass-cta { color: #8FBFF5; }
+.hero-cine .glass-barra { background: rgba(255, 255, 255, .15); }
+.hero-cine .glass-barra i { background: #fff; }
+.hero-foto-editorial {
+  width: min(112%, 560px); max-width: none; height: auto; max-height: 640px; object-fit: cover;
+  border-radius: 24px; box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .35);
+  margin-bottom: calc(clamp(34px, 5vw, 72px) * -0.4);
+}
+.hero-producto-img { width: min(105%, 560px); max-width: none; height: auto; filter: drop-shadow(0 40px 50px rgba(0, 0, 0, .18)); }
+
+/* ---------- probador virtual ---------- */
+.probador-fondo {
+  position: fixed; inset: 0; z-index: 400; background: rgba(0, 0, 0, .45);
+  backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.probador-caja {
+  width: min(520px, 100%); max-height: 92vh; overflow-y: auto; background: rgba(250, 250, 252, .95);
+  backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, .9); border-radius: 24px;
+  box-shadow: 0 40px 100px -30px rgba(0, 0, 0, .5); padding: 0 0 22px;
+}
+.probador-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; border-bottom: 1px solid var(--linea-suave); font-family: var(--display); font-weight: 600; color: var(--hueso); }
+.probador-head button { background: none; border: none; font-size: 1.4rem; color: var(--gris-label); }
+.probador-drop { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 46px 30px; cursor: pointer; }
+.probador-drop-titulo { font-family: var(--display); font-weight: 600; font-size: 1.15rem; color: var(--hueso); }
+.probador-drop-sub { font-size: .84rem; color: var(--hueso-60); margin-top: 6px; max-width: 300px; }
+.probador-lienzo { position: relative; margin: 18px 22px 0; border-radius: 16px; overflow: hidden; touch-action: none; background: #000; }
+.probador-lienzo > img:first-child { width: 100%; display: block; user-select: none; }
+.probador-gafas { position: absolute; cursor: grab; user-select: none; touch-action: none; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .3)); }
+.probador-gafas:active { cursor: grabbing; }
+.probador-controles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 16px 22px 0; }
+.probador-controles label { font-size: .72rem; font-weight: 600; color: var(--gris-label); text-transform: uppercase; letter-spacing: .08em; display: flex; flex-direction: column; gap: 6px; }
+.probador-controles input[type="range"] { accent-color: #1D1D1F; }
+.probador-tip { font-size: .78rem; color: var(--hueso-35); text-align: center; padding: 10px 22px 0; }
+.probador-acciones { display: flex; gap: 10px; justify-content: center; padding: 16px 22px 0; flex-wrap: wrap; }
+
 /* ---------- reveals ---------- */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.22, 1, .36, 1), transform .8s cubic-bezier(.22, 1, .36, 1); }
 .reveal.visible { opacity: 1; transform: none; }
