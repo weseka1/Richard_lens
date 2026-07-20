@@ -314,6 +314,27 @@ const server = http.createServer(async (req, res) => {
       return json(res, 404, { error: 'ruta desconocida' });
     }
 
+    // ---- SEO: sitemap + robots (el dominio real se setea en config.dominio al deployar) ----
+    if (p === '/sitemap.xml') {
+      const cfg = leer('config.json', {});
+      const base = cfg.dominio || 'http://localhost:5250';
+      const productos = leer('productos.json', []).filter(x => x.estado !== 'pausado');
+      const urls = [
+        `${base}/`, `${base}/catalogo`,
+        `${base}/catalogo?orden=vendidos`, `${base}/catalogo?promo=1`,
+        ...productos.map(x => `${base}/producto/${x.id}`)
+      ];
+      res.writeHead(200, { 'Content-Type': 'application/xml; charset=utf-8' });
+      return res.end(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+        urls.map(u => `  <url><loc>${u.replace(/&/g, '&amp;')}</loc></url>`).join('\n') + '\n</urlset>');
+    }
+    if (p === '/robots.txt') {
+      const cfg = leer('config.json', {});
+      const base = cfg.dominio || 'http://localhost:5250';
+      res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+      return res.end(`User-agent: *\nAllow: /\nDisallow: /panel\nDisallow: /api/\nSitemap: ${base}/sitemap.xml\n`);
+    }
+
     // ---- fotos del catálogo (07_CATALOGO/imagenes) ----
     if (p.startsWith('/fotos/')) {
       const rel = p.replace('/fotos/', '').split('/').filter(x => x && x !== '..');

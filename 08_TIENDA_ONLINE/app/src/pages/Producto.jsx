@@ -32,7 +32,11 @@ export default function Producto() {
 
   useEffect(() => {
     if (!p) return;
-    document.title = `${p.marca} ${p.modelo} — RICHARD LENS`;
+    import('../lib/seo.js').then(({ setSeo, jsonldProducto }) => setSeo({
+      titulo: `Anteojos ${p.marca} ${p.modelo} Originales — Precio Argentina | Richard Lens`,
+      descripcion: `${p.marca} ${p.modelo} 100% original con garantía doble.${p.precio_web ? ` $${p.precio_web.toLocaleString('es-AR')} y cuotas.` : ''} ${p.variantes?.length || 1} variantes. Envíos a toda Argentina.`,
+      jsonld: jsonldProducto(p, cfg)
+    }));
     setFotoActiva(0);
     getFotos(p.foto_codigo).then(setFotos);
     track('visita_producto', p.id);
@@ -77,34 +81,46 @@ export default function Producto() {
           <h1 className="prod-titulo">{p.modelo}</h1>
           <p className="prod-desc">{p.descripcion}</p>
 
-          {p.variantes?.length > 0 && (
-            <div style={{ margin: '22px 0' }}>
-              <p style={{ fontFamily: 'var(--display)', fontWeight: 700, textTransform: 'uppercase', fontSize: '.78rem', letterSpacing: '.16em', color: 'var(--blanco-60)', marginBottom: 10 }}>
-                Elegí tu combinación <span style={{ color: 'var(--cian)' }}>({p.variantes.length})</span>
-              </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, maxHeight: 260, overflowY: 'auto', paddingRight: 6 }}>
-                {p.variantes.map(x => {
-                  const [label, bg, fg] = PILL_STOCK[x.stock] || PILL_STOCK['CONSULTAR'];
-                  const activa = v?.sku === x.sku;
-                  return (
+          {p.variantes?.length > 0 && (() => {
+            const conStock = x => x.stock === 'STOCK' || x.stock === 'POCO STOCK';
+            const colores = [...new Set(p.variantes.map(x => x.color))];
+            const colorSel = v?.color || colores[0];
+            const deColor = p.variantes.filter(x => x.color === colorSel);
+            const [labelSel, bgSel, fgSel] = PILL_STOCK[v?.stock] || PILL_STOCK['CONSULTAR'];
+            return (
+              <div className="selector-variantes">
+                <p className="selector-label">Color <span>· {colores.length} disponibles</span></p>
+                <div className="selector-chips">
+                  {colores.map(c => {
+                    const hay = p.variantes.some(x => x.color === c && conStock(x));
+                    return (
+                      <button
+                        key={c}
+                        className={'chip-var' + (colorSel === c ? ' activo' : '') + (hay ? '' : ' agotado')}
+                        onClick={() => setVariante(p.variantes.find(x => x.color === c && conStock(x)) || p.variantes.find(x => x.color === c))}
+                      >{c}</button>
+                    );
+                  })}
+                </div>
+                <p className="selector-label">Talle</p>
+                <div className="selector-chips">
+                  {deColor.map(x => (
                     <button
                       key={x.sku}
+                      className={'chip-var chip-talle' + (v?.sku === x.sku ? ' activo' : '') + (conStock(x) ? '' : ' agotado')}
                       onClick={() => setVariante(x)}
-                      style={{
-                        display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10,
-                        background: activa ? 'rgba(198,167,94,.12)' : 'var(--grafito)',
-                        border: activa ? '1px solid var(--oro)' : '1px solid var(--linea-suave)',
-                        borderRadius: 3, padding: '11px 14px', color: 'var(--hueso)', textAlign: 'left', fontSize: '.86rem', fontWeight: 500
-                      }}
-                    >
-                      <span>{x.color} <span style={{ color: 'var(--blanco-35)', fontWeight: 500 }}>· {x.codigo} · {x.talle}</span></span>
-                      <span style={{ background: bg, color: fg, borderRadius: 999, padding: '3px 10px', fontSize: '.64rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.08em', whiteSpace: 'nowrap' }}>{label}</span>
-                    </button>
-                  );
-                })}
+                    >{x.talle || 'Único'}</button>
+                  ))}
+                </div>
+                {v && (
+                  <div className="selector-estado">
+                    <span style={{ background: bgSel, color: fgSel }} className="selector-pill">{labelSel}</span>
+                    <span className="selector-cod">SKU {v.sku} · {v.codigo}</span>
+                  </div>
+                )}
               </div>
-            </div>
-          )}
+            );
+          })()}
 
           <div className="prod-specs">
             {!p.variantes?.length && <div className="spec"><small>Color</small><span>{p.color}</span></div>}

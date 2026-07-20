@@ -185,6 +185,15 @@ export default function Home() {
       {/* NEWSLETTER */}
       <Newsletter />
 
+      {/* CONTENIDO SEO */}
+      <section className="seccion" style={{ paddingTop: 60, paddingBottom: 60 }}>
+        <div className="wrap seo-bloque">
+          <h2>Anteojos de sol originales en Argentina</h2>
+          <p>Richard Lens &amp; Co. es una eyewear house argentina especializada en anteojos de sol y armazones recetados 100% originales: Ray-Ban Wayfarer, Aviator, Clubmaster y Erika con entrega inmediata, y lentes de sol de lujo Dior, Prada, Gucci, Louis Vuitton, Cartier, Saint Laurent, Fendi, Versace, Balenciaga, Celine, Miu Miu y Off-White a pedido. Todos nuestros lentes incluyen estuche, paño y papelería original, con grabados verificables y garantía doble de autenticidad: si no es original, devolvemos el doble.</p>
+          <p>Comprá gafas de sol online con envío asegurado a todo el país — Buenos Aires, Córdoba, Rosario, Mendoza, Bahía Blanca y cada rincón de Argentina — con cuotas sin recargo y descuento por transferencia. ¿Buscás anteojos Ray-Ban originales baratos, lentes polarizados o gafas de lujo? Escribinos por WhatsApp y recibí precio y stock en minutos.</p>
+        </div>
+      </section>
+
       {/* CTA FINAL */}
       <section className="cta-final">
         <div className="cta-panel">

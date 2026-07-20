@@ -1,5 +1,210 @@
 [
   {
+    "fecha": "2026-07-20T20:18:24.432Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:18:18.045Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:18:14.564Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:18:10.669Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:17:59.465Z",
+    "tipo": "visita_producto",
+    "detalle": "highstreet-3605n"
+  },
+  {
+    "fecha": "2026-07-20T20:17:45.897Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T20:17:43.044Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:17:33.436Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T20:14:56.590Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:11:46.354Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:11:38.952Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T20:11:33.286Z",
+    "tipo": "visita_producto",
+    "detalle": "stringer"
+  },
+  {
+    "fecha": "2026-07-20T20:11:30.045Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T20:11:24.742Z",
+    "tipo": "visita_producto",
+    "detalle": "ow-lecce"
+  },
+  {
+    "fecha": "2026-07-20T20:11:17.799Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:11:09.060Z",
+    "tipo": "visita_producto",
+    "detalle": "aviador-classic-3025"
+  },
+  {
+    "fecha": "2026-07-20T20:09:35.363Z",
+    "tipo": "visita_producto",
+    "detalle": "blaze-aviator-3584n"
+  },
+  {
+    "fecha": "2026-07-20T20:09:24.521Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T20:03:46.074Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T20:02:27.301Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:00:17.362Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:00:12.791Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T20:00:09.020Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:58:45.388Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:58:38.865Z",
+    "tipo": "visita_producto",
+    "detalle": "amore-fashion-4390"
+  },
+  {
+    "fecha": "2026-07-20T19:58:27.335Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-20T19:58:13.860Z",
+    "tipo": "carrito_agregar",
+    "detalle": "Off-White OW LECCE"
+  },
+  {
+    "fecha": "2026-07-20T19:58:12.674Z",
+    "tipo": "carrito_agregar",
+    "detalle": "Off-White OW VIRGIL"
+  },
+  {
+    "fecha": "2026-07-20T19:58:07.545Z",
+    "tipo": "chat_abierto",
+    "detalle": "/"
+  },
+  {
+    "fecha": "2026-07-20T19:57:48.744Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:57:45.517Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:57:39.678Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:57:36.245Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:57:06.752Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:57:01.820Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T19:56:57.650Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:56:50.089Z",
+    "tipo": "visita_producto",
+    "detalle": "asap-rocky-wayfarer-puffer-4940"
+  },
+  {
+    "fecha": "2026-07-20T19:56:37.458Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T19:56:26.246Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:55:57.336Z",
+    "tipo": "visita_producto",
+    "detalle": "ow-virgil"
+  },
+  {
+    "fecha": "2026-07-20T19:55:45.824Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-20T19:42:51.883Z",
     "tipo": "visita",
     "detalle": "home"

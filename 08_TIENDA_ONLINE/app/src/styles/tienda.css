@@ -535,6 +535,46 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
 .probador-tip { font-size: .78rem; color: var(--hueso-35); text-align: center; padding: 10px 22px 0; }
 .probador-acciones { display: flex; gap: 10px; justify-content: center; padding: 16px 22px 0; flex-wrap: wrap; }
 
+/* ---------- selector de variantes tipo MELI (color → talle → stock) ---------- */
+.selector-variantes { margin: 22px 0; }
+.selector-label { font-size: .7rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gris-label); margin: 16px 0 8px; }
+.selector-label span { text-transform: none; letter-spacing: 0; font-weight: 400; }
+.selector-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip-var {
+  background: #fff; border: 1px solid var(--linea); color: var(--hueso);
+  font-size: .82rem; font-weight: 500; padding: 9px 16px; border-radius: 12px; transition: all .2s;
+}
+.chip-var:hover { border-color: var(--hueso); }
+.chip-var.activo { background: #1D1D1F; border-color: #1D1D1F; color: #fff; }
+.chip-var.agotado { opacity: .45; text-decoration: line-through; }
+.chip-talle { border-radius: 999px; font-size: .78rem; padding: 8px 15px; }
+.selector-estado { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+.selector-pill { border-radius: 999px; padding: 5px 13px; font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+.selector-cod { font-size: .72rem; color: var(--hueso-35); }
+
+/* ---------- doodles new-rich de fondo (negro en claro, blanco en oscuro) ---------- */
+.fondo-doodles { position: fixed; inset: 0; z-index: 0; pointer-events: none; mix-blend-mode: difference; }
+.fondo-doodles svg { position: absolute; overflow: visible; opacity: .07; }
+.doodle-trazo {
+  fill: none; stroke: #FFFFFF; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 420; stroke-dashoffset: 420;
+  animation: doodlear 9s ease-in-out infinite;
+}
+@keyframes doodlear {
+  0% { stroke-dashoffset: 420; opacity: 0; }
+  12% { opacity: 1; }
+  45% { stroke-dashoffset: 0; opacity: 1; }
+  75% { stroke-dashoffset: 0; opacity: 1; }
+  95% { opacity: 0; }
+  100% { stroke-dashoffset: 420; opacity: 0; }
+}
+main, header, footer, .cart-drawer, .chat-panel, .fab-stack { position: relative; z-index: 2; }
+
+/* ---------- bloque SEO del pie ---------- */
+.seo-bloque { max-width: 880px; }
+.seo-bloque h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; color: var(--hueso); }
+.seo-bloque p { font-size: .84rem; color: var(--hueso-35); margin-bottom: 14px; }
+
 /* ---------- reveals ---------- */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.22, 1, .36, 1), transform .8s cubic-bezier(.22, 1, .36, 1); }
 .reveal.visible { opacity: 1; transform: none; }
