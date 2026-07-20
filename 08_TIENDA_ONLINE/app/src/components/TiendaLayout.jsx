@@ -104,7 +104,7 @@ export default function TiendaLayout() {
                   <Link to="/catalogo?forma=armazón recetado">Armazones recetados</Link>
                   <Link to="/catalogo?forma=collab">Collabs</Link>
                 </div>
-              </div>
+              </div>, document.body)}
             </div>
             <Link to="/catalogo?canal=WEB">La Caja Fuerte</Link>
             <a href="/#por-que">Por qué nosotros</a>
