@@ -87,10 +87,14 @@ nav a:hover, nav a.activa { color: var(--hueso); }
   border: 1px solid rgba(255, 255, 255, 1);
   /* el 100vmax oscurece TODO lo de atrás cuando el panel está abierto (truco Nike) */
   box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .3), inset 0 1px 0 #fff, 0 0 0 100vmax rgba(10, 10, 11, .32);
-  opacity: 0; visibility: hidden; transition: opacity .25s cubic-bezier(.22, 1, .36, 1), transform .25s cubic-bezier(.22, 1, .36, 1), visibility .25s;
+  opacity: 0; visibility: hidden;
+  transition: opacity .25s cubic-bezier(.22, 1, .36, 1), transform .25s cubic-bezier(.22, 1, .36, 1), visibility .25s;
+  transition-delay: .18s; /* margen para viajar del link al panel sin que se cierre */
   z-index: 150;
 }
-.mega-wrap:hover .mega, .mega:hover { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+/* puente invisible que tapa el hueco entre el header y el panel */
+.mega::before { content: ''; position: absolute; left: 0; right: 0; top: -46px; height: 46px; }
+.mega-wrap:hover .mega, .mega:hover { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); transition-delay: 0s; }
 .mega-col { display: flex; flex-direction: column; gap: 2px; }
 .mega-col b { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gris-label); font-weight: 700; margin-bottom: 10px; }
 .mega-col a { font-size: .9rem; font-weight: 500; color: var(--hueso); padding: 7px 10px; margin-left: -10px; border-radius: 10px; letter-spacing: 0; text-transform: none; }
@@ -616,7 +620,12 @@ main, header, footer { position: relative; z-index: 2; } /* ojo: jamás pisar el
 .ig-chrome b { display: block; font-size: .82rem; color: var(--hueso); font-weight: 600; line-height: 1.2; }
 .ig-chrome span { display: block; font-size: .68rem; color: var(--gris-label); }
 .ig-chrome em { margin-left: auto; font-style: normal; font-size: .74rem; font-weight: 600; color: #0066CC; }
-.ig-telefono video { width: 100%; aspect-ratio: 9 / 15; object-fit: cover; display: block; }
+.ig-telefono video { width: 100%; aspect-ratio: 9 / 13.5; object-fit: cover; display: block; }
+.ig-pie { background: #fff; padding: 10px 14px 14px; }
+.ig-acciones { display: flex; gap: 14px; align-items: center; }
+.ig-acciones svg { width: 22px; height: 22px; fill: none; stroke: #1D1D1F; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+.ig-caption { font-size: .76rem; color: var(--hueso); margin-top: 8px; }
+.ig-caption b { font-weight: 600; margin-right: 4px; }
 @media (max-width: 800px) { .ig-in { grid-template-columns: 1fr; gap: 30px; } }
 
 /* ---------- popup suscripción (glass iPhone, estilo Nike) ---------- */

@@ -206,6 +206,15 @@ export default function Home() {
               <em>Seguir</em>
             </div>
             <video src="/img/ig.mp4" autoPlay muted loop playsInline />
+            <div className="ig-pie">
+              <div className="ig-acciones">
+                <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-9.5-9A5.4 5.4 0 0 1 12 6.2 5.4 5.4 0 0 1 21.5 12c-2 4.1-9.5 9-9.5 9Z" /></svg>
+                <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 21l2-5.6A8.5 8.5 0 1 1 21 11.5Z" /></svg>
+                <svg viewBox="0 0 24 24"><path d="M22 3 2 10.5l7 2.5M22 3l-5.5 18L12 13M22 3 12 13" /></svg>
+                <svg viewBox="0 0 24 24" style={{ marginLeft: 'auto' }}><path d="M6 3h12v18l-6-4.5L6 21V3Z" /></svg>
+              </div>
+              <p className="ig-caption"><b>{cfg?.instagram || 'richardlens.ar'}</b> Dobles en el club. Los ojos, cubiertos. 🎾</p>
+            </div>
           </a>
         </div>
       </section>
