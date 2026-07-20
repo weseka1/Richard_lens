@@ -1,5 +1,50 @@
 [
   {
+    "fecha": "2026-07-20T20:58:07.906Z",
+    "tipo": "visita_producto",
+    "detalle": "asap-rocky-3928"
+  },
+  {
+    "fecha": "2026-07-20T20:57:17.093Z",
+    "tipo": "visita",
+    "detalle": "catalogo:vendidos"
+  },
+  {
+    "fecha": "2026-07-20T20:57:07.107Z",
+    "tipo": "visita_producto",
+    "detalle": "teru-bio-based-4425"
+  },
+  {
+    "fecha": "2026-07-20T20:56:52.257Z",
+    "tipo": "visita",
+    "detalle": "catalogo:vendidos"
+  },
+  {
+    "fecha": "2026-07-20T20:56:23.379Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:56:20.265Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:56:09.550Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:54:13.997Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T20:52:27.947Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-20T20:44:36.772Z",
     "tipo": "visita",
     "detalle": "home"

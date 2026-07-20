@@ -70,7 +70,19 @@ export default function Catalogo() {
       <p className="sec-bajada">{bajada}</p>
 
       <div className="filtros">
-        <Chips items={marcas} valor={marca} onCambio={v => { setMarca(v); setCanal(null); }} />
+        <Chips
+          items={['Ray-Ban', 'Ray-Ban · Ferrari', 'Louis Vuitton', 'Dior', 'Gucci', 'Prada', 'Oakley'].filter(m => marcas.includes(m))}
+          valor={marca}
+          onCambio={v => { setMarca(v); setCanal(null); }}
+        />
+        <select
+          className="chip select-marca"
+          value={marca || ''}
+          onChange={e => { setMarca(e.target.value || null); setCanal(null); }}
+        >
+          <option value="">Todas las marcas</option>
+          {marcas.map(m => <option key={m} value={m}>{m}</option>)}
+        </select>
       </div>
       <div className="filtros">
         <Chips items={FORMAS} valor={forma} onCambio={setForma} />

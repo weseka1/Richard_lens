@@ -8,6 +8,7 @@ import { useCarrito } from '../lib/carrito.js';
 import Lenis from 'lenis';
 import IntroGraffiti from './IntroGraffiti.jsx';
 import FondoDoodles from './FondoDoodles.jsx';
+import PopupSuscripcion from './PopupSuscripcion.jsx';
 
 const ConfigContext = createContext(null);
 export const useCfg = () => useContext(ConfigContext);
@@ -50,6 +51,7 @@ export default function TiendaLayout() {
     <ConfigContext.Provider value={cfg}>
       <IntroGraffiti />
       <FondoDoodles />
+      <PopupSuscripcion />
       <header>
         <div className="anuncio" aria-hidden="true">
           <div className="anuncio-in">
@@ -66,7 +68,41 @@ export default function TiendaLayout() {
           <button className="menu-btn" aria-label="Menú" onClick={() => setMenu(m => !m)}>☰</button>
           <nav className={menu ? 'abierta' : ''}>
             <NavLink to="/" end className={({ isActive }) => isActive ? 'activa' : ''}>Inicio</NavLink>
-            <NavLink to="/catalogo" className={({ isActive }) => isActive ? 'activa' : ''}>Catálogo</NavLink>
+            <div className="mega-wrap">
+              <NavLink to="/catalogo" className={({ isActive }) => isActive ? 'activa' : ''}>Catálogo</NavLink>
+              <div className="mega">
+                <div className="mega-col">
+                  <b>Destacados</b>
+                  <Link to="/catalogo?orden=vendidos">Más vendidos</Link>
+                  <Link to="/catalogo?promo=1">En promoción</Link>
+                  <Link to="/catalogo?estado=disponible">Stock inmediato</Link>
+                  <Link to="/catalogo">Ver todo</Link>
+                </div>
+                <div className="mega-col">
+                  <b>Ray-Ban</b>
+                  <Link to="/catalogo?marca=Ray-Ban">Toda la línea</Link>
+                  <Link to="/catalogo?marca=Ray-Ban%20·%20Ferrari">Ferrari Edition</Link>
+                  <Link to="/catalogo?marca=Ray-Ban%20·%20A%24AP%20Rocky">A$AP Rocky</Link>
+                  <Link to="/catalogo?marca=Oakley">Oakley</Link>
+                </div>
+                <div className="mega-col">
+                  <b>La Caja Fuerte</b>
+                  <Link to="/catalogo?marca=Louis%20Vuitton">Louis Vuitton</Link>
+                  <Link to="/catalogo?marca=Dior">Dior</Link>
+                  <Link to="/catalogo?marca=Gucci">Gucci</Link>
+                  <Link to="/catalogo?marca=Prada">Prada</Link>
+                  <Link to="/catalogo?marca=Cartier">Cartier</Link>
+                  <Link to="/catalogo?canal=WEB">Todo el lujo</Link>
+                </div>
+                <div className="mega-col">
+                  <b>Colecciones</b>
+                  <Link to="/catalogo?genero=hombre">Gafas Hombre</Link>
+                  <Link to="/catalogo?genero=mujer">Gafas Mujer</Link>
+                  <Link to="/catalogo?forma=armazón recetado">Armazones recetados</Link>
+                  <Link to="/catalogo?forma=collab">Collabs</Link>
+                </div>
+              </div>
+            </div>
             <Link to="/catalogo?canal=WEB">La Caja Fuerte</Link>
             <a href="/#por-que">Por qué nosotros</a>
             <BotonWA cfg={cfg} className="btn-wa-mini">WhatsApp</BotonWA>
