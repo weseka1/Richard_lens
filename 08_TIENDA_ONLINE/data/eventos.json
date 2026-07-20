@@ -1,5 +1,40 @@
 [
   {
+    "fecha": "2026-07-20T19:36:45.790Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:36:44.772Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:36:08.342Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:36:08.241Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:32:25.789Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:30:20.326Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T19:29:45.252Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-20T19:29:22.173Z",
     "tipo": "visita_producto",
     "detalle": "ve4361"

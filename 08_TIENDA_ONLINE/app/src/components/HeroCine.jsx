@@ -1,71 +1,76 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { plata, getFotos } from '../lib/api.js';
+import { plata } from '../lib/api.js';
 import { BotonWA } from './TiendaLayout.jsx';
 
-/* El hero. Dos modos:
- * 1) CINE: si existe app/public/img/hero.mp4 (video real bajado de la ref) → panel oscuro
- *    full-bleed con el video de fondo y el copy centrado.
- * 2) PORCELANA: fallback — el aviador recortado flotando estilo Apple.
- * El widget de vidrio con el drop vive en los dos modos. */
+/* El hero maison: split editorial GRANDE — copy sobre porcelana a la izquierda,
+ * la foto editorial (el negro) full-bleed a la derecha. Tilt 3D sutil tipo iPhone:
+ * el panel entero se inclina 1-2 grados siguiendo el mouse, con perspectiva.
+ * Si existe /img/hero.mp4 → modo cine con video de fondo. */
 
-function GlassWidget({ drop, cfg }) {
-  const [foto, setFoto] = useState(null);
+function useTilt() {
   const ref = useRef(null);
-  useEffect(() => { if (drop) getFotos(drop.foto_codigo).then(fs => setFoto(fs[0] || null)); }, [drop?.id]);
   useEffect(() => {
     if (matchMedia('(pointer: coarse)').matches) return;
     const el = ref.current;
     if (!el) return;
+    let raf = null;
     const move = e => {
-      const x = (e.clientX / innerWidth - 0.5) * 2, y = (e.clientY / innerHeight - 0.5) * 2;
-      el.style.transform = `translate(${x * -8}px, ${y * -6}px)`;
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        el.style.transform = `perspective(1600px) rotateY(${x * 2.4}deg) rotateX(${y * -1.6}deg)`;
+      });
     };
-    addEventListener('mousemove', move, { passive: true });
-    return () => removeEventListener('mousemove', move);
+    const leave = () => {
+      if (raf) cancelAnimationFrame(raf);
+      el.style.transform = 'perspective(1600px) rotateY(0deg) rotateX(0deg)';
+    };
+    el.addEventListener('mousemove', move);
+    el.addEventListener('mouseleave', leave);
+    return () => { el.removeEventListener('mousemove', move); el.removeEventListener('mouseleave', leave); };
   }, []);
-  if (!drop) return null;
-  return (
-    <Link to={`/producto/${drop.id}`} className="glass-widget" ref={ref}>
-      <span className="glass-kicker">Drop en stock</span>
-      {foto && <img src={foto} alt={drop.modelo} className="glass-foto" />}
-      <span className="glass-nombre">{drop.marca} {drop.modelo}</span>
-      {drop.precio_web > 0 && cfg && <span className="glass-precio">{plata(drop.precio_web)} <i>· {cfg.cuotas} cuotas</i></span>}
-      <span className="glass-barra"><i style={{ width: '68%' }} /></span>
-      <span className="glass-cta">Ver el drop →</span>
-    </Link>
-  );
+  return ref;
 }
 
 export default function HeroCine({ drop, cfg }) {
   const [hayVideo, setHayVideo] = useState(true);
+  const tiltRef = useTilt();
+
+  const copy = (claro) => (
+    <div className="hero-copy">
+      <p className="hero-kicker" style={claro ? { color: 'rgba(255,255,255,.6)' } : undefined}>Richard Lens &amp; Co. — Est. Argentina</p>
+      <h1>
+        <span className="l1" style={claro ? { color: '#fff' } : undefined}>Eyewear</span>
+        <span className="l2" style={claro ? { color: '#fff' } : undefined}>House.</span>
+      </h1>
+      <p className="hero-sub" style={claro ? { color: 'rgba(255,255,255,.72)' } : undefined}>
+        Ray-Ban, Dior, Prada, Louis Vuitton, Cartier. 100% originales con garantía doble, envíos a todo el país.
+      </p>
+      <div className="hero-ctas">
+        <Link to="/catalogo" className="btn-brush" style={claro ? { background: '#fff', color: '#1D1D1F' } : undefined}>Ver la colección</Link>
+        <BotonWA cfg={cfg} className="btn-pill" texto="Hola, quiero ver modelos y precios."
+          style={claro ? { borderColor: 'rgba(255,255,255,.4)', color: '#fff' } : undefined}>WhatsApp</BotonWA>
+      </div>
+      {drop && (
+        <Link to={`/producto/${drop.id}`} className="hero-drop-linea" style={claro ? { color: 'rgba(255,255,255,.55)' } : undefined}>
+          Drop en stock — {drop.marca} {drop.modelo}{drop.precio_web > 0 ? ` · ${plata(drop.precio_web)}` : ''} →
+        </Link>
+      )}
+    </div>
+  );
 
   if (hayVideo) return (
     <section className="hero">
       <div className="wrap">
-        <div className="hero-cine">
-          <video
-            src="/img/hero.mp4"
-            autoPlay muted loop playsInline
-            onError={() => setHayVideo(false)}
-          />
-          <div className="hero-cine-velo" />
-          <div className="hero-cine-contenido">
-            <p className="hero-kicker" style={{ color: 'rgba(255,255,255,.65)' }}>Richard Lens &amp; Co. — Est. Argentina</p>
-            <h1>
-              <span className="l1" style={{ color: '#fff' }}>Eyewear</span>
-              <span className="l2" style={{ color: '#fff' }}>House.</span>
-            </h1>
-            <p className="hero-sub" style={{ color: 'rgba(255,255,255,.72)', margin: '22px auto 32px' }}>
-              Ray-Ban, Dior, Prada, Louis Vuitton, Cartier. 100% originales, garantía doble, envíos a todo el país.
-            </p>
-            <div className="hero-ctas" style={{ justifyContent: 'center' }}>
-              <Link to="/catalogo" className="btn-brush" style={{ background: '#fff', color: '#1D1D1F' }}>Ver la colección</Link>
-              <BotonWA cfg={cfg} className="btn-pill" texto="Hola, quiero ver modelos y precios."
-                style={{ borderColor: 'rgba(255,255,255,.4)', color: '#fff' }}>WhatsApp</BotonWA>
-            </div>
+        <div className="hero-tilt" ref={tiltRef}>
+          <div className="hero-cine">
+            <video src="/img/hero.mp4" autoPlay muted loop playsInline onError={() => setHayVideo(false)} />
+            <div className="hero-cine-velo" />
+            <div className="hero-cine-contenido">{copy(true)}</div>
           </div>
-          <GlassWidget drop={drop} cfg={cfg} />
         </div>
       </div>
     </section>
@@ -74,22 +79,12 @@ export default function HeroCine({ drop, cfg }) {
   return (
     <section className="hero">
       <div className="wrap">
-        <div className="hero-panel">
-          <div>
-            <p className="hero-kicker">Richard Lens &amp; Co. — Est. Argentina</p>
-            <h1>
-              <span className="l1">Eyewear</span>
-              <span className="l2">House.</span>
-            </h1>
-            <p className="hero-sub">Ray-Ban, Dior, Prada, Louis Vuitton, Cartier. 100% originales con garantía doble, entrega inmediata y envíos a todo el país.</p>
-            <div className="hero-ctas">
-              <Link to="/catalogo" className="btn-brush">Ver la colección</Link>
-              <BotonWA cfg={cfg} className="btn-pill" texto="Hola, quiero ver modelos y precios.">WhatsApp</BotonWA>
+        <div className="hero-tilt" ref={tiltRef}>
+          <div className="hero-split">
+            {copy(false)}
+            <div className="hero-split-foto">
+              <img src="/img/hero-editorial.jpg" alt="Modelo con Ray-Ban — Richard Lens" />
             </div>
-          </div>
-          <div className="hero-avatar">
-            <img src="/img/hero-editorial.jpg" alt="Modelo con Ray-Ban — Richard Lens" className="hero-foto-editorial" />
-            <GlassWidget drop={drop} cfg={cfg} />
           </div>
         </div>
       </div>

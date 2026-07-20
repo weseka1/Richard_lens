@@ -6,6 +6,7 @@ import ChatRich from './ChatRich.jsx';
 import CartDrawer from './CartDrawer.jsx';
 import { useCarrito } from '../lib/carrito.js';
 import Lenis from 'lenis';
+import IntroGraffiti from './IntroGraffiti.jsx';
 
 const ConfigContext = createContext(null);
 export const useCfg = () => useContext(ConfigContext);
@@ -46,6 +47,7 @@ export default function TiendaLayout() {
 
   return (
     <ConfigContext.Provider value={cfg}>
+      <IntroGraffiti />
       <header>
         <div className="anuncio" aria-hidden="true">
           <div className="anuncio-in">

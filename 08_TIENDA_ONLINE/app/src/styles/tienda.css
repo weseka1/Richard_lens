@@ -428,6 +428,51 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
 .news-ok { font-size: .82rem; color: var(--verde); font-weight: 500; }
 @media (max-width: 800px) { .news-in { grid-template-columns: 1fr; gap: 30px; } .glass-widget { left: 0; bottom: 4%; width: 190px; } }
 
+/* ---------- intro graffiti: el tag se dibuja y revela la maison ---------- */
+.intro-graffiti {
+  position: fixed; inset: 0; z-index: 9999; background: #F5F5F7;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1);
+}
+.intro-graffiti.saliendo { opacity: 0; transform: translateY(-3%); pointer-events: none; }
+.intro-tag { width: min(88vw, 900px); overflow: visible; }
+.intro-texto { font-family: 'Permanent Marker', cursive; font-size: 108px; letter-spacing: .01em; }
+.intro-trazo {
+  fill: none; stroke: #FF3E8A; stroke-width: 2.5;
+  stroke-dasharray: 1400; stroke-dashoffset: 1400;
+  animation: trazar 1.6s cubic-bezier(.5, 0, .3, 1) forwards;
+}
+.intro-relleno { fill: #FF3E8A; opacity: 0; animation: rellenar .5s ease 1.35s forwards; }
+@keyframes trazar { to { stroke-dashoffset: 0; } }
+@keyframes rellenar { to { opacity: 1; } }
+.intro-sub {
+  font-family: var(--texto); font-size: .68rem; letter-spacing: .5em; text-transform: uppercase;
+  color: var(--gris-label); font-weight: 600; opacity: 0; animation: rellenar .6s ease 1.6s forwards;
+}
+@media (max-width: 700px) { .intro-texto { font-size: 64px; } }
+
+/* ---------- hero maison: split gigante + tilt 3D fino ---------- */
+.hero-tilt { transform: perspective(1600px); transform-style: preserve-3d; transition: transform .5s cubic-bezier(.22, 1, .36, 1); will-change: transform; }
+.hero-split {
+  position: relative; border-radius: 30px; overflow: hidden; min-height: min(86vh, 860px);
+  display: grid; grid-template-columns: 1fr 1.05fr; align-items: stretch;
+  background: linear-gradient(170deg, #FFFFFF 0%, #F0F0F2 100%);
+  border: 1px solid var(--linea-suave);
+  box-shadow: 0 30px 80px -35px rgba(0, 0, 0, .18);
+}
+.hero-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(36px, 5vw, 84px); }
+.hero-split .hero-copy h1 .l1 { font-size: clamp(2.6rem, 5.4vw, 4.8rem); }
+.hero-split .hero-copy h1 .l2 { font-size: clamp(3.2rem, 7vw, 6.4rem); }
+.hero-split-foto { position: relative; overflow: hidden; }
+.hero-split-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.hero-drop-linea { display: inline-block; margin-top: 26px; font-size: .82rem; font-weight: 500; color: var(--gris-label); transition: color .25s; }
+.hero-drop-linea:hover { color: #0066CC; }
+@media (max-width: 900px) {
+  .hero-split { grid-template-columns: 1fr; min-height: auto; }
+  .hero-split-foto { min-height: 420px; order: -1; }
+  .hero-split-foto img { position: absolute; }
+}
+
 /* ---------- hero CINE (video real) + foto editorial ---------- */
 .hero-cine {
   position: relative; border-radius: 28px; overflow: hidden; min-height: 620px;
