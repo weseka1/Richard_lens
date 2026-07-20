@@ -1,5 +1,60 @@
 [
   {
+    "fecha": "2026-07-20T19:42:51.883Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:42:22.002Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:42:21.929Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:42:10.102Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:42:06.481Z",
+    "tipo": "visita_producto",
+    "detalle": "wayfarer-classic-2140"
+  },
+  {
+    "fecha": "2026-07-20T19:41:01.334Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:40:43.102Z",
+    "tipo": "visita_producto",
+    "detalle": "wayfarer-classic-2140"
+  },
+  {
+    "fecha": "2026-07-20T19:40:40.799Z",
+    "tipo": "visita",
+    "detalle": "catalogo:promo"
+  },
+  {
+    "fecha": "2026-07-20T19:40:04.641Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:39:59.919Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T19:39:55.648Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-20T19:36:45.790Z",
     "tipo": "visita",
     "detalle": "home"

@@ -436,15 +436,25 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
 }
 .intro-graffiti.saliendo { opacity: 0; transform: translateY(-3%); pointer-events: none; }
 .intro-tag { width: min(88vw, 900px); overflow: visible; }
-.intro-texto { font-family: 'Permanent Marker', cursive; font-size: 108px; letter-spacing: .01em; }
-.intro-trazo {
-  fill: none; stroke: #FF3E8A; stroke-width: 2.5;
-  stroke-dasharray: 1400; stroke-dashoffset: 1400;
-  animation: trazar 1.6s cubic-bezier(.5, 0, .3, 1) forwards;
+.intro-texto { font-family: 'Permanent Marker', cursive; font-size: 104px; letter-spacing: .01em; }
+/* niebla del overspray: gorda, difusa, se pinta junto al trazo */
+.capa-niebla {
+  fill: none; stroke: #FF3E8A; stroke-width: 30; opacity: .35;
+  stroke-linecap: round; stroke-dasharray: 1400; stroke-dashoffset: 1400;
+  animation: trazar 1.9s cubic-bezier(.45, 0, .3, 1) forwards;
 }
-.intro-relleno { fill: #FF3E8A; opacity: 0; animation: rellenar .5s ease 1.35s forwards; }
+/* el chorro principal del aerosol: trazo gordo con borde rugoso */
+.capa-trazo {
+  fill: none; stroke: #FF3E8A; stroke-width: 13; opacity: .9;
+  stroke-linecap: round; stroke-dasharray: 1400; stroke-dashoffset: 1400;
+  animation: trazar 1.9s cubic-bezier(.45, 0, .3, 1) forwards;
+}
+/* el relleno pleno queda al final, con el mismo borde spray */
+.capa-relleno { fill: #FF3E8A; opacity: 0; animation: rellenar .45s ease 1.55s forwards; }
+.intro-drip { fill: #FF3E8A; opacity: .85; transform: scaleY(0); transform-origin: center top; transform-box: fill-box; animation: gotear 1s cubic-bezier(.5, 0, .6, 1) forwards; }
 @keyframes trazar { to { stroke-dashoffset: 0; } }
 @keyframes rellenar { to { opacity: 1; } }
+@keyframes gotear { to { transform: scaleY(1); } }
 .intro-sub {
   font-family: var(--texto); font-size: .68rem; letter-spacing: .5em; text-transform: uppercase;
   color: var(--gris-label); font-weight: 600; opacity: 0; animation: rellenar .6s ease 1.6s forwards;
