@@ -494,11 +494,18 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
 
 /* ---------- hero CINE (video real) + foto editorial ---------- */
 .hero-cine {
-  position: relative; border-radius: 28px; overflow: hidden; min-height: 620px;
-  background: #0B0B0C; display: flex; align-items: center; justify-content: center;
+  position: relative; border-radius: 0; overflow: visible; min-height: min(88vh, 900px);
+  background: none; display: flex; align-items: center; justify-content: center;
+  animation: veloflota 10s ease-in-out infinite; /* flota, apenas */
 }
-.hero-cine video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .85; }
-.hero-cine-velo { position: absolute; inset: 0; background: radial-gradient(80% 70% at 50% 45%, transparent 30%, rgba(0, 0, 0, .55) 100%); }
+.hero-cine video {
+  position: absolute; inset: -4% -6%; width: 112%; height: 108%; object-fit: cover;
+  /* fundido en la porcelana: los bordes se disuelven en el blanco */
+  -webkit-mask-image: radial-gradient(ellipse 68% 62% at 50% 48%, #000 48%, transparent 76%);
+  mask-image: radial-gradient(ellipse 68% 62% at 50% 48%, #000 48%, transparent 76%);
+}
+.hero-cine-velo { position: absolute; inset: 0; background: radial-gradient(50% 42% at 50% 46%, rgba(0, 0, 0, .34), transparent 75%); pointer-events: none; }
+@keyframes veloflota { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 .hero-cine-contenido { position: relative; z-index: 2; text-align: center; max-width: 640px; padding: 60px 24px; }
 .hero-cine .glass-widget { left: auto; right: 4%; bottom: 8%; background: rgba(20, 20, 22, .5); border-color: rgba(255, 255, 255, .18); }
 .hero-cine .glass-nombre, .hero-cine .glass-precio { color: #fff; }
@@ -571,7 +578,7 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
   95% { opacity: 0; }
   100% { stroke-dashoffset: 420; opacity: 0; }
 }
-main, header, footer, .cart-drawer, .chat-panel, .fab-stack { position: relative; z-index: 2; }
+main, header, footer { position: relative; z-index: 2; } /* ojo: jamás pisar el position de drawer/chat/fabs (son fixed) */
 
 /* ---------- sección Instagram: el reel en un teléfono ---------- */
 .ig-in { display: grid; grid-template-columns: 1.1fr .9fr; gap: 50px; align-items: center; }
