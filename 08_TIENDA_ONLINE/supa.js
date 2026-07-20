@@ -31,10 +31,10 @@ async function rest(ruta, metodo = 'GET', datos, prefer) {
 
 /* baja el catálogo entero y reescribe el espejo productos.json (misma forma que siempre) */
 async function pullCatalogo() {
-  const filas = await rest('productos?select=*,variantes(*)&order=id');
-  const productos = filas.map(({ variantes, creado, actualizado, ...p }) => ({
+  const filas = await rest('rl_productos?select=*,rl_variantes(*)&order=id');
+  const productos = filas.map(({ rl_variantes, creado, actualizado, ...p }) => ({
     ...p,
-    variantes: (variantes || []).map(({ producto_id, actualizado, ...v }) => v)
+    variantes: (rl_variantes || []).map(({ producto_id, actualizado, ...v }) => v)
   }));
   fs.writeFileSync(DATA('productos.json'), JSON.stringify(productos, null, 2), 'utf8');
   return productos.length;

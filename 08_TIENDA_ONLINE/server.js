@@ -184,7 +184,7 @@ const server = http.createServer(async (req, res) => {
         const cambios = await body(req);
         productos[i] = { ...productos[i], ...cambios, id: mProd[1] };
         guardar('productos.json', productos);
-        if (supa.activo()) { const { variantes, ...campos } = cambios; if (Object.keys(campos).length) supa.actualizar('productos', mProd[1], campos); }
+        if (supa.activo()) { const { variantes, ...campos } = cambios; if (Object.keys(campos).length) supa.actualizar('rl_productos', mProd[1], campos); }
         return json(res, 200, { ok: true });
       }
       if (mProd && req.method === 'DELETE') {
@@ -213,7 +213,7 @@ const server = http.createServer(async (req, res) => {
         const nuevo = { id: 'P' + Date.now(), fecha: new Date().toISOString(), estado: 'nuevo', ...b };
         pedidos.unshift(nuevo);
         guardar('pedidos.json', pedidos);
-        if (supa.activo()) supa.insertar('pedidos', { producto: nuevo.producto, cantidad: nuevo.cantidad, monto: nuevo.monto, canal: nuevo.canal, cliente: nuevo.cliente, estado: nuevo.estado, detalle: { local_id: nuevo.id } });
+        if (supa.activo()) supa.insertar('rl_pedidos', { producto: nuevo.producto, cantidad: nuevo.cantidad, monto: nuevo.monto, canal: nuevo.canal, cliente: nuevo.cliente, estado: nuevo.estado, detalle: { local_id: nuevo.id } });
         return json(res, 200, { ok: true });
       }
       const mPed = p.match(/^\/api\/pedidos\/([\w-]+)$/);
@@ -238,7 +238,7 @@ const server = http.createServer(async (req, res) => {
         if (!subs.some(s => s.email === email.toLowerCase())) {
           subs.unshift({ email: email.toLowerCase(), fecha: new Date().toISOString(), origen: 'web' });
           guardar('suscriptores.json', subs);
-          if (supa.activo()) supa.insertar('suscriptores', { email: email.toLowerCase(), origen: 'web' });
+          if (supa.activo()) supa.insertar('rl_suscriptores', { email: email.toLowerCase(), origen: 'web' });
         }
         return json(res, 200, { ok: true });
       }

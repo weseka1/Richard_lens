@@ -29,12 +29,12 @@ async function upsert(tabla, filas) {
   }
 }
 
-const filasProductos = productos.map(({ variantes, ...p }) => p);
+const filasProductos = [...new Map(productos.map(({ variantes, ...p }) => [p.id, p])).values()];
 const filasVariantes = productos.flatMap(p => (p.variantes || []).map(v => ({
   sku: String(v.sku), producto_id: p.id, codigo: v.codigo, color: v.color, talle: v.talle, stock: v.stock
 })));
 
 console.log(`Migrando ${filasProductos.length} productos y ${filasVariantes.length} variantes…`);
-await upsert('productos', filasProductos);
-await upsert('variantes', filasVariantes);
+await upsert('rl_productos', filasProductos);
+await upsert('rl_variantes', filasVariantes);
 console.log('MIGRACIÓN COMPLETA ✅');
