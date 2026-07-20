@@ -8,8 +8,8 @@ import CardProducto, { Badge, TileMarca, popColor } from '../components/CardProd
 const PILL_STOCK = {
   'STOCK': ['Stock ya', 'var(--lima)', 'var(--tinta)'],
   'POCO STOCK': ['Quedan pocos', 'var(--amarillo)', 'var(--tinta)'],
-  'POR ENTRAR': ['Por entrar', 'rgba(250,247,242,.14)', 'var(--blanco)'],
-  'CONSULTAR': ['Consultar', 'rgba(250,247,242,.14)', 'var(--blanco)']
+  'POR ENTRAR': ['Sin stock', 'rgba(255,77,61,.22)', '#FF9C92'],
+  'CONSULTAR': ['Sin stock', 'rgba(255,77,61,.22)', '#FF9C92']
 };
 
 export default function Producto() {
