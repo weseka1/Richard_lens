@@ -1,5 +1,60 @@
 [
   {
+    "fecha": "2026-07-20T13:18:28.857Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T13:18:23.660Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-20T13:14:59.009Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T13:14:03.277Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T13:12:44.861Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T13:12:22.586Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T13:12:15.528Z",
+    "tipo": "visita_producto",
+    "detalle": "erika-4171"
+  },
+  {
+    "fecha": "2026-07-20T13:12:05.852Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T13:11:55.719Z",
+    "tipo": "visita_producto",
+    "detalle": "ve4361"
+  },
+  {
+    "fecha": "2026-07-20T13:11:18.554Z",
+    "tipo": "whatsapp_click",
+    "detalle": "/ → Hola, quiero mis lentes. ¿Qué tenés en stock?"
+  },
+  {
+    "fecha": "2026-07-20T13:10:04.259Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-20T13:07:19.506Z",
     "tipo": "visita",
     "detalle": "home"

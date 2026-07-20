@@ -142,7 +142,7 @@ nav a:hover, nav a.activa { color: var(--rosa); }
   width: min(118%, 640px); max-width: none; height: auto; object-fit: contain;
   margin-bottom: calc(clamp(30px, 5vw, 64px) * -1); /* pisa el padding del panel: sale desde el borde */
   filter: drop-shadow(0 24px 40px rgba(0, 0, 0, .35));
-  animation: respira 6s ease-in-out infinite;
+  /* estático a pedido de Juani: el personaje queda clavado, solo el fondo se mueve */
 }
 @keyframes respira { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-12px) rotate(-1deg); } }
 .sticker { position: absolute; font-family: var(--tag); white-space: nowrap; z-index: 3; animation: stamp .5s cubic-bezier(.2, 1.6, .4, 1) both; }
