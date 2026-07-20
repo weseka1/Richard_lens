@@ -276,6 +276,29 @@ const server = http.createServer(async (req, res) => {
           });
         }
         const factHoy = paresPorDia[paresPorDia.length - 1].plata;
+        // extras de comando: mes, ticket, canal, funnel del día y productos calientes
+        const inicioMes = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+        const delMes = entregados.filter(x => new Date(x.fecha) >= inicioMes);
+        const factMes = delMes.reduce((a, x) => a + (parseInt(x.monto) || 0), 0);
+        const paresMes = delMes.reduce((a, x) => a + (parseInt(x.cantidad) || 1), 0);
+        const porCanal = {};
+        for (const x of entregados) porCanal[x.canal || 'web'] = (porCanal[x.canal || 'web'] || 0) + (parseInt(x.monto) || 0);
+        const esHoy = f => new Date(f) >= hoy;
+        const visitasHoy = eventos.filter(x => x.tipo === 'visita' && esHoy(x.fecha)).length +
+          eventos.filter(x => x.tipo === 'visita_producto' && esHoy(x.fecha)).length;
+        const carritosHoy = eventos.filter(x => x.tipo === 'carrito_agregar' && esHoy(x.fecha)).length;
+        const calor = {};
+        for (const e of eventos) {
+          if (e.tipo === 'visita_producto') (calor[e.detalle] = calor[e.detalle] || { vistas: 0, carrito: 0 }).vistas++;
+          if (e.tipo === 'carrito_agregar') (calor[e.detalle] = calor[e.detalle] || { vistas: 0, carrito: 0 }).carrito++;
+        }
+        const top = Object.entries(calor)
+          .map(([k, v]) => {
+            const prod = productos.find(x => x.id === k);
+            return { nombre: prod ? `${prod.marca} ${prod.modelo}` : k, ...v };
+          })
+          .sort((a, b) => (b.carrito * 3 + b.vistas) - (a.carrito * 3 + a.vistas)).slice(0, 5);
+
         return json(res, 200, {
           productos: productos.length,
           en_stock: productos.filter(x => x.estado === 'disponible').length,
@@ -286,6 +309,15 @@ const server = http.createServer(async (req, res) => {
           pares_por_dia: paresPorDia,
           facturacion_hoy: factHoy,
           facturacion_7dias: paresPorDia.reduce((a, x) => a + x.plata, 0),
+          facturacion_mes: factMes,
+          pares_mes: paresMes,
+          ticket_promedio: entregados.length ? Math.round(entregados.reduce((a, x) => a + (parseInt(x.monto) || 0), 0) / entregados.length) : 0,
+          suscriptores: leer('suscriptores.json', []).length,
+          visitas_hoy: visitasHoy,
+          carritos_hoy: carritosHoy,
+          por_canal: porCanal,
+          top_productos: top,
+          nube: supa.activo(),
           meta_dia: cfg.meta_pares_dia || 4,
           meta_facturacion_dia: cfg.meta_facturacion_dia || 500000,
           clicks_whatsapp: eventos.filter(x => x.tipo === 'whatsapp_click').length,

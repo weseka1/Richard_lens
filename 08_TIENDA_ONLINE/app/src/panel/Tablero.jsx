@@ -42,7 +42,30 @@ export default function Tablero() {
           <span className="kpi-nota">{s.consultas_ia} consultas al asistente</span>
         </div>
       </div>
-      <div className="tarjeta">
+      <div className="kpis">
+        <div className="kpi">
+          <small>Facturación del mes</small>
+          <div className="kpi-valor">{plata(s.facturacion_mes)}</div>
+          <span className="kpi-nota">{s.pares_mes} pares vendidos este mes</span>
+        </div>
+        <div className="kpi">
+          <small>Ticket promedio</small>
+          <div className="kpi-valor">{plata(s.ticket_promedio)}</div>
+          <span className="kpi-nota">por venta cerrada</span>
+        </div>
+        <div className="kpi">
+          <small>La lista (suscriptores)</small>
+          <div className="kpi-valor">{s.suscriptores}</div>
+          <span className="kpi-nota">mails capturados para campañas</span>
+        </div>
+        <div className="kpi">
+          <small>Hoy en la tienda</small>
+          <div className="kpi-valor">{s.visitas_hoy}</div>
+          <span className="kpi-nota">visitas · {s.carritos_hoy} agregados al carrito · nube {s.nube ? '🟢 sincronizada' : '🔴 off'}</span>
+        </div>
+      </div>
+
+      <div className="tarjeta" style={{ marginBottom: 20 }}>
         <h2>Últimos 7 días</h2>
         <div className="grafico">
           {s.pares_por_dia.map((d, i) => (
@@ -52,6 +75,34 @@ export default function Tablero() {
               <span className="g-label">{d.dia}</span>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 14 }}>
+        <div className="tarjeta">
+          <h2>Productos calientes 🔥</h2>
+          {s.top_productos?.length ? (
+            <table>
+              <thead><tr><th>Producto</th><th>Vistas</th><th>Al carrito</th></tr></thead>
+              <tbody>
+                {s.top_productos.map(t => (
+                  <tr key={t.nombre}><td>{t.nombre}</td><td>{t.vistas}</td><td><b>{t.carrito}</b></td></tr>
+                ))}
+              </tbody>
+            </table>
+          ) : <p className="ayuda">Cuando entre tráfico, acá ves qué modelos calientan (vistas y carritos).</p>}
+        </div>
+        <div className="tarjeta">
+          <h2>Facturación por canal</h2>
+          {Object.keys(s.por_canal || {}).length ? (
+            <table>
+              <tbody>
+                {Object.entries(s.por_canal).sort((a, b) => b[1] - a[1]).map(([c, m]) => (
+                  <tr key={c}><td style={{ textTransform: 'capitalize' }}>{c}</td><td style={{ textAlign: 'right' }}><b>{plata(m)}</b></td></tr>
+                ))}
+              </tbody>
+            </table>
+          ) : <p className="ayuda">Se completa con cada venta registrada (WhatsApp, Instagram, MELI, web).</p>}
         </div>
       </div>
     </section>
