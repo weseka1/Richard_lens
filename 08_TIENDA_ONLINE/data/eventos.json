@@ -1,5 +1,30 @@
 [
   {
+    "fecha": "2026-07-20T21:23:30.349Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T21:21:36.365Z",
+    "tipo": "visita_producto",
+    "detalle": "zuri-bio-based-4455"
+  },
+  {
+    "fecha": "2026-07-20T21:21:06.701Z",
+    "tipo": "visita_producto",
+    "detalle": "zuri-bio-based-4455"
+  },
+  {
+    "fecha": "2026-07-20T21:20:57.320Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T21:20:44.210Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
     "fecha": "2026-07-20T21:16:18.712Z",
     "tipo": "visita",
     "detalle": "catalogo"

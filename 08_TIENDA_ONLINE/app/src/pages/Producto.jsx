@@ -20,9 +20,11 @@ export default function Producto() {
   const cfg = useCfg();
   const productos = useProductos();
   const [fotos, setFotos] = useState([]);
+  const [mapaFotos, setMapaFotos] = useState({});
   const [fotoActiva, setFotoActiva] = useState(0);
   const [variante, setVariante] = useState(null);
   const [probador, setProbador] = useState(false);
+  const [zoom, setZoom] = useState(false);
 
   const p = (productos || []).find(x => x.id === id);
 
@@ -39,6 +41,7 @@ export default function Producto() {
     }));
     setFotoActiva(0);
     getFotos(p.foto_codigo).then(setFotos);
+    fetch('/api/fotos-mapa/' + p.foto_codigo).then(r => r.json()).then(setMapaFotos).catch(() => setMapaFotos({}));
     track('visita_producto', p.id);
     return () => { document.title = 'RICHARD LENS — Anteojos 100% originales. Se te nota lo rich.'; };
   }, [p?.id]);
@@ -50,6 +53,11 @@ export default function Producto() {
   if (!p) return <main className="wrap" style={{ paddingTop: 150, minHeight: '60vh' }} />;
 
   const v = variante || p.variantes?.[0];
+  // si la auditoría IA mapeó fotos a colores, la galería respeta la variante elegida
+  const fotosDeColor = v?.color
+    ? fotos.filter(f => mapaFotos[f.split('/').pop()] === v.color)
+    : [];
+  const galeria = fotosDeColor.length ? fotosDeColor : fotos;
   const msgWA = v
     ? `Hola, me interesa el ${p.marca} ${p.modelo} en ${v.color} (${v.codigo}, talle ${v.talle}). ¿Precio?`
     : `Hola, me interesa el ${p.marca} ${p.modelo} (${p.codigo}). ¿Precio y stock?`;
@@ -59,13 +67,18 @@ export default function Producto() {
       <div className="producto-layout">
         <div>
           <div className="galeria-principal" style={{ '--pop': popColor(p.id) }}>
-            {fotos.length
-              ? <img src={fotos[fotoActiva]} alt={`${p.marca} ${p.modelo}`} />
+            {galeria.length
+              ? <img src={galeria[Math.min(fotoActiva, galeria.length - 1)]} alt={`${p.marca} ${p.modelo}`} onClick={() => setZoom(true)} />
               : <TileMarca p={p} nota="Fotos reales por WhatsApp — pedilas" />}
           </div>
-          {fotos.length > 1 && (
+          {zoom && galeria.length > 0 && (
+            <div className="lightbox" onClick={() => setZoom(false)}>
+              <img src={galeria[Math.min(fotoActiva, galeria.length - 1)]} alt={`${p.marca} ${p.modelo} ampliada`} />
+            </div>
+          )}
+          {galeria.length > 1 && (
             <div className="galeria-thumbs">
-              {fotos.map((f, i) => (
+              {galeria.map((f, i) => (
                 <img key={f} src={f} alt={`vista ${i + 1}`} className={i === fotoActiva ? 'activa' : ''} onClick={() => setFotoActiva(i)} />
               ))}
             </div>

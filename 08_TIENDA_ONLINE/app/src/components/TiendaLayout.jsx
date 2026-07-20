@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { linkWA, track } from '../lib/api.js';
 import { useConfig } from '../lib/hooks.js';
@@ -71,8 +72,8 @@ export default function TiendaLayout() {
             <NavLink to="/" end className={({ isActive }) => isActive ? 'activa' : ''}>Inicio</NavLink>
             <div className="mega-wrap">
               <button className={'nav-boton' + (mega ? ' activa' : '')} onClick={() => setMega(m => !m)}>Catálogo ▾</button>
-              {mega && <div className="mega-overlay" onClick={() => setMega(false)} />}
-              <div className={'mega' + (mega ? ' abierta' : '')} onClick={() => setMega(false)}>
+              {mega && createPortal(<div className="mega-overlay" onClick={() => setMega(false)} />, document.body)}
+              {mega && createPortal(<div className="mega abierta" onClick={() => setMega(false)}>
                 <div className="mega-col">
                   <b>Destacados</b>
                   <Link to="/catalogo?orden=vendidos">Más vendidos</Link>

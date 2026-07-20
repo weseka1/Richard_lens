@@ -193,8 +193,14 @@ const server = http.createServer(async (req, res) => {
       if (mFotos) {
         const dir = path.join(FOTOS_DIR, mFotos[1]);
         let files = [];
-        try { files = fs.readdirSync(dir).filter(f => /\.(jpe?g|png|webp)$/i.test(f)).sort(); } catch {}
+        try { files = fs.readdirSync(dir).filter(f => /\.(jpe?g|png|webp)$/i.test(f) && !f.startsWith('_')).sort(); } catch {}
         return json(res, 200, files.map(f => `/fotos/${mFotos[1]}/${f}`));
+      }
+      // mapa foto→color de variante (lo escribe la auditoría IA como fotos.json en cada carpeta)
+      const mMapa = p.match(/^\/api\/fotos-mapa\/([\w-]+)$/);
+      if (mMapa) {
+        try { return json(res, 200, JSON.parse(fs.readFileSync(path.join(FOTOS_DIR, mMapa[1], 'fotos.json'), 'utf8'))); }
+        catch { return json(res, 200, {}); }
       }
 
       if (p === '/api/pedidos' && req.method === 'GET') return json(res, 200, leer('pedidos.json', []));
