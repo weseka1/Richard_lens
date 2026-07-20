@@ -52,7 +52,7 @@ function json(res, code, data) {
 function body(req) {
   return new Promise((resolve, reject) => {
     let b = '';
-    req.on('data', c => { b += c; if (b.length > 1e6) req.destroy(); });
+    req.on('data', c => { b += c; if (b.length > 12e6) req.destroy(); }); // 12MB: fotos del panel en base64
     req.on('end', () => { try { resolve(b ? JSON.parse(b) : {}); } catch (e) { reject(e); } });
   });
 }
@@ -200,6 +200,28 @@ const server = http.createServer(async (req, res) => {
         try { files = fs.readdirSync(dir).filter(f => /\.(jpe?g|png|webp)$/i.test(f) && !f.startsWith('_')).sort(); } catch {}
         return json(res, 200, files.map(f => `/fotos/${mFotos[1]}/${f}`));
       }
+      // subir foto desde el panel (base64) → 07_CATALOGO/imagenes/<codigo>/
+      const mSubir = p.match(/^\/api\/fotos-subir\/([\w-]+)$/);
+      if (mSubir && req.method === 'POST') {
+        const { base64, ext } = await body(req);
+        if (!base64) return json(res, 400, { error: 'falta base64' });
+        const dir = path.join(FOTOS_DIR, mSubir[1]);
+        fs.mkdirSync(dir, { recursive: true });
+        const existentes = fs.readdirSync(dir).filter(f => /^\d\d\./.test(f)).length;
+        const nombre = String(existentes + 1).padStart(2, '0') + '.' + (ext || 'jpg').replace(/[^a-z]/gi, '').toLowerCase();
+        fs.writeFileSync(path.join(dir, nombre), Buffer.from(base64.replace(/^data:[^,]+,/, ''), 'base64'));
+        return json(res, 200, { ok: true, archivo: nombre });
+      }
+      // ocultar foto (renombra con _descartada_, la web deja de mostrarla)
+      const mBorrarF = p.match(/^\/api\/fotos-borrar\/([\w-]+)$/);
+      if (mBorrarF && req.method === 'POST') {
+        const { archivo } = await body(req);
+        const origen = path.join(FOTOS_DIR, mBorrarF[1], (archivo || '').replace(/[\\/]/g, ''));
+        if (!fs.existsSync(origen)) return json(res, 404, { error: 'no existe' });
+        fs.renameSync(origen, path.join(FOTOS_DIR, mBorrarF[1], '_descartada_' + path.basename(origen)));
+        return json(res, 200, { ok: true });
+      }
+
       // mapa foto→color de variante (lo escribe la auditoría IA como fotos.json en cada carpeta)
       const mMapa = p.match(/^\/api\/fotos-mapa\/([\w-]+)$/);
       if (mMapa) {

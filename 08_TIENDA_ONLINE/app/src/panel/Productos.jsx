@@ -19,12 +19,50 @@ const CAMPOS = p => [
   { id: 'descripcion', label: 'Descripción (1-2 frases)', valor: p?.descripcion, ancho: true }
 ];
 
+const sinTildes = s => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
 export default function Productos() {
   const [lista, setLista] = useState([]);
   const [modal, setModal] = useState(null); // null | {titulo, campos, onGuardar}
+  const [busca, setBusca] = useState('');
+  const [fEstado, setFEstado] = useState('');
+  const [fCanal, setFCanal] = useState('');
 
   const cargar = () => api('admin/productos').then(setLista).catch(() => {});
   useEffect(() => { cargar(); }, []);
+
+  const filtrada = lista.filter(p => {
+    const txt = sinTildes(`${p.marca} ${p.modelo} ${p.codigo} ${p.id}`);
+    return (!busca || sinTildes(busca).split(/\s+/).every(w => txt.includes(w))) &&
+      (!fEstado || p.estado === fEstado) &&
+      (!fCanal || p.canal === fCanal);
+  });
+  const visibles = filtrada.slice(0, 200);
+
+  /* ---- gestor de fotos ---- */
+  const [fotosDe, setFotosDe] = useState(null);   // producto en edición de fotos
+  const [fotos, setFotos] = useState([]);
+  async function abrirFotos(p) {
+    setFotosDe(p);
+    setFotos(await fetch('/api/fotos/' + p.foto_codigo).then(r => r.json()).catch(() => []));
+  }
+  async function subirFotos(e) {
+    for (const f of e.target.files) {
+      const base64 = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(f); });
+      await fetch('/api/fotos-subir/' + fotosDe.foto_codigo, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ base64, ext: f.name.split('.').pop() })
+      });
+    }
+    abrirFotos(fotosDe);
+  }
+  async function borrarFoto(src) {
+    await fetch('/api/fotos-borrar/' + fotosDe.foto_codigo, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ archivo: src.split('/').pop() })
+    });
+    abrirFotos(fotosDe);
+  }
 
   function editar(p) {
     setModal({
@@ -65,13 +103,34 @@ export default function Productos() {
         </div>
       </div>
       <p className="ayuda">El flujo: completás <code>07_CATALOGO/STOCK.csv</code> → "Importar" → ajustás precio acá. Precio 0 = "Consultar por WhatsApp" en la tienda.</p>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 14, alignItems: 'center' }}>
+        <input
+          style={{ maxWidth: 320 }}
+          placeholder="Buscar por marca, modelo o código…"
+          value={busca}
+          onChange={e => setBusca(e.target.value)}
+        />
+        <select style={{ maxWidth: 160 }} value={fEstado} onChange={e => setFEstado(e.target.value)}>
+          <option value="">Todos los estados</option>
+          <option value="disponible">Disponible</option>
+          <option value="a_pedido">A pedido</option>
+          <option value="proximamente">Próximamente</option>
+          <option value="pausado">Pausado</option>
+        </select>
+        <select style={{ maxWidth: 160 }} value={fCanal} onChange={e => setFCanal(e.target.value)}>
+          <option value="">Todos los canales</option>
+          <option value="ML+WEB">MELI + Web</option>
+          <option value="WEB">Solo web (LUX)</option>
+        </select>
+        <span className="ayuda" style={{ margin: 0 }}>{filtrada.length} de {lista.length}{filtrada.length > 200 ? ' · mostrando 200, afiná la búsqueda' : ''}</span>
+      </div>
       <div className="tarjeta">
         <table>
           <thead>
             <tr><th>Producto</th><th>Precio web</th><th>Precio MELI</th><th>Costo USD</th><th>Stock</th><th>Canal</th><th>Estado</th><th></th></tr>
           </thead>
           <tbody>
-            {lista.map(p => (
+            {visibles.map(p => (
               <tr key={p.id}>
                 <td><b>{p.marca}</b> {p.modelo}<br /><span style={{ color: 'var(--hueso-35)', fontSize: '.76rem' }}>{p.codigo}</span></td>
                 <td>{p.precio_web ? plata(p.precio_web) : <span className="pill pill-warn">consultar</span>}</td>
@@ -81,6 +140,7 @@ export default function Productos() {
                 <td>{p.canal}</td>
                 <td><span className={'pill ' + (p.estado === 'disponible' ? 'pill-ok' : p.estado === 'proximamente' ? 'pill-warn' : 'pill-gris')}>{p.estado}</span></td>
                 <td style={{ whiteSpace: 'nowrap' }}>
+                  <button className="btn-mini" onClick={() => abrirFotos(p)}>Fotos</button>{' '}
                   <button className="btn-mini" onClick={() => editar(p)}>Editar</button>{' '}
                   <button className="btn-mini" onClick={() => borrar(p)}>×</button>
                 </td>
@@ -90,6 +150,31 @@ export default function Productos() {
         </table>
       </div>
       {modal && <Modal {...modal} onCerrar={() => setModal(null)} />}
+
+      {fotosDe && (
+        <div className="modal-fondo abierto" onClick={e => e.target === e.currentTarget && setFotosDe(null)}>
+          <div className="modal-caja">
+            <h2>Fotos — {fotosDe.marca} {fotosDe.modelo}</h2>
+            <p className="ayuda">Las mismas fotos alimentan la tienda, el probador y MercadoLibre.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))', gap: 10, margin: '14px 0 18px' }}>
+              {fotos.map(src => (
+                <div key={src} style={{ position: 'relative' }}>
+                  <img src={src} alt="" style={{ width: '100%', aspectRatio: '1', objectFit: 'contain', background: '#fff', borderRadius: 10, border: '1px solid rgba(0,0,0,.08)' }} />
+                  <button className="btn-mini" style={{ position: 'absolute', top: 4, right: 4 }} onClick={() => borrarFoto(src)}>×</button>
+                </div>
+              ))}
+              {!fotos.length && <p className="ayuda">Sin fotos todavía — subí las primeras.</p>}
+            </div>
+            <div className="modal-botones" style={{ justifyContent: 'space-between' }}>
+              <label className="btn-oro" style={{ cursor: 'pointer' }}>
+                + Agregar fotos
+                <input type="file" accept="image/*" multiple hidden onChange={subirFotos} />
+              </label>
+              <button className="btn-sec" onClick={() => setFotosDe(null)}>Listo</button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
