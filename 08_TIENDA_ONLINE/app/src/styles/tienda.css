@@ -137,6 +137,13 @@ nav a:hover, nav a.activa { color: var(--rosa); }
 /* avatar RICH + stickers */
 .hero-avatar { position: relative; display: flex; justify-content: center; align-items: flex-end; height: 100%; }
 .hero-avatar svg { width: min(100%, 460px); height: auto; animation: respira 5s ease-in-out infinite; }
+/* el modelo real (foto/render IA recortado): grande, saliéndose apenas del panel como en la referencia */
+.hero-modelo {
+  width: min(100%, 520px); height: auto; object-fit: contain;
+  margin-bottom: calc(clamp(30px, 5vw, 64px) * -1); /* pisa el padding del panel: sale desde el borde */
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, .35));
+  animation: respira 6s ease-in-out infinite;
+}
 @keyframes respira { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-12px) rotate(-1deg); } }
 .sticker { position: absolute; font-family: var(--tag); white-space: nowrap; z-index: 3; animation: stamp .5s cubic-bezier(.2, 1.6, .4, 1) both; }
 .sticker-chip { font-family: var(--bubble); letter-spacing: .04em; padding: 10px 18px; border-radius: 999px; box-shadow: 3px 4px 0 rgba(17, 16, 19, .5); }
