@@ -48,7 +48,7 @@ export default function Home() {
               <p className="hero-kicker">Anteojos 100% originales · Envíos a todo el país</p>
               <h1>
                 <span className="l1">Se te nota</span>
-                <span className="l2">LO RICH</span>
+                <span className="l2">lo rich.</span>
               </h1>
               <p className="hero-sub">Ray-Ban y Oakley con entrega inmediata. Prada, Gucci, Louis Vuitton, Balenciaga y Fendi directo a tu puerta — sin vidriera, sin verso, con garantía doble.</p>
               <div className="hero-ctas">

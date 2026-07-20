@@ -47,10 +47,7 @@ export default function TiendaLayout() {
         <div className="header-bar">
         <div className="header-in">
           <Link to="/" className="logo-text" aria-label="Richard Lens">
-            {'RICHARD LENS'.split('').map((l, i) => l === ' '
-              ? <span key={i}>&nbsp;</span>
-              : <span key={i} className="lt" style={{ color: ['#FF3E8A', '#29D9F5', '#FFD52E', '#9BE22E', '#9B5CFF'][i % 5] }}>{l}</span>
-            )}
+            RICHARD LENS<span style={{ color: 'var(--oro)', fontSize: '.72em', letterSpacing: '.2em', marginLeft: 8, alignSelf: 'center' }}>&amp; CO.</span>
           </Link>
           <button className="menu-btn" aria-label="Menú" onClick={() => setMenu(m => !m)}>☰</button>
           <nav className={menu ? 'abierta' : ''}>
@@ -76,10 +73,7 @@ export default function TiendaLayout() {
           <div className="wrap footer-in">
             <div>
               <div className="logo-text" style={{ marginBottom: 8 }}>
-                {'RICHARD LENS'.split('').map((l, i) => l === ' '
-                  ? <span key={i}>&nbsp;</span>
-                  : <span key={i} className="lt" style={{ color: ['#FF3E8A', '#29D9F5', '#FFD52E', '#9BE22E', '#9B5CFF'][i % 5] }}>{l}</span>
-                )}
+                RICHARD LENS<span style={{ color: 'var(--oro)', fontSize: '.72em', letterSpacing: '.2em', marginLeft: 8, alignSelf: 'center' }}>&amp; CO.</span>
               </div>
               <p>Anteojos 100% originales · Envíos a todo el país<br />{cfg.textos.garantia}</p>
             </div>

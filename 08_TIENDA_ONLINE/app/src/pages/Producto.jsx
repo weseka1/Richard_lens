@@ -7,10 +7,10 @@ import CardProducto, { Badge, TileMarca, popColor } from '../components/CardProd
 import { agregar, precioLista } from '../lib/carrito.js';
 
 const PILL_STOCK = {
-  'STOCK': ['Stock ya', 'var(--lima)', 'var(--tinta)'],
-  'POCO STOCK': ['Quedan pocos', 'var(--amarillo)', 'var(--tinta)'],
-  'POR ENTRAR': ['Sin stock', 'rgba(255,77,61,.22)', '#FF9C92'],
-  'CONSULTAR': ['Sin stock', 'rgba(255,77,61,.22)', '#FF9C92']
+  'STOCK': ['Stock ya', '#C6A75E', '#0A0A0B'],
+  'POCO STOCK': ['Quedan pocos', '#F4F1EA', '#0A0A0B'],
+  'POR ENTRAR': ['Sin stock', 'rgba(244,241,234,.08)', 'rgba(244,241,234,.5)'],
+  'CONSULTAR': ['Sin stock', 'rgba(244,241,234,.08)', 'rgba(244,241,234,.5)']
 };
 
 export default function Producto() {
@@ -90,9 +90,9 @@ export default function Producto() {
                       onClick={() => setVariante(x)}
                       style={{
                         display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10,
-                        background: activa ? 'rgba(255,62,138,.14)' : 'var(--negro-2)',
-                        border: activa ? '2px solid var(--rosa)' : '2px solid rgba(250,247,242,.08)',
-                        borderRadius: 12, padding: '10px 14px', color: 'var(--blanco)', textAlign: 'left', fontSize: '.86rem', fontWeight: 600
+                        background: activa ? 'rgba(198,167,94,.12)' : 'var(--grafito)',
+                        border: activa ? '1px solid var(--oro)' : '1px solid var(--linea-suave)',
+                        borderRadius: 3, padding: '11px 14px', color: 'var(--hueso)', textAlign: 'left', fontSize: '.86rem', fontWeight: 500
                       }}
                     >
                       <span>{x.color} <span style={{ color: 'var(--blanco-35)', fontWeight: 500 }}>· {x.codigo} · {x.talle}</span></span>
