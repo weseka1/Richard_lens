@@ -347,6 +347,80 @@ footer { border-top: 1px solid var(--linea-suave); padding: 50px 0 100px; backgr
 .cart-vaciar { display: block; margin: 14px auto 0; background: none; border: none; color: var(--hueso-35); font-size: .74rem; text-decoration: underline; cursor: pointer; }
 .cart-vaciar:hover { color: var(--hueso); }
 
+/* ---------- panel de vidrio del hero (glassmorphism editorial) ---------- */
+.glass-widget {
+  position: absolute; left: -14%; bottom: 12%; z-index: 4; width: 220px;
+  background: rgba(244, 241, 234, .07); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(244, 241, 234, .16); border-radius: 14px; padding: 16px;
+  display: flex; flex-direction: column; gap: 8px;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .6);
+  transition: border-color .3s;
+}
+.glass-widget:hover { border-color: var(--oro); }
+.glass-kicker { font-size: .58rem; letter-spacing: .3em; text-transform: uppercase; color: var(--oro); font-weight: 600; }
+.glass-foto { width: 100%; aspect-ratio: 1.6; object-fit: cover; border-radius: 8px; }
+.glass-nombre { font-family: var(--serif); font-size: .95rem; color: var(--hueso); line-height: 1.25; }
+.glass-precio { font-size: .82rem; color: var(--hueso); font-weight: 600; }
+.glass-precio i { font-style: normal; color: var(--hueso-35); font-weight: 400; font-size: .74rem; }
+.glass-barra { height: 3px; background: rgba(244, 241, 234, .12); border-radius: 2px; overflow: hidden; }
+.glass-barra i { display: block; height: 100%; background: var(--oro); border-radius: 2px; }
+.glass-cta { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: var(--hueso-60); font-weight: 600; margin-top: 2px; }
+.glass-widget:hover .glass-cta { color: var(--oro-hi); }
+
+/* ---------- grilla de categorías (la lógica Nike) ---------- */
+.grid-categorias { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.cat-tile {
+  position: relative; aspect-ratio: .82; border-radius: 4px; overflow: hidden;
+  border: 1px solid var(--linea-suave); background: var(--grafito);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  transition: border-color .3s, transform .35s cubic-bezier(.22, 1, .36, 1);
+}
+.cat-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.22, 1, .36, 1); }
+.cat-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(7, 7, 8, .92) 92%); }
+.cat-tile:hover { border-color: var(--oro); transform: translateY(-4px); }
+.cat-tile:hover img { transform: scale(1.05); }
+.cat-nombre { position: relative; z-index: 2; font-family: var(--serif); font-size: 1.5rem; color: var(--hueso); padding: 0 22px 6px; }
+.cat-flecha { position: relative; z-index: 2; font-size: .64rem; letter-spacing: .26em; text-transform: uppercase; color: var(--oro); font-weight: 600; padding: 0 22px 20px; }
+
+.sec-fila { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: 46px; }
+.sec-fila .sec-titulo { margin-bottom: 0; }
+
+/* ---------- promo banner ---------- */
+.promo-banner {
+  display: flex; justify-content: space-between; align-items: center; gap: 26px; flex-wrap: wrap;
+  border: 1px solid var(--linea); border-radius: 4px; padding: clamp(28px, 4vw, 48px);
+  background: linear-gradient(120deg, #16130C, #0C0B08 70%);
+  margin: 30px auto 0; transition: border-color .3s;
+}
+.promo-banner:hover { border-color: var(--oro); }
+.promo-kicker { font-size: .64rem; letter-spacing: .3em; text-transform: uppercase; color: var(--oro); font-weight: 600; margin-bottom: 10px; }
+.promo-banner h3 { font-family: var(--serif); font-size: clamp(1.6rem, 3.4vw, 2.6rem); color: var(--hueso); }
+.promo-sub { color: var(--hueso-60); font-size: .92rem; margin-top: 8px; max-width: 480px; }
+
+/* ---------- RICH 001: el lente girando ---------- */
+.rich3d {
+  position: relative; min-height: 640px; display: flex; align-items: flex-end; justify-content: center;
+  background: radial-gradient(60% 55% at 50% 38%, rgba(198, 167, 94, .13), transparent 70%), #070707;
+  border-top: 1px solid var(--linea-suave); border-bottom: 1px solid var(--linea-suave);
+  overflow: hidden; padding: 80px 24px 90px;
+}
+.rich3d-texto { position: relative; z-index: 2; text-align: center; max-width: 560px; }
+.rich3d .sec-kicker { border-bottom-color: var(--linea); }
+.rich3d .sec-titulo { font-size: clamp(2.6rem, 6vw, 4.6rem); }
+
+/* ---------- newsletter ---------- */
+.news { background: var(--grafito); border-top: 1px solid var(--linea-suave); }
+.news-in { display: grid; grid-template-columns: 1.1fr .9fr; gap: 50px; align-items: center; }
+.news-form { display: flex; flex-direction: column; gap: 12px; }
+.news-form input {
+  background: var(--negro); border: 1px solid var(--linea); border-radius: 2px;
+  padding: 16px 18px; color: var(--hueso); font-family: var(--texto); font-size: .95rem; outline: none;
+}
+.news-form input:focus { border-color: var(--oro); }
+.news-form .btn-brush { text-align: center; }
+.news-ok { font-size: .82rem; color: var(--oro-hi); font-weight: 500; }
+@media (max-width: 800px) { .news-in { grid-template-columns: 1fr; gap: 30px; } .glass-widget { left: 0; bottom: 4%; width: 190px; } }
+
 /* ---------- reveals ---------- */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.22, 1, .36, 1), transform .8s cubic-bezier(.22, 1, .36, 1); }
 .reveal.visible { opacity: 1; transform: none; }

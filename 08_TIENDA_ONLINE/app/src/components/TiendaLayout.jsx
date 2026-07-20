@@ -5,6 +5,7 @@ import { useConfig } from '../lib/hooks.js';
 import ChatRich from './ChatRich.jsx';
 import CartDrawer from './CartDrawer.jsx';
 import { useCarrito } from '../lib/carrito.js';
+import Lenis from 'lenis';
 
 const ConfigContext = createContext(null);
 export const useCfg = () => useContext(ConfigContext);
@@ -33,6 +34,15 @@ export default function TiendaLayout() {
   useEffect(() => { if (cantidad > 0) setCarrito(true); }, [cantidad]);
 
   useEffect(() => { window.scrollTo(0, 0); setMenu(false); }, [loc.pathname]);
+
+  /* scroll cinematográfico (el pulso wsk) */
+  useEffect(() => {
+    const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+    let id;
+    const raf = t => { lenis.raf(t); id = requestAnimationFrame(raf); };
+    id = requestAnimationFrame(raf);
+    return () => { cancelAnimationFrame(id); lenis.destroy(); };
+  }, []);
 
   return (
     <ConfigContext.Provider value={cfg}>

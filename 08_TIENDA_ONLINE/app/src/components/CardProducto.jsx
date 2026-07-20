@@ -20,6 +20,7 @@ export function popColor(id) {
 export function Badge({ p, estatico }) {
   const style = estatico ? { position: 'static' } : undefined;
   if (p.estado === 'proximamente') return <span className="card-badge badge-drop" style={style}>Drop en camino</span>;
+  if (p.destacado && p.estado === 'disponible') return <span className="card-badge badge-stock" style={style}>Más vendido</span>;
   if (p.estado === 'disponible' && p.stock > 0) return <span className="card-badge badge-stock" style={style}>Stock ya</span>;
   if (p.estado === 'disponible') return <span className="card-badge badge-stock" style={style}>Disponible</span>;
   return <span className="card-badge badge-pedido" style={style}>A pedido</span>;

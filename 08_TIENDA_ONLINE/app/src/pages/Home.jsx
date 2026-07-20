@@ -1,33 +1,68 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { track } from '../lib/api.js';
+import { track, api } from '../lib/api.js';
 import { useProductos, useReveals } from '../lib/hooks.js';
 import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
 import CardProducto from '../components/CardProducto.jsx';
 import HeroCollage from '../components/HeroCollage.jsx';
 
-const MARCAS = ['RAY-BAN', 'OAKLEY', 'PRADA', 'GUCCI', 'LOUIS VUITTON', 'BALENCIAGA', 'FENDI', 'VERSACE', 'DOLCE & GABBANA'];
+// el lente girando entra lazy (three.js no pesa en el primer paint)
+const Gafas360 = lazy(() => import('../components/Gafas360.jsx'));
+
+const MARCAS = ['RAY-BAN', 'OAKLEY', 'PRADA', 'GUCCI', 'DIOR', 'LOUIS VUITTON', 'CARTIER', 'SAINT LAURENT', 'BALENCIAGA', 'FENDI', 'VERSACE', 'CELINE', 'TOM FORD', 'MIU MIU', 'OFF-WHITE'];
+
+/* la lógica Nike: categorías arriba, lo que queremos vender primero */
+const CATEGORIAS = [
+  { titulo: 'Gafas Hombre', href: '/catalogo?genero=hombre', foto: '/fotos/rb2140-901/01.jpg' },
+  { titulo: 'Gafas Mujer', href: '/catalogo?genero=mujer', foto: '/fotos/rb4171-865-13/02.jpg' },
+  { titulo: 'Más Vendidos', href: '/catalogo?orden=vendidos', foto: '/fotos/rb3025-l0205/01.jpg' },
+  { titulo: 'En Promoción', href: '/catalogo?promo=1', foto: '/fotos/rb3016-w0365/01.jpg' }
+];
 
 const FAQS = [
-  ['¿Cómo sé que no es réplica?', 'Antes de pagar te mostramos los grabados del cristal y la varilla, el estuche, el paño y la factura. Y si igual dudás: garantía doble — no es original, te devolvemos el doble. Ninguna réplica puede prometer eso.'],
-  ['¿Por qué las marcas de lujo no tienen precio publicado?', 'Porque el stock de Prada, Gucci o LV se mueve rápido y el precio depende del modelo y del dólar. Por WhatsApp tenés precio real del día en minutos, no un número viejo que después "aumentó".'],
-  ['¿Hacen envíos al interior?', 'A todo el país, asegurado y con seguimiento. Despachamos en 24-48 h por Andreani u OCA. Llega igual a CABA que a un pueblo de 2.000 habitantes.'],
-  ['¿Puedo pagar en cuotas?', 'Sí, con tarjeta. Y si pagás por transferencia tenés descuento directo. Te pasamos las dos opciones por WhatsApp y elegís.'],
-  ['¿Y si no me queda bien?', 'Tenés 30 días para cambiarlo. Coordinás el cambio por el mismo WhatsApp donde compraste — sin formularios ni llamaditas.']
+  ['¿Cómo sé que no es réplica?', 'Antes de pagar te mostramos los grabados del cristal y la varilla, el estuche, el paño y la factura. Y si igual dudás: garantía doble — no es original, te devolvemos el doble.'],
+  ['¿Hacen envíos al interior?', 'A todo el país, asegurado y con seguimiento. Despachamos en 24-48 h por Andreani u OCA.'],
+  ['¿Puedo pagar en cuotas?', 'Sí, con tarjeta. Y si pagás por transferencia tenés descuento directo. Elegís al cerrar el pedido.'],
+  ['¿Y si no me queda bien?', 'Tenés 30 días para cambiarlo, coordinando por el mismo WhatsApp donde compraste.']
 ];
 
 const CONFIANZA = [
-  ['01', 'Garantía doble de autenticidad', 'Si algo de lo que te vendimos no es original, te devolvemos el doble de lo que pagaste. Así de seguros estamos.'],
-  ['02', 'Todo a la vista antes de pagar', 'Grabados, estuche, paño y factura. Te mandamos video del par exacto que te llevás, no fotos de catálogo.'],
-  ['03', 'Envíos asegurados a todo el país', 'Despacho en 24-48 h con seguimiento. De Ushuaia a La Quiaca, llega igual de protegido.'],
-  ['04', 'Cambios sin drama', '30 días para cambiar. El lente te tiene que gustar de verdad, si no, no sirve — ni a vos ni a nosotros.']
+  ['I', 'Garantía doble de autenticidad', 'Si algo de lo que te vendimos no es original, te devolvemos el doble de lo que pagaste.'],
+  ['II', 'Todo a la vista antes de pagar', 'Grabados, estuche, paño y factura. Video del par exacto que te llevás.'],
+  ['III', 'Envíos asegurados al país entero', 'Despacho en 24-48 h con seguimiento, de Ushuaia a La Quiaca.'],
+  ['IV', 'Cambios sin fricción', '30 días para cambiar, por el mismo canal donde compraste.']
 ];
 
-const PASOS = [
-  ['Elegí tu par', 'Mirá el catálogo o preguntale a RICH, nuestro asistente. Si no está, lo conseguimos a pedido.'],
-  ['Escribinos por WhatsApp', 'Precio, stock, cuotas y video del par en mano. Respondemos en minutos, no en días.'],
-  ['Lo recibís donde estés', 'Pagás como te quede cómodo (cuotas o transferencia con descuento) y va asegurado hasta tu puerta.']
-];
+function Newsletter() {
+  const [email, setEmail] = useState('');
+  const [estado, setEstado] = useState('');
+  async function suscribir(e) {
+    e.preventDefault();
+    if (!email) return;
+    try {
+      await api('suscriptores', 'POST', { email });
+      setEstado('Adentro. Los drops te llegan antes que a nadie.');
+      setEmail('');
+      track('newsletter_alta', email);
+    } catch { setEstado('Ese mail no parece válido — probá de nuevo.'); }
+  }
+  return (
+    <section className="seccion news">
+      <div className="wrap news-in reveal">
+        <div>
+          <p className="sec-kicker">La lista</p>
+          <h2 className="sec-titulo" style={{ fontSize: 'clamp(1.8rem,3.6vw,2.8rem)' }}>Los drops llegan primero<br />a los de la lista.</h2>
+          <p className="sec-bajada" style={{ marginBottom: 0 }}>Stock nuevo, precios y ediciones limitadas, directo a tu casilla. Sin spam — no somos de escribir de más.</p>
+        </div>
+        <form className="news-form" onSubmit={suscribir}>
+          <input type="email" required placeholder="tu@email.com" value={email} onChange={e => setEmail(e.target.value)} />
+          <button className="btn-brush" type="submit">Entrar a la lista</button>
+          {estado && <p className="news-ok">{estado}</p>}
+        </form>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   const cfg = useCfg();
@@ -35,12 +70,13 @@ export default function Home() {
   useReveals(productos);
   useEffect(() => { track('visita', 'home'); }, []);
 
-  const drops = (productos || []).filter(p => p.canal !== 'WEB' && p.estado !== 'proximamente').slice(0, 4);
-  const vault = (productos || []).filter(p => p.canal === 'WEB').slice(0, 8);
+  const vendidos = (productos || []).filter(p => p.canal !== 'WEB' && p.estado === 'disponible' && p.destacado).slice(0, 4);
+  const vault = (productos || []).filter(p => p.canal === 'WEB' && p.estado !== 'proximamente').slice(0, 8);
+  const drop = vendidos[0];
 
   return (
     <main>
-      {/* HERO: panel gradiente que muta de color + RICH modelando */}
+      {/* HERO editorial + panel de vidrio */}
       <section className="hero">
         <div className="wrap">
           <div className="hero-panel">
@@ -50,50 +86,91 @@ export default function Home() {
                 <span className="l1">Se te nota</span>
                 <span className="l2">lo rich.</span>
               </h1>
-              <p className="hero-sub">Ray-Ban y Oakley con entrega inmediata. Prada, Gucci, Louis Vuitton, Balenciaga y Fendi directo a tu puerta — sin vidriera, sin verso, con garantía doble.</p>
+              <p className="hero-sub">Ray-Ban con entrega inmediata. Dior, Prada, Gucci, Louis Vuitton y Cartier directo a tu puerta — sin vidriera, sin verso, con garantía doble.</p>
               <div className="hero-ctas">
-                <Link to="/catalogo" className="btn-brush">Ver el catálogo</Link>
+                <Link to="/catalogo" className="btn-brush">Ver la colección</Link>
                 <BotonWA cfg={cfg} className="btn-pill" texto="Hola, quiero ver modelos y precios.">WhatsApp</BotonWA>
               </div>
             </div>
-            <HeroCollage />
+            <HeroCollage drop={drop} cfg={cfg} />
           </div>
         </div>
       </section>
 
-      {/* MARQUEE */}
+      {/* TICKER MARCAS */}
       <div className="marquee" aria-hidden="true">
         <div className="marquee-in">
           {[0, 1].map(v => MARCAS.map((m, i) => (
-            <React.Fragment key={v + '-' + i}>
-              <span>{['PRADA', 'LOUIS VUITTON', 'FENDI'].includes(m) ? <b>{m}</b> : m}</span>
-              <span>✦</span>
-            </React.Fragment>
+            <React.Fragment key={v + '-' + i}><span>{m}</span><span>·</span></React.Fragment>
           )))}
         </div>
       </div>
 
-      {/* DROPS */}
-      <section className="seccion">
+      {/* CATEGORÍAS (la grilla Nike) */}
+      <section className="seccion" style={{ paddingBottom: 40 }}>
         <div className="wrap">
-          <p className="sec-kicker reveal">Entrega inmediata</p>
-          <h2 className="sec-titulo reveal">Los drops de ahora</h2>
-          <p className="sec-bajada reveal">Stock real, foto real, entrega ya. Cuando dice que quedan pocos, quedan pocos.</p>
-          <div className="grid-productos">
-            {drops.map((p, i) => <CardProducto key={p.id} p={p} i={i} cfg={cfg} />)}
+          <p className="sec-kicker reveal">Comprá por categoría</p>
+          <h2 className="sec-titulo reveal">¿Qué estás buscando?</h2>
+          <div className="grid-categorias">
+            {CATEGORIAS.map((c, i) => (
+              <Link to={c.href} className="cat-tile reveal" key={c.titulo} style={{ transitionDelay: `${i * 70}ms` }}>
+                <img src={c.foto} alt={c.titulo} loading="lazy" />
+                <span className="cat-nombre">{c.titulo}</span>
+                <span className="cat-flecha">Ver →</span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CAJA FUERTE */}
+      {/* MÁS VENDIDOS */}
+      <section className="seccion">
+        <div className="wrap">
+          <div className="sec-fila reveal">
+            <div>
+              <p className="sec-kicker">Los que vuelan</p>
+              <h2 className="sec-titulo">Más vendidos</h2>
+            </div>
+            <Link to="/catalogo?orden=vendidos" className="btn-pill pill-claro">Ver todos →</Link>
+          </div>
+          <div className="grid-productos">
+            {vendidos.map((p, i) => <CardProducto key={p.id} p={p} i={i} cfg={cfg} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* PROMO BANNER */}
+      <section className="wrap reveal">
+        <Link to="/catalogo?promo=1" className="promo-banner">
+          <div>
+            <p className="promo-kicker">En promoción</p>
+            <h3>Polarizados a $299.900</h3>
+            <p className="promo-sub">El mercado los vende arriba de $450.000. Nosotros no. Original, con factura y garantía doble.</p>
+          </div>
+          <span className="btn-brush">Ver ofertas</span>
+        </Link>
+      </section>
+
+      {/* LA CAJA FUERTE */}
       <section className="seccion vault">
         <div className="wrap">
           <p className="sec-kicker reveal">Solo por acá — jamás en MercadoLibre</p>
           <h2 className="sec-titulo reveal">La caja <span className="oro">fuerte</span></h2>
-          <p className="sec-bajada reveal">Las marcas que no se subastan: van directo. Prada, Gucci, LV, Balenciaga, Fendi, Versace y D&G a pedido, con garantía y factura a la vista. El precio se habla por WhatsApp, como corresponde.</p>
+          <p className="sec-bajada reveal">Dior, Prada, Gucci, Louis Vuitton, Cartier, Saint Laurent. Las marcas que no se subastan: van directo, con garantía y factura a la vista.</p>
           <div className="grid-productos">
             {vault.map((p, i) => <CardProducto key={p.id} p={p} i={i} cfg={cfg} />)}
           </div>
+        </div>
+      </section>
+
+      {/* RICH 001 — el lente girando */}
+      <section className="rich3d">
+        <Suspense fallback={null}><Gafas360 /></Suspense>
+        <div className="rich3d-texto">
+          <p className="sec-kicker reveal">Próximamente</p>
+          <h2 className="sec-titulo reveal">RICH 001</h2>
+          <p className="sec-bajada reveal" style={{ margin: '0 auto 30px' }}>La línea propia. Edición numerada, polarizado UV400, drop limitado. El rich estaba en el nombre.</p>
+          <Newsletter3dCta cfg={cfg} />
         </div>
       </section>
 
@@ -101,7 +178,7 @@ export default function Home() {
       <section className="seccion" id="por-que">
         <div className="wrap">
           <p className="sec-kicker reveal">Por qué nosotros</p>
-          <h2 className="sec-titulo reveal">Lo que a otros les falta,<br />acá sobra</h2>
+          <h2 className="sec-titulo reveal">Lo que a otros les falta, acá sobra</h2>
           <div className="grid-confianza reveal">
             {CONFIANZA.map(([num, t, d]) => (
               <div className="conf-item" key={num}>
@@ -114,21 +191,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CÓMO COMPRAR */}
-      <section className="seccion">
-        <div className="wrap">
-          <p className="sec-kicker reveal">Cómo comprar</p>
-          <h2 className="sec-titulo reveal">Tres pasos, cero vueltas</h2>
-          <div className="pasos reveal">
-            {PASOS.map(([t, d]) => (
-              <div className="paso" key={t}><h3>{t}</h3><p>{d}</p></div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
-      <section className="seccion">
+      <section className="seccion" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <p className="sec-kicker reveal">Las dudas de siempre</p>
           <h2 className="sec-titulo reveal">Preguntá tranquilo</h2>
@@ -140,10 +204,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA FINAL: panel gradiente rosa→violeta */}
+      {/* NEWSLETTER */}
+      <Newsletter />
+
+      {/* CTA FINAL */}
       <section className="cta-final">
         <div className="cta-panel">
-          <h2>EL QUE QUIERE,<br />PUEDE.</h2>
+          <h2>El que quiere, <span>puede.</span></h2>
           <p className="tag-graffiti">y al que puede, se le nota</p>
           <div>
             <BotonWA cfg={cfg} className="btn-brush" texto="Hola, quiero mis lentes. ¿Qué tenés en stock?">Quiero mis lentes</BotonWA>
@@ -151,5 +218,15 @@ export default function Home() {
         </div>
       </section>
     </main>
+  );
+}
+
+function Newsletter3dCta({ cfg }) {
+  return (
+    <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+      <a href="#lista" className="btn-pill pill-claro" onClick={e => { e.preventDefault(); document.querySelector('.news')?.scrollIntoView({ behavior: 'smooth' }); }}>
+        Avisame del drop
+      </a>
+    </div>
   );
 }

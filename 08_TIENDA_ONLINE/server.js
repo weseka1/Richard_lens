@@ -219,6 +219,20 @@ const server = http.createServer(async (req, res) => {
         return json(res, 200, { ok: true });
       }
 
+      // newsletter: captura de mails para automatizar después (n8n / email marketing)
+      if (p === '/api/suscriptores' && req.method === 'POST') {
+        const { email } = await body(req);
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json(res, 400, { error: 'email inválido' });
+        const subs = leer('suscriptores.json', []);
+        if (!subs.some(s => s.email === email.toLowerCase())) {
+          subs.unshift({ email: email.toLowerCase(), fecha: new Date().toISOString(), origen: 'web' });
+          guardar('suscriptores.json', subs);
+        }
+        return json(res, 200, { ok: true });
+      }
+      if (p === '/api/suscriptores' && req.method === 'GET')
+        return json(res, 200, leer('suscriptores.json', []));
+
       if (p === '/api/eventos' && req.method === 'POST') {
         const eventos = leer('eventos.json', []);
         const b = await body(req);
