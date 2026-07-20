@@ -11,6 +11,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const meli = require('./meli.js');
 
 const ROOT = __dirname;
 const DATA = p => path.join(ROOT, 'data', p);
@@ -153,6 +154,7 @@ const server = http.createServer(async (req, res) => {
 
   try {
     // ---- API ----
+    if (p.startsWith('/api/meli/')) return meli.handler(req, res, url);
     if (p.startsWith('/api/')) {
       const cfg = leer('config.json', {});
       const productos = leer('productos.json', []);

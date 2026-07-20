@@ -5,11 +5,13 @@ import Productos from './Productos.jsx';
 import Ventas from './Ventas.jsx';
 import Consultas from './Consultas.jsx';
 import ConfigView from './ConfigView.jsx';
+import Meli from './Meli.jsx';
 
 const LINKS = [
   ['', 'Tablero'],
   ['productos', 'Productos'],
   ['ventas', 'Ventas'],
+  ['meli', 'MercadoLibre'],
   ['consultas', 'Consultas'],
   ['config', 'Config']
 ];
@@ -36,6 +38,7 @@ export default function Panel() {
           <Route index element={<Tablero />} />
           <Route path="productos" element={<Productos />} />
           <Route path="ventas" element={<Ventas />} />
+          <Route path="meli" element={<Meli />} />
           <Route path="consultas" element={<Consultas />} />
           <Route path="config" element={<ConfigView />} />
         </Routes>
