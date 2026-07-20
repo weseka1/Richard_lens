@@ -31,12 +31,13 @@ export default function TiendaLayout() {
   const [menu, setMenu] = useState(false);
   const [chat, setChat] = useState(false);
   const [carrito, setCarrito] = useState(false);
+  const [mega, setMega] = useState(false);
   const { cantidad } = useCarrito();
   const loc = useLocation();
 
   useEffect(() => { if (cantidad > 0) setCarrito(true); }, [cantidad]);
 
-  useEffect(() => { window.scrollTo(0, 0); setMenu(false); }, [loc.pathname]);
+  useEffect(() => { window.scrollTo(0, 0); setMenu(false); setMega(false); }, [loc.pathname, loc.search]);
 
   /* scroll cinematográfico (el pulso wsk) */
   useEffect(() => {
@@ -69,8 +70,9 @@ export default function TiendaLayout() {
           <nav className={menu ? 'abierta' : ''}>
             <NavLink to="/" end className={({ isActive }) => isActive ? 'activa' : ''}>Inicio</NavLink>
             <div className="mega-wrap">
-              <NavLink to="/catalogo" className={({ isActive }) => isActive ? 'activa' : ''}>Catálogo</NavLink>
-              <div className="mega">
+              <button className={'nav-boton' + (mega ? ' activa' : '')} onClick={() => setMega(m => !m)}>Catálogo ▾</button>
+              {mega && <div className="mega-overlay" onClick={() => setMega(false)} />}
+              <div className={'mega' + (mega ? ' abierta' : '')} onClick={() => setMega(false)}>
                 <div className="mega-col">
                   <b>Destacados</b>
                   <Link to="/catalogo?orden=vendidos">Más vendidos</Link>
