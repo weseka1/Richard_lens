@@ -60,7 +60,21 @@ export default function Catalogo() {
     (!promo || (p.precio_web > 0 && p.precio_web <= 229900)) &&
     (p.estado !== 'proximamente' || (!promo && !orden))
   );
-  if (orden === 'vendidos' || genero) lista = [...lista].sort((a, b) => (b.destacado - a.destacado) || (b.stock - a.stock));
+  // orden de góndola: RB clásicos → collabs → Oakley → lujo → resto; armazones al final;
+  // dentro de cada grupo: destacados y stock primero
+  const rango = p => {
+    if (p.forma === 'armazón recetado') return 60;
+    if (p.marca === 'Ray-Ban') return 10;
+    if (p.marca.startsWith('Ray-Ban ·')) return 20;
+    if (p.marca === 'Oakley') return 25;
+    if (p.canal === 'WEB') return 30;   // el lujo
+    return 40;
+  };
+  lista = [...lista].sort((a, b) =>
+    (orden === 'vendidos' || genero)
+      ? (b.destacado - a.destacado) || (b.stock - a.stock)
+      : rango(a) - rango(b) || (b.destacado - a.destacado) || (b.stock - a.stock) || a.marca.localeCompare(b.marca)
+  );
   useReveals(lista.length);
 
   return (

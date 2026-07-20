@@ -1,5 +1,20 @@
 [
   {
+    "fecha": "2026-07-20T20:59:48.392Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:59:47.473Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-20T20:59:33.297Z",
+    "tipo": "visita_producto",
+    "detalle": "asap-rocky-wayfarer-puffer-4940"
+  },
+  {
     "fecha": "2026-07-20T20:58:07.906Z",
     "tipo": "visita_producto",
     "detalle": "asap-rocky-3928"
