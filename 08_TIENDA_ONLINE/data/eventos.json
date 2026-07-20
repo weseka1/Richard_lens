@@ -1,5 +1,35 @@
 [
   {
+    "fecha": "2026-07-20T20:35:35.209Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:35:22.674Z",
+    "tipo": "carrito_agregar",
+    "detalle": "Ray-Ban Round Metal Classic 3447"
+  },
+  {
+    "fecha": "2026-07-20T20:35:17.074Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T20:34:50.318Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T20:34:42.635Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T20:33:28.744Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-20T20:23:58.383Z",
     "tipo": "visita",
     "detalle": "home"
