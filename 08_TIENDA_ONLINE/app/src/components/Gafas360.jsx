@@ -22,7 +22,7 @@ export default function Gafas360() {
       cont.appendChild(renderer.domElement);
 
       const negro = new THREE.MeshPhysicalMaterial({ color: 0x0B0B0C, roughness: 0.18, clearcoat: 1, clearcoatRoughness: 0.12 });
-      const oro = new THREE.MeshStandardMaterial({ color: 0xC6A75E, metalness: 0.95, roughness: 0.28 });
+      const oro = new THREE.MeshStandardMaterial({ color: 0xC9C9CE, metalness: 0.95, roughness: 0.25 }); // plata pulida, no dorado
 
       const gafas = new THREE.Group();
       // slot para modelo real: soltar un gafas.glb en app/public/img/ y lo usa en vez de las primitivas
@@ -55,8 +55,8 @@ export default function Gafas360() {
 
       escena.add(new THREE.AmbientLight(0xffffff, 0.5));
       const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(3, 4, 5); escena.add(key);
-      const relleno = new THREE.DirectionalLight(0xC6A75E, 0.7); relleno.position.set(-4, -1, 3); escena.add(relleno);
-      const contra = new THREE.PointLight(0xE0C784, 1.2, 30); contra.position.set(0, 2, -5); escena.add(contra);
+      const relleno = new THREE.DirectionalLight(0xFFFFFF, 0.6); relleno.position.set(-4, -1, 3); escena.add(relleno);
+      const contra = new THREE.PointLight(0xF5F5F7, 1.3, 30); contra.position.set(0, 2, -5); escena.add(contra);
 
       const reloj = new THREE.Clock();
       const frame = () => {
