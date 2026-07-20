@@ -37,7 +37,13 @@ export default function Productos() {
       (!fEstado || p.estado === fEstado) &&
       (!fCanal || p.canal === fCanal);
   });
-  const visibles = filtrada.slice(0, 200);
+
+  /* paginado: 25 por página, vuelve a la 1 al cambiar filtros */
+  const POR_PAGINA = 25;
+  const [pag, setPag] = useState(0);
+  useEffect(() => { setPag(0); }, [busca, fEstado, fCanal]);
+  const totalPags = Math.max(1, Math.ceil(filtrada.length / POR_PAGINA));
+  const visibles = filtrada.slice(pag * POR_PAGINA, (pag + 1) * POR_PAGINA);
 
   /* ---- gestor de fotos ---- */
   const [fotosDe, setFotosDe] = useState(null);   // producto en edición de fotos
@@ -122,7 +128,7 @@ export default function Productos() {
           <option value="ML+WEB">MELI + Web</option>
           <option value="WEB">Solo web (LUX)</option>
         </select>
-        <span className="ayuda" style={{ margin: 0 }}>{filtrada.length} de {lista.length}{filtrada.length > 200 ? ' · mostrando 200, afiná la búsqueda' : ''}</span>
+        <span className="ayuda" style={{ margin: 0 }}>{filtrada.length} de {lista.length}</span>
       </div>
       <div className="tarjeta">
         <table>
@@ -149,6 +155,12 @@ export default function Productos() {
           </tbody>
         </table>
       </div>
+      <div style={{ display: 'flex', gap: 10, alignItems: 'center', justifyContent: 'center', marginTop: 16 }}>
+        <button className="btn-mini" disabled={pag === 0} onClick={() => setPag(p => p - 1)} style={{ opacity: pag === 0 ? .4 : 1 }}>‹ Anterior</button>
+        <span className="ayuda" style={{ margin: 0 }}>Página {pag + 1} de {totalPags}</span>
+        <button className="btn-mini" disabled={pag >= totalPags - 1} onClick={() => setPag(p => p + 1)} style={{ opacity: pag >= totalPags - 1 ? .4 : 1 }}>Siguiente ›</button>
+      </div>
+
       {modal && <Modal {...modal} onCerrar={() => setModal(null)} />}
 
       {fotosDe && (
