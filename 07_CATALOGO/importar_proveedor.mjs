@@ -5,6 +5,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { precioPara } from './reglas_precios.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const CSV = resolve(HERE, 'proveedor_stock.csv');
@@ -14,22 +15,34 @@ const PRODUCTOS = resolve(HERE, '..', '08_TIENDA_ONLINE', 'data', 'productos.jso
 const slug = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
   .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-// marca según categoría/modelo (el mayorista es Ray-Ban-céntrico)
+// marca según categoría/modelo — el proveedor abrevia las marcas de lujo (DIO=Dior, PRAD=Prada...)
+const MARCAS_CAT = {
+  MIU: 'Miu Miu', LV: 'Louis Vuitton', OW: 'Off-White', OS: 'Oscar Wylee',
+  DIO: 'Dior', PRAD: 'Prada', OAK: 'Oakley', HOLDBROOK: 'Oakley', CEL: 'Celine',
+  GUC: 'Gucci', FEN: 'Fendi', VER: 'Versace', TOM: 'Tom Ford', 'SAINT L': 'Saint Laurent',
+  BALEN: 'Balenciaga', DG: 'Dolce & Gabbana', CART: 'Cartier',
+  'SCUDERIA FERRARI': 'Ray-Ban · Ferrari', 'ASAP ROCKY': 'Ray-Ban · A$AP Rocky',
+  'AMORE FASHION': 'Amore Fashion'
+};
+export const MARCAS_LUX = ['Louis Vuitton', 'Miu Miu', 'Off-White', 'Dior', 'Prada', 'Celine',
+  'Gucci', 'Fendi', 'Versace', 'Tom Ford', 'Saint Laurent', 'Balenciaga', 'Dolce & Gabbana', 'Cartier'];
+
 function marcaDe(categoria, modelo) {
-  const m = modelo.toLowerCase(), c = categoria.toUpperCase();
-  if (c === 'MIU' || m.includes('miu')) return 'Miu Miu';
-  if (c === 'LV' || m.startsWith('lv') || m.includes('vuitton') || m.includes('millonaire') || m.includes('millionaire')) return 'Louis Vuitton';
-  if (c === 'OW' || m === 'ow' || m.includes('off-white') || m.includes('off white')) return 'Off-White';
-  if (c === 'OS') return 'Oscar Wylee';
-  if (c === 'SCUDERIA FERRARI') return 'Ray-Ban · Ferrari';
+  const m = modelo.toLowerCase(), c = categoria.toUpperCase().trim();
+  if (MARCAS_CAT[c]) return MARCAS_CAT[c];
+  if (m.includes('miu')) return 'Miu Miu';
+  if (m.startsWith('lv') || m.includes('vuitton') || m.includes('millonaire') || m.includes('millionaire')) return 'Louis Vuitton';
+  if (m.includes('off-white') || m.includes('off white')) return 'Off-White';
   return 'Ray-Ban';
 }
 
 const FORMA = {
   WAYFARER: 'wayfarer', AVIADOR: 'aviador', ROUND: 'redondo', SQUARE: 'cuadrado',
   CLUBMASTER: 'clubmaster', ERIKA: 'erika', CATS: 'cats', HEXAGONAL: 'hexagonal',
-  HIGHSTREET: 'highstreet', BLAZE: 'blaze', OPTICAL: 'armazón recetado',
-  'SCUDERIA FERRARI': 'ferrari', JUSTIN: 'justin', OLYMPIAN: 'olympian'
+  HIGHSTREET: 'highstreet', BLAZE: 'blaze', OPTICAL: 'armazón recetado', OPTICA: 'armazón recetado',
+  'SCUDERIA FERRARI': 'collab', 'ASAP ROCKY': 'collab', JUSTIN: 'justin', OLYMPIAN: 'olympian',
+  CLUBROUND: 'redondo', 'ROUND DOUBLE BRIDGE': 'redondo', ROUNDBEAT: 'redondo', OVAL: 'redondo',
+  OCTAGONAL: 'hexagonal', ENVOLVENTES: 'deportivo', JUNIOR: 'niños'
 };
 
 const filas = readFileSync(CSV, 'utf8').trim().split(/\r?\n/).slice(1)
@@ -71,6 +84,7 @@ for (const [modelo, vars] of grupos) {
   const cat = vars[0].categoria;
   const marca = marcaDe(cat, modelo);
   const conStock = vars.filter(v => v.stock === 'STOCK' || v.stock === 'POCO STOCK');
+  const esLux = MARCAS_LUX.includes(marca);
   const previo = previosPorId[id] || {};
   const variantes = vars
     .sort((a, b) => (RANK[a.stock] ?? 9) - (RANK[b.stock] ?? 9))
@@ -82,14 +96,14 @@ for (const [modelo, vars] of grupos) {
     codigo: vars[0].codigo,
     color: `${new Set(vars.map(v => v.color)).size} colores`,
     cristal: 'según variante',
-    forma: FORMA[cat.toUpperCase()] || cat.toLowerCase(),
+    forma: esLux ? 'lujo' : (FORMA[cat.toUpperCase()] || cat.toLowerCase()),
     material: previo.material || 'acetato/metal',
     genero: 'unisex',
-    precio_web: previo.precio_web || 0,
-    precio_ml: previo.precio_ml || 0,
+    precio_web: previo.precio_web || precioPara(marca, modelo, FORMA[cat.toUpperCase()] || cat.toLowerCase()).web,
+    precio_ml: previo.precio_ml || (esLux ? 0 : precioPara(marca, modelo, FORMA[cat.toUpperCase()] || cat.toLowerCase()).ml),
     stock: conStock.length,
     costo_usd: previo.costo_usd || 0,
-    canal: ['Louis Vuitton', 'Miu Miu', 'Off-White'].includes(marca) ? 'WEB' : (previo.canal || 'ML+WEB'),
+    canal: esLux ? 'WEB' : (previo.canal || 'ML+WEB'),
     estado: conStock.length ? 'disponible' : 'a_pedido',
     destacado: previo.destacado || false,
     descripcion: previo.descripcion && !previo.descripcion.includes('Original, con garantía')
