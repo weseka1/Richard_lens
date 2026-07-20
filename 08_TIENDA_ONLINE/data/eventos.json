@@ -1,5 +1,155 @@
 [
   {
+    "fecha": "2026-07-20T00:30:14.179Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T00:29:59.835Z",
+    "tipo": "visita_producto",
+    "detalle": "wayfarer-classic-2140"
+  },
+  {
+    "fecha": "2026-07-20T00:29:38.548Z",
+    "tipo": "visita_producto",
+    "detalle": "wayfarer-classic-2140"
+  },
+  {
+    "fecha": "2026-07-20T00:27:38.194Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T00:15:51.794Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T00:15:31.984Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T00:14:31.954Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T00:13:36.375Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T00:12:56.972Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T00:12:24.502Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-20T00:10:50.247Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T00:10:48.602Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-20T00:10:48.376Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-20T00:10:46.443Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-20T00:10:34.774Z",
+    "tipo": "chat_abierto",
+    "detalle": "/"
+  },
+  {
+    "fecha": "2026-07-20T00:10:29.809Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-19T23:53:26.138Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-19T17:54:41.266Z",
+    "tipo": "visita_producto",
+    "detalle": "rb3025-l0205"
+  },
+  {
+    "fecha": "2026-07-19T17:14:14.948Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-19T16:46:40.086Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-19T16:46:35.660Z",
+    "tipo": "visita_producto",
+    "detalle": "rb2140-622"
+  },
+  {
+    "fecha": "2026-07-19T16:46:34.808Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-19T16:46:26.085Z",
+    "tipo": "visita_producto",
+    "detalle": "rb2140-622"
+  },
+  {
+    "fecha": "2026-07-19T16:46:24.553Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-19T16:46:14.500Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-19T16:46:10.001Z",
+    "tipo": "chat_abierto",
+    "detalle": "/catalogo"
+  },
+  {
+    "fecha": "2026-07-19T16:39:44.795Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-19T15:25:51.118Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-19T15:25:37.863Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-19T15:24:42.030Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-19T15:21:16.097Z",
     "tipo": "visita",
     "detalle": "home"

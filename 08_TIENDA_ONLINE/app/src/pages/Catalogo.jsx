@@ -5,7 +5,6 @@ import { useProductos, useReveals } from '../lib/hooks.js';
 import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
 import CardProducto from '../components/CardProducto.jsx';
 
-const FORMAS = ['wayfarer', 'aviador', 'redondo', 'cuadrado', 'deportivo'];
 const ESTADOS = [['disponible', 'Stock ya'], ['a_pedido', 'A pedido']];
 
 function Chips({ items, valor, onCambio, labels = {} }) {
@@ -34,6 +33,12 @@ export default function Catalogo() {
   useEffect(() => { track('visita', 'catalogo' + (canal ? ':cajafuerte' : '')); }, []);
 
   const marcas = useMemo(() => [...new Set((productos || []).map(p => p.marca))], [productos]);
+  // formas dinámicas: las 8 categorías con más modelos
+  const FORMAS = useMemo(() => {
+    const conteo = {};
+    (productos || []).forEach(p => { conteo[p.forma] = (conteo[p.forma] || 0) + 1; });
+    return Object.entries(conteo).sort((a, b) => b[1] - a[1]).slice(0, 8).map(e => e[0]);
+  }, [productos]);
   const lista = (productos || []).filter(p =>
     (!marca || p.marca === marca) &&
     (!forma || p.forma === forma) &&

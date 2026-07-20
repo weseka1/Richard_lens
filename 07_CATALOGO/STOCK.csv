@@ -2,5 +2,43 @@ modelo;marca;codigo;color;cristal;cantidad;costo_usd;precio_ml;precio_web;canal;
 Wayfarer Classic;Ray-Ban;RB2140 901;Negro brillante;Verde G-15;0;55;0;0;ML+WEB;Ray-Ban RB2140 901 wayfarer black
 Wayfarer Negro Mate;Ray-Ban;RB2140 622;Negro mate;Verde G-15;0;55;0;0;ML+WEB;Ray-Ban RB2140 622 wayfarer matte black
 Aviator Dorado;Ray-Ban;RB3025 L0205;Dorado;Verde G-15;0;60;0;0;ML+WEB;Ray-Ban RB3025 L0205 aviator gold
+Aviator Polarizado;Ray-Ban;RB3025 002/58;Negro;Verde polarizado;0;70;0;0;ML+WEB;Ray-Ban RB3025 002/58 aviator black polarized
 Round Metal;Ray-Ban;RB3447 001;Dorado;Verde G-15;0;60;0;0;ML+WEB;Ray-Ban RB3447 001 round metal gold
-EJEMPLO LUX borrar;Gucci;GG0061S;Negro/Dorado;Gris;0;110;0;0;WEB;Gucci GG0061S sunglasses black gold
+Clubmaster Classic;Ray-Ban;RB3016 W0365;Negro / Dorado;Verde G-15;0;60;0;0;ML+WEB;Ray-Ban RB3016 W0365 clubmaster black
+Justin;Ray-Ban;RB4165 601/8G;Negro goma;Gris degradado;0;55;0;0;ML+WEB;Ray-Ban RB4165 601/8G justin matte black
+Erika;Ray-Ban;RB4171 865/13;Marron havana;Marron degradado;0;55;0;0;ML+WEB;Ray-Ban RB4171 865/13 erika havana
+New Wayfarer;Ray-Ban;RB2132 902;Havana;Verde G-15;0;55;0;0;ML+WEB;Ray-Ban RB2132 902 new wayfarer tortoise
+Hexagonal;Ray-Ban;RB3548N 001;Dorado;Verde G-15;0;60;0;0;ML+WEB;Ray-Ban RB3548N 001 hexagonal gold
+Cats 5000;Ray-Ban;RB4125 601;Negro;Verde G-15;0;58;0;0;ML+WEB;Ray-Ban RB4125 601 cats 5000 black
+Wayfarer Ease;Ray-Ban;RB4340 601;Negro;Verde G-15;0;55;0;0;ML+WEB;Ray-Ban RB4340 601 wayfarer ease black
+Holbrook;Oakley;OO9102;Negro mate;Prizm;0;58;0;0;ML+WEB;Oakley OO9102 holbrook matte black prizm
+Sutro;Oakley;OO9406;Negro pulido;Prizm Road;0;62;0;0;ML+WEB;Oakley OO9406 sutro black prizm road
+Frogskins;Oakley;OO9013;Negro;Prizm;0;55;0;0;ML+WEB;Oakley OO9013 frogskins black prizm
+Radar EV Path;Oakley;OO9208;Negro;Prizm;0;68;0;0;ML+WEB;Oakley OO9208 radar ev path black prizm
+Sylas;Oakley;OO9448;Negro mate;Prizm;0;55;0;0;ML+WEB;Oakley OO9448 sylas matte black prizm
+Gascan;Oakley;OO9014;Negro mate;Gris;0;52;0;0;ML+WEB;Oakley OO9014 gascan matte black
+PR 01ZS;Prada;PR 01ZS;Negro;Gris degradado;0;110;0;0;WEB;Prada PR 01ZS sunglasses black
+PR 17WS;Prada;PR 17WS;Negro;Gris oscuro;0;115;0;0;WEB;Prada PR 17WS sunglasses black
+PR 06YS;Prada;PR 06YS;Negro / Dorado;Gris;0;115;0;0;WEB;Prada PR 06YS sunglasses black gold
+Linea Rossa;Prada;SPS 04XS;Negro mate;Gris ahumado;0;120;0;0;WEB;Prada Linea Rossa SPS 04XS sunglasses
+GG0061S;Gucci;GG0061S;Negro / Dorado;Gris;0;110;0;0;WEB;Gucci GG0061S sunglasses black gold
+GG0022S;Gucci;GG0022S;Havana;Marron;0;110;0;0;WEB;Gucci GG0022S sunglasses havana
+GG1215S;Gucci;GG1215S;Negro;Gris;0;120;0;0;WEB;Gucci GG1215S sunglasses black
+GG0396S;Gucci;GG0396S;Negro;Gris;0;115;0;0;WEB;Gucci GG0396S sunglasses black
+DG4438;Dolce & Gabbana;DG4438;Negro;Gris oscuro;0;105;0;0;WEB;Dolce Gabbana DG4438 sunglasses black
+DG6187;Dolce & Gabbana;DG6187;Negro;Gris;0;105;0;0;WEB;Dolce Gabbana DG6187 sunglasses black
+DG4413;Dolce & Gabbana;DG4413;Negro / Dorado;Gris degradado;0;110;0;0;WEB;Dolce Gabbana DG4413 sunglasses
+Waimea;Louis Vuitton;Z1082E;Negro / Monogram;Gris;0;140;0;0;WEB;Louis Vuitton Waimea Z1082E sunglasses
+Cyclone;Louis Vuitton;Z1642E;Negro / Dorado;Gris;0;160;0;0;WEB;Louis Vuitton Cyclone Z1642E sunglasses
+1.1 Millionaires;Louis Vuitton;Z1165W;Negro / Dorado;Gris;0;160;0;0;WEB;Louis Vuitton 1.1 Millionaires sunglasses black gold
+BB0095S;Balenciaga;BB0095S;Negro;Gris;0;110;0;0;WEB;Balenciaga BB0095S sunglasses black
+BB0100S;Balenciaga;BB0100S;Negro;Gris;0;110;0;0;WEB;Balenciaga BB0100S sunglasses black
+BB0261SA;Balenciaga;BB0261SA;Negro;Gris;0;115;0;0;WEB;Balenciaga BB0261SA sunglasses black
+O'Lock;Fendi;FE40047;Negro / Dorado;Gris;0;120;0;0;WEB;Fendi O'Lock FE40047 sunglasses
+Fendi First;Fendi;FE40045;Negro / Dorado;Gris;0;125;0;0;WEB;Fendi First FE40045 sunglasses black
+Fendigraphy;Fendi;FE40077;Negro;Gris;0;120;0;0;WEB;Fendi Fendigraphy FE40077 sunglasses
+VE4361 Medusa;Versace;VE4361;Negro / Oro;Gris;0;105;0;0;WEB;Versace VE4361 medusa sunglasses black gold
+Medusa Charm;Versace;VE2199;Negro / Oro;Gris oscuro;0;110;0;0;WEB;Versace VE2199 medusa charm sunglasses
+VE4404;Versace;VE4404;Negro;Gris;0;105;0;0;WEB;Versace VE4404 sunglasses black
+VE2251;Versace;VE2251;Dorado;Gris;0;110;0;0;WEB;Versace VE2251 greca sunglasses gold
+RICH 001;RICH;DROP 001;Negro humo;Polarizado UV400;0;0;0;0;WEB;wayfarer sunglasses matte black studio

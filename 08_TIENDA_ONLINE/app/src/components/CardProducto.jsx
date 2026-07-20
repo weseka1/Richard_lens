@@ -4,7 +4,8 @@ import { plata, getFotos } from '../lib/api.js';
 
 export const MONOS = {
   'Ray-Ban': 'RB', 'Oakley': 'O', 'Prada': 'P', 'Gucci': 'GG', 'Dolce & Gabbana': 'D&G',
-  'Louis Vuitton': 'LV', 'Balenciaga': 'BB', 'Fendi': 'FF', 'Versace': 'V', 'RICH': 'R$'
+  'Louis Vuitton': 'LV', 'Balenciaga': 'BB', 'Fendi': 'FF', 'Versace': 'V', 'RICH': 'R$',
+  'Miu Miu': 'MM', 'Off-White': 'OW', 'Ray-Ban · Ferrari': 'RB·F', 'Oscar Wylee': 'OS'
 };
 
 /* cada producto tiene SU color pleno (estable por id) — la gramática PFP */

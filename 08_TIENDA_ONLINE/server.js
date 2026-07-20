@@ -121,9 +121,12 @@ function cerebroLocal(mensaje, cfg, productos) {
 
 // ---------- asistente con Claude ----------
 async function cerebroClaude(mensaje, historial, cfg, productos) {
-  const catalogo = productos.map(p =>
-    `${p.marca} ${p.modelo} (${p.codigo}) ${p.color} — ${p.estado}${p.precio_web ? ' $' + p.precio_web.toLocaleString('es-AR') : ' precio por WhatsApp'}`
-  ).join('\n');
+  // con 500+ modelos el catálogo completo no entra: van los disponibles más fuertes + resumen
+  const disponibles = productos.filter(p => p.estado === 'disponible')
+    .sort((a, b) => (b.stock || 0) - (a.stock || 0)).slice(0, 80);
+  const catalogo = disponibles.map(p =>
+    `${p.marca} ${p.modelo} — ${p.variantes?.length || 1} variantes, ${p.stock || 0} con stock${p.precio_web ? ' $' + p.precio_web.toLocaleString('es-AR') : ', precio por WhatsApp'}`
+  ).join('\n') + `\n(+${productos.length - disponibles.length} modelos más en la web: si preguntan por uno que no está acá, deriva a WhatsApp)`;
   const system = `Sos RICH, el asistente de RICHARD LENS, tienda argentina de anteojos 100% originales (Ray-Ban, Oakley y marcas de lujo: Prada, Gucci, D&G, Louis Vuitton, Balenciaga, Fendi, Versace).
 Hablás en argentino, canchero pero vendedor profesional: frases cortas, cero verso, cero emojis en cadena.
 Reglas: (1) El cierre SIEMPRE es por WhatsApp ${cfg.whatsapp_display} — invitá a escribir para precio/stock/reserva. (2) Nunca inventes precios ni stock que no estén en el catálogo. (3) Si preguntan si es original: garantía de autenticidad, se muestran grabados, estuche y factura. (4) Envíos asegurados a todo el país. (5) Cuotas: ${cfg.cuotas}. Transferencia: ${cfg.descuento_transferencia}% off. (6) Respuestas de 1 a 3 frases.

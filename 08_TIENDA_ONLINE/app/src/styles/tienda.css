@@ -95,6 +95,14 @@ nav a:hover, nav a.activa { color: var(--rosa); }
 }
 @keyframes gradmove { 0% { background-position: 0% 30%; } 100% { background-position: 100% 70%; } }
 @keyframes huespin { to { filter: hue-rotate(360deg); } }
+/* sticker-bomb de marca sobre el gradiente: $, coronas, gafas y R$ en fila india */
+.hero-panel::after, .cta-panel::after {
+  content: ''; position: absolute; inset: -60px; z-index: 1; opacity: .09; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cg fill='%23111013'%3E%3Ctext x='18' y='64' font-family='Arial Black' font-size='46' transform='rotate(-14 18 64)'%3E$%3C/text%3E%3Cg transform='translate(118,28) rotate(9)'%3E%3Crect x='0' y='0' width='38' height='26' rx='8'/%3E%3Crect x='46' y='0' width='38' height='26' rx='8'/%3E%3Crect x='36' y='6' width='12' height='7' rx='3'/%3E%3C/g%3E%3Cpath d='M30 168 l8 -26 18 18 14 -26 14 26 18 -18 8 26 -4 14 -72 0 Z' transform='rotate(11 66 160)'/%3E%3Ctext x='138' y='206' font-family='Arial Black' font-size='34' transform='rotate(-9 138 206)'%3ER$%3C/text%3E%3C/g%3E%3C/svg%3E");
+  background-size: 240px;
+  animation: bomba 40s linear infinite;
+}
+@keyframes bomba { to { transform: translate(240px, 240px); } }
 .hero-panel > * { position: relative; z-index: 2; }
 .hero-kicker { font-family: var(--display); font-weight: 700; display: inline-block; font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; background: var(--tinta); color: var(--blanco); padding: 8px 16px; border-radius: 999px; margin-bottom: 22px; }
 .hero h1 { text-transform: uppercase; }
@@ -121,6 +129,10 @@ nav a:hover, nav a.activa { color: var(--rosa); }
   transition: transform .15s, background .2s;
 }
 .btn-pill:hover { transform: scale(1.04); background: rgba(17, 16, 19, .2); }
+/* variantes para fondo negro (fichas, secciones oscuras) */
+.brush-rosa::before { background: var(--rosa) !important; }
+.pill-claro { background: none; color: var(--blanco); border-color: rgba(250, 247, 242, .35); }
+.pill-claro:hover { background: rgba(250, 247, 242, .08); border-color: var(--cian); color: var(--cian); }
 
 /* avatar RICH + stickers */
 .hero-avatar { position: relative; display: flex; justify-content: center; align-items: flex-end; height: 100%; }

@@ -24,6 +24,18 @@ npm run dev               # terminal 2: Vite con hot-reload en :5173
 Editás componentes en `app/src/` y ves los cambios al instante. Cuando esté listo:
 `npm run build` → regenera `dist/` → `node server.js` sirve la versión nueva.
 
+## El stock REAL (proveedor sun-bh, dropshipping)
+
+El catálogo de la tienda YA está cargado con el stock real del proveedor (506 modelos, ~1.900
+SKUs de anteojos con variantes de color/talle/estado). Cuando el proveedor actualice:
+
+1. Bajar el export de stock de sun-bh.com (login de Juani) → `.xlsx`
+2. Convertirlo a `07_CATALOGO/proveedor_stock.csv` (columnas: modelo;codigo;color;sku;talle;stock;categoria;producto)
+3. `node 07_CATALOGO/importar_proveedor.mjs` → regenera la tienda SIN pisar precios/destacados que ya hayas tocado
+
+Los PDFs del catálogo visual del proveedor quedan en `07_CATALOGO/` (RAY BAN, 789, ÚLTIMOS INGRESOS).
+La indumentaria (TNF/UNIQ, 267 SKUs) y relojes del proveedor quedaron FUERA de la tienda — es de gafas.
+
 ## Lo único que falta conectar (en orden)
 
 1. **Tu WhatsApp comercial** → Panel → Config → campo WhatsApp (hoy apunta al de WESEKA como placeholder). Guardar y listo, todos los botones de la tienda apuntan ahí.

@@ -5,6 +5,13 @@ import { useProductos, useReveals } from '../lib/hooks.js';
 import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
 import CardProducto, { Badge, TileMarca, popColor } from '../components/CardProducto.jsx';
 
+const PILL_STOCK = {
+  'STOCK': ['Stock ya', 'var(--lima)', 'var(--tinta)'],
+  'POCO STOCK': ['Quedan pocos', 'var(--amarillo)', 'var(--tinta)'],
+  'POR ENTRAR': ['Por entrar', 'rgba(250,247,242,.14)', 'var(--blanco)'],
+  'CONSULTAR': ['Consultar', 'rgba(250,247,242,.14)', 'var(--blanco)']
+};
+
 export default function Producto() {
   const { id } = useParams();
   const nav = useNavigate();
@@ -12,6 +19,7 @@ export default function Producto() {
   const productos = useProductos();
   const [fotos, setFotos] = useState([]);
   const [fotoActiva, setFotoActiva] = useState(0);
+  const [variante, setVariante] = useState(null);
 
   const p = (productos || []).find(x => x.id === id);
 
@@ -34,7 +42,10 @@ export default function Producto() {
 
   if (!p) return <main className="wrap" style={{ paddingTop: 150, minHeight: '60vh' }} />;
 
-  const msgWA = `Hola, me interesa el ${p.marca} ${p.modelo} (${p.codigo}). ¿Precio y stock?`;
+  const v = variante || p.variantes?.[0];
+  const msgWA = v
+    ? `Hola, me interesa el ${p.marca} ${p.modelo} en ${v.color} (${v.codigo}, talle ${v.talle}). ¿Precio?`
+    : `Hola, me interesa el ${p.marca} ${p.modelo} (${p.codigo}). ¿Precio y stock?`;
 
   return (
     <main className="wrap">
@@ -63,9 +74,38 @@ export default function Producto() {
           <h1 className="prod-titulo">{p.modelo}</h1>
           <p className="prod-desc">{p.descripcion}</p>
 
+          {p.variantes?.length > 0 && (
+            <div style={{ margin: '22px 0' }}>
+              <p style={{ fontFamily: 'var(--display)', fontWeight: 700, textTransform: 'uppercase', fontSize: '.78rem', letterSpacing: '.16em', color: 'var(--blanco-60)', marginBottom: 10 }}>
+                Elegí tu combinación <span style={{ color: 'var(--cian)' }}>({p.variantes.length})</span>
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, maxHeight: 260, overflowY: 'auto', paddingRight: 6 }}>
+                {p.variantes.map(x => {
+                  const [label, bg, fg] = PILL_STOCK[x.stock] || PILL_STOCK['CONSULTAR'];
+                  const activa = v?.sku === x.sku;
+                  return (
+                    <button
+                      key={x.sku}
+                      onClick={() => setVariante(x)}
+                      style={{
+                        display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10,
+                        background: activa ? 'rgba(255,62,138,.14)' : 'var(--negro-2)',
+                        border: activa ? '2px solid var(--rosa)' : '2px solid rgba(250,247,242,.08)',
+                        borderRadius: 12, padding: '10px 14px', color: 'var(--blanco)', textAlign: 'left', fontSize: '.86rem', fontWeight: 600
+                      }}
+                    >
+                      <span>{x.color} <span style={{ color: 'var(--blanco-35)', fontWeight: 500 }}>· {x.codigo} · {x.talle}</span></span>
+                      <span style={{ background: bg, color: fg, borderRadius: 999, padding: '3px 10px', fontSize: '.64rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.08em', whiteSpace: 'nowrap' }}>{label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           <div className="prod-specs">
-            <div className="spec"><small>Color</small><span>{p.color}</span></div>
-            <div className="spec"><small>Cristal</small><span>{p.cristal}</span></div>
+            {!p.variantes?.length && <div className="spec"><small>Color</small><span>{p.color}</span></div>}
+            {!p.variantes?.length && <div className="spec"><small>Cristal</small><span>{p.cristal}</span></div>}
             <div className="spec"><small>Forma</small><span>{p.forma}</span></div>
             <div className="spec"><small>Material</small><span>{p.material}</span></div>
             <div className="spec"><small>Autenticidad</small><span>Grabados + estuche + factura</span></div>
@@ -86,10 +126,10 @@ export default function Producto() {
           )}
 
           <div className="hero-ctas">
-            <BotonWA cfg={cfg} className="btn btn-oro" texto={msgWA}>
+            <BotonWA cfg={cfg} className="btn-brush brush-rosa" texto={msgWA}>
               {p.estado === 'a_pedido' ? 'Encargar este par' : 'Quiero este par'}
             </BotonWA>
-            <Link to="/catalogo" className="btn btn-linea">Ver más modelos</Link>
+            <Link to="/catalogo" className="btn-pill pill-claro">Ver más modelos</Link>
           </div>
         </div>
       </div>
