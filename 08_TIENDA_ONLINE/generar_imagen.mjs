@@ -29,7 +29,7 @@ shot on 85mm lens, high fashion magazine quality. No brand logos anywhere.`;
 const prompt = process.argv[2] || PROMPT_HERO;
 const salida = resolve(HERE, process.argv[3] || 'app/public/img/rich-hero.png');
 
-const MODELOS = ['gemini-2.5-flash-image', 'gemini-2.0-flash-preview-image-generation'];
+const MODELOS = ['gemini-3.1-flash-lite-image', 'gemini-3.1-flash-image-preview', 'gemini-3.1-flash-image', 'gemini-3-pro-image-preview', 'gemini-2.5-flash-image'];
 
 let listo = false;
 for (const modelo of MODELOS) {

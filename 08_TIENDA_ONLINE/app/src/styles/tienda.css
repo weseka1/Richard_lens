@@ -139,7 +139,7 @@ nav a:hover, nav a.activa { color: var(--rosa); }
 .hero-avatar svg { width: min(100%, 460px); height: auto; animation: respira 5s ease-in-out infinite; }
 /* el modelo real (foto/render IA recortado): grande, saliéndose apenas del panel como en la referencia */
 .hero-modelo {
-  width: min(100%, 520px); height: auto; object-fit: contain;
+  width: min(118%, 640px); max-width: none; height: auto; object-fit: contain;
   margin-bottom: calc(clamp(30px, 5vw, 64px) * -1); /* pisa el padding del panel: sale desde el borde */
   filter: drop-shadow(0 24px 40px rgba(0, 0, 0, .35));
   animation: respira 6s ease-in-out infinite;
