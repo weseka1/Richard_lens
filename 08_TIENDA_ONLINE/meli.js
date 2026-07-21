@@ -63,10 +63,28 @@ const body = req => new Promise((ok, err) => {
 });
 
 // ---------- tokens ----------
-/* Los busca en el disco (local) y si no, en la nube (Render). */
+/* Los busca en el disco y si no, en la nube.
+ * Si están en el disco pero todavía no en la nube, los sube solo: así no
+ * hace falta reconectar a mano después de cada deploy o de cada vez que
+ * Render apaga la instancia y le borra el disco. */
+let sincronizado = false;
 async function tokensActuales() {
   const cfg = leer('meli.json', {});
-  return cfg.tokens || await tokensDeLaNube();
+  if (cfg.tokens) {
+    if (!sincronizado && supa.activo()) {
+      sincronizado = true;
+      supa.secretoGet('meli_tokens')
+        .then(v => {
+          if (!v || v.refresh_token !== cfg.tokens.refresh_token) {
+            console.log('[meli] copiando tokens a la nube para que sobrevivan al deploy');
+            guardarTokens(cfg.tokens);
+          }
+        })
+        .catch(e => console.error('[meli] sync de tokens:', e.message));
+    }
+    return cfg.tokens;
+  }
+  return await tokensDeLaNube();
 }
 
 async function token() {
