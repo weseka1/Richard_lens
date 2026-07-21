@@ -291,12 +291,12 @@ Si no te queda cómodo, lo cambiás dentro de los 30 días.
 ENVÍO
 A todo el país con seguimiento. Te pasamos el código apenas despachamos.
 
-${colores.length > 1 ? 'Elegí tu color arriba, en las opciones de la publicación.' : ''}
+${conFoto.length > 1 ? 'Elegí tu color arriba, en las opciones de la publicación.' : ''}
 
 RICHARD LENS & CO. — Eyewear House`.replace(/\n{3,}/g, '\n\n')
   });
 
-  return { id: item.id, permalink: item.permalink, variantes: colores.length };
+  return { id: item.id, permalink: item.permalink, variantes: conFoto.length };
 }
 
 // ---------- inteligencia de mercado ----------
