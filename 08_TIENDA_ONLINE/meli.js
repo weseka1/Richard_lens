@@ -99,7 +99,12 @@ async function api(ruta, metodo = 'GET', datos) {
     body: datos ? JSON.stringify(datos) : undefined
   });
   const out = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(out.message || `MELI ${ruta} → ${r.status}`);
+  if (!r.ok) {
+    // MELI manda el detalle real en cause[]: sin esto solo se ve
+    // "Validation error" y no hay forma de saber qué campo falló
+    const causas = (out.cause || []).map(c => c.message || c.code || JSON.stringify(c)).join(' | ');
+    throw new Error(`${out.message || r.status}${causas ? ' → ' + causas : ''}`);
+  }
   return out;
 }
 
