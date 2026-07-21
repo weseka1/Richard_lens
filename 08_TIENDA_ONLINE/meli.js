@@ -330,19 +330,30 @@ async function handler(req, res, urlObj) {
      * reputación. Reactivarla vende mucho antes que publicar de cero. */
     if (p === '/api/meli/mis-items') {
       const me = await api('/users/me');
-      const ids = [];
-      let offset = 0;
-      while (offset < 400) {
-        const r = await api(`/users/${me.id}/items/search?limit=100&offset=${offset}&status=all`);
-        ids.push(...(r.results || []));
-        if (!r.results?.length || ids.length >= (r.paging?.total || 0)) break;
-        offset += 100;
+      const ids = new Set();
+      const porEstado = {};
+      // "all" no es un status válido en MELI: hay que pedir cada uno.
+      // Sin parámetro sólo devuelve las activas, y las pausadas son justo
+      // las que nos interesan rescatar.
+      for (const st of ['', 'active', 'paused', 'closed', 'under_review', 'inactive']) {
+        let offset = 0;
+        for (;;) {
+          let r;
+          try { r = await api(`/users/${me.id}/items/search?limit=100&offset=${offset}${st ? '&status=' + st : ''}`); }
+          catch { break; }
+          const res_ = r.results || [];
+          res_.forEach(x => ids.add(x));
+          porEstado[st || 'default'] = r.paging?.total ?? res_.length;
+          offset += 100;
+          if (res_.length < 100 || offset >= (r.paging?.total || 0) || offset >= 500) break;
+        }
       }
-      if (!ids.length) return json(res, 200, { total: 0, items: [] });
+      if (!ids.size) return json(res, 200, { total: 0, items: [], diagnostico: { usuario: me.nickname, user_id: me.id, porEstado } });
 
+      const listaIds = [...ids];
       const items = [];
-      for (let i = 0; i < ids.length; i += 20) {
-        const lote = await api(`/items?ids=${ids.slice(i, i + 20).join(',')}`);
+      for (let i = 0; i < listaIds.length; i += 20) {
+        const lote = await api(`/items?ids=${listaIds.slice(i, i + 20).join(',')}`);
         for (const x of lote) {
           const b = x.body || {};
           items.push({
@@ -362,7 +373,7 @@ async function handler(req, res, urlObj) {
       } catch {}
 
       items.sort((a, b) => (b.vendidos - a.vendidos) || ((b.visitas || 0) - (a.visitas || 0)));
-      return json(res, 200, { total: items.length, items });
+      return json(res, 200, { total: items.length, items, diagnostico: { usuario: me.nickname, user_id: me.id, porEstado } });
     }
 
     /* Reactiva una publicación pausada y le corrige precio y stock. */
