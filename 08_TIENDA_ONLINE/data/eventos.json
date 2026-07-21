@@ -1,5 +1,255 @@
 [
   {
+    "fecha": "2026-07-21T14:48:05.598Z",
+    "tipo": "visita_producto",
+    "detalle": "3669-evolve"
+  },
+  {
+    "fecha": "2026-07-21T14:46:36.213Z",
+    "tipo": "visita_producto",
+    "detalle": "aviador-classic-3025"
+  },
+  {
+    "fecha": "2026-07-21T14:46:16.576Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T14:45:36.859Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T14:45:04.731Z",
+    "tipo": "visita_producto",
+    "detalle": "asap-rocky-wayfarer-puffer-4940"
+  },
+  {
+    "fecha": "2026-07-21T14:44:49.268Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T14:44:46.261Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T14:40:29.947Z",
+    "tipo": "visita_producto",
+    "detalle": "3546v"
+  },
+  {
+    "fecha": "2026-07-21T14:40:18.118Z",
+    "tipo": "visita_producto",
+    "detalle": "panthere-de-cart"
+  },
+  {
+    "fecha": "2026-07-21T14:40:15.572Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T14:39:20.277Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T14:24:43.248Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T14:21:15.249Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T14:05:46.146Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T13:56:43.206Z",
+    "tipo": "visita_producto",
+    "detalle": "highstreet-4259"
+  },
+  {
+    "fecha": "2026-07-21T13:56:26.105Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T13:56:22.197Z",
+    "tipo": "visita_producto",
+    "detalle": "4184"
+  },
+  {
+    "fecha": "2026-07-21T13:56:10.876Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T13:56:07.834Z",
+    "tipo": "visita_producto",
+    "detalle": "cel-triomphe-12"
+  },
+  {
+    "fecha": "2026-07-21T13:56:00.483Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T13:55:56.260Z",
+    "tipo": "visita_producto",
+    "detalle": "cat-eye-acetate"
+  },
+  {
+    "fecha": "2026-07-21T13:50:56.760Z",
+    "tipo": "chat_abierto",
+    "detalle": "/"
+  },
+  {
+    "fecha": "2026-07-21T13:50:25.497Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T04:08:54.242Z",
+    "tipo": "visita_producto",
+    "detalle": "off-white-branson"
+  },
+  {
+    "fecha": "2026-07-21T04:08:51.138Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T04:08:41.331Z",
+    "tipo": "visita_producto",
+    "detalle": "ow-arthur"
+  },
+  {
+    "fecha": "2026-07-21T04:08:35.734Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T04:08:29.165Z",
+    "tipo": "visita_producto",
+    "detalle": "g1032"
+  },
+  {
+    "fecha": "2026-07-21T04:08:22.332Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T04:08:14.639Z",
+    "tipo": "visita_producto",
+    "detalle": "gg1278s"
+  },
+  {
+    "fecha": "2026-07-21T04:07:55.613Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T04:07:45.774Z",
+    "tipo": "visita_producto",
+    "detalle": "g024"
+  },
+  {
+    "fecha": "2026-07-21T04:07:39.800Z",
+    "tipo": "visita_producto",
+    "detalle": "g020"
+  },
+  {
+    "fecha": "2026-07-21T04:07:35.776Z",
+    "tipo": "visita_producto",
+    "detalle": "g021"
+  },
+  {
+    "fecha": "2026-07-21T04:07:27.764Z",
+    "tipo": "visita_producto",
+    "detalle": "g020"
+  },
+  {
+    "fecha": "2026-07-21T04:07:21.256Z",
+    "tipo": "visita_producto",
+    "detalle": "g021"
+  },
+  {
+    "fecha": "2026-07-21T04:07:18.738Z",
+    "tipo": "visita_producto",
+    "detalle": "cat-eye-acetate"
+  },
+  {
+    "fecha": "2026-07-21T04:06:45.646Z",
+    "tipo": "visita_producto",
+    "detalle": "gg1278s"
+  },
+  {
+    "fecha": "2026-07-21T04:06:37.751Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-21T04:06:34.629Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T04:06:03.995Z",
+    "tipo": "visita_producto",
+    "detalle": "round-metal-classic-3447"
+  },
+  {
+    "fecha": "2026-07-21T04:05:30.260Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T04:05:16.742Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-21T04:03:25.528Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-21T04:02:39.480Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-21T04:02:21.868Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T03:55:58.065Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T03:55:36.767Z",
+    "tipo": "visita_producto",
+    "detalle": "aviador-classic-3025"
+  },
+  {
+    "fecha": "2026-07-21T03:55:23.367Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T03:55:06.932Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-21T03:50:18.786Z",
     "tipo": "visita",
     "detalle": "catalogo:vendidos"
