@@ -1,83 +1,98 @@
-/* Lanzador de publicaciones en MercadoLibre — la estrategia de 3 escalones.
+/* Lanzador MELI — el método de Juani, con sus números actualizados.
  *
- * Por cada modelo dispara TRES publicaciones con precio, título y foto de
- * portada distintos. No son duplicados: MELI castiga la publicación idéntica,
- * no que un vendedor tenga varias entradas con distinto ángulo comercial.
+ * Sale de sus 80 publicaciones anteriores: 5 publicaciones por modelo con
+ * precios escalonados. Vendió en tres escalones distintos del mismo modelo,
+ * así que no es duplicar por duplicar: es cubrir toda la banda de búsqueda.
+ * Cada publicación lleva título y foto de portada distintos, que es lo que
+ * las hace publicaciones separadas y no duplicados.
  *
- *   BAJO   → gana el filtro "menor precio". Margen flaco a propósito: las
- *            primeras ventas se compran, sirven para levantar reputación.
- *   MEDIO  → el que convierte de verdad. Acá está el volumen.
- *   ALTO   → cuotas sin interés, para el que compra por confianza.
+ * Prioridad FERRARI: 17 de sus 22 ventas fueron Ferrari. Wayfarer y Round
+ * vendieron cero.
  *
- * Uso:  node lanzar_meli.mjs --dry            (muestra qué haría, no publica)
- *       node lanzar_meli.mjs --escalon bajo   (publica solo un escalón)
- *       node lanzar_meli.mjs                  (publica los tres)
+ * Uso:  node lanzar_meli.mjs --dry              simula, no publica
+ *       node lanzar_meli.mjs --escalon 3        publica solo el escalón 3
+ *       node lanzar_meli.mjs --modelo <id>      publica solo un modelo
+ *       node lanzar_meli.mjs                    dispara todo
  */
 
-const BASE = process.env.RL_URL || 'https://richardlens.onrender.com';
-const DOLAR = 1545, COSTO_USD = 58;
-const MELI_COM = 0.155, IIBB = 0.035, IVA = 0.21, ENVIO = 7000;
+const BASE = process.env.RL_URL || 'http://localhost:5250';
+const DOLAR = 1545;
+const MELI = 0.155, IIBB = 0.035, IVA = 0.21, ENVIO = 7000;
 
-const ESCALONES = {
-  bajo:  { precio: 169900, stock: 3, listing: 'gold_special', sufijo: 'Con Estuche' },
-  medio: { precio: 229900, stock: 5, listing: 'gold_special', sufijo: 'Originales' },
-  alto:  { precio: 289900, stock: 5, listing: 'gold_pro',     sufijo: 'Garantia Oficial' }
-};
+const costoDe = p => (String(p.marca).includes('Ferrari') || /polariz/i.test(p.modelo) ? 61 : 58) * DOLAR;
+const piso = costo => (costo + ENVIO) / (1 - MELI - IIBB - IVA / (1 + IVA));
+const bolsillo = (precio, costo) => precio - precio * MELI - ENVIO - (precio - precio / (1 + IVA)) - precio * IIBB - costo;
+const plata = n => '$' + Math.round(n).toLocaleString('es-AR');
+const redondear = n => Math.round(n / 1000) * 1000 - 100;
 
-/* Solo modelos cuya carpeta de fotos es realmente de ESE modelo.
- * Las variantes espejado/rareprint comparten carpeta con la clásica:
- * publicarlas mostraría el producto equivocado y eso en MELI se paga caro. */
-const MODELOS = ['aviador-classic-3025', 'wayfarer-classic-2140', 'erika-4171', 'round-metal-classic-3447'];
+/* la escalera: multiplicador sobre el piso + el gancho que va en el título */
+const ESCALERA = [
+  { m: 1.28, sufijo: 'Originales Italy',     stock: 3,  listing: 'gold_special' },
+  { m: 1.45, sufijo: 'Con Estuche Original', stock: 5,  listing: 'gold_special' },
+  { m: 1.62, sufijo: 'Garantia Oficial',     stock: 8,  listing: 'gold_special' },
+  { m: 1.82, sufijo: 'Envio Gratis',         stock: 8,  listing: 'gold_special' },
+  { m: 2.05, sufijo: 'Polarizados Uv400',    stock: 5,  listing: 'gold_pro' }
+];
+
+/* Ferrari primero: son los que vendieron. Se publican solo los que tengan
+ * fotos_ok, o sea revisados foto por foto. */
+const MODELOS = [
+  'scuderia-ferrari-round-double-bridge-3674m',   // su #1 historico: 9 ventas
+  'scuderia-ferrari-fibre-carbon-8313m',          // su #2: 3 ventas
+  'scuderia-ferrari-4310m',
+  'scuderia-ferrari-2217m',
+  'scuderia-ferrari-4179m',
+  'scuderia-ferrari-aviator-3460m',
+  'erika-4171',                                   // 4 ventas historicas
+  'aviador-classic-3025'
+];
 
 const args = process.argv.slice(2);
 const dry = args.includes('--dry');
-const soloEscalon = args.includes('--escalon') ? args[args.indexOf('--escalon') + 1] : null;
-
-const plata = n => '$' + Math.round(n).toLocaleString('es-AR');
-const bolsillo = p => {
-  const costo = COSTO_USD * DOLAR;
-  return p - p * MELI_COM - ENVIO - (p - p / (1 + IVA)) - p * IIBB - costo;
-};
+const soloEscalon = args.includes('--escalon') ? Number(args[args.indexOf('--escalon') + 1]) : null;
+const soloModelo = args.includes('--modelo') ? args[args.indexOf('--modelo') + 1] : null;
 
 const productos = await (await fetch(`${BASE}/api/productos`)).json();
 
-console.log(`\n═══ LANZADOR MELI ${dry ? '(SIMULACIÓN — no publica nada)' : '— PUBLICANDO EN SERIO'}\n`);
+console.log(`\n═══ LANZADOR MELI ${dry ? '— SIMULACIÓN' : '— PUBLICANDO EN SERIO'}   (${BASE})\n`);
 
-let ok = 0, fallos = 0;
-for (const id of MODELOS) {
+let ok = 0, fallos = 0, saltados = 0, facturacionPotencial = 0;
+for (const id of (soloModelo ? [soloModelo] : MODELOS)) {
   const p = productos.find(x => x.id === id);
-  if (!p) { console.log(`✗ ${id}: no está en el catálogo`); fallos++; continue; }
-  if (!p.fotos_ok) { console.log(`✗ ${p.modelo}: fotos SIN VERIFICAR — no se publica`); fallos++; continue; }
+  if (!p) { console.log(`✗ ${id}: no está en el catálogo`); saltados++; continue; }
+  if (!p.fotos_ok) { console.log(`⏭  ${p.modelo}: fotos sin revisar — se salta`); saltados++; continue; }
 
-  console.log(`━━ ${p.marca} ${p.modelo}  (stock proveedor: ${p.stock})`);
-  for (const [nombre, e] of Object.entries(ESCALONES)) {
-    if (soloEscalon && soloEscalon !== nombre) continue;
-    const titulo = `Anteojos De Sol ${p.marca} ${p.modelo} ${e.sufijo}`.slice(0, 60);
-    console.log(`   ${nombre.toUpperCase().padEnd(6)} ${plata(e.precio).padStart(10)} · stock ${e.stock} · ganás ${plata(bolsillo(e.precio))}`);
-    console.log(`          "${titulo}"`);
+  const costo = costoDe(p);
+  console.log(`━━ ${p.marca} ${p.modelo}   (costo ${plata(costo)} · stock proveedor ${p.stock})`);
 
+  for (const [i, e] of ESCALERA.entries()) {
+    if (soloEscalon && soloEscalon !== i + 1) continue;
+    const precio = redondear(piso(costo) * e.m);
+    const titulo = `Anteojos De Sol ${p.marca.replace(' · ', ' ')} ${p.modelo} ${e.sufijo}`.slice(0, 60);
+    const g = bolsillo(precio, costo);
+    facturacionPotencial += precio;
+
+    console.log(`   #${i + 1} ${plata(precio).padStart(10)} · stock ${String(e.stock).padStart(2)} · ganás ${plata(g).padStart(9)}`);
+    console.log(`      "${titulo}"`);
     if (dry) continue;
+
     try {
       const r = await fetch(`${BASE}/api/meli/publicar`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: p.id, precio: e.precio, titulo, stockMax: e.stock, listing: e.listing })
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: p.id, precio, titulo, stockMax: e.stock, listing: e.listing })
       });
       const j = await r.json();
-      if (j.permalink) { console.log(`          ✅ ${j.permalink}`); ok++; }
-      else { console.log(`          ❌ ${j.error || JSON.stringify(j)}`); fallos++; }
-    } catch (err) { console.log(`          ❌ ${err.message}`); fallos++; }
+      if (j.permalink) { console.log(`      ✅ ${j.permalink}`); ok++; }
+      else { console.log(`      ❌ ${j.error || JSON.stringify(j).slice(0, 160)}`); fallos++; }
+    } catch (err) { console.log(`      ❌ ${err.message}`); fallos++; }
   }
   console.log('');
 }
 
-const total = MODELOS.length * (soloEscalon ? 1 : 3);
-console.log(dry
-  ? `Simulación: ${total} publicaciones listas para disparar.`
-  : `Resultado: ${ok} publicadas, ${fallos} fallaron.`);
-
 if (dry) {
-  const medio = ESCALONES.medio.precio;
-  console.log(`\nPara facturar $2.000.000: ${Math.ceil(2000000 / medio)} ventas al escalón medio` +
-    ` → ${plata(Math.ceil(2000000 / medio) * bolsillo(medio))} en el bolsillo.`);
+  console.log(`Simulación lista. ${saltados ? saltados + ' modelo(s) saltados por fotos sin revisar.' : ''}`);
+  const medio = redondear(piso(61 * DOLAR) * 1.62);
+  console.log(`Para $2.000.000: ${Math.ceil(2000000 / medio)} ventas al escalón 3 (${plata(medio)}).`);
+} else {
+  console.log(`Resultado: ${ok} publicadas · ${fallos} fallaron · ${saltados} saltadas.`);
 }
