@@ -254,6 +254,11 @@ nav a:hover, nav a.activa { color: var(--hueso); }
 .precio { font-family: var(--texto); font-weight: 600; font-size: 1.02rem; color: var(--hueso); letter-spacing: 0; }
 .precio-consultar { font-size: .78rem; font-weight: 500; color: #0066CC; letter-spacing: .01em; text-transform: none; }
 .cuotas { font-size: .7rem; color: var(--hueso-35); font-weight: 400; margin-top: 2px; }
+/* incentivos de compra (datos reales) */
+.urgencia { display: inline-block; margin-top: 10px; font-size: .72rem; font-weight: 700; color: #C2412E; letter-spacing: .02em; }
+.entrega-ya { display: inline-block; margin-top: 10px; font-size: .7rem; font-weight: 600; color: var(--verde); }
+.beneficios { display: flex; gap: 10px; flex-wrap: wrap; margin: -26px 0 34px; }
+.beneficios span { background: #fff; border: 1px solid var(--linea-suave); border-radius: 999px; padding: 8px 16px; font-size: .78rem; font-weight: 500; color: var(--hueso-60); box-shadow: 0 2px 10px -6px rgba(0, 0, 0, .12); }
 .btn-cart {
   position: relative; margin-top: 14px; padding: 10px 24px; border: none;
   background: #1D1D1F; font-family: var(--texto); font-weight: 500; font-size: .78rem;
@@ -356,6 +361,32 @@ nav a:hover, nav a.activa { color: var(--hueso); }
 /* lightbox: la foto en grande */
 .lightbox { position: fixed; inset: 0; z-index: 500; background: rgba(10, 10, 11, .92); display: flex; align-items: center; justify-content: center; padding: 4vh 4vw; cursor: zoom-out; }
 .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; background: #fff; border-radius: 12px; padding: 2%; }
+/* navegación de galería: flechas glass + contador + swipe */
+.galeria-principal { position: relative; user-select: none; }
+.galeria-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(0, 0, 0, .08);
+  background: rgba(255, 255, 255, .8); backdrop-filter: blur(12px);
+  font-size: 1.5rem; line-height: 1; color: var(--hueso); cursor: pointer;
+  box-shadow: 0 6px 20px -8px rgba(0, 0, 0, .25); transition: transform .15s, background .2s;
+  display: flex; align-items: center; justify-content: center; padding-bottom: 3px;
+}
+.galeria-nav:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+.nav-izq { left: 14px; } .nav-der { right: 14px; }
+.galeria-contador {
+  position: absolute; bottom: 14px; right: 14px; z-index: 3;
+  background: rgba(255, 255, 255, .85); backdrop-filter: blur(10px);
+  border-radius: 999px; padding: 4px 12px; font-size: .72rem; font-weight: 600; color: var(--hueso-60);
+}
+.galeria-aviso { font-size: .78rem; color: var(--gris-label); margin-top: 10px; }
+.buscador-head input {
+  background: var(--negro); border: 1px solid var(--linea-suave); border-radius: 999px;
+  padding: 9px 16px; font-size: .82rem; color: var(--hueso); outline: none; width: 150px; transition: width .3s, border-color .25s;
+}
+.buscador-head input:focus { width: 210px; border-color: var(--hueso); }
+.hero-probador-linea { display: block; margin-top: 10px; font-size: .82rem; font-weight: 500; color: #0066CC; }
+.hero-probador-linea:hover { text-decoration: underline; }
+@media (max-width: 860px) { .buscador-head { display: none; } }
 .galeria-thumbs { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
 .galeria-thumbs img { width: 66px; height: 66px; object-fit: cover; border-radius: 12px; cursor: pointer; opacity: .5; transition: all .25s; background: #fff; border: 1px solid var(--linea-suave); }
 .galeria-thumbs img.activa, .galeria-thumbs img:hover { opacity: 1; border-color: var(--hueso); box-shadow: none; }
@@ -680,9 +711,13 @@ main, header, footer { position: relative; z-index: 2; } /* ojo: jamás pisar el
 .seo-bloque h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; color: var(--hueso); }
 .seo-bloque p { font-size: .84rem; color: var(--hueso-35); margin-bottom: 14px; }
 
-/* ---------- reveals ---------- */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.22, 1, .36, 1), transform .8s cubic-bezier(.22, 1, .36, 1); }
-.reveal.visible { opacity: 1; transform: none; }
+/* ---------- reveals burbuja: nacen chicos y desenfocados, se inflan con rebote suave ---------- */
+.reveal { opacity: 0; transform: translateY(44px) scale(.93); filter: blur(7px); transition: opacity .9s cubic-bezier(.22, 1, .36, 1), transform .95s cubic-bezier(.18, 1.22, .32, 1), filter .9s ease; }
+.reveal.visible { opacity: 1; transform: none; filter: none; }
+.card { filter: blur(5px); }
+.card.visible { filter: none; transition: transform .8s cubic-bezier(.18, 1.22, .32, 1), box-shadow .35s, opacity .8s, filter .8s ease; }
+/* las secciones que respiran con el scroll (EfectoBurbuja les anima scale/opacity) */
+.grid-categorias, .grid-productos, .promo-banner, .grid-confianza, .pasos, .faq, .news-in, .ig-telefono, .cta-panel, .rich3d-texto, .seo-bloque { will-change: transform, opacity; transform-origin: center; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 900px) {

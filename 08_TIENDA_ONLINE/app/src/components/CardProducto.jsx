@@ -80,6 +80,12 @@ export default function CardProducto({ p, i = 0, cfg }) {
         ) : (
           <div className="card-precios"><span className="precio-consultar">Precio por WhatsApp →</span></div>
         )}
+        {p.estado === 'disponible' && p.stock > 0 && p.stock <= 3 && (
+          <span className="urgencia">⚡ Últimas {p.stock} {p.stock === 1 ? 'unidad' : 'unidades'}</span>
+        )}
+        {p.estado === 'disponible' && p.stock > 3 && (
+          <span className="entrega-ya">Entrega inmediata</span>
+        )}
         {comprable && (
           <button className="btn-cart" onClick={alCarrito}>
             {agregado ? '✓ En el carrito' : 'Agregar al carrito'}

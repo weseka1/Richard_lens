@@ -38,6 +38,7 @@ export default function Catalogo() {
   const genero = params.get('genero');
   const orden = params.get('orden');
   const promo = params.get('promo');
+  const q = (params.get('q') || '').toLowerCase();
 
   useEffect(() => { setCanal(params.get('canal')); setMarca(params.get('marca')); }, [params]);
   useEffect(() => { track('visita', 'catalogo' + (canal ? ':cajafuerte' : promo ? ':promo' : orden ? ':vendidos' : '')); }, []);
@@ -53,6 +54,7 @@ export default function Catalogo() {
     return Object.entries(conteo).sort((a, b) => b[1] - a[1]).slice(0, 8).map(e => e[0]);
   }, [productos]);
   let lista = (productos || []).filter(p =>
+    (!q || q.split(/\s+/).every(w => `${p.marca} ${p.modelo} ${p.codigo}`.toLowerCase().includes(w))) &&
     (!marca || p.marca === marca) &&
     (!forma || p.forma === forma) &&
     (!estado || p.estado === estado) &&

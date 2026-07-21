@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
  * Ajuste manual fino (arrastrar / tamaño / rotación) + descarga de la foto.
  * v2 (futuro): auto-fit con detección de cara. */
 
-export default function Probador({ abierto, onCerrar, fotoGafas, nombre }) {
+export default function Probador({ abierto, onCerrar, fotoGafas, nombre, precio, onComprar }) {
   const [selfie, setSelfie] = useState(null);
   const [gafasSrc, setGafasSrc] = useState(fotoGafas);
   useEffect(() => setGafasSrc(fotoGafas), [fotoGafas]);
@@ -113,8 +113,14 @@ export default function Probador({ abierto, onCerrar, fotoGafas, nombre }) {
             <p className="probador-tip">Arrastrá las gafas hasta tus ojos y ajustá con los controles.</p>
             <div className="probador-acciones">
               <button className="btn-pill pill-claro" onClick={() => setSelfie(null)}>Otra foto</button>
-              <button className="btn-brush" onClick={descargar}>Descargar mi foto</button>
+              <button className="btn-pill pill-claro" onClick={descargar}>Descargar</button>
+              {onComprar && (
+                <button className="btn-brush" onClick={() => { onComprar(); onCerrar(); }}>
+                  Me quedan{precio ? ` — ${precio}` : ''} · Comprar
+                </button>
+              )}
             </div>
+            <p className="probador-tip" style={{ fontSize: '.72rem' }}>🛡️ Y si al recibirlas no te convencen: 30 días de cambio, sin drama.</p>
           </>
         )}
       </div>

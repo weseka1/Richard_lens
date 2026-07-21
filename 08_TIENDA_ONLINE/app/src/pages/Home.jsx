@@ -120,6 +120,12 @@ export default function Home() {
             </div>
             <Link to="/catalogo?orden=vendidos" className="btn-pill pill-claro">Ver todos →</Link>
           </div>
+          <div className="beneficios reveal">
+            <span>🚚 Envío gratis a todo el país</span>
+            <span>💳 {cfg?.cuotas || 6} cuotas con tarjeta</span>
+            <span>⚡ {cfg?.descuento_transferencia || 10}% off por transferencia</span>
+            <span>🛡️ Garantía doble de autenticidad</span>
+          </div>
           <div className="grid-productos">
             {vendidos.map((p, i) => <CardProducto key={p.id} p={p} i={i} cfg={cfg} />)}
           </div>
@@ -150,8 +156,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* RICH 001 — la línea propia (el 3D vuelve cuando haya modelo real: gafas.glb) */}
+      {/* RICH 001 — la línea propia. Slot de video épico: soltar rich001.mp4 en app/public/img/ */}
       <section className="rich3d">
+        <VideoRich />
         <div className="rich3d-texto">
           <p className="sec-kicker reveal">Próximamente</p>
           <h2 className="sec-titulo reveal">RICH 001</h2>
@@ -250,6 +257,21 @@ export default function Home() {
         </div>
       </section>
     </main>
+  );
+}
+
+function VideoRich() {
+  const [hay, setHay] = useState(true);
+  if (!hay) return null;
+  return (
+    <>
+      <video
+        src="/img/rich001.mp4" autoPlay muted loop playsInline
+        onError={() => setHay(false)}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: .5 }}
+      />
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(60% 55% at 50% 45%, transparent 20%, rgba(11,11,12,.88) 100%)' }} />
+    </>
   );
 }
 

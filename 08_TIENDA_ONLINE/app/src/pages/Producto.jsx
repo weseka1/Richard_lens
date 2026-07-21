@@ -26,6 +26,17 @@ export default function Producto() {
   const [probador, setProbador] = useState(false);
   const [zoom, setZoom] = useState(false);
   useEffect(() => { setFotoActiva(0); }, [variante?.sku]); // al cambiar color, la galería arranca en su primera foto
+  // llegar con ?probar=1 abre el probador directo (el CTA del hero)
+  useEffect(() => { if (new URLSearchParams(location.search).get('probar')) setProbador(true); }, [id]);
+  // flechas del teclado para recorrer la galería
+  useEffect(() => {
+    const tecla = e => {
+      if (e.key === 'ArrowRight') setFotoActiva(a => a + 1);
+      if (e.key === 'ArrowLeft') setFotoActiva(a => Math.max(0, a - 1));
+    };
+    addEventListener('keydown', tecla);
+    return () => removeEventListener('keydown', tecla);
+  }, []);
 
   const p = (productos || []).find(x => x.id === id);
 
@@ -67,11 +78,32 @@ export default function Producto() {
     <main className="wrap">
       <div className="producto-layout">
         <div>
-          <div className="galeria-principal" style={{ '--pop': popColor(p.id) }}>
+          <div
+            className="galeria-principal"
+            style={{ '--pop': popColor(p.id), touchAction: 'pan-y' }}
+            onPointerDown={e => { e.currentTarget.dataset.x = e.clientX; }}
+            onPointerUp={e => {
+              const dx = e.clientX - Number(e.currentTarget.dataset.x || e.clientX);
+              if (Math.abs(dx) > 40 && galeria.length > 1)
+                setFotoActiva(a => (Math.min(a, galeria.length - 1) + (dx < 0 ? 1 : -1) + galeria.length) % galeria.length);
+            }}
+          >
             {galeria.length
-              ? <img src={galeria[Math.min(fotoActiva, galeria.length - 1)]} alt={`${p.marca} ${p.modelo}`} onClick={() => setZoom(true)} />
+              ? <img src={galeria[Math.min(fotoActiva, galeria.length - 1)]} alt={`${p.marca} ${p.modelo}`} draggable={false} onClick={() => setZoom(true)} />
               : <TileMarca p={p} nota="Fotos reales por WhatsApp — pedilas" />}
+            {galeria.length > 1 && (
+              <>
+                <button className="galeria-nav nav-izq" aria-label="Anterior"
+                  onClick={e => { e.stopPropagation(); setFotoActiva(a => (Math.min(a, galeria.length - 1) - 1 + galeria.length) % galeria.length); }}>‹</button>
+                <button className="galeria-nav nav-der" aria-label="Siguiente"
+                  onClick={e => { e.stopPropagation(); setFotoActiva(a => (Math.min(a, galeria.length - 1) + 1) % galeria.length); }}>›</button>
+                <span className="galeria-contador">{Math.min(fotoActiva, galeria.length - 1) + 1} / {galeria.length}</span>
+              </>
+            )}
           </div>
+          {v?.color && Object.keys(mapaFotos || {}).length > 0 && !fotosDeColor.length && (
+            <p className="galeria-aviso">📷 Las fotos exactas de "{v.color}" te las pasamos por WhatsApp — estas son de la familia del modelo.</p>
+          )}
           {zoom && galeria.length > 0 && (
             <div className="lightbox" onClick={() => setZoom(false)}>
               <img src={galeria[Math.min(fotoActiva, galeria.length - 1)]} alt={`${p.marca} ${p.modelo} ampliada`} />
@@ -182,6 +214,11 @@ export default function Producto() {
             onCerrar={() => setProbador(false)}
             fotoGafas={`/img/tryon/${p.id}.png`}
             nombre={`${p.marca} ${p.modelo}`}
+            precio={p.precio_web > 0 ? plata(p.precio_web) : ''}
+            onComprar={p.precio_web > 0 && p.estado === 'disponible' ? () => agregar({
+              id: p.id, marca: p.marca, modelo: p.modelo, precio: p.precio_web,
+              sku: v?.sku, color: v?.color, codigo: v?.codigo, talle: v?.talle
+            }) : null}
           />
         </div>
       </div>

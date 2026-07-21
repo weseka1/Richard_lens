@@ -55,8 +55,13 @@ export default function HeroCine({ drop, cfg }) {
           style={claro ? { borderColor: 'rgba(255,255,255,.4)', color: '#fff' } : undefined}>WhatsApp</BotonWA>
       </div>
       {drop && (
-        <Link to={`/producto/${drop.id}`} className="hero-drop-linea" style={claro ? { color: 'rgba(255,255,255,.55)' } : undefined}>
+        <Link to={`/producto/${drop.id}`} className="hero-drop-linea" style={claro ? { color: 'rgba(255,255,255,.75)' } : undefined}>
           Drop en stock — {drop.marca} {drop.modelo}{drop.precio_web > 0 ? ` · ${plata(drop.precio_web)}` : ''} →
+        </Link>
+      )}
+      {drop && (
+        <Link to={`/producto/${drop.id}?probar=1`} className="hero-probador-linea" style={claro ? { color: '#8FBFF5' } : undefined}>
+          📷 Probátelas con tu selfie — probador virtual
         </Link>
       )}
     </div>

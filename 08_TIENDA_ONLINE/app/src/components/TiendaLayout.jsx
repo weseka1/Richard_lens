@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { linkWA, track } from '../lib/api.js';
 import { useConfig } from '../lib/hooks.js';
 import ChatRich from './ChatRich.jsx';
@@ -10,6 +10,7 @@ import Lenis from 'lenis';
 import IntroGraffiti from './IntroGraffiti.jsx';
 import FondoDoodles from './FondoDoodles.jsx';
 import PopupSuscripcion from './PopupSuscripcion.jsx';
+import EfectoBurbuja from './EfectoBurbuja.jsx';
 
 const ConfigContext = createContext(null);
 export const useCfg = () => useContext(ConfigContext);
@@ -33,6 +34,9 @@ export default function TiendaLayout() {
   const [chat, setChat] = useState(false);
   const [carrito, setCarrito] = useState(false);
   const [mega, setMega] = useState(false);
+  const [q, setQ] = useState('');
+  const nav = useNavigate();
+  const buscar = e => { e.preventDefault(); if (q.trim()) { nav('/catalogo?q=' + encodeURIComponent(q.trim())); setQ(''); } };
   const { cantidad } = useCarrito();
   const loc = useLocation();
 
@@ -54,11 +58,12 @@ export default function TiendaLayout() {
       <IntroGraffiti />
       <FondoDoodles />
       <PopupSuscripcion />
+      <EfectoBurbuja />
       <header>
         <div className="anuncio" aria-hidden="true">
           <div className="anuncio-in">
             {[0, 1].map(v => (
-              <span key={v}>ENVÍO GRATIS A TODO EL PAÍS<i>●</i> 100% ORIGINALES CON GARANTÍA DOBLE<i>●</i> DROP 001 ABIERTO<i>●</i> CUOTAS + DESCUENTO POR TRANSFERENCIA<i>●</i></span>
+              <span key={v}>ENVÍO GRATIS A TODO EL PAÍS<i>●</i> 100% ORIGINALES CON GARANTÍA DOBLE<i>●</i> PROBADOR VIRTUAL — PROBÁTELAS CON TU SELFIE<i>●</i> CUOTAS + DESCUENTO POR TRANSFERENCIA<i>●</i></span>
             ))}
           </div>
         </div>
@@ -108,6 +113,9 @@ export default function TiendaLayout() {
             </div>
             <Link to="/catalogo?canal=WEB">La Caja Fuerte</Link>
             <a href="/#por-que">Por qué nosotros</a>
+            <form className="buscador-head" onSubmit={buscar}>
+              <input value={q} onChange={e => setQ(e.target.value)} placeholder="Buscar modelo…" aria-label="Buscar" />
+            </form>
             <BotonWA cfg={cfg} className="btn-wa-mini">WhatsApp</BotonWA>
             <button className="btn-cart-head" onClick={() => setCarrito(true)}>
               CARRITO ({cantidad})
