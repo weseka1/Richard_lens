@@ -226,6 +226,51 @@ RICHARD LENS & CO. — Eyewear House`.replace(/\n{3,}/g, '\n\n')
   return { id: item.id, permalink: item.permalink, variantes: colores.length };
 }
 
+// ---------- inteligencia de mercado ----------
+/* Radiografía de la competencia para un modelo: dónde está el piso real del
+ * mercado, dónde la mediana, y quiénes venden de verdad (no el que publicó
+ * caro y nunca vendió). Con esto se arman los escalones de precio. */
+async function mercado(q, limite = 50) {
+  const r = await api(`/sites/MLA/search?q=${encodeURIComponent(q)}&limit=${limite}`);
+  const items = (r.results || []).filter(i => i.price > 0);
+  if (!items.length) return { q, total: 0, items: [] };
+
+  const precios = items.map(i => i.price).sort((a, b) => a - b);
+  const pct = p => precios[Math.min(precios.length - 1, Math.floor(precios.length * p))];
+
+  // los que efectivamente mueven mercadería mandan más que los que solo publican
+  const vendedores = [...items].sort((a, b) => (b.sold_quantity || 0) - (a.sold_quantity || 0)).slice(0, 10);
+  const conVentas = items.filter(i => (i.sold_quantity || 0) > 0);
+  const preciosQueVenden = conVentas.map(i => i.price).sort((a, b) => a - b);
+
+  return {
+    q,
+    total: r.paging?.total || items.length,
+    analizados: items.length,
+    precio: {
+      min: precios[0],
+      p25: pct(0.25),
+      mediana: pct(0.5),
+      p75: pct(0.75),
+      max: precios[precios.length - 1]
+    },
+    // el precio al que se vende de verdad, que es el que importa
+    medianaQueVende: preciosQueVenden.length
+      ? preciosQueVenden[Math.floor(preciosQueVenden.length / 2)]
+      : null,
+    conVentas: conVentas.length,
+    envioGratisPct: Math.round(items.filter(i => i.shipping?.free_shipping).length * 100 / items.length),
+    fullPct: Math.round(items.filter(i => i.shipping?.logistic_type === 'fulfillment').length * 100 / items.length),
+    top: vendedores.map(i => ({
+      titulo: i.title,
+      precio: i.price,
+      vendidos: i.sold_quantity || 0,
+      envioGratis: !!i.shipping?.free_shipping,
+      link: i.permalink
+    }))
+  };
+}
+
 // ---------- handler ----------
 async function handler(req, res, urlObj) {
   const p = urlObj.pathname;
@@ -242,6 +287,13 @@ async function handler(req, res, urlObj) {
       const b = await body(req);
       guardar('meli.json', { ...cfg, app_id: (b.app_id || '').trim(), secret: (b.secret || '').trim() });
       return json(res, 200, { ok: true });
+    }
+
+    if (p === '/api/meli/mercado') {
+      const q = urlObj.searchParams.get('q');
+      if (!q) return json(res, 400, { error: 'falta q' });
+      try { return json(res, 200, await mercado(q, Number(urlObj.searchParams.get('limit')) || 50)); }
+      catch (e) { return json(res, 500, { error: e.message }); }
     }
 
     if (p === '/api/meli/conectar') {
