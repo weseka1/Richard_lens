@@ -426,11 +426,13 @@ async function handler(req, res, urlObj) {
       return json(res, 200, { total: items.length, items, diagnostico: { usuario: me.nickname, user_id: me.id, porEstado } });
     }
 
-    /* Reactiva una publicación pausada y le corrige precio y stock. */
+    /* Reactiva una publicación y/o le corrige precio, stock y título. */
     if (p === '/api/meli/reactivar' && req.method === 'POST') {
-      const { id, precio, stock } = await body(req);
+      const { id, precio, stock, titulo, activar } = await body(req);
       if (!id) return json(res, 400, { error: 'falta id' });
-      const cambios = { status: 'active' };
+      const cambios = {};
+      if (activar !== false) cambios.status = 'active';
+      if (titulo) cambios.title = String(titulo).slice(0, 60);
       if (precio) cambios.price = Number(precio);
       if (stock != null) cambios.available_quantity = Number(stock);
       const r = await api(`/items/${id}`, 'PUT', cambios);
