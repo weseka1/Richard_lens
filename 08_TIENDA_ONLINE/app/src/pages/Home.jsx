@@ -9,12 +9,26 @@ import HeroCine from '../components/HeroCine.jsx';
 const MARCAS = ['RAY-BAN', 'OAKLEY', 'PRADA', 'GUCCI', 'DIOR', 'LOUIS VUITTON', 'CARTIER', 'SAINT LAURENT', 'BALENCIAGA', 'FENDI', 'VERSACE', 'CELINE', 'TOM FORD', 'MIU MIU', 'OFF-WHITE'];
 
 /* la lógica Nike: categorías arriba, lo que queremos vender primero */
+/* tiles = AVATARES editoriales en estudio gris (mismo sistema que cat-hombre).
+ * Soltar cat-mujer.jpg / cat-vendidos.jpg / cat-promo.jpg en app/public/img/ y entran solos;
+ * mientras falten, cae al recorte de producto. */
 const CATEGORIAS = [
-  { titulo: 'Gafas Hombre', href: '/catalogo?genero=hombre', foto: '/img/cat-hombre.jpg' },
-  { titulo: 'Gafas Mujer', href: '/catalogo?genero=mujer', foto: '/img/cat-mujer.jpg' },
-  { titulo: 'Más Vendidos', href: '/catalogo?orden=vendidos', foto: '/fotos/rb3025-l0205/01.jpg' },
-  { titulo: 'En Promoción', href: '/catalogo?promo=1', foto: '/fotos/rb3016-w0365/01.jpg' }
+  { titulo: 'Gafas Hombre', href: '/catalogo?genero=hombre', foto: '/img/cat-hombre.jpg', fallback: '/img/tryon/wayfarer-classic-2140.png' },
+  { titulo: 'Gafas Mujer', href: '/catalogo?genero=mujer', foto: '/img/cat-mujer-estudio.jpg', fallback: '/img/cat-mujer.jpg' },
+  { titulo: 'Más Vendidos', href: '/catalogo?orden=vendidos', foto: '/img/cat-vendidos.jpg', fallback: '/img/tryon/aviador-espejado-3025.png' },
+  { titulo: 'En Promoción', href: '/catalogo?promo=1', foto: '/img/cat-promo.jpg', fallback: '/img/tryon/wayfarer-espejado-2140.png' }
 ];
+
+function TileCategoria({ c, i }) {
+  const [src, setSrc] = useState(c.foto);
+  return (
+    <Link to={c.href} className={'cat-tile reveal' + (src.includes('/tryon/') ? ' tile-producto' : '')} style={{ transitionDelay: `${i * 70}ms` }}>
+      <img src={src} alt={c.titulo} loading="lazy" onError={() => src !== c.fallback && setSrc(c.fallback)} />
+      <span className="cat-nombre">{c.titulo}</span>
+      <span className="cat-flecha">Ver →</span>
+    </Link>
+  );
+}
 
 const FAQS = [
   ['¿Cómo sé que no es réplica?', 'Antes de pagar te mostramos los grabados del cristal y la varilla, el estuche, el paño y la factura. Y si igual dudás: garantía doble — no es original, te devolvemos el doble.'],
@@ -91,13 +105,7 @@ export default function Home() {
           <p className="sec-kicker reveal">Comprá por categoría</p>
           <h2 className="sec-titulo reveal">¿Qué estás buscando?</h2>
           <div className="grid-categorias">
-            {CATEGORIAS.map((c, i) => (
-              <Link to={c.href} className="cat-tile reveal" key={c.titulo} style={{ transitionDelay: `${i * 70}ms` }}>
-                <img src={c.foto} alt={c.titulo} loading="lazy" />
-                <span className="cat-nombre">{c.titulo}</span>
-                <span className="cat-flecha">Ver →</span>
-              </Link>
-            ))}
+            {CATEGORIAS.map((c, i) => <TileCategoria key={c.titulo} c={c} i={i} />)}
           </div>
         </div>
       </section>

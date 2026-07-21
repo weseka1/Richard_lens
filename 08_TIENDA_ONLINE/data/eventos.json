@@ -1,5 +1,50 @@
 [
   {
+    "fecha": "2026-07-21T02:17:23.009Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T02:17:20.558Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-21T02:17:14.937Z",
+    "tipo": "visita_producto",
+    "detalle": "g020"
+  },
+  {
+    "fecha": "2026-07-21T02:17:02.653Z",
+    "tipo": "visita_producto",
+    "detalle": "gg1278s"
+  },
+  {
+    "fecha": "2026-07-21T02:17:00.212Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T02:16:41.380Z",
+    "tipo": "visita_producto",
+    "detalle": "waimea-sunglasses"
+  },
+  {
+    "fecha": "2026-07-21T02:16:40.316Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T02:16:29.878Z",
+    "tipo": "visita_producto",
+    "detalle": "erika-4171"
+  },
+  {
+    "fecha": "2026-07-21T02:14:15.563Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-21T02:07:14.739Z",
     "tipo": "visita_producto",
     "detalle": "ow-milano"
