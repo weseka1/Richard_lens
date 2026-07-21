@@ -19,7 +19,11 @@ const BASE = process.env.RL_URL || 'http://localhost:5250';
 const DOLAR = 1545;
 const MELI = 0.155, IIBB = 0.035, IVA = 0.21, ENVIO = 7000;
 
-const costoDe = p => (String(p.marca).includes('Ferrari') || /polariz/i.test(p.modelo) ? 61 : 58) * DOLAR;
+/* costo real por tipo: el lujo sale bastante más caro que un Ray-Ban */
+const costoDe = p => (
+  p.canal === 'WEB' ? 110 :
+  String(p.marca).includes('Ferrari') || /polariz/i.test(p.modelo) ? 61 : 58
+) * DOLAR;
 const piso = costo => (costo + ENVIO) / (1 - MELI - IIBB - IVA / (1 + IVA));
 const bolsillo = (precio, costo) => precio - precio * MELI - ENVIO - (precio - precio / (1 + IVA)) - precio * IIBB - costo;
 const plata = n => '$' + Math.round(n).toLocaleString('es-AR');
@@ -39,9 +43,12 @@ function armarTitulo(p, gancho) {
     .replace(/\d{3,4}\s*[a-zA-Z]?/g, '')
     .replace(/\s+/g, ' ').trim();
 
+  const marca = String(p.marca).split(' · ')[0];
   const base = esFerrari
     ? `Anteojos De Sol Rayban X Escudería Ferrari ${codigo}`
-    : `Anteojos De Sol Rayban ${limpio} ${codigo}`.replace(/\s+/g, ' ');
+    : /ray-?ban/i.test(marca)
+      ? `Anteojos De Sol Rayban ${limpio} ${codigo}`.replace(/\s+/g, ' ')
+      : `Lentes De Sol ${marca} ${p.modelo}`.replace(/\s+/g, ' ');
 
   // agrega el gancho solo si entra entero: cortar a mitad de palabra queda feo
   const full = `${base} ${gancho}`.replace(/\s+/g, ' ').trim();
@@ -60,15 +67,16 @@ const ESCALERA = [
 
 /* Ferrari primero: son los que vendieron. Se publican solo los que tengan
  * fotos_ok, o sea revisados foto por foto. */
+/* Ray-Ban y Ferrari están en el denylist de MELI: rebotan en la puerta.
+ * Lo que sí pasa el filtro es el lujo, y encima deja mucho más por venta. */
 const MODELOS = [
-  'scuderia-ferrari-round-double-bridge-3674m',   // su #1 historico: 9 ventas
-  'scuderia-ferrari-fibre-carbon-8313m',          // su #2: 3 ventas
-  'scuderia-ferrari-4310m',
-  'scuderia-ferrari-2217m',
-  'scuderia-ferrari-4179m',
-  'scuderia-ferrari-aviator-3460m',
-  'erika-4171',                                   // 4 ventas historicas
-  'aviador-classic-3025'
+  've4438b',           // Versace cat-eye, 6 fotos mapeadas
+  've4361',            // Versace Biggie
+  'ski-rectangle',     // Balenciaga, 5 fotos mapeadas
+  'max-square-af',     // Balenciaga
+  'dynasty-d-frame',   // Balenciaga
+  've4432u',
+  've4474u'
 ];
 
 const args = process.argv.slice(2);
@@ -103,7 +111,7 @@ for (const id of (soloModelo ? [soloModelo] : MODELOS)) {
     try {
       const r = await fetch(`${BASE}/api/meli/publicar`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: p.id, precio, titulo, stockMax: e.stock, listing: e.listing })
+        body: JSON.stringify({ id: p.id, precio, titulo, stockMax: e.stock, listing: e.listing, permitirLujo: true })
       });
       const j = await r.json();
       if (j.permalink) { console.log(`      ✅ ${j.permalink}`); ok++; }

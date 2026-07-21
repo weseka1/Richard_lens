@@ -192,7 +192,10 @@ function armarTitulo(producto, sufijo = '') {
  * opciones: { precio, titulo, stockMax, listing }
  */
 async function publicar(producto, cfgTienda, opciones = {}) {
-  if (producto.canal === 'WEB') throw new Error('Producto solo-web (lujo): jamás va a MELI');
+  // el lujo era solo-web por decisión de negocio; ahora se publica si se pide
+  // explícitamente (opciones.permitirLujo), no por accidente
+  if (producto.canal === 'WEB' && !opciones.permitirLujo)
+    throw new Error('Producto solo-web (lujo): pasá permitirLujo para publicarlo igual');
   if (!producto.fotos_ok) throw new Error('Fotos sin revisar — marcalas en el panel antes de publicar');
 
   const precio = Number(opciones.precio || producto.precio_ml);
@@ -230,8 +233,10 @@ async function publicar(producto, cfgTienda, opciones = {}) {
       { id: 'WARRANTY_TYPE', value_name: 'Garantía del vendedor' },
       { id: 'WARRANTY_TIME', value_name: '30 días' }
     ],
-    shipping: { mode: 'me2', local_pick_up: false }
   };
+  // el envío lo resuelve MELI según el precio y la config del vendedor:
+  // forzar me2 rebotaba con "User has not mode me1"
+  if (opciones.envio) base.shipping = opciones.envio;
 
   /* Una variante por color, PERO solo con los colores que tienen foto propia.
    * MELI rechaza la publicación si dos variantes comparten la misma foto
@@ -508,7 +513,7 @@ async function handler(req, res, urlObj) {
     }
 
     if (p === '/api/meli/publicar' && req.method === 'POST') {
-      const { id, precio, titulo, stockMax, listing } = await body(req);
+      const { id, precio, titulo, stockMax, listing, permitirLujo } = await body(req);
       const productos = leer('productos.json', []);
       const producto = productos.find(x => x.id === id);
       if (!producto) return json(res, 404, { error: 'producto no existe' });
@@ -522,7 +527,7 @@ async function handler(req, res, urlObj) {
 
       const cfgTienda = leer('config.json', {});
       let r;
-      try { r = await publicar(producto, cfgTienda, { precio, titulo: tit, stockMax, listing }); }
+      try { r = await publicar(producto, cfgTienda, { precio, titulo: tit, stockMax, listing, permitirLujo }); }
       catch (e) {
         // devolver lo que se intentó mandar: sin esto MELI dice sólo
         // "Validation error" y no hay forma de saber qué campo lo rompió
