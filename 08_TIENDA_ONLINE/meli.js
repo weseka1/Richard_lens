@@ -340,15 +340,23 @@ async function handler(req, res, urlObj) {
     }
 
     if (p === '/api/meli/publicar' && req.method === 'POST') {
-      const { id } = await body(req);
+      const { id, precio, titulo, stockMax, listing } = await body(req);
       const productos = leer('productos.json', []);
       const producto = productos.find(x => x.id === id);
       if (!producto) return json(res, 404, { error: 'producto no existe' });
-      if (producto.meli_item_id) return json(res, 400, { error: 'Ya publicado: ' + producto.meli_permalink });
+
+      /* un producto puede tener VARIAS publicaciones (los escalones de precio).
+       * Lo que no puede repetirse es el mismo título: eso sí es un duplicado. */
+      producto.meli_items = producto.meli_items || [];
+      const tit = titulo || armarTitulo(producto);
+      if (producto.meli_items.some(x => x.titulo === tit))
+        return json(res, 400, { error: 'Ya existe una publicación con ese título' });
+
       const cfgTienda = leer('config.json', {});
-      const r = await publicar(producto, cfgTienda);
-      producto.meli_item_id = r.id;
-      producto.meli_permalink = r.permalink;
+      const r = await publicar(producto, cfgTienda, { precio, titulo: tit, stockMax, listing });
+      producto.meli_items.push({ id: r.id, permalink: r.permalink, titulo: tit, precio: precio || producto.precio_ml });
+      producto.meli_item_id = producto.meli_item_id || r.id;      // compatibilidad
+      producto.meli_permalink = producto.meli_permalink || r.permalink;
       guardar('productos.json', productos);
       return json(res, 200, { ok: true, ...r });
     }
