@@ -1,5 +1,35 @@
 [
   {
+    "fecha": "2026-07-21T02:20:47.163Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T02:20:41.079Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T02:20:40.178Z",
+    "tipo": "visita_producto",
+    "detalle": "3669-evolve"
+  },
+  {
+    "fecha": "2026-07-21T02:20:12.770Z",
+    "tipo": "visita_producto",
+    "detalle": "3669-evolve"
+  },
+  {
+    "fecha": "2026-07-21T02:19:03.568Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T02:18:59.483Z",
+    "tipo": "chat_abierto",
+    "detalle": "/"
+  },
+  {
     "fecha": "2026-07-21T02:17:23.009Z",
     "tipo": "visita",
     "detalle": "home"
