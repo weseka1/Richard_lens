@@ -398,17 +398,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban Amore Fashion 4392. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "amore-fashion-4392",
-    "meli_item_id": "MLA3643904648",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3643904648-anteojos-de-sol-amore-fashion-4392-uv400-con-estuche-_JM",
-    "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3643904648",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643904648-anteojos-de-sol-amore-fashion-4392-uv400-con-estuche-_JM",
-        "titulo": "Anteojos De Sol Amore Fashion 4392 Uv400 Con Estuche",
-        "precio": 199900
-      }
-    ],
+    "meli_item_id": null,
+    "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "102008",

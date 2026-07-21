@@ -432,6 +432,37 @@ async function handler(req, res, urlObj) {
       return json(res, 200, { ok: true, id: r.id, estado: r.status, precio: r.price, permalink: r.permalink });
     }
 
+    /* ¿Nos deja MELI publicar esta marca? Usa /items/validate, que corre todas
+     * las validaciones (incluido el denylist de marca) SIN crear nada. Así se
+     * puede sondear todo el catálogo sin ensuciar la cuenta ni sumar sanciones. */
+    if (p === '/api/meli/probar-marca') {
+      const marca = urlObj.searchParams.get('marca');
+      if (!marca) return json(res, 400, { error: 'falta marca' });
+      const prueba = {
+        title: `Lentes De Sol ${marca} Originales Con Estuche Uv400`.slice(0, 60),
+        category_id: 'MLA417128',
+        price: 249900,
+        currency_id: 'ARS',
+        available_quantity: 3,
+        buying_mode: 'buy_it_now',
+        listing_type_id: 'gold_special',
+        condition: 'new',
+        pictures: [{ source: 'https://http2.mlstatic.com/D_NQ_NP_2X_600001-MLA1_O.jpg' }],
+        attributes: [
+          { id: 'BRAND', value_name: marca },
+          { id: 'MODEL', value_name: 'Test' },
+          { id: 'GENDER', value_name: 'Sin género' }
+        ]
+      };
+      try {
+        await api('/items/validate', 'POST', prueba);
+        return json(res, 200, { marca, permitida: true });
+      } catch (e) {
+        const bloqueada = /denylist|not authorized|brand/i.test(e.message);
+        return json(res, 200, { marca, permitida: !bloqueada, motivo: e.message });
+      }
+    }
+
     if (p === '/api/meli/conectar') {
       if (!cfg.app_id) return json(res, 400, { error: 'Primero cargá App ID y Secret' });
       // el devcenter nuevo de MELI exige los scopes explícitos en la URL:
