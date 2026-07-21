@@ -184,7 +184,13 @@ const server = http.createServer(async (req, res) => {
         const cambios = await body(req);
         productos[i] = { ...productos[i], ...cambios, id: mProd[1] };
         guardar('productos.json', productos);
-        if (supa.activo()) { const { variantes, ...campos } = cambios; if (Object.keys(campos).length) supa.actualizarProducto(mProd[1], campos); }
+        if (supa.activo()) {
+          const { variantes, ...campos } = cambios;
+          if (Object.keys(campos).length) supa.actualizarProducto(mProd[1], campos);
+          // variantes editadas a mano en el panel también suben a la nube
+          if (Array.isArray(variantes) && variantes.length)
+            supa.upsertVariantes(variantes.map(v => ({ ...v, producto_id: mProd[1] })));
+        }
         return json(res, 200, { ok: true });
       }
       if (mProd && req.method === 'DELETE') {
@@ -231,6 +237,31 @@ const server = http.createServer(async (req, res) => {
         try { mapa = JSON.parse(fs.readFileSync(ruta, 'utf8')); } catch {}
         if (color) mapa[archivo] = color; else delete mapa[archivo];
         fs.writeFileSync(ruta, JSON.stringify(mapa, null, 2), 'utf8');
+        return json(res, 200, { ok: true });
+      }
+
+      // elegir PORTADA desde el panel: la foto pasa a llamarse 00_xxx y queda primera
+      // (la web ordena alfabéticamente). Le saca el prefijo a la portada anterior.
+      const mPortada = p.match(/^\/api\/fotos-portada\/([\w-]+)$/);
+      if (mPortada && req.method === 'POST') {
+        const { archivo } = await body(req);
+        const dir = path.join(FOTOS_DIR, mPortada[1]);
+        const limpio = (archivo || '').replace(/[\\/]/g, '');
+        if (!limpio || !fs.existsSync(path.join(dir, limpio))) return json(res, 404, { error: 'no existe' });
+        const rutaMapa = path.join(dir, 'fotos.json');
+        let mapa = {};
+        try { mapa = JSON.parse(fs.readFileSync(rutaMapa, 'utf8')); } catch {}
+        const renombrar = (de, a) => {
+          if (de === a) return;
+          fs.renameSync(path.join(dir, de), path.join(dir, a));
+          if (Object.prototype.hasOwnProperty.call(mapa, de)) { mapa[a] = mapa[de]; delete mapa[de]; }
+        };
+        // destronar a la portada actual
+        for (const f of fs.readdirSync(dir)) {
+          if (/^00[_.]/.test(f) && f !== limpio) renombrar(f, f.replace(/^00[_.]/, ''));
+        }
+        if (!/^00_/.test(limpio)) renombrar(limpio, '00_' + limpio.replace(/^00[_.]/, ''));
+        fs.writeFileSync(rutaMapa, JSON.stringify(mapa, null, 2), 'utf8');
         return json(res, 200, { ok: true });
       }
 

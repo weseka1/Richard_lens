@@ -1,5 +1,25 @@
 [
   {
+    "fecha": "2026-07-21T16:13:45.416Z",
+    "tipo": "visita_producto",
+    "detalle": "aviador-espejado-3025"
+  },
+  {
+    "fecha": "2026-07-21T16:13:18.360Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T16:09:23.347Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T16:06:10.105Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
     "fecha": "2026-07-21T15:57:45.664Z",
     "tipo": "visita",
     "detalle": "home"

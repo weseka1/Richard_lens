@@ -21,6 +21,75 @@ const CAMPOS = p => [
 
 const sinTildes = s => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
+const ESTADOS_STOCK = ['STOCK', 'POCO STOCK', 'POR ENTRAR', 'CONSULTAR'];
+
+/* Editor de variantes estilo Tiendanube: una fila por combinación color+talle.
+ * Todo editable a mano — sin esto dependés de que el proveedor mande bien el xlsx. */
+function EditorVariantes({ producto, onCerrar, onGuardado }) {
+  const [filas, setFilas] = useState(() => (producto.variantes || []).map(v => ({ ...v })));
+  const [guardando, setGuardando] = useState(false);
+
+  const set = (i, campo, valor) => setFilas(f => f.map((x, j) => j === i ? { ...x, [campo]: valor } : x));
+  const agregar = () => setFilas(f => [...f, {
+    color: '', talle: '', stock: 'CONSULTAR',
+    sku: `${producto.codigo || producto.id}-${f.length + 1}`, codigo: producto.codigo || ''
+  }]);
+  const quitar = i => setFilas(f => f.filter((_, j) => j !== i));
+
+  async function guardar() {
+    const limpias = filas.filter(v => (v.color || '').trim());
+    const skus = limpias.map(v => v.sku);
+    if (new Set(skus).size !== skus.length) return alert('Hay SKUs repetidos. Cada variante necesita el suyo.');
+    setGuardando(true);
+    try {
+      await api('productos/' + producto.id, 'PUT', { ...producto, variantes: limpias });
+      invalidarProductos();
+      onGuardado();
+      onCerrar();
+    } catch (e) { alert('No se pudo guardar: ' + e.message); }
+    finally { setGuardando(false); }
+  }
+
+  return (
+    <div className="modal-fondo abierto" onClick={e => e.target === e.currentTarget && onCerrar()}>
+      <div className="modal-caja" style={{ maxWidth: 860 }}>
+        <h2>Variantes — {producto.marca} {producto.modelo}</h2>
+        <p className="ayuda">Cada fila es un color + talle con su stock. Lo que ponés acá es lo que el cliente elige en la ficha. El color tiene que escribirse igual que el que le asignás a las fotos.</p>
+        <div style={{ maxHeight: '52vh', overflowY: 'auto', margin: '12px 0' }}>
+          <table>
+            <thead>
+              <tr><th style={{ minWidth: 170 }}>Color</th><th>Talle</th><th>SKU</th><th>Stock</th><th></th></tr>
+            </thead>
+            <tbody>
+              {filas.map((v, i) => (
+                <tr key={i}>
+                  <td><input value={v.color || ''} placeholder="Negro/verde" onChange={e => set(i, 'color', e.target.value)} /></td>
+                  <td><input value={v.talle || ''} placeholder="Standard (50-22)" onChange={e => set(i, 'talle', e.target.value)} /></td>
+                  <td><input value={v.sku || ''} onChange={e => set(i, 'sku', e.target.value)} /></td>
+                  <td>
+                    <select value={v.stock || 'CONSULTAR'} onChange={e => set(i, 'stock', e.target.value)}>
+                      {ESTADOS_STOCK.map(s => <option key={s} value={s}>{s}</option>)}
+                    </select>
+                  </td>
+                  <td><button className="btn-mini" onClick={() => quitar(i)}>×</button></td>
+                </tr>
+              ))}
+              {!filas.length && <tr><td colSpan="5"><span className="ayuda">Sin variantes. Agregá la primera.</span></td></tr>}
+            </tbody>
+          </table>
+        </div>
+        <div className="modal-botones" style={{ justifyContent: 'space-between' }}>
+          <button className="btn-sec" onClick={agregar}>+ Agregar variante</button>
+          <div style={{ display: 'flex', gap: 10 }}>
+            <button className="btn-sec" onClick={onCerrar}>Cancelar</button>
+            <button className="btn-oro" onClick={guardar} disabled={guardando}>{guardando ? 'Guardando…' : 'Guardar variantes'}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Productos() {
   const [lista, setLista] = useState([]);
   const [modal, setModal] = useState(null); // null | {titulo, campos, onGuardar}
@@ -49,6 +118,7 @@ export default function Productos() {
   const [fotosDe, setFotosDe] = useState(null);   // producto en edición de fotos
   const [fotos, setFotos] = useState([]);
   const [mapaColores, setMapaColores] = useState({});
+  const [variantesDe, setVariantesDe] = useState(null);
   async function abrirFotos(p) {
     setFotosDe(p);
     setFotos(await fetch('/api/fotos/' + p.foto_codigo).then(r => r.json()).catch(() => []));
@@ -74,6 +144,13 @@ export default function Productos() {
   }
   async function borrarFoto(src) {
     await fetch('/api/fotos-borrar/' + fotosDe.foto_codigo, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ archivo: src.split('/').pop() })
+    });
+    abrirFotos(fotosDe);
+  }
+  async function hacerPortada(src) {
+    await fetch('/api/fotos-portada/' + fotosDe.foto_codigo, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ archivo: src.split('/').pop() })
     });
@@ -157,6 +234,9 @@ export default function Productos() {
                 <td><span className={'pill ' + (p.estado === 'disponible' ? 'pill-ok' : p.estado === 'proximamente' ? 'pill-warn' : 'pill-gris')}>{p.estado}</span></td>
                 <td style={{ whiteSpace: 'nowrap' }}>
                   <button className="btn-mini" onClick={() => abrirFotos(p)}>Fotos</button>{' '}
+                  <button className="btn-mini" onClick={() => setVariantesDe(p)}>
+                    Variantes{p.variantes?.length ? ` (${new Set(p.variantes.map(v => v.color)).size})` : ''}
+                  </button>{' '}
                   <button className="btn-mini" onClick={() => editar(p)}>Editar</button>{' '}
                   <button className="btn-mini" onClick={() => borrar(p)}>×</button>
                 </td>
@@ -173,18 +253,45 @@ export default function Productos() {
 
       {modal && <Modal {...modal} onCerrar={() => setModal(null)} />}
 
+      {variantesDe && (
+        <EditorVariantes
+          producto={variantesDe}
+          onCerrar={() => setVariantesDe(null)}
+          onGuardado={cargar}
+        />
+      )}
+
       {fotosDe && (
         <div className="modal-fondo abierto" onClick={e => e.target === e.currentTarget && setFotosDe(null)}>
           <div className="modal-caja">
             <h2>Fotos — {fotosDe.marca} {fotosDe.modelo}</h2>
-            <p className="ayuda">Asignale el color a cada foto: cuando el cliente elige ese color en la ficha, ve ESA foto. Las mismas fotos alimentan tienda, probador y MercadoLibre.</p>
+            <p className="ayuda">Asignale el color a cada foto: cuando el cliente elige ese color en la ficha, ve ESA foto. La portada ★ es la que sale en el catálogo — elegí siempre una donde la gafa apunte a la izquierda.</p>
+            {(() => {
+              const coloresProducto = [...new Set((fotosDe.variantes || []).map(v => v.color))].filter(Boolean);
+              const conFoto = new Set(Object.values(mapaColores).filter(Boolean));
+              const faltan = coloresProducto.filter(c => !conFoto.has(c));
+              if (!coloresProducto.length) return null;
+              return (
+                <p className={'ayuda'} style={{ margin: '10px 0 0', color: faltan.length ? '#B4531F' : '#1D7A3E' }}>
+                  {coloresProducto.length - faltan.length} de {coloresProducto.length} colores con foto propia
+                  {faltan.length > 0 && <> · sin foto: {faltan.join(' · ')}</>}
+                </p>
+              );
+            })()}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 12, margin: '14px 0 18px' }}>
               {fotos.map(src => {
                 const archivo = src.split('/').pop();
+                const esPortada = /^00[_.]/.test(archivo);
                 const coloresProducto = [...new Set((fotosDe.variantes || []).map(v => v.color))];
                 return (
                   <div key={src} style={{ position: 'relative' }}>
-                    <img src={src} alt="" style={{ width: '100%', aspectRatio: '1', objectFit: 'contain', background: '#fff', borderRadius: 10, border: mapaColores[archivo] ? '2px solid #1D7A3E' : '1px solid rgba(0,0,0,.08)' }} />
+                    <img src={src} alt="" style={{ width: '100%', aspectRatio: '1', objectFit: 'contain', background: '#fff', borderRadius: 10, border: esPortada ? '2px solid #1D1D1F' : mapaColores[archivo] ? '2px solid #1D7A3E' : '1px solid rgba(0,0,0,.08)' }} />
+                    <button
+                      className="btn-mini"
+                      title={esPortada ? 'Es la portada' : 'Usar como portada'}
+                      style={{ position: 'absolute', top: 4, left: 4, background: esPortada ? '#1D1D1F' : undefined, color: esPortada ? '#fff' : undefined }}
+                      onClick={() => hacerPortada(src)}
+                    >★</button>
                     <button className="btn-mini" style={{ position: 'absolute', top: 4, right: 4 }} onClick={() => borrarFoto(src)}>×</button>
                     <select
                       style={{ marginTop: 6, fontSize: '.72rem', padding: '5px 8px' }}
