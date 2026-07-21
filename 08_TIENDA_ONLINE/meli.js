@@ -19,7 +19,19 @@ const baseUrl = () => {
 const REDIRECT_PATH = '/api/meli/callback';
 const redirect = () => (baseUrl() || 'http://localhost:5250') + REDIRECT_PATH;
 
-const leer = (a, fb) => { try { return JSON.parse(fs.readFileSync(DATA(a), 'utf8')); } catch { return fb; } };
+const leerArchivo = (a, fb) => { try { return JSON.parse(fs.readFileSync(DATA(a), 'utf8')); } catch { return fb; } };
+/* En la nube meli.json no viaja (está gitignoreado): las credenciales entran
+ * por variables de entorno y los tokens se guardan en el disco del servidor. */
+const leer = (a, fb) => {
+  const d = leerArchivo(a, fb);
+  if (a !== 'meli.json') return d;
+  const c = d && typeof d === 'object' ? d : {};
+  return {
+    ...c,
+    app_id: c.app_id || process.env.MELI_APP_ID || '',
+    secret: c.secret || process.env.MELI_SECRET || ''
+  };
+};
 const guardar = (a, d) => fs.writeFileSync(DATA(a), JSON.stringify(d, null, 2), 'utf8');
 const json = (res, code, data) => {
   res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8' });
