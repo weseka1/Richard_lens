@@ -1,5 +1,50 @@
 [
   {
+    "fecha": "2026-07-21T16:55:56.265Z",
+    "tipo": "visita_producto",
+    "detalle": "spr15y"
+  },
+  {
+    "fecha": "2026-07-21T16:55:48.412Z",
+    "tipo": "visita_producto",
+    "detalle": "spr07y"
+  },
+  {
+    "fecha": "2026-07-21T16:55:45.934Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T16:55:44.780Z",
+    "tipo": "visita_producto",
+    "detalle": "spr17w"
+  },
+  {
+    "fecha": "2026-07-21T16:55:43.869Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T16:55:39.742Z",
+    "tipo": "visita_producto",
+    "detalle": "spr17w"
+  },
+  {
+    "fecha": "2026-07-21T16:55:32.787Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T16:55:29.604Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T16:55:27.113Z",
+    "tipo": "visita_producto",
+    "detalle": "g020"
+  },
+  {
     "fecha": "2026-07-21T16:50:49.447Z",
     "tipo": "visita_producto",
     "detalle": "g020"
