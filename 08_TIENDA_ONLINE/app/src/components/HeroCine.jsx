@@ -74,7 +74,7 @@ export default function HeroCine({ drop, cfg }) {
           <div className="hero-cine">
             <video src="/img/hero.mp4" autoPlay muted loop playsInline onError={() => setHayVideo(false)} />
             <div className="hero-cine-velo" />
-            <div className="hero-cine-contenido">{copy(true)}</div>
+            <div className="hero-cine-contenido">{copy(false)}</div>
           </div>
         </div>
       </div>

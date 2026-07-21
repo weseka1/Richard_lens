@@ -99,8 +99,20 @@ export default function TiendaLayout() {
                   <Link to="/catalogo?marca=Dior">Dior</Link>
                   <Link to="/catalogo?marca=Gucci">Gucci</Link>
                   <Link to="/catalogo?marca=Prada">Prada</Link>
-                  <Link to="/catalogo?marca=Cartier">Cartier</Link>
+                  <Link to="/catalogo?marca=Fendi">Fendi</Link>
+                  <Link to="/catalogo?marca=Off-White">Off-White</Link>
+                  <Link to="/catalogo?marca=Saint%20Laurent">Saint Laurent</Link>
                   <Link to="/catalogo?canal=WEB">Todo el lujo</Link>
+                </div>
+                <div className="mega-col">
+                  <b>Más lujo</b>
+                  <Link to="/catalogo?marca=Versace">Versace</Link>
+                  <Link to="/catalogo?marca=Balenciaga">Balenciaga</Link>
+                  <Link to="/catalogo?marca=Celine">Celine</Link>
+                  <Link to="/catalogo?marca=Tom%20Ford">Tom Ford</Link>
+                  <Link to="/catalogo?marca=Cartier">Cartier</Link>
+                  <Link to="/catalogo?marca=Dolce%20%26%20Gabbana">Dolce &amp; Gabbana</Link>
+                  <Link to="/catalogo?marca=Miu%20Miu">Miu Miu</Link>
                 </div>
                 <div className="mega-col">
                   <b>Colecciones</b>

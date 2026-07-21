@@ -1,5 +1,35 @@
 [
   {
+    "fecha": "2026-07-21T03:19:36.189Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T03:19:26.360Z",
+    "tipo": "visita",
+    "detalle": "catalogo:vendidos"
+  },
+  {
+    "fecha": "2026-07-21T03:15:38.959Z",
+    "tipo": "visita",
+    "detalle": "catalogo:vendidos"
+  },
+  {
+    "fecha": "2026-07-21T03:15:31.431Z",
+    "tipo": "visita_producto",
+    "detalle": "dixtrem-mu"
+  },
+  {
+    "fecha": "2026-07-21T03:15:21.882Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T03:11:04.449Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-21T03:05:32.656Z",
     "tipo": "visita",
     "detalle": "home"

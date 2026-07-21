@@ -1,6 +1,6 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { track, api } from '../lib/api.js';
+import { track, api, plata, getFotos } from '../lib/api.js';
 import { useProductos, useReveals } from '../lib/hooks.js';
 import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
 import CardProducto from '../components/CardProducto.jsx';
@@ -81,8 +81,22 @@ export default function Home() {
   useReveals(productos);
   useEffect(() => { track('visita', 'home'); }, []);
 
-  const vendidos = (productos || []).filter(p => p.canal !== 'WEB' && p.estado === 'disponible' && p.destacado).slice(0, 4);
-  const vault = (productos || []).filter(p => p.canal === 'WEB' && p.estado !== 'proximamente').slice(0, 8);
+  /* dedupe por familia: Erika 4171 y 4171V son casi la misma gafa — en vidriera va UNA sola */
+  const familia = p => (p.marca + '|' + (String(p.modelo).match(/\d{3,}/)?.[0] || p.modelo)).toLowerCase();
+  const unicos = (lista, n) => {
+    const vistos = new Set(); const out = [];
+    for (const p of lista) {
+      const k = familia(p);
+      if (vistos.has(k)) continue;
+      vistos.add(k); out.push(p);
+      if (out.length === n) break;
+    }
+    return out;
+  };
+  const disponibles = (productos || []).filter(p => p.canal !== 'WEB' && p.estado === 'disponible');
+  const vendidos = unicos(disponibles.filter(p => p.destacado), 8);
+  const vault = unicos((productos || []).filter(p => p.canal === 'WEB' && p.estado !== 'proximamente'), 8);
+  const miniIg = unicos(disponibles.filter(p => !vendidos.includes(p)), 4);
   const drop = vendidos[0];
 
   return (
@@ -99,19 +113,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* CATEGORÍAS (la grilla Nike) */}
+      {/* MÁS VENDIDOS — primero: el inicio es pura venta */}
       <section className="seccion" style={{ paddingBottom: 40 }}>
-        <div className="wrap">
-          <p className="sec-kicker reveal">Comprá por categoría</p>
-          <h2 className="sec-titulo reveal">¿Qué estás buscando?</h2>
-          <div className="grid-categorias">
-            {CATEGORIAS.map((c, i) => <TileCategoria key={c.titulo} c={c} i={i} />)}
-          </div>
-        </div>
-      </section>
-
-      {/* MÁS VENDIDOS */}
-      <section className="seccion">
         <div className="wrap">
           <div className="sec-fila reveal">
             <div>
@@ -128,6 +131,17 @@ export default function Home() {
           </div>
           <div className="grid-productos">
             {vendidos.map((p, i) => <CardProducto key={p.id} p={p} i={i} cfg={cfg} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* CATEGORÍAS (la grilla Nike) */}
+      <section className="seccion" style={{ paddingTop: 40 }}>
+        <div className="wrap">
+          <p className="sec-kicker reveal">Comprá por categoría</p>
+          <h2 className="sec-titulo reveal">¿Qué estás buscando?</h2>
+          <div className="grid-categorias">
+            {CATEGORIAS.map((c, i) => <TileCategoria key={c.titulo} c={c} i={i} />)}
           </div>
         </div>
       </section>
@@ -205,6 +219,9 @@ export default function Home() {
             <h2 className="sec-titulo">La casa, en movimiento.</h2>
             <p className="sec-bajada" style={{ marginBottom: 26 }}>Drops, llegadas y el detrás de escena, todos los días en Instagram.</p>
             <a className="btn-brush" href={`https://instagram.com/${cfg?.instagram || 'richardlens.ar'}`} target="_blank" rel="noopener noreferrer">Seguir en Instagram</a>
+            <div className="ig-mini-grid">
+              {miniIg.map(p => <MiniProducto key={p.id} p={p} />)}
+            </div>
           </div>
           <a
             className="ig-telefono reveal"
@@ -257,6 +274,19 @@ export default function Home() {
         </div>
       </section>
     </main>
+  );
+}
+
+/* mini vidriera para la sección IG — nada de aire muerto, siempre producto a la vista */
+function MiniProducto({ p }) {
+  const [foto, setFoto] = useState(null);
+  useEffect(() => { getFotos(p.foto_codigo).then(fs => setFoto(fs[0] || null)); }, [p.foto_codigo]);
+  return (
+    <Link to={`/producto/${p.id}`} className="ig-mini">
+      {foto && <img src={foto} alt={`${p.marca} ${p.modelo}`} loading="lazy" />}
+      <span>{p.marca} {p.modelo}</span>
+      <b>{p.precio_web > 0 ? plata(p.precio_web) : 'Consultar'}</b>
+    </Link>
   );
 }
 
