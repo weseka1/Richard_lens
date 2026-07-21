@@ -296,6 +296,57 @@ async function handler(req, res, urlObj) {
       catch (e) { return json(res, 500, { error: e.message }); }
     }
 
+    /* Las publicaciones que YA existen en la cuenta, con sus métricas.
+     * Una pausada que ya vendió vale oro: conserva ranking, preguntas y
+     * reputación. Reactivarla vende mucho antes que publicar de cero. */
+    if (p === '/api/meli/mis-items') {
+      const me = await api('/users/me');
+      const ids = [];
+      let offset = 0;
+      while (offset < 400) {
+        const r = await api(`/users/${me.id}/items/search?limit=100&offset=${offset}&status=all`);
+        ids.push(...(r.results || []));
+        if (!r.results?.length || ids.length >= (r.paging?.total || 0)) break;
+        offset += 100;
+      }
+      if (!ids.length) return json(res, 200, { total: 0, items: [] });
+
+      const items = [];
+      for (let i = 0; i < ids.length; i += 20) {
+        const lote = await api(`/items?ids=${ids.slice(i, i + 20).join(',')}`);
+        for (const x of lote) {
+          const b = x.body || {};
+          items.push({
+            id: b.id, titulo: b.title, precio: b.price, estado: b.status,
+            subestado: (b.sub_status || []).join(','),
+            vendidos: b.sold_quantity || 0, stock: b.available_quantity || 0,
+            visitas: null, categoria: b.category_id, listing: b.listing_type_id,
+            fotos: (b.pictures || []).length, permalink: b.permalink,
+            salud: b.health, creado: b.date_created
+          });
+        }
+      }
+      // visitas de los últimos 30 días, en un solo pedido
+      try {
+        const v = await api(`/items/visits?ids=${items.map(i => i.id).join(',')}&date_from=${new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10)}&date_to=${new Date().toISOString().slice(0, 10)}`);
+        for (const it of items) if (v[it.id] != null) it.visitas = v[it.id];
+      } catch {}
+
+      items.sort((a, b) => (b.vendidos - a.vendidos) || ((b.visitas || 0) - (a.visitas || 0)));
+      return json(res, 200, { total: items.length, items });
+    }
+
+    /* Reactiva una publicación pausada y le corrige precio y stock. */
+    if (p === '/api/meli/reactivar' && req.method === 'POST') {
+      const { id, precio, stock } = await body(req);
+      if (!id) return json(res, 400, { error: 'falta id' });
+      const cambios = { status: 'active' };
+      if (precio) cambios.price = Number(precio);
+      if (stock != null) cambios.available_quantity = Number(stock);
+      const r = await api(`/items/${id}`, 'PUT', cambios);
+      return json(res, 200, { ok: true, id: r.id, estado: r.status, precio: r.price, permalink: r.permalink });
+    }
+
     if (p === '/api/meli/conectar') {
       if (!cfg.app_id) return json(res, 400, { error: 'Primero cargá App ID y Secret' });
       // el devcenter nuevo de MELI exige los scopes explícitos en la URL:
