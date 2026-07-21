@@ -20,7 +20,9 @@ const FOTOS_DIR = path.join(ROOT, '..', '07_CATALOGO', 'imagenes');
 const STOCK_CSV = path.join(ROOT, '..', '07_CATALOGO', 'STOCK.csv');
 
 const PORT = process.env.PORT || 5250;
-const HOST = process.env.HOST || '127.0.0.1'; // subir a 0.0.0.0 solo si querés verla desde el cel en la misma wifi
+// en la nube (Render inyecta PORT) hay que escuchar en todas las interfaces;
+// en local queda cerrado al equipo salvo que pidas lo contrario
+const HOST = process.env.HOST || (process.env.PORT ? '0.0.0.0' : '127.0.0.1');
 
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',

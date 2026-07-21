@@ -8,7 +8,12 @@ const fs = require('fs');
 const path = require('path');
 const DATA = p => path.join(__dirname, 'data', p);
 
+/* En la nube el archivo no existe (está gitignoreado a propósito): ahí las
+ * credenciales llegan por variables de entorno. En local sigue el archivo. */
 function cfg() {
+  if (process.env.SUPABASE_URL && process.env.SUPABASE_KEY) {
+    return { url: process.env.SUPABASE_URL, service: process.env.SUPABASE_KEY, clave: process.env.SUPABASE_CLAVE || '' };
+  }
   try { return JSON.parse(fs.readFileSync(DATA('supabase.json'), 'utf8')); } catch { return null; }
 }
 const activo = () => { const c = cfg(); return !!(c && c.url && c.service); };

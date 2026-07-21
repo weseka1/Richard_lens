@@ -1,0 +1,17 @@
+# Deploy de la tienda en Render (plan free).
+# El nombre del servicio define el dominio: richardlens.onrender.com
+services:
+  - type: web
+    name: richardlens
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: 08_TIENDA_ONLINE
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/config
+    envVars:
+      - key: PUBLIC_URL
+        value: https://richardlens.onrender.com
+      - key: NODE_VERSION
+        value: "20"

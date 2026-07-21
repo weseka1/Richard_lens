@@ -9,7 +9,15 @@ const path = require('path');
 const DATA = p => path.join(__dirname, 'data', p);
 const FOTOS_DIR = path.join(__dirname, '..', '07_CATALOGO', 'imagenes');
 const API = 'https://api.mercadolibre.com';
-const REDIRECT = 'http://localhost:5250/api/meli/callback';
+/* MELI rechaza localhost: el callback tiene que ser un dominio público con HTTPS.
+ * Sale de PUBLIC_URL (Render lo inyecta) o de dominio en config.json. */
+const baseUrl = () => {
+  if (process.env.PUBLIC_URL) return process.env.PUBLIC_URL.replace(/\/$/, '');
+  try { return (JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'config.json'), 'utf8')).dominio || '').replace(/\/$/, ''); }
+  catch { return ''; }
+};
+const REDIRECT_PATH = '/api/meli/callback';
+const redirect = () => (baseUrl() || 'http://localhost:5250') + REDIRECT_PATH;
 
 const leer = (a, fb) => { try { return JSON.parse(fs.readFileSync(DATA(a), 'utf8')); } catch { return fb; } };
 const guardar = (a, d) => fs.writeFileSync(DATA(a), JSON.stringify(d, null, 2), 'utf8');
@@ -146,7 +154,7 @@ async function handler(req, res, urlObj) {
 
     if (p === '/api/meli/conectar') {
       if (!cfg.app_id) return json(res, 400, { error: 'Primero cargá App ID y Secret' });
-      const u = `https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=${cfg.app_id}&redirect_uri=${encodeURIComponent(REDIRECT)}`;
+      const u = `https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=${cfg.app_id}&redirect_uri=${encodeURIComponent(redirect())}`;
       res.writeHead(302, { Location: u });
       return res.end();
     }
@@ -158,7 +166,7 @@ async function handler(req, res, urlObj) {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
           grant_type: 'authorization_code', client_id: cfg.app_id,
-          client_secret: cfg.secret, code, redirect_uri: REDIRECT
+          client_secret: cfg.secret, code, redirect_uri: redirect()
         })
       });
       const t = await r.json();
