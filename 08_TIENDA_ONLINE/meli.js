@@ -76,12 +76,39 @@ async function api(ruta, metodo = 'GET', datos) {
 }
 
 // ---------- publicar ----------
-async function subirFotos(fotoCodigo) {
-  const dir = path.join(FOTOS_DIR, fotoCodigo);
+const STOCK_VIVO = v => v.stock === 'STOCK' || v.stock === 'POCO STOCK';
+const TOPE_STOCK = 5;   // conservador a propósito: una cancelación por falta de
+                        // stock te funde la reputación, y somos dropshipping
+
+/* Devuelve las fotos usables ordenadas: la portada (00_) primero.
+ * Descarta las que la auditoría marcó como ajenas al modelo. */
+function fotosDe(fotoCodigo) {
+  const original = path.join(FOTOS_DIR, fotoCodigo);
+  // preparar_fotos_meli.mjs deja acá las versiones 1200x1200 sobre blanco,
+  // que son las que habilitan el zoom de MELI. Si no existen, van las crudas.
+  const listas = path.join(original, 'meli');
+  const dir = fs.existsSync(listas) ? listas : original;
   let files = [];
-  try { files = fs.readdirSync(dir).filter(f => /\.(jpe?g|png|webp)$/i.test(f)).sort().slice(0, 4); } catch {}
-  const ids = [];
+  try {
+    files = fs.readdirSync(dir)
+      .filter(f => /\.(jpe?g|png|webp)$/i.test(f) && !f.startsWith('_'))
+      .sort();
+  } catch {}
+  let mapa = {};
+  try { mapa = JSON.parse(fs.readFileSync(path.join(original, 'fotos.json'), 'utf8')); } catch {}
+  // el mapa color→foto usa los nombres originales; acá los archivos pueden
+  // haber pasado de .png a .jpg, así que comparamos por nombre sin extensión
+  const sinExt = n => n.replace(/\.[^.]+$/, '');
+  const mapaNorm = {};
+  for (const [k, v] of Object.entries(mapa)) mapaNorm[sinExt(k)] = v;
+  return { dir, files: files.slice(0, 12), mapa: mapaNorm, sinExt };
+}
+
+/* Sube cada archivo y devuelve archivo → picture_id, para poder asignarle
+ * a cada variante de color SUS fotos (MELI lo permite: defines_picture). */
+async function subirFotos(dir, files) {
   const t = await token();
+  const ids = {};
   for (const f of files) {
     const buf = fs.readFileSync(path.join(dir, f));
     const fd = new FormData();
@@ -89,61 +116,114 @@ async function subirFotos(fotoCodigo) {
     const r = await fetch(`${API}/pictures/items/upload`, {
       method: 'POST', headers: { 'Authorization': `Bearer ${t}` }, body: fd
     });
-    if (r.ok) { const j = await r.json(); ids.push({ id: j.id }); }
+    if (r.ok) { const j = await r.json(); ids[f] = j.id; }
   }
   return ids;
 }
 
-async function publicar(producto, cfgTienda) {
+const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
+
+function armarTitulo(producto, sufijo = '') {
+  const marca = producto.marca.split(' · ')[0];
+  const base = `Anteojos De Sol ${marca} ${producto.modelo}`;
+  const full = sufijo ? `${base} ${sufijo}` : `${base} Originales`;
+  return full.length <= 60 ? full : base.slice(0, 60);
+}
+
+/**
+ * Publica en MELI con VARIANTES reales de color: el comprador elige el color
+ * dentro de la publicación en vez de preguntarlo. Es lo que pide la política
+ * (una publicación = un producto) y además convierte mucho mejor.
+ *
+ * opciones: { precio, titulo, stockMax, listing }
+ */
+async function publicar(producto, cfgTienda, opciones = {}) {
   if (producto.canal === 'WEB') throw new Error('Producto solo-web (lujo): jamás va a MELI');
-  if (!producto.precio_ml) throw new Error('Sin precio MELI cargado');
+  if (!producto.fotos_ok) throw new Error('Fotos sin revisar — marcalas en el panel antes de publicar');
 
-  const pictures = await subirFotos(producto.foto_codigo);
-  if (!pictures.length) throw new Error('Sin fotos locales para subir');
+  const precio = Number(opciones.precio || producto.precio_ml);
+  if (!precio) throw new Error('Sin precio MELI cargado');
 
-  const q = `${producto.marca} ${producto.modelo} anteojos de sol`;
-  const disc = await api(`/sites/MLA/domain_discovery/search?q=${encodeURIComponent(q)}&limit=1`);
-  const category_id = disc[0]?.category_id;
-  if (!category_id) throw new Error('No se pudo predecir la categoría');
+  const { dir, files, mapa, sinExt } = fotosDe(producto.foto_codigo);
+  if (!files.length) throw new Error('Sin fotos locales para subir');
 
-  const titulo = `Anteojos ${producto.marca.replace(' · ', ' ')} ${producto.modelo} Originales`.slice(0, 60);
-  const stockReal = Math.max(1, producto.stock || 1);
+  const disc = await api(`/sites/MLA/domain_discovery/search?q=${encodeURIComponent(`${producto.marca} ${producto.modelo} anteojos de sol`)}&limit=1`);
+  const category_id = disc[0]?.category_id || 'MLA417128';   // Anteojos de Sol
 
-  const item = await api('/items', 'POST', {
-    title: titulo,
+  const subidas = await subirFotos(dir, files);
+  const pictures = files.filter(f => subidas[f]).map(f => ({ id: subidas[f] }));
+  if (!pictures.length) throw new Error('MELI rechazó todas las fotos');
+
+  const base = {
+    title: opciones.titulo || armarTitulo(producto),
     category_id,
-    price: producto.precio_ml,
     currency_id: 'ARS',
-    available_quantity: Math.min(stockReal, 5),
     buying_mode: 'buy_it_now',
-    listing_type_id: 'gold_special',
+    listing_type_id: opciones.listing || 'gold_special',
     condition: 'new',
     pictures,
     attributes: [
       { id: 'BRAND', value_name: producto.marca.split(' · ')[0] },
       { id: 'MODEL', value_name: producto.modelo },
       { id: 'GENDER', value_name: 'Sin género' }
-    ]
-  });
+    ],
+    sale_terms: [
+      { id: 'WARRANTY_TYPE', value_name: 'Garantía del vendedor' },
+      { id: 'WARRANTY_TIME', value_name: '30 días' }
+    ],
+    shipping: { mode: 'me2', local_pick_up: false, free_shipping: true }
+  };
 
-  const variantesTxt = (producto.variantes || []).filter(v => v.stock === 'STOCK' || v.stock === 'POCO STOCK')
-    .map(v => `• ${v.color} (${v.codigo}) — talle ${v.talle}`).join('\n');
+  /* una variante por color con stock; cada una con sus fotos si están mapeadas */
+  const colores = [...new Set((producto.variantes || []).filter(STOCK_VIVO).map(v => v.color))].filter(Boolean);
+  const tope = Number(opciones.stockMax || TOPE_STOCK);
+
+  if (colores.length > 1) {
+    base.variations = colores.map(color => {
+      const suyas = files.filter(f => norm(mapa[sinExt(f)]) === norm(color)).map(f => subidas[f]).filter(Boolean);
+      const v = (producto.variantes || []).find(x => x.color === color) || {};
+      return {
+        attribute_combinations: [{ id: 'COLOR', value_name: color }],
+        available_quantity: Math.min(v.stock === 'POCO STOCK' ? 2 : tope, tope),
+        price: precio,
+        picture_ids: suyas.length ? suyas : [pictures[0].id],
+        attributes: v.sku ? [{ id: 'SELLER_SKU', value_name: String(v.sku) }] : []
+      };
+    });
+  } else {
+    base.price = precio;
+    base.available_quantity = Math.min(Math.max(1, producto.stock || 1), tope);
+  }
+
+  const item = await api('/items', 'POST', base);
+
   await api(`/items/${item.id}/description`, 'POST', {
     plain_text:
-`${producto.marca} ${producto.modelo} — 100% ORIGINAL con garantía.
+`${producto.marca.split(' · ')[0]} ${producto.modelo} — 100% ORIGINAL
 
-COLORES DISPONIBLES (consultanos por el tuyo):
-${variantesTxt || producto.color}
+QUÉ RECIBÍS
+Anteojos originales con estuche rígido, paño de microfibra y papelería
+de la marca. Grabados de fábrica en cristal y varilla, verificables.
 
-LO QUE RECIBÍS: anteojos originales + estuche + paño + papelería de la marca. Grabados verificables.
-GARANTÍA DE AUTENTICIDAD: si no es original, te devolvemos el doble.
-ENVÍO: a todo el país, asegurado, despacho en 24-48 h.
-CUOTAS: ${cfgTienda.cuotas || 6} sin recargo con tarjeta.
+PROTECCIÓN
+Cristales con filtro UV400.
 
-RICHARD LENS — Se te nota lo rich.`
+GARANTÍA
+30 días de garantía del vendedor. Si el producto no es original,
+te devolvemos el doble de lo que pagaste.
+
+CAMBIOS
+Si no te queda cómodo, lo cambiás dentro de los 30 días.
+
+ENVÍO
+A todo el país con seguimiento. Te pasamos el código apenas despachamos.
+
+${colores.length > 1 ? 'Elegí tu color arriba, en las opciones de la publicación.' : ''}
+
+RICHARD LENS & CO. — Eyewear House`.replace(/\n{3,}/g, '\n\n')
   });
 
-  return { id: item.id, permalink: item.permalink };
+  return { id: item.id, permalink: item.permalink, variantes: colores.length };
 }
 
 // ---------- handler ----------
