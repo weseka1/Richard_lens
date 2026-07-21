@@ -619,6 +619,19 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
 .hero-cine-contenido h1 .l2 { font-size: clamp(3rem, 6.2vw, 5.4rem) !important; text-shadow: 0 2px 28px rgba(245, 245, 247, .85); }
 .hero-cine-contenido .hero-kicker { text-shadow: 0 1px 12px rgba(245, 245, 247, .9); }
 .hero-cine-contenido .hero-drop-linea { text-shadow: 0 1px 10px rgba(245, 245, 247, .9); }
+/* botón del probador: pill glass con emoji, segundo CTA estrella del hero */
+.btn-probador {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 16px;
+  padding: 12px 22px; border-radius: 999px;
+  background: rgba(255, 255, 255, .72); border: 1px solid var(--linea-suave);
+  backdrop-filter: blur(14px) saturate(1.5); -webkit-backdrop-filter: blur(14px) saturate(1.5);
+  font-size: .84rem; font-weight: 600; color: var(--hueso); letter-spacing: 0;
+  box-shadow: 0 10px 30px -18px rgba(0, 0, 0, .25);
+  transition: transform .25s, box-shadow .25s, background .25s;
+}
+.btn-probador:hover { transform: translateY(-2px); background: #fff; box-shadow: 0 16px 38px -18px rgba(0, 0, 0, .3); }
+.btn-probador-emoji { font-size: 1.15rem; line-height: 1; }
+.btn-probador em { font-style: normal; color: #0066CC; font-weight: 600; }
 .hero-cine .glass-widget { left: auto; right: 4%; bottom: 8%; z-index: 2; }
 .hero-foto-editorial {
   width: min(112%, 560px); max-width: none; height: auto; max-height: 640px; object-fit: cover;
