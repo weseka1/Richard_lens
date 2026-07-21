@@ -1,5 +1,80 @@
 [
   {
+    "fecha": "2026-07-21T03:05:32.656Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T03:05:23.368Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T03:02:39.776Z",
+    "tipo": "carrito_agregar",
+    "detalle": "Ray-Ban Round Metal Classic 3447"
+  },
+  {
+    "fecha": "2026-07-21T02:59:35.291Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T02:59:04.591Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T02:58:46.989Z",
+    "tipo": "visita_producto",
+    "detalle": "diclub-m1u"
+  },
+  {
+    "fecha": "2026-07-21T02:58:33.974Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-21T02:58:30.247Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-21T02:58:08.252Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T02:57:57.081Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T02:57:54.467Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T02:57:50.922Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T02:57:15.550Z",
+    "tipo": "visita_producto",
+    "detalle": "scuderia-ferrari-4302m"
+  },
+  {
+    "fecha": "2026-07-21T02:57:11.068Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T02:53:57.319Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-21T02:38:56.411Z",
     "tipo": "visita",
     "detalle": "home"
