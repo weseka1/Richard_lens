@@ -1,5 +1,30 @@
 [
   {
+    "fecha": "2026-07-21T16:50:49.447Z",
+    "tipo": "visita_producto",
+    "detalle": "g020"
+  },
+  {
+    "fecha": "2026-07-21T16:50:46.894Z",
+    "tipo": "visita_producto",
+    "detalle": "rectangular-frame"
+  },
+  {
+    "fecha": "2026-07-21T16:50:45.439Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T16:50:15.965Z",
+    "tipo": "visita_producto",
+    "detalle": "erika-4171"
+  },
+  {
+    "fecha": "2026-07-21T16:50:12.294Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-21T16:13:45.416Z",
     "tipo": "visita_producto",
     "detalle": "aviador-espejado-3025"

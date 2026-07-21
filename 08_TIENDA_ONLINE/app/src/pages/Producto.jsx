@@ -108,7 +108,7 @@ export default function Producto() {
             )}
           </div>
           {v?.color && variosColores && !fotosDeColor.length && fotos.length > 0 && (
-            <p className="galeria-aviso">📷 Estas fotos son de la familia del modelo, no todas del color "{v.color}". Las fotos exactas te las pasamos por WhatsApp antes de que pagues.</p>
+            <p className="galeria-aviso">📷 Fotos oficiales del modelo. La galería muestra la línea completa, no solo el color "{v.color}" — escribinos y te confirmamos el detalle exacto de esa variante antes de cerrar.</p>
           )}
           {zoom && galeria.length > 0 && (
             <div className="lightbox" onClick={() => setZoom(false)}>

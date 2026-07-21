@@ -96,6 +96,7 @@ export default function Productos() {
   const [busca, setBusca] = useState('');
   const [fEstado, setFEstado] = useState('');
   const [fCanal, setFCanal] = useState('');
+  const [fFotos, setFFotos] = useState('');
 
   const cargar = () => api('admin/productos').then(setLista).catch(() => {});
   useEffect(() => { cargar(); }, []);
@@ -104,13 +105,14 @@ export default function Productos() {
     const txt = sinTildes(`${p.marca} ${p.modelo} ${p.codigo} ${p.id}`);
     return (!busca || sinTildes(busca).split(/\s+/).every(w => txt.includes(w))) &&
       (!fEstado || p.estado === fEstado) &&
-      (!fCanal || p.canal === fCanal);
+      (!fCanal || p.canal === fCanal) &&
+      (!fFotos || (fFotos === 'ok' ? !!p.fotos_ok : !p.fotos_ok));
   });
 
   /* paginado: 25 por página, vuelve a la 1 al cambiar filtros */
   const POR_PAGINA = 25;
   const [pag, setPag] = useState(0);
-  useEffect(() => { setPag(0); }, [busca, fEstado, fCanal]);
+  useEffect(() => { setPag(0); }, [busca, fEstado, fCanal, fFotos]);
   const totalPags = Math.max(1, Math.ceil(filtrada.length / POR_PAGINA));
   const visibles = filtrada.slice(pag * POR_PAGINA, (pag + 1) * POR_PAGINA);
 
@@ -215,6 +217,11 @@ export default function Productos() {
           <option value="ML+WEB">MELI + Web</option>
           <option value="WEB">Solo web (LUX)</option>
         </select>
+        <select style={{ maxWidth: 180 }} value={fFotos} onChange={e => setFFotos(e.target.value)}>
+          <option value="">Fotos: todas</option>
+          <option value="no">Sin revisar</option>
+          <option value="ok">Ya revisadas</option>
+        </select>
         <span className="ayuda" style={{ margin: 0 }}>{filtrada.length} de {lista.length}</span>
       </div>
       <div className="tarjeta">
@@ -233,7 +240,9 @@ export default function Productos() {
                 <td>{p.canal}</td>
                 <td><span className={'pill ' + (p.estado === 'disponible' ? 'pill-ok' : p.estado === 'proximamente' ? 'pill-warn' : 'pill-gris')}>{p.estado}</span></td>
                 <td style={{ whiteSpace: 'nowrap' }}>
-                  <button className="btn-mini" onClick={() => abrirFotos(p)}>Fotos</button>{' '}
+                  <button className="btn-mini" onClick={() => abrirFotos(p)} title={p.fotos_ok ? 'Fotos revisadas' : 'Fotos sin revisar'}>
+                    {p.fotos_ok ? '✓ Fotos' : 'Fotos'}
+                  </button>{' '}
                   <button className="btn-mini" onClick={() => setVariantesDe(p)}>
                     Variantes{p.variantes?.length ? ` (${new Set(p.variantes.map(v => v.color)).size})` : ''}
                   </button>{' '}
@@ -306,6 +315,20 @@ export default function Productos() {
               })}
               {!fotos.length && <p className="ayuda">Sin fotos todavía — subí las primeras.</p>}
             </div>
+            <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: '.82rem', marginBottom: 14, cursor: 'pointer' }}>
+              <input
+                type="checkbox"
+                style={{ width: 'auto', margin: 0 }}
+                checked={!!fotosDe.fotos_ok}
+                onChange={async e => {
+                  const ok = e.target.checked;
+                  await api('productos/' + fotosDe.id, 'PUT', { fotos_ok: ok });
+                  invalidarProductos(); cargar();
+                  setFotosDe(f => ({ ...f, fotos_ok: ok }));
+                }}
+              />
+              Fotos revisadas — confirmo que todas son de <b>este</b> modelo
+            </label>
             <div className="modal-botones" style={{ justifyContent: 'space-between' }}>
               <label className="btn-oro" style={{ cursor: 'pointer' }}>
                 + Agregar fotos

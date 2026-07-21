@@ -31,7 +31,7 @@ function TileCategoria({ c, i }) {
 }
 
 const FAQS = [
-  ['¿Cómo sé que no es réplica?', 'Antes de pagar te mostramos los grabados del cristal y la varilla, el estuche, el paño y la factura. Y si igual dudás: garantía doble — no es original, te devolvemos el doble.'],
+  ['¿Cómo sé que no es réplica?', 'Cada par llega con estuche, paño y papelería original, y con los grabados de fábrica en el cristal y la varilla — los verificás vos cuando lo tenés en la mano. Y si aun así no te cierra: garantía doble. No es original, te devolvemos el doble de lo que pagaste.'],
   ['¿Hacen envíos al interior?', 'A todo el país, asegurado y con seguimiento. Despachamos en 24-48 h por Andreani u OCA.'],
   ['¿Puedo pagar en cuotas?', 'Sí, con tarjeta. Y si pagás por transferencia tenés descuento directo. Elegís al cerrar el pedido.'],
   ['¿Y si no me queda bien?', 'Tenés 30 días para cambiarlo, coordinando por el mismo WhatsApp donde compraste.']
@@ -39,7 +39,7 @@ const FAQS = [
 
 const CONFIANZA = [
   ['I', 'Garantía doble de autenticidad', 'Si algo de lo que te vendimos no es original, te devolvemos el doble de lo que pagaste.'],
-  ['II', 'Todo a la vista antes de pagar', 'Grabados, estuche, paño y factura. Video del par exacto que te llevás.'],
+  ['II', 'Lo revisás con el par en la mano', 'Llega con estuche, paño y papelería original, y los grabados de fábrica en cristal y varilla. Si algo no cierra, lo cambiás.'],
   ['III', 'Envíos asegurados al país entero', 'Despacho en 24-48 h con seguimiento, de Ushuaia a La Quiaca.'],
   ['IV', 'Cambios sin fricción', '30 días para cambiar, por el mismo canal donde compraste.']
 ];
