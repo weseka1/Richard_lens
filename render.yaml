@@ -10,6 +10,8 @@ services:
     buildCommand: npm install
     startCommand: node server.js
     healthCheckPath: /api/config
+    autoDeploy: true          # cada push a main redeploya solo
+    branch: main
     envVars:
       - key: PUBLIC_URL
         value: https://richardlens.onrender.com

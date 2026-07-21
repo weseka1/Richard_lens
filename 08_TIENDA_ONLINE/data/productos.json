@@ -20,6 +20,8 @@
     "foto_codigo": "30montaigne-su",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200065",
@@ -58,6 +60,8 @@
     "foto_codigo": "3546v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -81,6 +85,8 @@
     "foto_codigo": "3602v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -104,6 +110,8 @@
     "foto_codigo": "3668-evolve",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101107",
@@ -184,6 +192,8 @@
     "foto_codigo": "3669-evolve",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100392",
@@ -250,6 +260,8 @@
     "foto_codigo": "4184",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101047",
@@ -281,6 +293,8 @@
     "foto_codigo": "alex-4201",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -304,6 +318,8 @@
     "foto_codigo": "amore-fashion-4390",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "102000",
@@ -384,6 +400,8 @@
     "foto_codigo": "amore-fashion-4392",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "102008",
@@ -422,6 +440,8 @@
     "foto_codigo": "anh-bio-based-3731",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100086",
@@ -467,6 +487,8 @@
     "foto_codigo": "asap-rocky-3927",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100096",
@@ -512,6 +534,8 @@
     "foto_codigo": "asap-rocky-3928",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100006",
@@ -564,6 +588,8 @@
     "foto_codigo": "asap-rocky-3929",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "102020",
@@ -623,6 +649,8 @@
     "foto_codigo": "asap-rocky-wayfarer-puffer-4940",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100024",
@@ -689,6 +717,8 @@
     "foto_codigo": "rb3025-002-58",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101257",
@@ -720,6 +750,8 @@
     "foto_codigo": "aviador-3449",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100165",
@@ -779,6 +811,8 @@
     "foto_codigo": "aviador-6413",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101263",
@@ -810,6 +844,8 @@
     "foto_codigo": "aviador-6489",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101260",
@@ -869,6 +905,8 @@
     "foto_codigo": "rb3025-002-58",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": true,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100103",
@@ -998,6 +1036,8 @@
     "foto_codigo": "rb3025-002-58",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100113",
@@ -1106,6 +1146,8 @@
     "foto_codigo": "rb3025-002-58",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100153",
@@ -1158,6 +1200,8 @@
     "foto_codigo": "aviador-evolve-3689",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100144",
@@ -1245,6 +1289,8 @@
     "foto_codigo": "aviador-folding-3479",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100160",
@@ -1290,6 +1336,8 @@
     "foto_codigo": "aviador-folding-3479v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -1313,6 +1361,8 @@
     "foto_codigo": "rb3025-002-58",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100191",
@@ -1344,6 +1394,8 @@
     "foto_codigo": "aviador-gaze-6589",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101264",
@@ -1375,6 +1427,8 @@
     "foto_codigo": "aviador-junior-3044",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101240",
@@ -1406,6 +1460,8 @@
     "foto_codigo": "aviador-max-3925",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100020",
@@ -1458,6 +1514,8 @@
     "foto_codigo": "rb3025-002-58",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100134",
@@ -1545,6 +1603,8 @@
     "foto_codigo": "aviador-reverse-0101s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -1568,6 +1628,8 @@
     "foto_codigo": "aviador-reverse-x-lenny-kravitz-0101s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -1591,6 +1653,8 @@
     "foto_codigo": "rb3025-002-58",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100133",
@@ -1622,6 +1686,8 @@
     "foto_codigo": "aviador-titanio-8125",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100164",
@@ -1660,6 +1726,8 @@
     "foto_codigo": "aviator-8307v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100061",
@@ -1691,6 +1759,8 @@
     "foto_codigo": "aviator-fibre-carbon-8307",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100194",
@@ -1736,6 +1806,8 @@
     "foto_codigo": "aviatoroutdoorsman-ii-rainbow-3407v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -1759,6 +1831,8 @@
     "foto_codigo": "balorama-4089",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -1782,6 +1856,8 @@
     "foto_codigo": "beat-3594",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100250",
@@ -1855,6 +1931,8 @@
     "foto_codigo": "big-fendigraphy",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200096",
@@ -1893,6 +1971,8 @@
     "foto_codigo": "bill-2198",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100548",
@@ -1945,6 +2025,8 @@
     "foto_codigo": "bio-based-4421d",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100038",
@@ -1983,6 +2065,8 @@
     "foto_codigo": "bio-based-4436",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -2006,6 +2090,8 @@
     "foto_codigo": "bio-based-4441d",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100621",
@@ -2051,6 +2137,8 @@
     "foto_codigo": "bio-based-4457d",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100041",
@@ -2096,6 +2184,8 @@
     "foto_codigo": "blaze-aviator-3584n",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100470",
@@ -2169,6 +2259,8 @@
     "foto_codigo": "blaze-cat-eye-3580",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100527",
@@ -2228,6 +2320,8 @@
     "foto_codigo": "blaze-clubmaster-3576",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100494",
@@ -2336,6 +2430,8 @@
     "foto_codigo": "blaze-general-3583",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100520",
@@ -2381,6 +2477,8 @@
     "foto_codigo": "blaze-hexagonal-3579",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100517",
@@ -2440,6 +2538,8 @@
     "foto_codigo": "blaze-highstreet-4380n",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100536",
@@ -2492,6 +2592,8 @@
     "foto_codigo": "blaze-meteor-4368n",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100462",
@@ -2530,6 +2632,8 @@
     "foto_codigo": "blaze-round-3574",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100505",
@@ -2617,6 +2721,8 @@
     "foto_codigo": "blaze-round-double-bridge-3614n",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100473",
@@ -2690,6 +2796,8 @@
     "foto_codigo": "blaze-round-double-bridge-4292",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100514",
@@ -2756,6 +2864,8 @@
     "foto_codigo": "blaze-round-polarizado-3574",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100500",
@@ -2787,6 +2897,8 @@
     "foto_codigo": "blaze-shooter-3581",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100485",
@@ -2881,6 +2993,8 @@
     "foto_codigo": "blaze-wayfarer-4440n",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100529",
@@ -2933,6 +3047,8 @@
     "foto_codigo": "blaze-wayfarer-4447n",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100532",
@@ -2971,6 +3087,8 @@
     "foto_codigo": "boy-friend-reverse-0501s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101158",
@@ -3002,6 +3120,8 @@
     "foto_codigo": "burbank-2299",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101180",
@@ -3061,6 +3181,8 @@
     "foto_codigo": "caravan-3136",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101218",
@@ -3092,6 +3214,8 @@
     "foto_codigo": "caravan-titanio-8136",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101221",
@@ -3130,6 +3254,8 @@
     "foto_codigo": "caravan-titanio-8136v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -3153,6 +3279,8 @@
     "foto_codigo": "carlos-0947s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101152",
@@ -3191,6 +3319,8 @@
     "foto_codigo": "cat-eye-3652",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100453",
@@ -3278,6 +3408,8 @@
     "foto_codigo": "cat-eye-acetate",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200116",
@@ -3309,6 +3441,8 @@
     "foto_codigo": "catalyst",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -3332,6 +3466,8 @@
     "foto_codigo": "rb4125-601",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101187",
@@ -3391,6 +3527,8 @@
     "foto_codigo": "rb4125-601",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100361",
@@ -3422,6 +3560,8 @@
     "foto_codigo": "cats-4126",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101191",
@@ -3453,6 +3593,8 @@
     "foto_codigo": "cats-4126v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -3476,6 +3618,8 @@
     "foto_codigo": "cats-4128",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101196",
@@ -3521,6 +3665,8 @@
     "foto_codigo": "cats-4147",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101193",
@@ -3566,6 +3712,8 @@
     "foto_codigo": "cats-4250",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100450",
@@ -3604,6 +3752,8 @@
     "foto_codigo": "cats-4291",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101198",
@@ -3635,6 +3785,8 @@
     "foto_codigo": "cats-4360",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100452",
@@ -3666,6 +3818,8 @@
     "foto_codigo": "cats-4379d",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100060",
@@ -3697,6 +3851,8 @@
     "foto_codigo": "cdi-s1i",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200071",
@@ -3728,6 +3884,8 @@
     "foto_codigo": "cel-triomphe-12",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200020",
@@ -3759,6 +3917,8 @@
     "foto_codigo": "cel-triomphe-metal-01",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200024",
@@ -3804,6 +3964,8 @@
     "foto_codigo": "cel-triomphe-rhinestone-01",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200022",
@@ -3842,6 +4004,8 @@
     "foto_codigo": "cel-triomphe-rhinestone-02",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200021",
@@ -3873,6 +4037,8 @@
     "foto_codigo": "cel-triomphe-xl",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200017",
@@ -3918,6 +4084,8 @@
     "foto_codigo": "chris-4187",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100596",
@@ -3991,6 +4159,8 @@
     "foto_codigo": "chris-7045",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101324",
@@ -4036,6 +4206,8 @@
     "foto_codigo": "chris-polarizado-4187",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100605",
@@ -4081,6 +4253,8 @@
     "foto_codigo": "chromance-4275",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101038",
@@ -4112,6 +4286,8 @@
     "foto_codigo": "chromance-4293",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101039",
@@ -4143,6 +4319,8 @@
     "foto_codigo": "club-round-4346v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101050",
@@ -4174,6 +4352,8 @@
     "foto_codigo": "rb3016-w0365",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100717",
@@ -4205,6 +4385,8 @@
     "foto_codigo": "rb3016-w0365",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -4228,6 +4410,8 @@
     "foto_codigo": "clubmaster-5154",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101294",
@@ -4280,6 +4464,8 @@
     "foto_codigo": "clubmaster-6346",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101299",
@@ -4332,6 +4518,8 @@
     "foto_codigo": "clubmaster-aluminium-3507",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100660",
@@ -4370,6 +4558,8 @@
     "foto_codigo": "rb3016-w0365",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100613",
@@ -4450,6 +4640,8 @@
     "foto_codigo": "clubmaster-double-bridge-3816",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100656",
@@ -4488,6 +4680,8 @@
     "foto_codigo": "clubmaster-double-bridge-3816v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -4511,6 +4705,8 @@
     "foto_codigo": "rb3016-w0365",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100635",
@@ -4584,6 +4780,8 @@
     "foto_codigo": "rb3016-w0365",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100628",
@@ -4622,6 +4820,8 @@
     "foto_codigo": "clubmaster-folding-2176",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100648",
@@ -4667,6 +4867,8 @@
     "foto_codigo": "clubmaster-folding-5334",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101302",
@@ -4698,6 +4900,8 @@
     "foto_codigo": "clubmaster-light-ray-8056",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100657",
@@ -4729,6 +4933,8 @@
     "foto_codigo": "rb3016-w0365",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100641",
@@ -4788,6 +4994,8 @@
     "foto_codigo": "clubmaster-madera-5154m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101301",
@@ -4819,6 +5027,8 @@
     "foto_codigo": "clubmaster-metal-3716",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100651",
@@ -4878,6 +5088,8 @@
     "foto_codigo": "clubmaster-oval-3946",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100622",
@@ -4937,6 +5149,8 @@
     "foto_codigo": "clubmaster-oversized-4175",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100658",
@@ -4968,6 +5182,8 @@
     "foto_codigo": "rb3016-w0365",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100644",
@@ -5006,6 +5222,8 @@
     "foto_codigo": "rb3016-w0365",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100629",
@@ -5044,6 +5262,8 @@
     "foto_codigo": "clubmaster-reverse-0504s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100606",
@@ -5103,6 +5323,8 @@
     "foto_codigo": "clubmaster-square-4190",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100645",
@@ -5141,6 +5363,8 @@
     "foto_codigo": "clubround-4246",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100666",
@@ -5221,6 +5445,8 @@
     "foto_codigo": "clubround-4246v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101304",
@@ -5259,6 +5485,8 @@
     "foto_codigo": "clubround-double-bridge-4346",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100676",
@@ -5318,6 +5546,8 @@
     "foto_codigo": "clubround-madera-4246m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100671",
@@ -5377,6 +5607,8 @@
     "foto_codigo": "cocqpit-3362",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101229",
@@ -5436,6 +5668,8 @@
     "foto_codigo": "colonel-3560",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "102302",
@@ -5474,6 +5708,8 @@
     "foto_codigo": "corrigan-4397",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101177",
@@ -5540,6 +5776,8 @@
     "foto_codigo": "cyclone-metal-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200509",
@@ -5571,6 +5809,8 @@
     "foto_codigo": "cyclone-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200514",
@@ -5602,6 +5842,8 @@
     "foto_codigo": "dg-crossed",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200076",
@@ -5647,6 +5889,8 @@
     "foto_codigo": "dg-essentials",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200079",
@@ -5692,6 +5936,8 @@
     "foto_codigo": "dg-logo",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200075",
@@ -5723,6 +5969,8 @@
     "foto_codigo": "di-so-real",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100387",
@@ -5761,6 +6009,8 @@
     "foto_codigo": "dib23-r1i",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200062",
@@ -5792,6 +6042,8 @@
     "foto_codigo": "dib27-s1i",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200061",
@@ -5823,6 +6075,8 @@
     "foto_codigo": "diblacksuit-s12i-bioacetate",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200072",
@@ -5861,6 +6115,8 @@
     "foto_codigo": "diclub-m1u",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200057",
@@ -5913,6 +6169,8 @@
     "foto_codigo": "diclub-m4u",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200042",
@@ -5944,6 +6202,8 @@
     "foto_codigo": "dimidnight-b2i",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200068",
@@ -5975,6 +6235,8 @@
     "foto_codigo": "dimidnight-s1i",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200067",
@@ -6006,6 +6268,8 @@
     "foto_codigo": "diosquare-s11",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200056",
@@ -6044,6 +6308,8 @@
     "foto_codigo": "dipacific-b2f",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200069",
@@ -6082,6 +6348,8 @@
     "foto_codigo": "dipacific-s1u",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200043",
@@ -6120,6 +6388,8 @@
     "foto_codigo": "dirsignature-s1u",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200041",
@@ -6151,6 +6421,8 @@
     "foto_codigo": "disignature-b2u",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200052",
@@ -6182,6 +6454,8 @@
     "foto_codigo": "disignature-b3u",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200049",
@@ -6213,6 +6487,8 @@
     "foto_codigo": "disignature-b5i",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200051",
@@ -6244,6 +6520,8 @@
     "foto_codigo": "disignature-b7i",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200045",
@@ -6296,6 +6574,8 @@
     "foto_codigo": "disignature-m1u",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200053",
@@ -6334,6 +6614,8 @@
     "foto_codigo": "disignature-s10f",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200040",
@@ -6365,6 +6647,8 @@
     "foto_codigo": "disignature-s4u",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200064",
@@ -6396,6 +6680,8 @@
     "foto_codigo": "disignature-s9u",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200050",
@@ -6427,6 +6713,8 @@
     "foto_codigo": "dixtrem-mu",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200063",
@@ -6458,6 +6746,8 @@
     "foto_codigo": "drifter-0360",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -6481,6 +6771,8 @@
     "foto_codigo": "drop-001",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -6504,6 +6796,8 @@
     "foto_codigo": "dynasty-d-frame",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200000",
@@ -6549,6 +6843,8 @@
     "foto_codigo": "dynasty-rectangle",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200004",
@@ -6587,6 +6883,8 @@
     "foto_codigo": "edge-large-square-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200521",
@@ -6618,6 +6916,8 @@
     "foto_codigo": "elon-3958",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100400",
@@ -6670,6 +6970,8 @@
     "foto_codigo": "empreinte-square-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200522",
@@ -6701,6 +7003,8 @@
     "foto_codigo": "emy-bio-based-3741",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100089",
@@ -6753,6 +7057,8 @@
     "foto_codigo": "erik-4398",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100731",
@@ -6784,6 +7090,8 @@
     "foto_codigo": "rb4171-865-13",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": true,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100556",
@@ -6976,6 +7284,8 @@
     "foto_codigo": "rb4171-865-13",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -6999,6 +7309,8 @@
     "foto_codigo": "erika-7046",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101326",
@@ -7044,6 +7356,8 @@
     "foto_codigo": "erika-full-rim-6375",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101310",
@@ -7075,6 +7389,8 @@
     "foto_codigo": "erika-highstreet-4305",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -7098,6 +7414,8 @@
     "foto_codigo": "erika-metal-3539",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100570",
@@ -7241,6 +7559,8 @@
     "foto_codigo": "erika-metal-3539v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -7264,6 +7584,8 @@
     "foto_codigo": "rb4171-865-13",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100566",
@@ -7309,6 +7631,8 @@
     "foto_codigo": "rb4171-865-13",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100594",
@@ -7382,6 +7706,8 @@
     "foto_codigo": "evidence-metal-pilot-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200505",
@@ -7420,6 +7746,8 @@
     "foto_codigo": "evidence-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200504",
@@ -7451,6 +7779,8 @@
     "foto_codigo": "fen-big-first",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200095",
@@ -7482,6 +7812,8 @@
     "foto_codigo": "fen-graphy",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200093",
@@ -7520,6 +7852,8 @@
     "foto_codigo": "fen-graphy-square",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200098",
@@ -7558,6 +7892,8 @@
     "foto_codigo": "fen-o-lock",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200100",
@@ -7589,6 +7925,8 @@
     "foto_codigo": "ferrari-3601v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -7612,6 +7950,8 @@
     "foto_codigo": "ferrari-4228v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -7635,6 +7975,8 @@
     "foto_codigo": "ferrari-8313v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -7658,6 +8000,8 @@
     "foto_codigo": "fibre-carbon-8058",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101238",
@@ -7724,6 +8068,8 @@
     "foto_codigo": "fibre-carbon-8059",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101230",
@@ -7783,6 +8129,8 @@
     "foto_codigo": "fibre-carbon-8301",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101234",
@@ -7821,6 +8169,8 @@
     "foto_codigo": "fibre-carbon-8302",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -7844,6 +8194,8 @@
     "foto_codigo": "flacko-bio-based-4454",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100711",
@@ -7889,6 +8241,8 @@
     "foto_codigo": "flip-out-3460",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100198",
@@ -7920,6 +8274,8 @@
     "foto_codigo": "frank-legend-3857",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100373",
@@ -7965,6 +8321,8 @@
     "foto_codigo": "frank-legend-3857v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101279",
@@ -7996,6 +8354,8 @@
     "foto_codigo": "frogskins",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -8019,6 +8379,8 @@
     "foto_codigo": "frogskins-lite",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -8042,6 +8404,8 @@
     "foto_codigo": "fs-fendi-sky-rectangle",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200087",
@@ -8080,6 +8444,8 @@
     "foto_codigo": "fs-fendi-sky-round",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200089",
@@ -8118,6 +8484,8 @@
     "foto_codigo": "fs-ff-evolution",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200090",
@@ -8156,6 +8524,8 @@
     "foto_codigo": "fs-ff-match",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200092",
@@ -8187,6 +8557,8 @@
     "foto_codigo": "fs-first-crystal",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200083",
@@ -8232,6 +8604,8 @@
     "foto_codigo": "full-rim-7098",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101339",
@@ -8277,6 +8651,8 @@
     "foto_codigo": "g020",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200101",
@@ -8308,6 +8684,8 @@
     "foto_codigo": "g021",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200102",
@@ -8339,6 +8717,8 @@
     "foto_codigo": "g023",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200103",
@@ -8370,6 +8750,8 @@
     "foto_codigo": "g024",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200104",
@@ -8401,6 +8783,8 @@
     "foto_codigo": "g025",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200105",
@@ -8432,6 +8816,8 @@
     "foto_codigo": "g026",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200106",
@@ -8463,6 +8849,8 @@
     "foto_codigo": "g032",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200107",
@@ -8494,6 +8882,8 @@
     "foto_codigo": "g034",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200108",
@@ -8525,6 +8915,8 @@
     "foto_codigo": "g035",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200109",
@@ -8556,6 +8948,8 @@
     "foto_codigo": "g1032",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200401",
@@ -8587,6 +8981,8 @@
     "foto_codigo": "g2032",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200402",
@@ -8618,6 +9014,8 @@
     "foto_codigo": "gatsby-i-4256",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101124",
@@ -8726,6 +9124,8 @@
     "foto_codigo": "gatsby-i-4256v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101329",
@@ -8764,6 +9164,8 @@
     "foto_codigo": "gatsby-ii-4257",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101142",
@@ -8879,6 +9281,8 @@
     "foto_codigo": "gauge",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -8902,6 +9306,8 @@
     "foto_codigo": "general-3561",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100417",
@@ -8982,6 +9388,8 @@
     "foto_codigo": "general-6389",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101321",
@@ -9013,6 +9421,8 @@
     "foto_codigo": "geometric-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200119",
@@ -9044,6 +9454,8 @@
     "foto_codigo": "gg0809s-w",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200117",
@@ -9082,6 +9494,8 @@
     "foto_codigo": "gg0811s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200113",
@@ -9113,6 +9527,8 @@
     "foto_codigo": "gg1278s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200110",
@@ -9158,6 +9574,8 @@
     "foto_codigo": "gina-4399",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100066",
@@ -9217,6 +9635,8 @@
     "foto_codigo": "golden-mask-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200510",
@@ -9248,6 +9668,8 @@
     "foto_codigo": "hawkeye-2298",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -9271,6 +9693,8 @@
     "foto_codigo": "rb3548n-001",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100818",
@@ -9386,6 +9810,8 @@
     "foto_codigo": "hexagonal-4306",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100833",
@@ -9431,6 +9857,8 @@
     "foto_codigo": "rb3548n-001",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100827",
@@ -9504,6 +9932,8 @@
     "foto_codigo": "hexagonal-scuderia-ferrari-6448m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101274",
@@ -9563,6 +9993,8 @@
     "foto_codigo": "highstreet-2180",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101084",
@@ -9664,6 +10096,8 @@
     "foto_codigo": "highstreet-2180-special-edition",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101077",
@@ -9702,6 +10136,8 @@
     "foto_codigo": "highstreet-2180v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101314",
@@ -9747,6 +10183,8 @@
     "foto_codigo": "highstreet-2183",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101112",
@@ -9778,6 +10216,8 @@
     "foto_codigo": "highstreet-2213",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100070",
@@ -9830,6 +10270,8 @@
     "foto_codigo": "highstreet-3588",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101111",
@@ -9861,6 +10303,8 @@
     "foto_codigo": "highstreet-3589",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101110",
@@ -9892,6 +10336,8 @@
     "foto_codigo": "highstreet-3605n",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101032",
@@ -9972,6 +10418,8 @@
     "foto_codigo": "highstreet-4253",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101098",
@@ -10038,6 +10486,8 @@
     "foto_codigo": "highstreet-4253v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -10061,6 +10511,8 @@
     "foto_codigo": "highstreet-4259",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101091",
@@ -10134,6 +10586,8 @@
     "foto_codigo": "highstreet-4259d",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100707",
@@ -10179,6 +10633,8 @@
     "foto_codigo": "highstreet-4259v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -10202,6 +10658,8 @@
     "foto_codigo": "highstreet-4278",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101119",
@@ -10233,6 +10691,8 @@
     "foto_codigo": "highstreet-4279",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101117",
@@ -10299,6 +10759,8 @@
     "foto_codigo": "highstreet-4279v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -10322,6 +10784,8 @@
     "foto_codigo": "highstreet-4311n",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101030",
@@ -10388,6 +10852,8 @@
     "foto_codigo": "highstreet-4315",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101066",
@@ -10454,6 +10920,8 @@
     "foto_codigo": "highstreet-4407",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -10477,6 +10945,8 @@
     "foto_codigo": "highstreet-4439d",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101044",
@@ -10536,6 +11006,8 @@
     "foto_codigo": "highstreet-4459d",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101155",
@@ -10574,6 +11046,8 @@
     "foto_codigo": "highstreet-junior-rj9056s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101248",
@@ -10612,6 +11086,8 @@
     "foto_codigo": "icon-cat-eye-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200524",
@@ -10643,6 +11119,8 @@
     "foto_codigo": "inverness-2191",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100837",
@@ -10695,6 +11173,8 @@
     "foto_codigo": "izzy-junior-9060s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101241",
@@ -10740,6 +11220,8 @@
     "foto_codigo": "ja-jo-3592",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100885",
@@ -10820,6 +11302,8 @@
     "foto_codigo": "jackie-ohh-4098",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101184",
@@ -10872,6 +11356,8 @@
     "foto_codigo": "jackie-ohh-4101",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101150",
@@ -10910,6 +11396,8 @@
     "foto_codigo": "jewel-mix-square",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200534",
@@ -10941,6 +11429,8 @@
     "foto_codigo": "julie-3957",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100396",
@@ -10993,6 +11483,8 @@
     "foto_codigo": "rb4165-601-8g",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101011",
@@ -11066,6 +11558,8 @@
     "foto_codigo": "rb4165-601-8g",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -11089,6 +11583,8 @@
     "foto_codigo": "rb4165-601-8g",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101021",
@@ -11155,6 +11651,8 @@
     "foto_codigo": "kai-bio-based-3757",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100012",
@@ -11200,6 +11698,8 @@
     "foto_codigo": "kat-bio-based-4427",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -11223,6 +11723,8 @@
     "foto_codigo": "kiliane-4395",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100069",
@@ -11275,6 +11777,8 @@
     "foto_codigo": "latch",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -11298,6 +11802,8 @@
     "foto_codigo": "legacy-square",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200526",
@@ -11336,6 +11842,8 @@
     "foto_codigo": "leonard-2193",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -11359,6 +11867,8 @@
     "foto_codigo": "link-light-cat-eye-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200519",
@@ -11397,6 +11907,8 @@
     "foto_codigo": "liteforce-4195v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -11420,6 +11932,8 @@
     "foto_codigo": "liteforce-4452",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100681",
@@ -11458,6 +11972,8 @@
     "foto_codigo": "loenard-2193",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -11481,6 +11997,8 @@
     "foto_codigo": "lv-trunk-pilot-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200508",
@@ -11512,6 +12030,8 @@
     "foto_codigo": "lv1051",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200537",
@@ -11543,6 +12063,8 @@
     "foto_codigo": "marshal-3648",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101200",
@@ -11630,6 +12152,8 @@
     "foto_codigo": "marshal-3648m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101209",
@@ -11675,6 +12199,8 @@
     "foto_codigo": "marshal-3648v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -11698,6 +12224,8 @@
     "foto_codigo": "mascot-pilot-square",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200500",
@@ -11729,6 +12257,8 @@
     "foto_codigo": "match-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200501",
@@ -11760,6 +12290,8 @@
     "foto_codigo": "max-square-af",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200008",
@@ -11791,6 +12323,8 @@
     "foto_codigo": "mega-clubmaster-0316s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100618",
@@ -11843,6 +12377,8 @@
     "foto_codigo": "mega-wayfarer-0840s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100127",
@@ -11909,6 +12445,8 @@
     "foto_codigo": "millionaires-metal",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200535",
@@ -11940,6 +12478,8 @@
     "foto_codigo": "millionaires-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200503",
@@ -11978,6 +12518,8 @@
     "foto_codigo": "miu-miu-eyewear-collection-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200238",
@@ -12331,6 +12873,8 @@
     "foto_codigo": "moon-rectangular-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200525",
@@ -12362,6 +12906,8 @@
     "foto_codigo": "moon-square",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200536",
@@ -12393,6 +12939,8 @@
     "foto_codigo": "moon-square-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200523",
@@ -12424,6 +12972,8 @@
     "foto_codigo": "my-monogram-soft-cat-eye-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200518",
@@ -12455,6 +13005,8 @@
     "foto_codigo": "rb2132-902",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100996",
@@ -12500,6 +13052,8 @@
     "foto_codigo": "new-wayfarer-5184",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101292",
@@ -12538,6 +13092,8 @@
     "foto_codigo": "new-wayfarer-junior-rj9052s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101246",
@@ -12569,6 +13125,8 @@
     "foto_codigo": "new-wayfarer-light-ray-4225",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101008",
@@ -12600,6 +13158,8 @@
     "foto_codigo": "rb2132-902",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100998",
@@ -12638,6 +13198,8 @@
     "foto_codigo": "nina-4314n",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100434",
@@ -12711,6 +13273,8 @@
     "foto_codigo": "nina-4314v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -12734,6 +13298,8 @@
     "foto_codigo": "oa-holdbrook",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -12757,6 +13323,8 @@
     "foto_codigo": "octagon-1972",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100849",
@@ -12802,6 +13370,8 @@
     "foto_codigo": "octagon-1972v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101272",
@@ -12847,6 +13417,8 @@
     "foto_codigo": "octagonal-3556",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100845",
@@ -12913,6 +13485,8 @@
     "foto_codigo": "octagonal-3556v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -12936,6 +13510,8 @@
     "foto_codigo": "off-white-branson",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200128",
@@ -12967,6 +13543,8 @@
     "foto_codigo": "olympian-2419",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "102014",
@@ -13033,6 +13611,8 @@
     "foto_codigo": "olympian-3119",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100688",
@@ -13092,6 +13672,8 @@
     "foto_codigo": "olympian-3119v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -13115,6 +13697,8 @@
     "foto_codigo": "outdoorsman-3030",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100182",
@@ -13153,6 +13737,8 @@
     "foto_codigo": "outdoorsman-3030v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -13176,6 +13762,8 @@
     "foto_codigo": "outdoorsman-3422q",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -13199,6 +13787,8 @@
     "foto_codigo": "outdoorsman-craft-3422q",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100181",
@@ -13251,6 +13841,8 @@
     "foto_codigo": "outdoorsman-ii-rainbow-3029",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100170",
@@ -13289,6 +13881,8 @@
     "foto_codigo": "outdoorsman-ii-rainbow-3407",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100172",
@@ -13348,6 +13942,8 @@
     "foto_codigo": "oval-1970",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100873",
@@ -13414,6 +14010,8 @@
     "foto_codigo": "oval-1970v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101269",
@@ -13452,6 +14050,8 @@
     "foto_codigo": "oval-3547n",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100859",
@@ -13546,6 +14146,8 @@
     "foto_codigo": "oval-3547v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101320",
@@ -13577,6 +14179,8 @@
     "foto_codigo": "oval-double-bridge-3847n",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100870",
@@ -13643,6 +14247,8 @@
     "foto_codigo": "oval-evolve-3547",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100862",
@@ -13702,6 +14308,8 @@
     "foto_codigo": "oversized-s002",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200037",
@@ -13747,6 +14355,8 @@
     "foto_codigo": "ow",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200151",
@@ -13883,6 +14493,8 @@
     "foto_codigo": "ow-arthur",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200138",
@@ -13942,6 +14554,8 @@
     "foto_codigo": "ow-branson",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200125",
@@ -13987,6 +14601,8 @@
     "foto_codigo": "ow-catalina",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200123",
@@ -14025,6 +14641,8 @@
     "foto_codigo": "ow-lecce",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200147",
@@ -14091,6 +14709,8 @@
     "foto_codigo": "ow-manchester",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200121",
@@ -14129,6 +14749,8 @@
     "foto_codigo": "ow-milano",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200141",
@@ -14188,6 +14810,8 @@
     "foto_codigo": "ow-virgil",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200132",
@@ -14261,6 +14885,8 @@
     "foto_codigo": "panthere-de-cart",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100077",
@@ -14306,6 +14932,8 @@
     "foto_codigo": "pr20ys",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200192",
@@ -14351,6 +14979,8 @@
     "foto_codigo": "rb2215",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100430",
@@ -14396,6 +15026,8 @@
     "foto_codigo": "rb4179",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -14419,6 +15051,8 @@
     "foto_codigo": "rbn-6414",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101285",
@@ -14450,6 +15084,8 @@
     "foto_codigo": "rbn3364v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -14473,6 +15109,8 @@
     "foto_codigo": "rbn3947",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100022",
@@ -14539,6 +15177,8 @@
     "foto_codigo": "rbn4184",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -14562,6 +15202,8 @@
     "foto_codigo": "rbn4221",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -14585,6 +15227,8 @@
     "foto_codigo": "rbn4279",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -14608,6 +15252,8 @@
     "foto_codigo": "rbn4285",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -14631,6 +15277,8 @@
     "foto_codigo": "rbn4286",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -14654,6 +15302,8 @@
     "foto_codigo": "rbn4286v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -14677,6 +15327,8 @@
     "foto_codigo": "rbn5298",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101330",
@@ -14708,6 +15360,8 @@
     "foto_codigo": "rbn7075",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101334",
@@ -14753,6 +15407,8 @@
     "foto_codigo": "rbn7088",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101336",
@@ -14791,6 +15447,8 @@
     "foto_codigo": "rbn7110",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101342",
@@ -14829,6 +15487,8 @@
     "foto_codigo": "rbn7111",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101344",
@@ -14867,6 +15527,8 @@
     "foto_codigo": "re-edition-dna",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200074",
@@ -14898,6 +15560,8 @@
     "foto_codigo": "rectangle-1969",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100377",
@@ -14950,6 +15614,8 @@
     "foto_codigo": "rectangle-1969v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101266",
@@ -15002,6 +15668,8 @@
     "foto_codigo": "rectangle-evolve-1969",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100381",
@@ -15040,6 +15708,8 @@
     "foto_codigo": "rectangular-frame",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200114",
@@ -15078,6 +15748,8 @@
     "foto_codigo": "round-3540",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100291",
@@ -15144,6 +15816,8 @@
     "foto_codigo": "round-3578",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100302",
@@ -15203,6 +15877,8 @@
     "foto_codigo": "round-3747",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100294",
@@ -15255,6 +15931,8 @@
     "foto_codigo": "round-3747v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101307",
@@ -15300,6 +15978,8 @@
     "foto_codigo": "round-4222",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100346",
@@ -15394,6 +16074,8 @@
     "foto_codigo": "round-4266v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -15417,6 +16099,8 @@
     "foto_codigo": "round-8247",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100249",
@@ -15462,6 +16146,8 @@
     "foto_codigo": "rb3447-001",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -15485,6 +16171,8 @@
     "foto_codigo": "round-double-bridge-3647n",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100241",
@@ -15607,6 +16295,8 @@
     "foto_codigo": "round-double-bridge-3647v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -15630,6 +16320,8 @@
     "foto_codigo": "rb3447-001",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100224",
@@ -15717,6 +16409,8 @@
     "foto_codigo": "round-fleck-2447",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100324",
@@ -15832,6 +16526,8 @@
     "foto_codigo": "round-fleck-2447v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101313",
@@ -15884,6 +16580,8 @@
     "foto_codigo": "round-fleck-2448",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100328",
@@ -15929,6 +16627,8 @@
     "foto_codigo": "round-folding-3517",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100269",
@@ -16009,6 +16709,8 @@
     "foto_codigo": "round-folding-3517v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -16032,6 +16734,8 @@
     "foto_codigo": "round-folding-3532",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100263",
@@ -16119,6 +16823,8 @@
     "foto_codigo": "round-folding-3532v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101317",
@@ -16164,6 +16870,8 @@
     "foto_codigo": "round-light-ray-4224",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -16187,6 +16895,8 @@
     "foto_codigo": "round-light-ray-4242",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100340",
@@ -16239,6 +16949,8 @@
     "foto_codigo": "round-liteforce-4237",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100337",
@@ -16270,6 +16982,8 @@
     "foto_codigo": "round-liteforce-4296",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100359",
@@ -16308,6 +17022,8 @@
     "foto_codigo": "rb3447-001",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101305",
@@ -16346,6 +17062,8 @@
     "foto_codigo": "rb3447-001",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": true,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100202",
@@ -16440,6 +17158,8 @@
     "foto_codigo": "rb3447-001",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100216",
@@ -16527,6 +17247,8 @@
     "foto_codigo": "rb3447-001",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100223",
@@ -16579,6 +17301,8 @@
     "foto_codigo": "round-reverse-0103s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101059",
@@ -16631,6 +17355,8 @@
     "foto_codigo": "round-shape-3537",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100308",
@@ -16683,6 +17409,8 @@
     "foto_codigo": "round-shape-3537v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -16706,6 +17434,8 @@
     "foto_codigo": "round-shape-3546",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100336",
@@ -16786,6 +17516,8 @@
     "foto_codigo": "round-shape-3546v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -16809,6 +17541,8 @@
     "foto_codigo": "round-shape-4266",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100355",
@@ -16875,6 +17609,8 @@
     "foto_codigo": "round-square-shape-3557",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100311",
@@ -16913,6 +17649,8 @@
     "foto_codigo": "round-titanio-8147m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100298",
@@ -16972,6 +17710,8 @@
     "foto_codigo": "roundbeat-2192",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100004",
@@ -17010,6 +17750,8 @@
     "foto_codigo": "ruond-8060",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100274",
@@ -17076,6 +17818,8 @@
     "foto_codigo": "ruond-8061",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100283",
@@ -17142,6 +17886,8 @@
     "foto_codigo": "santos-de-cart",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200011",
@@ -17194,6 +17940,8 @@
     "foto_codigo": "scuderia-ferrari-2217m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101146",
@@ -17253,6 +18001,8 @@
     "foto_codigo": "scuderia-ferrari-3601m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100809",
@@ -17298,6 +18048,8 @@
     "foto_codigo": "scuderia-ferrari-3602m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100807",
@@ -17350,6 +18102,8 @@
     "foto_codigo": "scuderia-ferrari-4179m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100427",
@@ -17416,6 +18170,8 @@
     "foto_codigo": "scuderia-ferrari-4228m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100765",
@@ -17475,6 +18231,8 @@
     "foto_codigo": "scuderia-ferrari-4302m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100788",
@@ -17534,6 +18292,8 @@
     "foto_codigo": "scuderia-ferrari-4308m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100801",
@@ -17572,6 +18332,8 @@
     "foto_codigo": "scuderia-ferrari-4309m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100803",
@@ -17610,6 +18372,8 @@
     "foto_codigo": "scuderia-ferrari-4310m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100798",
@@ -17669,6 +18433,8 @@
     "foto_codigo": "scuderia-ferrari-4322m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100793",
@@ -17728,6 +18494,8 @@
     "foto_codigo": "scuderia-ferrari-4343m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100752",
@@ -17787,6 +18555,8 @@
     "foto_codigo": "scuderia-ferrari-4366m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100755",
@@ -17832,6 +18602,8 @@
     "foto_codigo": "dg4413",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101042",
@@ -17863,6 +18635,8 @@
     "foto_codigo": "scuderia-ferrari-4414m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100719",
@@ -17901,6 +18675,8 @@
     "foto_codigo": "scuderia-ferrari-6449m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101280",
@@ -17960,6 +18736,8 @@
     "foto_codigo": "scuderia-ferrari-8327m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100366",
@@ -17991,6 +18769,8 @@
     "foto_codigo": "scuderia-ferrari-8351m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100760",
@@ -18043,6 +18823,8 @@
     "foto_codigo": "scuderia-ferrari-8351v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -18066,6 +18848,8 @@
     "foto_codigo": "scuderia-ferrari-8360m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100758",
@@ -18097,6 +18881,8 @@
     "foto_codigo": "scuderia-ferrari-aviator-3460m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100782",
@@ -18163,6 +18949,8 @@
     "foto_codigo": "scuderia-ferrari-collection-3617m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100813",
@@ -18208,6 +18996,8 @@
     "foto_codigo": "rb4125-601",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100748",
@@ -18260,6 +19050,8 @@
     "foto_codigo": "rb2132-902",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100744",
@@ -18298,6 +19090,8 @@
     "foto_codigo": "scuderia-ferrari-fibre-carbon-8313m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100775",
@@ -18350,6 +19144,8 @@
     "foto_codigo": "scuderia-ferrari-round-double-bridge-3647nm",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100735",
@@ -18409,6 +19205,8 @@
     "foto_codigo": "scuderia-ferrari-round-double-bridge-3674m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100068",
@@ -18461,6 +19259,8 @@
     "foto_codigo": "scuderia-ferrari-round-double-bridge-3703m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100044",
@@ -18499,6 +19299,8 @@
     "foto_codigo": "scuderia-ferrari-round-double-bridge-3794m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100702",
@@ -18544,6 +19346,8 @@
     "foto_codigo": "scuderia-ferrari-round-fleck-2447m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100769",
@@ -18596,6 +19400,8 @@
     "foto_codigo": "scuderia-ferrari-round-fleck-2448m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100772",
@@ -18648,6 +19454,8 @@
     "foto_codigo": "scuderia-ferrari-wayfarer-liteforce-4195m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101213",
@@ -18679,6 +19487,8 @@
     "foto_codigo": "shield-rectangle",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200009",
@@ -18710,6 +19520,8 @@
     "foto_codigo": "shirley-7022",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101331",
@@ -18748,6 +19560,8 @@
     "foto_codigo": "signature-round",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200528",
@@ -18786,6 +19600,8 @@
     "foto_codigo": "signet-3429m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101217",
@@ -18838,6 +19654,8 @@
     "foto_codigo": "signet-6386",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101322",
@@ -18869,6 +19687,8 @@
     "foto_codigo": "ski-rectangle",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200005",
@@ -18914,6 +19734,8 @@
     "foto_codigo": "sl-309-m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200203",
@@ -18945,6 +19767,8 @@
     "foto_codigo": "sl-312-m",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200201",
@@ -18990,6 +19814,8 @@
     "foto_codigo": "sl-657",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200196",
@@ -19028,6 +19854,8 @@
     "foto_codigo": "sl-m131",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200204",
@@ -19073,6 +19901,8 @@
     "foto_codigo": "sl001",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200193",
@@ -19104,6 +19934,8 @@
     "foto_codigo": "sl002",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200194",
@@ -19135,6 +19967,8 @@
     "foto_codigo": "sl008",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200195",
@@ -19166,6 +20000,8 @@
     "foto_codigo": "sl011",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200198",
@@ -19197,6 +20033,8 @@
     "foto_codigo": "sl012",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200199",
@@ -19228,6 +20066,8 @@
     "foto_codigo": "sleek-square",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200530",
@@ -19266,6 +20106,8 @@
     "foto_codigo": "split-cat-eye",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200532",
@@ -19304,6 +20146,8 @@
     "foto_codigo": "spr07y",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200185",
@@ -19335,6 +20179,8 @@
     "foto_codigo": "spr14y",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200178",
@@ -19366,6 +20212,8 @@
     "foto_codigo": "spr15y",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200183",
@@ -19404,6 +20252,8 @@
     "foto_codigo": "spr16w",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200182",
@@ -19435,6 +20285,8 @@
     "foto_codigo": "spr17w",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200170",
@@ -19501,6 +20353,8 @@
     "foto_codigo": "spr19w",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200187",
@@ -19546,6 +20400,8 @@
     "foto_codigo": "spr20z",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200180",
@@ -19584,6 +20440,8 @@
     "foto_codigo": "spr26z",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200179",
@@ -19615,6 +20473,8 @@
     "foto_codigo": "spr27z",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200186",
@@ -19646,6 +20506,8 @@
     "foto_codigo": "spra06",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200302",
@@ -19684,6 +20546,8 @@
     "foto_codigo": "spra14",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200174",
@@ -19715,6 +20579,8 @@
     "foto_codigo": "spra16",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200175",
@@ -19753,6 +20619,8 @@
     "foto_codigo": "spra20",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200173",
@@ -19784,6 +20652,8 @@
     "foto_codigo": "square-1971",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100404",
@@ -19836,6 +20706,8 @@
     "foto_codigo": "square-1971-polarizado",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100410",
@@ -19867,6 +20739,8 @@
     "foto_codigo": "square-1971v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101286",
@@ -19912,6 +20786,8 @@
     "foto_codigo": "square-1973v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -19935,6 +20811,8 @@
     "foto_codigo": "square-2188",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100405",
@@ -19987,6 +20865,8 @@
     "foto_codigo": "square-2206",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101073",
@@ -20032,6 +20912,8 @@
     "foto_codigo": "square-4408",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100369",
@@ -20098,6 +20980,8 @@
     "foto_codigo": "square-evolve-1971",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100411",
@@ -20150,6 +21034,8 @@
     "foto_codigo": "square-ii-1973",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100186",
@@ -20202,6 +21088,8 @@
     "foto_codigo": "state-street-2186",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101168",
@@ -20261,6 +21149,8 @@
     "foto_codigo": "state-street-2192",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100001",
@@ -20292,6 +21182,8 @@
     "foto_codigo": "stringer",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -20315,6 +21207,8 @@
     "foto_codigo": "teru-bio-based-4425",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100685",
@@ -20360,6 +21254,8 @@
     "foto_codigo": "thalia-2195",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -20383,6 +21279,8 @@
     "foto_codigo": "the-lv-pilot-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200507",
@@ -20414,6 +21312,8 @@
     "foto_codigo": "titanio-8683",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "102015",
@@ -20445,6 +21345,8 @@
     "foto_codigo": "tom-ford-frances-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200218",
@@ -20483,6 +21385,8 @@
     "foto_codigo": "tom-ford-icon-geometric-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200214",
@@ -20528,6 +21432,8 @@
     "foto_codigo": "tom-ford-icon-pilot-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200212",
@@ -20566,6 +21472,8 @@
     "foto_codigo": "tom-ford-photochromatic-achilles-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200208",
@@ -20604,6 +21512,8 @@
     "foto_codigo": "tom-ford-polarized-dax-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200220",
@@ -20649,6 +21559,8 @@
     "foto_codigo": "tom-ford-quincy-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200207",
@@ -20680,6 +21592,8 @@
     "foto_codigo": "tom-ford-round-horn-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200217",
@@ -20711,6 +21625,8 @@
     "foto_codigo": "tom-ford-vincent-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200211",
@@ -20749,6 +21665,8 @@
     "foto_codigo": "top-bar-3183",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100699",
@@ -20794,6 +21712,8 @@
     "foto_codigo": "trillbe",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -20817,6 +21737,8 @@
     "foto_codigo": "triomphe-01",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200032",
@@ -20876,6 +21798,8 @@
     "foto_codigo": "triomphe-13",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200029",
@@ -20921,6 +21845,8 @@
     "foto_codigo": "triomphe-metal-04",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200027",
@@ -20959,6 +21885,8 @@
     "foto_codigo": "ve4361",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200223",
@@ -21032,6 +21960,8 @@
     "foto_codigo": "ve4405o",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200232",
@@ -21063,6 +21993,8 @@
     "foto_codigo": "ve4432u",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200228",
@@ -21101,6 +22033,8 @@
     "foto_codigo": "dg4438",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200230",
@@ -21139,6 +22073,8 @@
     "foto_codigo": "ve4469",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200236",
@@ -21170,6 +22106,8 @@
     "foto_codigo": "ve4473u",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200233",
@@ -21201,6 +22139,8 @@
     "foto_codigo": "ve4474u",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200234",
@@ -21239,6 +22179,8 @@
     "foto_codigo": "veo2264",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200237",
@@ -21270,6 +22212,8 @@
     "foto_codigo": "waimea-l-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200515",
@@ -21308,6 +22252,8 @@
     "foto_codigo": "waimea-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200511",
@@ -21360,6 +22306,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -21383,6 +22331,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100360",
@@ -21414,6 +22364,8 @@
     "foto_codigo": "wayfarer-5121",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101290",
@@ -21452,6 +22404,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100609",
@@ -21483,6 +22437,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": true,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100898",
@@ -21584,6 +22540,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100922",
@@ -21748,6 +22706,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100895",
@@ -21779,6 +22739,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100956",
@@ -21810,6 +22772,8 @@
     "foto_codigo": "wayfarer-folding-4105",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100984",
@@ -21904,6 +22868,8 @@
     "foto_codigo": "wayfarer-folding-4105v",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -21927,6 +22893,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100961",
@@ -21986,6 +22954,8 @@
     "foto_codigo": "wayfarer-ii-2185",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100970",
@@ -22031,6 +23001,8 @@
     "foto_codigo": "wayfarer-ii-evolve-2185",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100973",
@@ -22083,6 +23055,8 @@
     "foto_codigo": "wayfarer-light-ray-4210",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100988",
@@ -22121,6 +23095,8 @@
     "foto_codigo": "wayfarer-liteforce-4195",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100994",
@@ -22180,6 +23156,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100965",
@@ -22239,6 +23217,8 @@
     "foto_codigo": "wayfarer-meteor-2168",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101000",
@@ -22298,6 +23278,8 @@
     "foto_codigo": "wayfarer-meteor-evolve-2168",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101005",
@@ -22350,6 +23332,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100963",
@@ -22388,6 +23372,8 @@
     "foto_codigo": "wayfarer-oval-2242",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101159",
@@ -22419,6 +23405,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100969",
@@ -22457,6 +23445,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100935",
@@ -22621,6 +23611,8 @@
     "foto_codigo": "wayfarer-reverse-0502s",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100901",
@@ -22687,6 +23679,8 @@
     "foto_codigo": "rb2140-622",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101058",
@@ -22718,6 +23712,8 @@
     "foto_codigo": "wayfarer-way-2241",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "101060",
@@ -22756,6 +23752,8 @@
     "foto_codigo": "wings-3597",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100438",
@@ -22801,6 +23799,8 @@
     "foto_codigo": "xime-bio-based-3730",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100083",
@@ -22853,6 +23853,8 @@
     "foto_codigo": "yevi-bio-based-3728",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -22876,6 +23878,8 @@
     "foto_codigo": "zaya-4456",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100710",
@@ -22942,6 +23946,8 @@
     "foto_codigo": "zena-bio-based-4430",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100130",
@@ -23001,6 +24007,8 @@
     "foto_codigo": "zuri-bio-based-4455",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100029",
@@ -23060,6 +24068,8 @@
     "foto_codigo": "zuri-bio-based-4455-polarizado",
     "meli_item_id": null,
     "meli_permalink": null,
+    "fotos_ok": false,
+    "meli_items": [],
     "variantes": [
       {
         "sku": "100030",
