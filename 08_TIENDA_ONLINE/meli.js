@@ -166,7 +166,12 @@ async function handler(req, res, urlObj) {
 
     if (p === '/api/meli/conectar') {
       if (!cfg.app_id) return json(res, 400, { error: 'Primero cargá App ID y Secret' });
-      const u = `https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=${cfg.app_id}&redirect_uri=${encodeURIComponent(redirect())}`;
+      // el devcenter nuevo de MELI exige los scopes explícitos en la URL:
+      // sin offline_access no hay refresh token y el permiso se cae a las 6 h
+      const u = 'https://auth.mercadolibre.com.ar/authorization?response_type=code'
+        + `&client_id=${cfg.app_id}`
+        + `&redirect_uri=${encodeURIComponent(redirect())}`
+        + `&scope=${encodeURIComponent('offline_access read write')}`;
       res.writeHead(302, { Location: u });
       return res.end();
     }
