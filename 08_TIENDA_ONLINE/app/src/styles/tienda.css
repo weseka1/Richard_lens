@@ -539,7 +539,15 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
   -webkit-mask-image: radial-gradient(ellipse 68% 62% at 50% 48%, #000 48%, transparent 76%);
   mask-image: radial-gradient(ellipse 68% 62% at 50% 48%, #000 48%, transparent 76%);
 }
-.hero-cine-velo { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 42%, rgba(0, 0, 0, .62) 100%); pointer-events: none; -webkit-mask-image: radial-gradient(ellipse 68% 62% at 50% 48%, #000 48%, transparent 76%); mask-image: radial-gradient(ellipse 68% 62% at 50% 48%, #000 48%, transparent 76%); }
+/* velo de cine: sombra fuerte detrás del copy (izquierda-abajo) que se disuelve hacia el video */
+.hero-cine-velo {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(98deg, rgba(8, 8, 10, .78) 0%, rgba(8, 8, 10, .45) 30%, transparent 58%),
+    linear-gradient(180deg, transparent 45%, rgba(8, 8, 10, .55) 100%);
+  -webkit-mask-image: radial-gradient(ellipse 72% 66% at 50% 48%, #000 52%, transparent 80%);
+  mask-image: radial-gradient(ellipse 72% 66% at 50% 48%, #000 52%, transparent 80%);
+}
 @keyframes veloflota { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 /* título de cine: chico, abajo a la izquierda, el video manda */
 .hero-cine { align-items: flex-end; justify-content: flex-start; }
@@ -548,11 +556,12 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
   padding: 0 24px clamp(60px, 9vh, 110px) clamp(28px, 7vw, 110px);
   background: none; border: none; box-shadow: none;
 }
-.hero-cine-contenido .hero-sub { margin: 16px 0 24px !important; font-size: .95rem; }
+.hero-cine-contenido .hero-sub { margin: 16px 0 26px !important; font-size: 1rem; text-shadow: 0 1px 18px rgba(0, 0, 0, .55); }
 .hero-cine-contenido .hero-ctas { justify-content: flex-start !important; }
-.hero-cine-contenido h1 .l1 { font-size: clamp(2rem, 4vw, 3.2rem) !important; }
-.hero-cine-contenido h1 .l2 { font-size: clamp(2.5rem, 5.4vw, 4.4rem) !important; }
-.hero-cine-contenido .hero-drop-linea { color: rgba(255, 255, 255, .55); }
+.hero-cine-contenido h1 .l1 { font-size: clamp(2.4rem, 4.6vw, 3.8rem) !important; text-shadow: 0 2px 28px rgba(0, 0, 0, .5); }
+.hero-cine-contenido h1 .l2 { font-size: clamp(3rem, 6.2vw, 5.4rem) !important; text-shadow: 0 2px 32px rgba(0, 0, 0, .5); }
+.hero-cine-contenido .hero-kicker { text-shadow: 0 1px 14px rgba(0, 0, 0, .6); }
+.hero-cine-contenido .hero-drop-linea { color: rgba(255, 255, 255, .75); text-shadow: 0 1px 12px rgba(0, 0, 0, .6); }
 .hero-cine .glass-widget { left: auto; right: 4%; bottom: 8%; background: rgba(20, 20, 22, .5); border-color: rgba(255, 255, 255, .18); }
 .hero-cine .glass-nombre, .hero-cine .glass-precio { color: #fff; }
 .hero-cine .glass-kicker { color: rgba(255, 255, 255, .55); }
