@@ -206,7 +206,8 @@ nav a:hover, nav a.activa { color: var(--hueso); }
   transition: transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s;
 }
 /* avatares editoriales: cover con velo blanco abajo para la etiqueta */
-.cat-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 18%; transition: transform .6s cubic-bezier(.22, 1, .36, 1); }
+.cat-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 18%; transition: transform 1.1s cubic-bezier(.16, 1, .3, 1), filter 1.1s; }
+.cat-tile:hover img { transform: scale(1.18); filter: brightness(1.04); } /* zoom lente: te acerca a la persona */
 .cat-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 52%, rgba(255, 255, 255, .92) 88%); }
 /* fallback de producto recortado mientras falta el avatar */
 .cat-tile.tile-producto { background: linear-gradient(170deg, #FFFFFF 0%, #EFEFF2 100%); }
