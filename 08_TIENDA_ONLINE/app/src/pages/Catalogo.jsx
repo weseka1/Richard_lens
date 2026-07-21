@@ -6,6 +6,27 @@ import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
 import CardProducto from '../components/CardProducto.jsx';
 
 const ESTADOS = [['disponible', 'Stock ya'], ['a_pedido', 'A pedido']];
+const POR_PAGINA = 24; // el navegador se ahoga si pintamos los 505 juntos (cada card pide sus fotos)
+
+/* paginador: ‹ 1 2 3 … 21 › — siempre muestra primera, última y las vecinas */
+function Paginador({ pagina, paginas, onIr }) {
+  if (paginas <= 1) return null;
+  const nums = [];
+  for (let i = 1; i <= paginas; i++) {
+    if (i === 1 || i === paginas || Math.abs(i - pagina) <= 1) nums.push(i);
+    else if (nums[nums.length - 1] !== '…') nums.push('…');
+  }
+  return (
+    <div className="paginador">
+      <button className="pag-btn" disabled={pagina === 1} onClick={() => onIr(pagina - 1)}>‹</button>
+      {nums.map((n, i) => n === '…'
+        ? <span key={'p' + i} className="pag-puntos">…</span>
+        : <button key={n} className={'pag-btn' + (n === pagina ? ' activo' : '')} onClick={() => onIr(n)}>{n}</button>
+      )}
+      <button className="pag-btn" disabled={pagina === paginas} onClick={() => onIr(pagina + 1)}>›</button>
+    </div>
+  );
+}
 
 function Chips({ items, valor, onCambio, labels = {} }) {
   return (
@@ -40,7 +61,11 @@ export default function Catalogo() {
   const promo = params.get('promo');
   const q = (params.get('q') || '').toLowerCase();
 
+  const [pagina, setPagina] = useState(1);
+
   useEffect(() => { setCanal(params.get('canal')); setMarca(params.get('marca')); }, [params]);
+  // cualquier filtro nuevo vuelve a la página 1: si no, quedás mirando una página que ya no existe
+  useEffect(() => { setPagina(1); }, [q, marca, forma, estado, canal, genero, orden, promo]);
   useEffect(() => { track('visita', 'catalogo' + (canal ? ':cajafuerte' : promo ? ':promo' : orden ? ':vendidos' : '')); }, []);
 
   const [tituloPagina, bajada] = TITULOS[genero || (promo ? 'promo' : orden === 'vendidos' ? 'vendidos' : '')] ||
@@ -77,7 +102,12 @@ export default function Catalogo() {
       ? (b.destacado - a.destacado) || (b.stock - a.stock)
       : rango(a) - rango(b) || (b.destacado - a.destacado) || (b.stock - a.stock) || a.marca.localeCompare(b.marca)
   );
-  useReveals(lista.length);
+
+  const paginas = Math.max(1, Math.ceil(lista.length / POR_PAGINA));
+  const pagActual = Math.min(pagina, paginas);
+  const visibles = lista.slice((pagActual - 1) * POR_PAGINA, pagActual * POR_PAGINA);
+  const irA = n => { setPagina(n); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  useReveals(visibles.length + pagActual);
 
   return (
     <main className="wrap" style={{ paddingTop: 130 }}>
@@ -105,8 +135,15 @@ export default function Catalogo() {
         <Chips items={ESTADOS.map(e => e[0])} valor={estado} onCambio={setEstado} labels={Object.fromEntries(ESTADOS)} />
       </div>
 
-      <div className="grid-productos" style={{ marginBottom: 110 }}>
-        {lista.map((p, i) => <CardProducto key={p.id} p={p} i={i} cfg={cfg} />)}
+      {lista.length > 0 && (
+        <p className="catalogo-conteo">
+          {lista.length} {lista.length === 1 ? 'modelo' : 'modelos'}
+          {paginas > 1 && <> · página {pagActual} de {paginas}</>}
+        </p>
+      )}
+
+      <div className="grid-productos" style={{ marginBottom: 40 }}>
+        {visibles.map((p, i) => <CardProducto key={p.id} p={p} i={i} cfg={cfg} />)}
         {productos && lista.length === 0 && (
           <p style={{ color: 'var(--hueso-60)', gridColumn: '1/-1', padding: '40px 0' }}>
             No hay resultados con esos filtros. Lo que buscás seguro se consigue:{' '}
@@ -115,6 +152,10 @@ export default function Catalogo() {
             </BotonWA>.
           </p>
         )}
+      </div>
+
+      <div style={{ marginBottom: 110 }}>
+        <Paginador pagina={pagActual} paginas={paginas} onIr={irA} />
       </div>
     </main>
   );

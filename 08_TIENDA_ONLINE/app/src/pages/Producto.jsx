@@ -7,6 +7,9 @@ import CardProducto, { Badge, TileMarca, popColor } from '../components/CardProd
 import { agregar, precioLista } from '../lib/carrito.js';
 import Probador from '../components/Probador.jsx';
 
+/* mismo color escrito distinto ("marrón degradé" / "marron degrade") tiene que matchear */
+const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim();
+
 const PILL_STOCK = {
   'STOCK': ['Stock ya', '#C6A75E', '#0A0A0B'],
   'POCO STOCK': ['Quedan pocos', '#F4F1EA', '#0A0A0B'],
@@ -65,11 +68,14 @@ export default function Producto() {
   if (!p) return <main className="wrap" style={{ paddingTop: 150, minHeight: '60vh' }} />;
 
   const v = variante || p.variantes?.[0];
-  // si la auditoría IA mapeó fotos a colores, la galería respeta la variante elegida
+  // si la auditoría IA mapeó fotos a colores, la galería respeta la variante elegida.
+  // Comparamos normalizado: el proveedor escribe "Carey/marron degrade" y la foto
+  // puede estar etiquetada "Carey/marrón degradé" — sin esto no matchea nunca.
   const fotosDeColor = v?.color
-    ? fotos.filter(f => mapaFotos[f.split('/').pop()] === v.color)
+    ? fotos.filter(f => norm(mapaFotos[f.split('/').pop()]) === norm(v.color))
     : [];
   const galeria = fotosDeColor.length ? fotosDeColor : fotos;
+  const variosColores = new Set((p.variantes || []).map(x => x.color)).size > 1;
   const msgWA = v
     ? `Hola, me interesa el ${p.marca} ${p.modelo} en ${v.color} (${v.codigo}, talle ${v.talle}). ¿Precio?`
     : `Hola, me interesa el ${p.marca} ${p.modelo} (${p.codigo}). ¿Precio y stock?`;
@@ -101,8 +107,8 @@ export default function Producto() {
               </>
             )}
           </div>
-          {v?.color && Object.keys(mapaFotos || {}).length > 0 && !fotosDeColor.length && (
-            <p className="galeria-aviso">📷 Las fotos exactas de "{v.color}" te las pasamos por WhatsApp — estas son de la familia del modelo.</p>
+          {v?.color && variosColores && !fotosDeColor.length && fotos.length > 0 && (
+            <p className="galeria-aviso">📷 Estas fotos son de la familia del modelo, no todas del color "{v.color}". Las fotos exactas te las pasamos por WhatsApp antes de que pagues.</p>
           )}
           {zoom && galeria.length > 0 && (
             <div className="lightbox" onClick={() => setZoom(false)}>

@@ -778,6 +778,19 @@ main, header, footer { position: relative; z-index: 2; } /* ojo: jamás pisar el
   .hero { padding-top: 125px; }
 }
 
+/* ---------- paginador del catálogo ---------- */
+.catalogo-conteo { font-size: .78rem; color: var(--gris-label); margin: 4px 0 22px; letter-spacing: .02em; }
+.paginador { display: flex; gap: 8px; justify-content: center; align-items: center; flex-wrap: wrap; }
+.pag-btn {
+  min-width: 40px; height: 40px; padding: 0 12px; border-radius: 999px;
+  background: #fff; border: 1px solid var(--linea-suave); color: var(--hueso);
+  font-family: var(--texto); font-size: .84rem; font-weight: 500; transition: all .22s;
+}
+.pag-btn:hover:not(:disabled) { border-color: var(--hueso); transform: translateY(-1px); }
+.pag-btn.activo { background: #1D1D1F; color: #fff; border-color: #1D1D1F; }
+.pag-btn:disabled { opacity: .35; cursor: default; }
+.pag-puntos { color: var(--gris-label); padding: 0 2px; }
+
 /* ---------- responsive v2: full mobile — iOS, Android, tablet, PC angosta ---------- */
 @media (max-width: 900px) {
   .wrap { padding: 0 18px; }

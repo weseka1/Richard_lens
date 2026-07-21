@@ -1,5 +1,65 @@
 [
   {
+    "fecha": "2026-07-21T15:57:45.664Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T15:54:05.270Z",
+    "tipo": "visita_producto",
+    "detalle": "ve4361"
+  },
+  {
+    "fecha": "2026-07-21T15:53:55.753Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T15:53:33.954Z",
+    "tipo": "visita_producto",
+    "detalle": "dipacific-b2f"
+  },
+  {
+    "fecha": "2026-07-21T15:53:19.991Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T15:53:17.206Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T15:53:17.167Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T15:52:24.451Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T15:52:09.721Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T15:51:52.681Z",
+    "tipo": "visita_producto",
+    "detalle": "cel-triomphe-rhinestone-01"
+  },
+  {
+    "fecha": "2026-07-21T15:51:31.888Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T14:48:14.927Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
     "fecha": "2026-07-21T14:48:05.598Z",
     "tipo": "visita_producto",
     "detalle": "3669-evolve"
