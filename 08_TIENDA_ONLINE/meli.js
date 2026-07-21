@@ -19,6 +19,25 @@ const baseUrl = () => {
 const REDIRECT_PATH = '/api/meli/callback';
 const redirect = () => (baseUrl() || 'http://localhost:5250') + REDIRECT_PATH;
 
+const supa = require('./supa.js');
+
+/* Los tokens viven en Supabase, no en el disco: Render borra el disco en cada
+ * deploy y se perdía la conexión. Cache en memoria para no pegarle a la base
+ * en cada request. */
+let tokensNube = null, tokensLeidos = false;
+async function tokensDeLaNube() {
+  if (tokensLeidos) return tokensNube;
+  tokensLeidos = true;
+  if (!supa.activo()) return null;
+  try { tokensNube = await supa.secretoGet('meli_tokens'); }
+  catch (e) { console.error('[meli] no pude leer tokens de la nube:', e.message); }
+  return tokensNube;
+}
+function guardarTokens(t) {
+  tokensNube = t; tokensLeidos = true;
+  if (supa.activo()) supa.secretoSet('meli_tokens', t).catch(e => console.error('[meli] no pude guardar tokens:', e.message));
+}
+
 const leerArchivo = (a, fb) => { try { return JSON.parse(fs.readFileSync(DATA(a), 'utf8')); } catch { return fb; } };
 /* En la nube meli.json no viaja (está gitignoreado): las credenciales entran
  * por variables de entorno y los tokens se guardan en el disco del servidor. */
@@ -44,22 +63,31 @@ const body = req => new Promise((ok, err) => {
 });
 
 // ---------- tokens ----------
+/* Los busca en el disco (local) y si no, en la nube (Render). */
+async function tokensActuales() {
+  const cfg = leer('meli.json', {});
+  return cfg.tokens || await tokensDeLaNube();
+}
+
 async function token() {
   const cfg = leer('meli.json', {});
-  if (!cfg.tokens) throw new Error('MELI no conectado');
-  if (Date.now() < (cfg.tokens.expira || 0) - 60000) return cfg.tokens.access_token;
+  const tk = await tokensActuales();
+  if (!tk) throw new Error('MELI no conectado');
+  if (Date.now() < (tk.expira || 0) - 60000) return tk.access_token;
   const r = await fetch(`${API}/oauth/token`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({
       grant_type: 'refresh_token', client_id: cfg.app_id,
-      client_secret: cfg.secret, refresh_token: cfg.tokens.refresh_token
+      client_secret: cfg.secret, refresh_token: tk.refresh_token
     })
   });
   if (!r.ok) throw new Error('No se pudo refrescar el token (' + r.status + ') — reconectá desde el panel');
   const t = await r.json();
-  cfg.tokens = { access_token: t.access_token, refresh_token: t.refresh_token, user_id: t.user_id, expira: Date.now() + t.expires_in * 1000 };
+  const nuevos = { access_token: t.access_token, refresh_token: t.refresh_token, user_id: t.user_id, expira: Date.now() + t.expires_in * 1000 };
+  cfg.tokens = nuevos;
   guardar('meli.json', cfg);
+  guardarTokens(nuevos);
   return t.access_token;
 }
 
@@ -279,8 +307,9 @@ async function handler(req, res, urlObj) {
   try {
     if (p === '/api/meli/estado') {
       let user = null;
-      if (cfg.tokens) { try { user = (await api('/users/me')).nickname; } catch {} }
-      return json(res, 200, { configurada: !!cfg.app_id, conectada: !!cfg.tokens && !!user, user });
+      const tk = await tokensActuales();
+      if (tk) { try { user = (await api('/users/me')).nickname; } catch {} }
+      return json(res, 200, { configurada: !!cfg.app_id, conectada: !!tk && !!user, user });
     }
 
     if (p === '/api/meli/config' && req.method === 'POST') {
@@ -373,6 +402,7 @@ async function handler(req, res, urlObj) {
       if (!r.ok) return json(res, 400, { error: 'OAuth falló', detalle: t });
       cfg.tokens = { access_token: t.access_token, refresh_token: t.refresh_token, user_id: t.user_id, expira: Date.now() + t.expires_in * 1000 };
       guardar('meli.json', cfg);
+      guardarTokens(cfg.tokens);   // que sobrevivan al próximo deploy
       res.writeHead(302, { Location: '/panel/meli' });
       return res.end();
     }

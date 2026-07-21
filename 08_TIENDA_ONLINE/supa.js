@@ -58,5 +58,10 @@ module.exports = {
   upsertVariantes: seguro(filas => rpc('rl_admin_upsert_variantes', { filas })),
   borrarProducto: seguro(id => rpc('rl_admin_delete_producto', { p_id: id })),
   pedidoUpdate: seguro((localId, campos) => rpc('rl_admin_pedido_update', { p_local: localId, campos })),
-  pedidoDelete: seguro(localId => rpc('rl_admin_pedido_delete', { p_local: localId }))
+  pedidoDelete: seguro(localId => rpc('rl_admin_pedido_delete', { p_local: localId })),
+  /* secretos que tienen que sobrevivir al deploy: el disco de Render es
+   * efímero y cada redeploy borraba los tokens de MELI. Van sin `seguro`
+   * porque acá sí necesitamos enterarnos si fallan. */
+  secretoGet: nombre => rpc('rl_admin_secreto_get', { p_nombre: nombre }),
+  secretoSet: (nombre, valor) => rpc('rl_admin_secreto_set', { p_nombre: nombre, p_valor: valor })
 };
