@@ -594,6 +594,25 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
   padding: 0 24px clamp(60px, 9vh, 110px) clamp(28px, 7vw, 110px);
   background: none; border: none; box-shadow: none;
 }
+/* cristal que barre el copy: una lámina de vidrio pasa por encima del texto y lo
+ * refracta (blur + brillo). 7.09s = un tercio exacto del loop del video (21.27s),
+ * así el barrido cae siempre en los mismos frames y parece parte de la escena */
+.hero-cine-contenido::before {
+  content: ''; position: absolute; top: -12%; bottom: -6%; left: 0; width: 34%;
+  z-index: 3; pointer-events: none;
+  transform: skewX(-16deg) translateX(-160%);
+  background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, .14) 32%, rgba(255, 255, 255, .32) 50%, rgba(255, 255, 255, .14) 68%, transparent 100%);
+  -webkit-backdrop-filter: blur(5px) saturate(1.4) brightness(1.07);
+  backdrop-filter: blur(5px) saturate(1.4) brightness(1.07);
+  animation: cristalpasa 7.09s cubic-bezier(.45, 0, .25, 1) infinite;
+}
+@keyframes cristalpasa {
+  0% { transform: skewX(-16deg) translateX(-160%); opacity: 0; }
+  6% { opacity: 1; }
+  34% { transform: skewX(-16deg) translateX(360%); opacity: 1; }
+  40%, 100% { transform: skewX(-16deg) translateX(360%); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-cine-contenido::before { animation: none; opacity: 0; } }
 .hero-cine-contenido .hero-sub { margin: 16px 0 26px !important; font-size: 1rem; text-shadow: 0 1px 16px rgba(245, 245, 247, .9); }
 .hero-cine-contenido .hero-ctas { justify-content: flex-start !important; }
 .hero-cine-contenido h1 .l1 { font-size: clamp(2.4rem, 4.6vw, 3.8rem) !important; text-shadow: 0 2px 24px rgba(245, 245, 247, .85); }
@@ -744,4 +763,49 @@ main, header, footer { position: relative; z-index: 2; } /* ojo: jamás pisar el
   .producto-layout { grid-template-columns: 1fr; gap: 32px; padding-top: 140px; }
   .seccion { padding: 64px 0; }
   .hero { padding-top: 125px; }
+}
+
+/* ---------- responsive v2: full mobile — iOS, Android, tablet, PC angosta ---------- */
+@media (max-width: 900px) {
+  .wrap { padding: 0 18px; }
+  .header-in { padding: 12px 16px; }
+  .logo-text { font-size: 1rem; }
+  /* el tilt 3D en pantallas chicas deforma el hero: quieto y acoplado */
+  .hero-tilt { transform: none !important; }
+  .hero-cine { min-height: min(74vh, 620px); min-height: min(74svh, 620px); }
+  .hero-cine-contenido { max-width: 100%; padding: 0 20px 44px 22px; }
+  .hero-cine .glass-widget { display: none; } /* en celu tapaba el copy */
+}
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+  .hero { padding-top: 112px; }
+  .hero-cine-contenido h1 .l1 { font-size: clamp(2rem, 9vw, 2.6rem) !important; }
+  .hero-cine-contenido h1 .l2 { font-size: clamp(2.6rem, 12vw, 3.4rem) !important; }
+  .hero-cine-contenido .hero-sub { font-size: .92rem; }
+  /* grillas de venta: 2 columnas como Nike mobile, nada de columna única eterna */
+  .grid-productos { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .card-info { padding: 12px 10px 16px; }
+  .card-modelo { font-size: .86rem; }
+  .card-detalle { font-size: .66rem; }
+  .precio { font-size: .92rem; }
+  .precio-lista, .cuotas { font-size: .64rem; }
+  .urgencia, .entrega-ya { font-size: .64rem; }
+  .card-num { top: 8px; left: 8px; padding: 4px 8px; }
+  .card-badge { top: 8px; right: 8px; padding: 5px 8px; }
+  .btn-cart { padding: 9px 14px; font-size: .7rem; }
+  .grid-categorias { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .cat-nombre { font-size: 1.02rem; padding: 0 14px 2px; }
+  .cat-flecha { font-size: .7rem; padding: 0 14px 14px; }
+  .beneficios { gap: 6px; }
+  .beneficios span { padding: 6px 11px; font-size: .66rem; }
+  .sec-fila { align-items: flex-start; flex-direction: column; }
+  .promo-banner { flex-direction: column; align-items: flex-start; }
+  .rich3d { min-height: 460px; padding: 60px 18px 70px; }
+  .ig-mini-grid { max-width: 100%; gap: 10px; }
+  .ig-mini { padding: 10px 12px; }
+  .ig-mini img { height: 74px; }
+}
+@media (max-width: 400px) {
+  .anuncio-in span { font-size: .6rem; }
+  .hero-cine-contenido { padding: 0 16px 36px 18px; }
 }

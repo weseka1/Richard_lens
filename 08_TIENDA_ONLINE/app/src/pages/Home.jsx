@@ -13,8 +13,8 @@ const MARCAS = ['RAY-BAN', 'OAKLEY', 'PRADA', 'GUCCI', 'DIOR', 'LOUIS VUITTON', 
  * Soltar cat-mujer.jpg / cat-vendidos.jpg / cat-promo.jpg en app/public/img/ y entran solos;
  * mientras falten, cae al recorte de producto. */
 const CATEGORIAS = [
-  { titulo: 'Gafas Hombre', href: '/catalogo?genero=hombre', foto: '/img/cat-hombre.jpg', fallback: '/img/tryon/wayfarer-classic-2140.png' },
-  { titulo: 'Gafas Mujer', href: '/catalogo?genero=mujer', foto: '/img/cat-mujer-estudio.jpg', fallback: '/img/cat-mujer.jpg' },
+  { titulo: 'Gafas Ray-Ban', href: '/catalogo?marca=Ray-Ban', foto: '/img/cat-hombre.jpg', fallback: '/img/tryon/wayfarer-classic-2140.png' },
+  { titulo: 'Gafas Diseñador', href: '/catalogo?canal=WEB', foto: '/img/cat-disenador.jpg', fallback: '/img/cat-mujer-estudio.jpg' },
   { titulo: 'Más Vendidos', href: '/catalogo?orden=vendidos', foto: '/img/cat-vendidos.jpg', fallback: '/img/tryon/aviador-espejado-3025.png' },
   { titulo: 'En Promoción', href: '/catalogo?promo=1', foto: '/img/cat-promo.jpg', fallback: '/img/tryon/wayfarer-espejado-2140.png' }
 ];

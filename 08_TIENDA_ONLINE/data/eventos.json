@@ -1,5 +1,55 @@
 [
   {
+    "fecha": "2026-07-21T03:47:59.769Z",
+    "tipo": "visita_producto",
+    "detalle": "ow-milano"
+  },
+  {
+    "fecha": "2026-07-21T03:47:51.123Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T03:47:30.086Z",
+    "tipo": "visita_producto",
+    "detalle": "big-fendigraphy"
+  },
+  {
+    "fecha": "2026-07-21T03:46:10.305Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T03:29:13.883Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T03:25:43.590Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T03:23:18.864Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-21T03:22:53.372Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-21T03:22:41.439Z",
+    "tipo": "visita_producto",
+    "detalle": "3546v"
+  },
+  {
+    "fecha": "2026-07-21T03:22:14.298Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-21T03:19:36.189Z",
     "tipo": "visita",
     "detalle": "home"
