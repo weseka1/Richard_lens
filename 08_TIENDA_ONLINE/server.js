@@ -222,6 +222,18 @@ const server = http.createServer(async (req, res) => {
         return json(res, 200, { ok: true });
       }
 
+      // asignar color a una foto DESDE EL PANEL (escribe fotos.json — mismo formato que la auditoría IA)
+      const mColorF = p.match(/^\/api\/fotos-color\/([\w-]+)$/);
+      if (mColorF && req.method === 'POST') {
+        const { archivo, color } = await body(req);
+        const ruta = path.join(FOTOS_DIR, mColorF[1], 'fotos.json');
+        let mapa = {};
+        try { mapa = JSON.parse(fs.readFileSync(ruta, 'utf8')); } catch {}
+        if (color) mapa[archivo] = color; else delete mapa[archivo];
+        fs.writeFileSync(ruta, JSON.stringify(mapa, null, 2), 'utf8');
+        return json(res, 200, { ok: true });
+      }
+
       // mapa foto→color de variante (lo escribe la auditoría IA como fotos.json en cada carpeta)
       const mMapa = p.match(/^\/api\/fotos-mapa\/([\w-]+)$/);
       if (mMapa) {

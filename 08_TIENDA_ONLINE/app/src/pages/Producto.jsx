@@ -25,6 +25,7 @@ export default function Producto() {
   const [variante, setVariante] = useState(null);
   const [probador, setProbador] = useState(false);
   const [zoom, setZoom] = useState(false);
+  useEffect(() => { setFotoActiva(0); }, [variante?.sku]); // al cambiar color, la galería arranca en su primera foto
 
   const p = (productos || []).find(x => x.id === id);
 

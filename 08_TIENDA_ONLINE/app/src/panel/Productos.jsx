@@ -45,12 +45,22 @@ export default function Productos() {
   const totalPags = Math.max(1, Math.ceil(filtrada.length / POR_PAGINA));
   const visibles = filtrada.slice(pag * POR_PAGINA, (pag + 1) * POR_PAGINA);
 
-  /* ---- gestor de fotos ---- */
+  /* ---- gestor de fotos (con asignación de color por foto → la ficha obedece) ---- */
   const [fotosDe, setFotosDe] = useState(null);   // producto en edición de fotos
   const [fotos, setFotos] = useState([]);
+  const [mapaColores, setMapaColores] = useState({});
   async function abrirFotos(p) {
     setFotosDe(p);
     setFotos(await fetch('/api/fotos/' + p.foto_codigo).then(r => r.json()).catch(() => []));
+    setMapaColores(await fetch('/api/fotos-mapa/' + p.foto_codigo).then(r => r.json()).catch(() => ({})));
+  }
+  async function asignarColor(src, color) {
+    const archivo = src.split('/').pop();
+    await fetch('/api/fotos-color/' + fotosDe.foto_codigo, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ archivo, color: color || null })
+    });
+    setMapaColores(m => { const n = { ...m }; if (color) n[archivo] = color; else delete n[archivo]; return n; });
   }
   async function subirFotos(e) {
     for (const f of e.target.files) {
@@ -167,14 +177,26 @@ export default function Productos() {
         <div className="modal-fondo abierto" onClick={e => e.target === e.currentTarget && setFotosDe(null)}>
           <div className="modal-caja">
             <h2>Fotos — {fotosDe.marca} {fotosDe.modelo}</h2>
-            <p className="ayuda">Las mismas fotos alimentan la tienda, el probador y MercadoLibre.</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))', gap: 10, margin: '14px 0 18px' }}>
-              {fotos.map(src => (
-                <div key={src} style={{ position: 'relative' }}>
-                  <img src={src} alt="" style={{ width: '100%', aspectRatio: '1', objectFit: 'contain', background: '#fff', borderRadius: 10, border: '1px solid rgba(0,0,0,.08)' }} />
-                  <button className="btn-mini" style={{ position: 'absolute', top: 4, right: 4 }} onClick={() => borrarFoto(src)}>×</button>
-                </div>
-              ))}
+            <p className="ayuda">Asignale el color a cada foto: cuando el cliente elige ese color en la ficha, ve ESA foto. Las mismas fotos alimentan tienda, probador y MercadoLibre.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 12, margin: '14px 0 18px' }}>
+              {fotos.map(src => {
+                const archivo = src.split('/').pop();
+                const coloresProducto = [...new Set((fotosDe.variantes || []).map(v => v.color))];
+                return (
+                  <div key={src} style={{ position: 'relative' }}>
+                    <img src={src} alt="" style={{ width: '100%', aspectRatio: '1', objectFit: 'contain', background: '#fff', borderRadius: 10, border: mapaColores[archivo] ? '2px solid #1D7A3E' : '1px solid rgba(0,0,0,.08)' }} />
+                    <button className="btn-mini" style={{ position: 'absolute', top: 4, right: 4 }} onClick={() => borrarFoto(src)}>×</button>
+                    <select
+                      style={{ marginTop: 6, fontSize: '.72rem', padding: '5px 8px' }}
+                      value={mapaColores[archivo] || ''}
+                      onChange={e => asignarColor(src, e.target.value)}
+                    >
+                      <option value="">— sin color —</option>
+                      {coloresProducto.map(c => <option key={c} value={c}>{c}</option>)}
+                    </select>
+                  </div>
+                );
+              })}
               {!fotos.length && <p className="ayuda">Sin fotos todavía — subí las primeras.</p>}
             </div>
             <div className="modal-botones" style={{ justifyContent: 'space-between' }}>

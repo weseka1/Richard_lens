@@ -1,5 +1,20 @@
 [
   {
+    "fecha": "2026-07-21T02:07:14.739Z",
+    "tipo": "visita_producto",
+    "detalle": "ow-milano"
+  },
+  {
+    "fecha": "2026-07-21T02:07:10.228Z",
+    "tipo": "visita",
+    "detalle": "catalogo:cajafuerte"
+  },
+  {
+    "fecha": "2026-07-21T02:06:31.625Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-20T21:56:48.091Z",
     "tipo": "visita",
     "detalle": "home"
