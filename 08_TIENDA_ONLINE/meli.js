@@ -204,28 +204,41 @@ async function publicar(producto, cfgTienda, opciones = {}) {
       { id: 'WARRANTY_TYPE', value_name: 'Garantía del vendedor' },
       { id: 'WARRANTY_TIME', value_name: '30 días' }
     ],
-    shipping: { mode: 'me2', local_pick_up: false, free_shipping: true }
+    shipping: { mode: 'me2', local_pick_up: false }
   };
 
-  /* una variante por color con stock; cada una con sus fotos si están mapeadas */
-  const colores = [...new Set((producto.variantes || []).filter(STOCK_VIVO).map(v => v.color))].filter(Boolean);
+  /* Una variante por color, PERO solo con los colores que tienen foto propia.
+   * MELI rechaza la publicación si dos variantes comparten la misma foto
+   * (COLOR es defines_picture), y además mostrarle al comprador un color con
+   * la foto de otro es pedir un reclamo. Los colores sin foto no se publican. */
   const tope = Number(opciones.stockMax || TOPE_STOCK);
+  const usadas = new Set();
+  const conFoto = [];
+  for (const v of (producto.variantes || []).filter(STOCK_VIVO)) {
+    if (conFoto.some(x => x.color === v.color)) continue;
+    const suyas = files
+      .filter(f => norm(mapa[sinExt(f)]) === norm(v.color))
+      .map(f => subidas[f])
+      .filter(id => id && !usadas.has(id));
+    if (!suyas.length) continue;
+    suyas.forEach(id => usadas.add(id));
+    conFoto.push({ color: v.color, sku: v.sku, stock: v.stock, fotos: suyas });
+  }
 
-  if (colores.length > 1) {
-    base.variations = colores.map(color => {
-      const suyas = files.filter(f => norm(mapa[sinExt(f)]) === norm(color)).map(f => subidas[f]).filter(Boolean);
-      const v = (producto.variantes || []).find(x => x.color === color) || {};
-      return {
-        attribute_combinations: [{ id: 'COLOR', value_name: color }],
-        available_quantity: Math.min(v.stock === 'POCO STOCK' ? 2 : tope, tope),
-        price: precio,
-        picture_ids: suyas.length ? suyas : [pictures[0].id],
-        attributes: v.sku ? [{ id: 'SELLER_SKU', value_name: String(v.sku) }] : []
-      };
-    });
+  if (conFoto.length > 1) {
+    base.variations = conFoto.map(c => ({
+      attribute_combinations: [{ id: 'COLOR', value_name: c.color }],
+      available_quantity: Math.min(c.stock === 'POCO STOCK' ? 2 : tope, tope),
+      price: precio,
+      picture_ids: c.fotos,
+      attributes: c.sku ? [{ id: 'SELLER_SKU', value_name: String(c.sku) }] : []
+    }));
   } else {
+    // un solo color con fotos: publicación simple, sin variantes
     base.price = precio;
     base.available_quantity = Math.min(Math.max(1, producto.stock || 1), tope);
+    const solo = conFoto[0];
+    if (solo) base.attributes.push({ id: 'COLOR', value_name: solo.color });
   }
 
   const item = await api('/items', 'POST', base);
