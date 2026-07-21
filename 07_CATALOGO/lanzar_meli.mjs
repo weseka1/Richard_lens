@@ -25,13 +25,37 @@ const bolsillo = (precio, costo) => precio - precio * MELI - ENVIO - (precio - p
 const plata = n => '$' + Math.round(n).toLocaleString('es-AR');
 const redondear = n => Math.round(n / 1000) * 1000 - 100;
 
+/* Títulos con la fórmula que YA le vendió a Juani:
+ *   "Anteojos De Sol Rayban X Escudería Ferrari 3674m Gafas Rb"
+ * Escribe "Rayban" pegado, que es como busca la gente, mete el número de
+ * modelo (que es lo que se tipea) y rellena con palabras clave. Nada de
+ * "Ray-Ban · Ferrari Scuderia Ferrari..." que repite y se corta.  */
+function armarTitulo(p, gancho) {
+  const esFerrari = /ferrari/i.test(p.marca) || /ferrari/i.test(p.modelo);
+  // el número de modelo es lo que la gente escribe en el buscador
+  const codigo = (String(p.modelo).match(/\d{3,4}\s*[a-zA-Z]?/) || [''])[0].replace(/\s+/g, '').toLowerCase();
+  const limpio = String(p.modelo)
+    .replace(/scuderia\s+ferrari/ig, '')
+    .replace(/\d{3,4}\s*[a-zA-Z]?/g, '')
+    .replace(/\s+/g, ' ').trim();
+
+  const base = esFerrari
+    ? `Anteojos De Sol Rayban X Escudería Ferrari ${codigo}`
+    : `Anteojos De Sol Rayban ${limpio} ${codigo}`.replace(/\s+/g, ' ');
+
+  // agrega el gancho solo si entra entero: cortar a mitad de palabra queda feo
+  const full = `${base} ${gancho}`.replace(/\s+/g, ' ').trim();
+  if (full.length <= 60) return full;
+  return base.length <= 60 ? base.slice(0, 60).trim() : base.slice(0, 60).replace(/\s\S*$/, '');
+}
+
 /* la escalera: multiplicador sobre el piso + el gancho que va en el título */
 const ESCALERA = [
-  { m: 1.28, sufijo: 'Originales Italy',     stock: 3,  listing: 'gold_special' },
-  { m: 1.45, sufijo: 'Con Estuche Original', stock: 5,  listing: 'gold_special' },
-  { m: 1.62, sufijo: 'Garantia Oficial',     stock: 8,  listing: 'gold_special' },
-  { m: 1.82, sufijo: 'Envio Gratis',         stock: 8,  listing: 'gold_special' },
-  { m: 2.05, sufijo: 'Polarizados Uv400',    stock: 5,  listing: 'gold_pro' }
+  { m: 1.28, sufijo: 'Gafas Rb',        stock: 3, listing: 'gold_special' },
+  { m: 1.45, sufijo: 'Italy Rb',        stock: 5, listing: 'gold_special' },
+  { m: 1.62, sufijo: 'Originales',      stock: 8, listing: 'gold_special' },
+  { m: 1.82, sufijo: 'Con Estuche',     stock: 8, listing: 'gold_special' },
+  { m: 2.05, sufijo: 'Uv400 Garantia',  stock: 5, listing: 'gold_pro' }
 ];
 
 /* Ferrari primero: son los que vendieron. Se publican solo los que tengan
@@ -68,7 +92,7 @@ for (const id of (soloModelo ? [soloModelo] : MODELOS)) {
   for (const [i, e] of ESCALERA.entries()) {
     if (soloEscalon && soloEscalon !== i + 1) continue;
     const precio = redondear(piso(costo) * e.m);
-    const titulo = `Anteojos De Sol ${p.marca.replace(' · ', ' ')} ${p.modelo} ${e.sufijo}`.slice(0, 60);
+    const titulo = armarTitulo(p, e.sufijo);
     const g = bolsillo(precio, costo);
     facturacionPotencial += precio;
 
