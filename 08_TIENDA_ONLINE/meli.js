@@ -109,6 +109,9 @@ async function api(ruta, metodo = 'GET', datos) {
 }
 
 // ---------- publicar ----------
+/* último payload enviado a MELI, para poder mostrarlo cuando rebota */
+let ultimoPayload = null;
+
 const STOCK_VIVO = v => v.stock === 'STOCK' || v.stock === 'POCO STOCK';
 const TOPE_STOCK = 5;   // conservador a propósito: una cancelación por falta de
                         // stock te funde la reputación, y somos dropshipping
@@ -180,8 +183,13 @@ async function publicar(producto, cfgTienda, opciones = {}) {
   const { dir, files, mapa, sinExt } = fotosDe(producto.foto_codigo);
   if (!files.length) throw new Error('Sin fotos locales para subir');
 
-  const disc = await api(`/sites/MLA/domain_discovery/search?q=${encodeURIComponent(`${producto.marca} ${producto.modelo} anteojos de sol`)}&limit=1`);
-  const category_id = disc[0]?.category_id || 'MLA417128';   // Anteojos de Sol
+  /* Anteojos de Sol, verificada contra la API. No la adivinamos con
+   * domain_discovery: con títulos como "Ray-Ban · Ferrari Scuderia..."
+   * devuelve categorías de merchandising y la publicación se cae. */
+  const ANTEOJOS_SOL = 'MLA417128';
+  const ARMAZONES = 'MLA457893';
+  const category_id = opciones.categoria ||
+    (/armaz|recetad|optic/i.test(producto.forma || '') ? ARMAZONES : ANTEOJOS_SOL);
 
   const subidas = await subirFotos(dir, files);
   const pictures = files.filter(f => subidas[f]).map(f => ({ id: subidas[f] }));
@@ -241,6 +249,7 @@ async function publicar(producto, cfgTienda, opciones = {}) {
     if (solo) base.attributes.push({ id: 'COLOR', value_name: solo.color });
   }
 
+  ultimoPayload = base;
   const item = await api('/items', 'POST', base);
 
   await api(`/items/${item.id}/description`, 'POST', {
@@ -463,7 +472,13 @@ async function handler(req, res, urlObj) {
         return json(res, 400, { error: 'Ya existe una publicación con ese título' });
 
       const cfgTienda = leer('config.json', {});
-      const r = await publicar(producto, cfgTienda, { precio, titulo: tit, stockMax, listing });
+      let r;
+      try { r = await publicar(producto, cfgTienda, { precio, titulo: tit, stockMax, listing }); }
+      catch (e) {
+        // devolver lo que se intentó mandar: sin esto MELI dice sólo
+        // "Validation error" y no hay forma de saber qué campo lo rompió
+        return json(res, 400, { error: e.message, enviado: ultimoPayload });
+      }
       producto.meli_items.push({ id: r.id, permalink: r.permalink, titulo: tit, precio: precio || producto.precio_ml });
       producto.meli_item_id = producto.meli_item_id || r.id;      // compatibilidad
       producto.meli_permalink = producto.meli_permalink || r.permalink;
