@@ -171,40 +171,18 @@ async function subirFotos(dir, files) {
       method: 'POST', headers: { 'Authorization': `Bearer ${t}` }, body: fd
     });
     if (r.ok) { const j = await r.json(); ids[f] = j.id; }
+    // sin este aviso la publicación sale con 2 fotos y nadie se entera
+    else console.error(`[meli] rechazó la foto ${f}: ${r.status} ${await r.text().catch(() => '')}`.slice(0, 200));
   }
   return ids;
 }
 
 const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
 
-/* MELI puntúa la "salud" de la publicación por cuántos atributos completás,
- * y con salud baja te manda al fondo del listado por más que el precio sea
- * bueno. Estos salen de datos que ya tenemos, sin inventar nada. */
-function atributosRicos(producto) {
-  const attrs = [];
-  const color = (producto.variantes || [])[0]?.color || producto.color || '';
-  const [armazon, lente] = String(color).split('/');
-
-  if (armazon) attrs.push({ id: 'FRAME_COLOR', value_name: armazon.trim() });
-  if (lente) attrs.push({ id: 'LENS_COLOR', value_name: lente.trim() });
-
-  const m = norm(producto.material);
-  if (/acetat|acrilic|plastic/.test(m)) attrs.push({ id: 'FRAME_MATERIAL', value_name: 'Acetato' });
-  else if (/metal|titan|acero|alumin/.test(m)) attrs.push({ id: 'FRAME_MATERIAL', value_name: 'Metal' });
-
-  const f = norm(producto.forma);
-  const FORMAS = {
-    aviador: 'Aviador', wayfarer: 'Wayfarer', redondo: 'Redondo',
-    cuadrado: 'Cuadrado', deportivo: 'Deportivo', lujo: 'Cuadrado'
-  };
-  if (FORMAS[f]) attrs.push({ id: 'FRAME_SHAPE', value_name: FORMAS[f] });
-
-  if (/polariz/i.test(producto.modelo) || /polariz/i.test(producto.cristal || ''))
-    attrs.push({ id: 'IS_POLARIZED', value_name: 'Sí' });
-
-  attrs.push({ id: 'UV_PROTECTION', value_name: 'Sí' });
-  return attrs;
-}
+/* La ficha técnica vive en fichaMeli.js porque el vocabulario de MELI es
+ * cerrado y hay que traducirlo: mandarle "Acetato" donde espera "Plástico"
+ * hace que descarte el atributo en silencio y la calidad no suba. */
+const { ficha: atributosRicos } = require('./fichaMeli');
 
 function armarTitulo(producto, sufijo = '') {
   const marca = producto.marca.split(' · ')[0];
@@ -507,9 +485,92 @@ async function handler(req, res, urlObj) {
       const { id, attributes } = await body(req);
       if (!id || !Array.isArray(attributes)) return json(res, 400, { error: 'falta id o attributes' });
       try {
-        await api(`/items/${id}`, 'PUT', { attributes });
-        return json(res, 200, { ok: true });
+        const item = await api(`/items/${id}`);
+        const variantes = item.variations || [];
+
+        /* Si la publicación tiene variantes, el color ya vive en cada variante.
+         * Repetirlo a nivel ítem hace que MELI rechace el PUT entero, así que
+         * hay que repartir: lo que describe al modelo va arriba, lo que
+         * describe a cada par va abajo. */
+        const enVariantes = new Set();
+        for (const v of variantes) {
+          for (const c of v.attribute_combinations || []) enVariantes.add(c.id);
+          for (const a of v.attributes || []) enVariantes.add(a.id);
+        }
+        const DE_VARIANTE = new Set(['EMPTY_GTIN_REASON', 'GTIN', 'LENS_WIDTH', 'LENS_HEIGHT', 'BRIDGE_LENGTH', 'TEMPLE_LENGTH']);
+
+        const libres = attributes.filter(a => !enVariantes.has(a.id));
+        const cuerpo = { attributes: libres.filter(a => !variantes.length || !DE_VARIANTE.has(a.id)) };
+        if (variantes.length) {
+          const porVariante = libres.filter(a => DE_VARIANTE.has(a.id));
+          if (porVariante.length) cuerpo.variations = variantes.map(v => ({ id: v.id, attributes: porVariante }));
+        }
+
+        await api(`/items/${id}`, 'PUT', cuerpo);
+        return json(res, 200, { ok: true, item: cuerpo.attributes.length, variantes: variantes.length });
       } catch (e) { return json(res, 400, { error: e.message }); }
+    }
+
+    /* Rellena fotos de una publicación que quedó con menos de 4.
+     * Pasa cuando MELI rechaza alguna subida (peso, formato) y el publicador
+     * seguía de largo sin avisar: la publicación arranca coja y nadie se entera. */
+    if (p === '/api/meli/rellenar-fotos' && req.method === 'POST') {
+      const { id, codigo, minimo = 4 } = await body(req);
+      if (!id || !codigo) return json(res, 400, { error: 'falta id o codigo' });
+      try {
+        const item = await api(`/items/${id}`);
+        const tiene = (item.pictures || []).length;
+        if (tiene >= minimo) return json(res, 200, { ok: true, sinCambios: true, fotos: tiene });
+
+        const { dir, files } = fotosDe(codigo);
+        if (!files.length) return json(res, 400, { error: 'sin fotos locales' });
+
+        const subidas = await subirFotos(dir, files);
+        const nuevas = files.filter(f => subidas[f]).map(f => ({ id: subidas[f] }));
+        // si en disco no hay más que en MELI, no falló la subida: faltan fotos
+        if (nuevas.length <= tiene) return json(res, 400, {
+          error: files.length <= tiene
+            ? `en disco solo hay ${files.length} fotos usables: hay que pedirlas al proveedor`
+            : `MELI aceptó ${nuevas.length} de ${files.length}`
+        });
+
+        await api(`/items/${id}`, 'PUT', { pictures: nuevas });
+        return json(res, 200, { ok: true, antes: tiene, ahora: nuevas.length });
+      } catch (e) { return json(res, 400, { error: e.message }); }
+    }
+
+    /* Qué le falta a una publicación para llegar a calidad 100.
+     * MELI puntúa por atributos completos, cantidad de fotos y ficha técnica;
+     * acá se cruza el ítem real contra los atributos de su categoría. */
+    if (p === '/api/meli/salud') {
+      const id = urlObj.searchParams.get('id');
+      if (!id) return json(res, 400, { error: 'falta id' });
+      const item = await api(`/items/${id}`);
+      const attrs = await api(`/categories/${item.category_id}/attributes`);
+      const puestos = new Set((item.attributes || []).filter(a => a.value_name || a.value_id).map(a => a.id));
+
+      const clasificar = t => attrs.filter(a => a.tags?.[t]).map(a => ({
+        id: a.id, nombre: a.name, tipo: a.value_type,
+        valores: (a.values || []).slice(0, 8).map(v => v.name)
+      }));
+
+      const faltan = attrs
+        .filter(a => !puestos.has(a.id))
+        .filter(a => a.tags?.required || a.tags?.catalog_required || a.tags?.conditional_required || !a.tags?.hidden)
+        .map(a => ({
+          id: a.id, nombre: a.name, requerido: !!a.tags?.required,
+          tipo: a.value_type,
+          valores: (a.values || []).slice(0, 10).map(v => v.name)
+        }));
+
+      return json(res, 200, {
+        id: item.id, titulo: item.title, salud: item.health,
+        fotos: (item.pictures || []).length,
+        atributosPuestos: puestos.size,
+        atributosCategoria: attrs.length,
+        requeridosFaltantes: faltan.filter(f => f.requerido),
+        faltan: faltan.slice(0, 40)
+      });
     }
 
     if (p === '/api/meli/conectar') {
