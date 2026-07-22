@@ -231,12 +231,8 @@ async function publicar(producto, cfgTienda, opciones = {}) {
     listing_type_id: opciones.listing || 'gold_special',
     condition: 'new',
     pictures,
-    attributes: [
-      { id: 'BRAND', value_name: producto.marca.split(' · ')[0] },
-      { id: 'MODEL', value_name: producto.modelo },
-      { id: 'GENDER', value_name: 'Sin género' },
-      ...atributosRicos(producto)
-    ],
+    // BRAND, MODEL y GENDER ya vienen en la ficha: repetirlos acá los duplicaba
+    attributes: atributosRicos(producto),
     sale_terms: [
       { id: 'WARRANTY_TYPE', value_name: 'Garantía del vendedor' },
       { id: 'WARRANTY_TIME', value_name: '30 días' }
@@ -265,6 +261,11 @@ async function publicar(producto, cfgTienda, opciones = {}) {
   }
 
   if (conFoto.length > 1) {
+    /* Con variantes, el color lo define cada variante. Dejarlo también arriba
+     * hace que MELI rechace la publicación entera por atributo repetido. */
+    const DE_VARIANTE = new Set(['COLOR', 'FRAME_COLOR', 'LENS_COLOR', 'TEMPLE_COLOR', 'DESIGN']);
+    base.attributes = base.attributes.filter(a => !DE_VARIANTE.has(a.id));
+
     base.variations = conFoto.map(c => ({
       attribute_combinations: [{ id: 'COLOR', value_name: c.color }],
       available_quantity: Math.min(c.stock === 'POCO STOCK' ? 2 : tope, tope),
