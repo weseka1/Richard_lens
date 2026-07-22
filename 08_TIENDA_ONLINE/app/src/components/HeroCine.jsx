@@ -37,7 +37,9 @@ function useTilt() {
 }
 
 export default function HeroCine({ drop, cfg }) {
-  const [hayVideo, setHayVideo] = useState(true);
+  // el hero SIEMPRE es el video: si no puede reproducirse queda su propio
+  // fotograma de portada, nunca una foto de otra sección
+  const [videoRoto, setVideoRoto] = useState(false);
   const tiltRef = useTilt();
 
   const copy = (claro) => (
@@ -70,34 +72,21 @@ export default function HeroCine({ drop, cfg }) {
     </div>
   );
 
-  if (hayVideo) return (
-    <section className="hero">
-      <div className="wrap">
-        <div className="hero-tilt" ref={tiltRef}>
-          <div className="hero-cine">
-            <VideoAdaptativo
-              src="/img/hero.mp4"
-              movil="/img/hero-movil.mp4"
-              poster="/img/hero-poster.jpg"
-              onError={() => setHayVideo(false)}
-            />
-            <div className="hero-cine-velo" />
-            <div className="hero-cine-contenido">{copy(false)}</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-
   return (
     <section className="hero">
       <div className="wrap">
         <div className="hero-tilt" ref={tiltRef}>
-          <div className="hero-split">
-            {copy(false)}
-            <div className="hero-split-foto">
-              <img src="/img/hero-editorial.jpg" alt="Modelo con Ray-Ban — Richard Lens" />
-            </div>
+          <div className="hero-cine">
+            {videoRoto
+              ? <img src="/img/hero-poster.jpg" alt="Richard Lens — Eyewear House" />
+              : <VideoAdaptativo
+                  src="/img/hero.mp4"
+                  movil="/img/hero-movil.mp4"
+                  poster="/img/hero-poster.jpg"
+                  onError={() => setVideoRoto(true)}
+                />}
+            <div className="hero-cine-velo" />
+            <div className="hero-cine-contenido">{copy(false)}</div>
           </div>
         </div>
       </div>

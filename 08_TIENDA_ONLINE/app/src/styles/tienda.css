@@ -836,6 +836,17 @@ main, header, footer { position: relative; z-index: 2; } /* ojo: jamás pisar el
   .hero-cine-contenido { padding: 0 16px 36px 18px; }
 }
 
+/* ---------- probador: estado de detección y ajuste plegable ---------- */
+.probador-cargando {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, .55); backdrop-filter: blur(3px);
+  font-size: .84rem; font-weight: 600; color: var(--hueso); letter-spacing: .02em;
+}
+.probador-ajuste-toggle {
+  display: block; margin: 4px auto 10px; background: none; border: none;
+  font-family: var(--texto); font-size: .76rem; color: #0066CC; text-decoration: underline;
+}
+
 /* ---------- render en celular: que se vea igual de fino que en la PC ---------- */
 @media (max-width: 900px) {
   /* el video tiene que cubrir el hero completo, sin bandas ni recortes raros */
