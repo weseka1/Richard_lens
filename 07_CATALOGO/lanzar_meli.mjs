@@ -71,6 +71,17 @@ const soloEscalon = val('--escalon') ? Number(val('--escalon')) : null;
 const limite = val('--limite') ? Number(val('--limite')) : Infinity;
 
 const productos = await (await fetch(`${BASE}/api/productos`)).json();
+
+/* Los títulos que YA están en MELI. Hay que preguntárselo a MELI y no al
+ * espejo local: Supabase reescribe productos.json cada 5 minutos y se lleva
+ * puesto el registro de lo publicado. Sin esto se duplican publicaciones. */
+const yaEnMeli = new Set();
+try {
+  const { items } = await (await fetch(`${BASE}/api/meli/mis-items`)).json();
+  (items || []).forEach(i => yaEnMeli.add(i.titulo));
+  console.log(`(${yaEnMeli.size} publicaciones ya existentes en la cuenta)`);
+} catch { console.log('(no pude leer las publicaciones existentes — cuidado con duplicados)'); }
+
 const aptos = productos.filter(p =>
   p.fotos_ok && p.estado === 'disponible' &&
   (!soloMarca || String(p.marca).toLowerCase().includes(soloMarca.toLowerCase()))
@@ -94,7 +105,7 @@ for (const p of aptos) {
     const g = bolsillo(precio, costo, com);
     potencial += precio;
 
-    if (yaPublicadas.has(titulo)) { yaEstaba++; continue; }
+    if (yaPublicadas.has(titulo) || yaEnMeli.has(titulo)) { yaEstaba++; continue; }
 
     lineas.push(`   #${i + 1} ${plata(precio).padStart(10)} · ${e.listing === 'gold_pro' ? 'PREMIUM' : 'clásica'} · ganás ${plata(g).padStart(9)}  "${titulo}"`);
     if (dry) continue;
