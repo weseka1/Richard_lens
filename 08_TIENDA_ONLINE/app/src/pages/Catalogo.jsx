@@ -62,6 +62,7 @@ export default function Catalogo() {
   const q = (params.get('q') || '').toLowerCase();
 
   const [pagina, setPagina] = useState(1);
+  const [filtrosAbiertos, setFiltrosAbiertos] = useState(false);
 
   useEffect(() => { setCanal(params.get('canal')); setMarca(params.get('marca')); }, [params]);
   // cualquier filtro nuevo vuelve a la página 1: si no, quedás mirando una página que ya no existe
@@ -115,31 +116,49 @@ export default function Catalogo() {
       <h1 className="sec-titulo">{tituloPagina}</h1>
       <p className="sec-bajada">{bajada}</p>
 
-      <div className="filtros">
+      {/* Marcas en UNA fila que se desliza: tres filas de botones antes del
+        * primer producto es un formulario, no una vidriera. Lo secundario
+        * (forma y stock) queda detrás de "Filtros". */}
+      <div className="filtros-fila">
         <Chips
-          items={['Ray-Ban', 'Ray-Ban · Ferrari', 'Louis Vuitton', 'Dior', 'Gucci', 'Prada', 'Oakley'].filter(m => marcas.includes(m))}
+          items={['Ray-Ban', 'Ray-Ban · Ferrari', 'Louis Vuitton', 'Dior', 'Gucci', 'Prada', 'Oakley', 'Versace', 'Balenciaga', 'Celine', 'Off-White', 'Fendi', 'Saint Laurent', 'Tom Ford'].filter(m => marcas.includes(m))}
           valor={marca}
           onCambio={v => { setMarca(v); setCanal(null); }}
         />
-        <select
-          className="chip select-marca"
-          value={marca || ''}
-          onChange={e => { setMarca(e.target.value || null); setCanal(null); }}
-        >
-          <option value="">Todas las marcas</option>
-          {marcas.map(m => <option key={m} value={m}>{m}</option>)}
-        </select>
-      </div>
-      <div className="filtros">
-        <Chips items={FORMAS} valor={forma} onCambio={setForma} />
-        <Chips items={ESTADOS.map(e => e[0])} valor={estado} onCambio={setEstado} labels={Object.fromEntries(ESTADOS)} />
       </div>
 
-      {lista.length > 0 && (
-        <p className="catalogo-conteo">
-          {lista.length} {lista.length === 1 ? 'modelo' : 'modelos'}
-          {paginas > 1 && <> · página {pagActual} de {paginas}</>}
-        </p>
+      <div className="filtros-barra">
+        <button
+          className={'chip filtros-btn' + (forma || estado ? ' activo' : '')}
+          onClick={() => setFiltrosAbiertos(v => !v)}
+        >
+          Filtros{(forma ? 1 : 0) + (estado ? 1 : 0) > 0 ? ` (${(forma ? 1 : 0) + (estado ? 1 : 0)})` : ''}
+        </button>
+        {(marca || forma || estado) && (
+          <button className="filtros-limpiar" onClick={() => { setMarca(null); setForma(null); setEstado(null); setCanal(null); }}>
+            Limpiar
+          </button>
+        )}
+        {lista.length > 0 && (
+          <span className="catalogo-conteo">{lista.length} modelos{paginas > 1 ? ` · pág. ${pagActual}/${paginas}` : ''}</span>
+        )}
+      </div>
+
+      {filtrosAbiertos && (
+        <div className="filtros-panel">
+          <p className="selector-label">Forma</p>
+          <Chips items={FORMAS} valor={forma} onCambio={setForma} />
+          <p className="selector-label">Disponibilidad</p>
+          <Chips items={ESTADOS.map(e => e[0])} valor={estado} onCambio={setEstado} labels={Object.fromEntries(ESTADOS)} />
+          <select
+            className="chip select-marca"
+            value={marca || ''}
+            onChange={e => { setMarca(e.target.value || null); setCanal(null); }}
+          >
+            <option value="">Todas las marcas</option>
+            {marcas.map(m => <option key={m} value={m}>{m}</option>)}
+          </select>
+        </div>
       )}
 
       <div className="grid-productos" style={{ marginBottom: 40 }}>
