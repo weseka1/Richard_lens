@@ -129,6 +129,21 @@ export default function TiendaLayout() {
   // al navegar, el menú se cierra solo
   useEffect(() => { setMenu(false); setMega(false); }, [loc.pathname, loc.search]);
 
+  /* Cerrar sólo al cambiar de ruta no alcanza: "Inicio" estando en la home y
+   * "Por qué nosotros" (que es un ancla) no cambian la ruta, así que el menú
+   * quedaba tapando la pantalla y parecía que el link no hacía nada. */
+  const cerrarSiEsLink = e => {
+    if (e.target.closest('a')) { setMenu(false); setMega(false); }
+  };
+
+  // con el menú abierto el fondo no se scrollea: si no, se siente trabado
+  useEffect(() => {
+    if (!menu) return;
+    const antes = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = antes; };
+  }, [menu]);
+
   return (
     <ConfigContext.Provider value={cfg}>
       <PopupSuscripcion />
@@ -146,7 +161,7 @@ export default function TiendaLayout() {
             RICHARD LENS<span style={{ color: 'var(--oro)', fontSize: '.72em', letterSpacing: '.2em', marginLeft: 8, alignSelf: 'center' }}>&amp; CO.</span>
           </Link>
           <button className="menu-btn" aria-label="Menú" onClick={() => setMenu(m => !m)}>☰</button>
-          <nav className={menu ? 'abierta' : ''}>
+          <nav className={menu ? 'abierta' : ''} onClick={cerrarSiEsLink}>
             <NavLink to="/" end className={({ isActive }) => isActive ? 'activa' : ''}>Inicio</NavLink>
             <div className="mega-wrap">
               <button className={'nav-boton' + (mega ? ' activa' : '')} onClick={() => setMega(m => !m)}>
@@ -163,7 +178,16 @@ export default function TiendaLayout() {
               )}
             </div>
             <Link to="/catalogo?canal=WEB">La Caja Fuerte</Link>
-            <a href="/#por-que">Por qué nosotros</a>
+            {/* con <a href> recargaba toda la app; ahora navega y baja suave */}
+            <Link
+              to="/"
+              onClick={e => {
+                e.preventDefault();
+                setMenu(false);
+                const ir = () => document.getElementById('por-que')?.scrollIntoView({ behavior: 'smooth' });
+                if (loc.pathname === '/') ir(); else { nav('/'); setTimeout(ir, 350); }
+              }}
+            >Por qué nosotros</Link>
             <form className="buscador-head" onSubmit={buscar}>
               <input value={q} onChange={e => setQ(e.target.value)} placeholder="Buscar modelo…" aria-label="Buscar" />
             </form>

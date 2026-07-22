@@ -112,8 +112,28 @@ export default function Producto() {
             <p className="galeria-aviso">Fotos oficiales del modelo. La galería muestra la línea completa, no solo el color "{v.color}" — escribinos y te confirmamos el detalle exacto de esa variante antes de cerrar.</p>
           )}
           {zoom && galeria.length > 0 && (
-            <div className="lightbox" onClick={() => setZoom(false)}>
+            <div
+              className="lightbox"
+              onClick={e => e.target === e.currentTarget && setZoom(false)}
+              onPointerDown={e => { e.currentTarget.dataset.x = e.clientX; }}
+              onPointerUp={e => {
+                const dx = e.clientX - Number(e.currentTarget.dataset.x || e.clientX);
+                if (Math.abs(dx) > 40 && galeria.length > 1)
+                  setFotoActiva(a => (Math.min(a, galeria.length - 1) + (dx < 0 ? 1 : -1) + galeria.length) % galeria.length);
+              }}
+              style={{ touchAction: 'pan-y' }}
+            >
+              <button className="lightbox-cerrar" onClick={() => setZoom(false)} aria-label="Cerrar">×</button>
               <img src={galeria[Math.min(fotoActiva, galeria.length - 1)]} alt={`${p.marca} ${p.modelo} ampliada`} />
+              {galeria.length > 1 && (
+                <>
+                  <button className="lightbox-nav izq" aria-label="Anterior"
+                    onClick={e => { e.stopPropagation(); setFotoActiva(a => (Math.min(a, galeria.length - 1) - 1 + galeria.length) % galeria.length); }}>‹</button>
+                  <button className="lightbox-nav der" aria-label="Siguiente"
+                    onClick={e => { e.stopPropagation(); setFotoActiva(a => (Math.min(a, galeria.length - 1) + 1) % galeria.length); }}>›</button>
+                  <span className="lightbox-contador">{Math.min(fotoActiva, galeria.length - 1) + 1} / {galeria.length}</span>
+                </>
+              )}
             </div>
           )}
           {galeria.length > 1 && (
