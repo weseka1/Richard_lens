@@ -177,6 +177,35 @@ async function subirFotos(dir, files) {
 
 const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
 
+/* MELI puntúa la "salud" de la publicación por cuántos atributos completás,
+ * y con salud baja te manda al fondo del listado por más que el precio sea
+ * bueno. Estos salen de datos que ya tenemos, sin inventar nada. */
+function atributosRicos(producto) {
+  const attrs = [];
+  const color = (producto.variantes || [])[0]?.color || producto.color || '';
+  const [armazon, lente] = String(color).split('/');
+
+  if (armazon) attrs.push({ id: 'FRAME_COLOR', value_name: armazon.trim() });
+  if (lente) attrs.push({ id: 'LENS_COLOR', value_name: lente.trim() });
+
+  const m = norm(producto.material);
+  if (/acetat|acrilic|plastic/.test(m)) attrs.push({ id: 'FRAME_MATERIAL', value_name: 'Acetato' });
+  else if (/metal|titan|acero|alumin/.test(m)) attrs.push({ id: 'FRAME_MATERIAL', value_name: 'Metal' });
+
+  const f = norm(producto.forma);
+  const FORMAS = {
+    aviador: 'Aviador', wayfarer: 'Wayfarer', redondo: 'Redondo',
+    cuadrado: 'Cuadrado', deportivo: 'Deportivo', lujo: 'Cuadrado'
+  };
+  if (FORMAS[f]) attrs.push({ id: 'FRAME_SHAPE', value_name: FORMAS[f] });
+
+  if (/polariz/i.test(producto.modelo) || /polariz/i.test(producto.cristal || ''))
+    attrs.push({ id: 'IS_POLARIZED', value_name: 'Sí' });
+
+  attrs.push({ id: 'UV_PROTECTION', value_name: 'Sí' });
+  return attrs;
+}
+
 function armarTitulo(producto, sufijo = '') {
   const marca = producto.marca.split(' · ')[0];
   const base = `Anteojos De Sol ${marca} ${producto.modelo}`;
@@ -227,7 +256,8 @@ async function publicar(producto, cfgTienda, opciones = {}) {
     attributes: [
       { id: 'BRAND', value_name: producto.marca.split(' · ')[0] },
       { id: 'MODEL', value_name: producto.modelo },
-      { id: 'GENDER', value_name: 'Sin género' }
+      { id: 'GENDER', value_name: 'Sin género' },
+      ...atributosRicos(producto)
     ],
     sale_terms: [
       { id: 'WARRANTY_TYPE', value_name: 'Garantía del vendedor' },
@@ -468,6 +498,17 @@ async function handler(req, res, urlObj) {
         const bloqueada = /denylist|not authorized|brand/i.test(e.message);
         return json(res, 200, { marca, permitida: !bloqueada, motivo: e.message });
       }
+    }
+
+    /* Completa atributos de una publicación ya online: sube la salud, y con
+     * salud MELI te muestra más arriba. */
+    if (p === '/api/meli/atributos' && req.method === 'POST') {
+      const { id, attributes } = await body(req);
+      if (!id || !Array.isArray(attributes)) return json(res, 400, { error: 'falta id o attributes' });
+      try {
+        await api(`/items/${id}`, 'PUT', { attributes });
+        return json(res, 200, { ok: true });
+      } catch (e) { return json(res, 400, { error: e.message }); }
     }
 
     if (p === '/api/meli/conectar') {
