@@ -38,25 +38,37 @@ const redondear = n => Math.round(n / 1000) * 1000 - 100;
 /* La escalera. Los cuatro primeros son Clásica (comisión baja, sin cuotas);
  * el quinto es Premium: cuesta más comisión pero va con cuotas sin interés,
  * que es lo que convence al que compra caro. */
+/* "Anteojos de sol", "Lentes de sol" y "Gafas de sol" son TRES búsquedas
+ * distintas en Argentina, y el buscador de MELI matchea por texto literal.
+ * Publicar el mismo modelo con los tres encabezados triplica el alcance
+ * sin comprar un solo producto más. */
+const ENCABEZADOS = ['Lentes De Sol', 'Anteojos De Sol', 'Gafas De Sol'];
+
 const ESCALERA = [
-  { m: 1.28, gancho: 'Originales',        stock: 3, listing: 'gold_special' },
-  { m: 1.45, gancho: 'Importados Uv400',  stock: 5, listing: 'gold_special' },
-  { m: 1.62, gancho: 'Con Estuche',       stock: 8, listing: 'gold_special' },
-  { m: 1.82, gancho: 'Envio Gratis',      stock: 8, listing: 'gold_special' },
-  { m: 1.55, gancho: 'Cuotas Sin Interes', stock: 5, listing: 'gold_pro' }
+  { m: 1.28, gancho: 'Originales',         stock: 3, listing: 'gold_special', enc: 0 },
+  { m: 1.28, gancho: 'Importados',         stock: 3, listing: 'gold_special', enc: 1 },
+  { m: 1.45, gancho: 'Uv400 Polarizados',  stock: 5, listing: 'gold_special', enc: 2 },
+  { m: 1.45, gancho: 'Con Estuche',        stock: 5, listing: 'gold_special', enc: 0 },
+  { m: 1.62, gancho: 'Originales Italia',  stock: 8, listing: 'gold_special', enc: 1 },
+  { m: 1.62, gancho: 'Envio Gratis',       stock: 8, listing: 'gold_special', enc: 2 },
+  { m: 1.82, gancho: 'Hombre Mujer',       stock: 8, listing: 'gold_special', enc: 0 },
+  { m: 1.82, gancho: 'Premium',            stock: 8, listing: 'gold_special', enc: 1 },
+  { m: 2.05, gancho: 'Garantia',           stock: 5, listing: 'gold_special', enc: 2 },
+  { m: 1.55, gancho: 'Cuotas Sin Interes', stock: 5, listing: 'gold_pro',     enc: 0 }
 ];
 
-function armarTitulo(p, gancho) {
+function armarTitulo(p, gancho, iEnc = 0) {
   const marca = String(p.marca).split(' · ')[0];
   const esFerrari = /ferrari/i.test(p.marca) || /ferrari/i.test(p.modelo);
   const codigo = (String(p.modelo).match(/\d{3,4}\s*[a-zA-Z]?/) || [''])[0].replace(/\s+/g, '').toLowerCase();
   const limpio = String(p.modelo).replace(/scuderia\s+ferrari/ig, '').replace(/\d{3,4}\s*[a-zA-Z]?/g, '').replace(/\s+/g, ' ').trim();
+  const enc = ENCABEZADOS[iEnc % ENCABEZADOS.length];
 
   const base = esFerrari
-    ? `Anteojos De Sol Rayban X Escudería Ferrari ${codigo}`
+    ? `${enc} Rayban X Escudería Ferrari ${codigo}`
     : /ray-?ban/i.test(marca)
-      ? `Anteojos De Sol Rayban ${limpio} ${codigo}`.replace(/\s+/g, ' ').trim()
-      : `Lentes De Sol ${marca} ${p.modelo}`.replace(/\s+/g, ' ').trim();
+      ? `${enc} Rayban ${limpio} ${codigo}`.replace(/\s+/g, ' ').trim()
+      : `${enc} ${marca} ${p.modelo}`.replace(/\s+/g, ' ').trim();
 
   const full = `${base} ${gancho}`.replace(/\s+/g, ' ').trim();
   if (full.length <= 60) return full;
@@ -101,7 +113,7 @@ for (const p of aptos) {
 
     const com = COMISION[e.listing];
     const precio = redondear(piso(costo, com) * e.m);
-    const titulo = armarTitulo(p, e.gancho);
+    const titulo = armarTitulo(p, e.gancho, e.enc);
     const g = bolsillo(precio, costo, com);
     potencial += precio;
 
