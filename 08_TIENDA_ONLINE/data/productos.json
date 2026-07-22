@@ -318,7 +318,7 @@
     "foto_codigo": "amore-fashion-4390",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -3408,7 +3408,7 @@
     "foto_codigo": "cat-eye-acetate",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -3851,7 +3851,7 @@
     "foto_codigo": "cdi-s1i",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -3884,7 +3884,7 @@
     "foto_codigo": "cel-triomphe-12",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -3915,41 +3915,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban CEL TRIOMPHE METAL 01. 3 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "cel-triomphe-metal-01",
-    "meli_item_id": "MLA1911343009",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343009-lentes-de-sol-celine-cel-triomphe-metal-01-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911343009",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343009-lentes-de-sol-celine-cel-triomphe-metal-01-originales-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE METAL 01 Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA3643997758",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997758-lentes-de-sol-celine-cel-triomphe-metal-01-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE METAL 01 Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911343025",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343025-lentes-de-sol-celine-cel-triomphe-metal-01-con-estuche-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE METAL 01 Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911343029",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343029-lentes-de-sol-celine-cel-triomphe-metal-01-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE METAL 01 Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911367029",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367029-lentes-de-sol-celine-cel-triomphe-metal-01-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE METAL 01",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200024",
@@ -3993,35 +3962,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban CEL TRIOMPHE RHINESTONE 01. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "cel-triomphe-rhinestone-01",
-    "meli_item_id": "MLA3643997776",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997776-lentes-de-sol-celine-cel-triomphe-rhinestone-01-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3643997776",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997776-lentes-de-sol-celine-cel-triomphe-rhinestone-01-originales-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE RHINESTONE 01 Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA3643997784",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997784-lentes-de-sol-celine-cel-triomphe-rhinestone-01-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE RHINESTONE 01",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911367053",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367053-lentes-de-sol-celine-cel-triomphe-rhinestone-01-con-estuche-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE RHINESTONE 01 Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911343063",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343063-lentes-de-sol-celine-cel-triomphe-rhinestone-01-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE RHINESTONE 01 Envio Gratis",
-        "precio": 505900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200022",
@@ -4091,41 +4035,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban CEL TRIOMPHE XL. 3 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "cel-triomphe-xl",
-    "meli_item_id": "MLA1911367073",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367073-lentes-de-sol-celine-cel-triomphe-xl-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911367073",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367073-lentes-de-sol-celine-cel-triomphe-xl-originales-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE XL Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911367085",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367085-lentes-de-sol-celine-cel-triomphe-xl-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE XL Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA3643997838",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997838-lentes-de-sol-celine-cel-triomphe-xl-con-estuche-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE XL Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911367095",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367095-lentes-de-sol-celine-cel-triomphe-xl-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE XL Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA3643997852",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997852-lentes-de-sol-celine-cel-triomphe-xl-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Celine CEL TRIOMPHE XL Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200017",
@@ -5929,7 +5842,7 @@
     "foto_codigo": "dg-crossed",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -5976,7 +5889,7 @@
     "foto_codigo": "dg-essentials",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -6129,7 +6042,7 @@
     "foto_codigo": "dib27-s1i",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -6160,35 +6073,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban DiBlackSuit S12I BioAcetate. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "diblacksuit-s12i-bioacetate",
-    "meli_item_id": "MLA3643997866",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997866-lentes-de-sol-dior-diblacksuit-s12i-bioacetate-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3643997866",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997866-lentes-de-sol-dior-diblacksuit-s12i-bioacetate-originales-_JM",
-        "titulo": "Lentes De Sol Dior DiBlackSuit S12I BioAcetate Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA3643997880",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997880-lentes-de-sol-dior-diblacksuit-s12i-bioacetate-_JM",
-        "titulo": "Lentes De Sol Dior DiBlackSuit S12I BioAcetate",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911343137",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343137-lentes-de-sol-dior-diblacksuit-s12i-bioacetate-con-estuche-_JM",
-        "titulo": "Lentes De Sol Dior DiBlackSuit S12I BioAcetate Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911367151",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367151-lentes-de-sol-dior-diblacksuit-s12i-bioacetate-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Dior DiBlackSuit S12I BioAcetate Envio Gratis",
-        "precio": 505900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200072",
@@ -6225,41 +6113,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban DICLUB M1U. 3 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "diclub-m1u",
-    "meli_item_id": "MLA1911367161",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367161-lentes-de-sol-dior-diclub-m1u-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911367161",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367161-lentes-de-sol-dior-diclub-m1u-originales-_JM",
-        "titulo": "Lentes De Sol Dior DICLUB M1U Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911367169",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367169-lentes-de-sol-dior-diclub-m1u-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Dior DICLUB M1U Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911367175",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367175-lentes-de-sol-dior-diclub-m1u-con-estuche-_JM",
-        "titulo": "Lentes De Sol Dior DICLUB M1U Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA3643997932",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997932-lentes-de-sol-dior-diclub-m1u-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Dior DICLUB M1U Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911367193",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367193-lentes-de-sol-dior-diclub-m1u-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Dior DICLUB M1U Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200057",
@@ -6310,41 +6167,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban DICLUB M4U. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "diclub-m4u",
-    "meli_item_id": "MLA1911367207",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367207-lentes-de-sol-dior-diclub-m4u-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911367207",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367207-lentes-de-sol-dior-diclub-m4u-originales-_JM",
-        "titulo": "Lentes De Sol Dior DICLUB M4U Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911367215",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367215-lentes-de-sol-dior-diclub-m4u-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Dior DICLUB M4U Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911343223",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343223-lentes-de-sol-dior-diclub-m4u-con-estuche-_JM",
-        "titulo": "Lentes De Sol Dior DICLUB M4U Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911343233",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343233-lentes-de-sol-dior-diclub-m4u-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Dior DICLUB M4U Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA3643997980",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997980-lentes-de-sol-dior-diclub-m4u-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Dior DICLUB M4U Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200042",
@@ -6374,41 +6200,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban DiMidnight B2I. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "dimidnight-b2i",
-    "meli_item_id": "MLA3643997992",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997992-lentes-de-sol-dior-dimidnight-b2i-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3643997992",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643997992-lentes-de-sol-dior-dimidnight-b2i-originales-_JM",
-        "titulo": "Lentes De Sol Dior DiMidnight B2I Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911367265",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367265-lentes-de-sol-dior-dimidnight-b2i-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Dior DiMidnight B2I Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911343265",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343265-lentes-de-sol-dior-dimidnight-b2i-con-estuche-_JM",
-        "titulo": "Lentes De Sol Dior DiMidnight B2I Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911343273",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343273-lentes-de-sol-dior-dimidnight-b2i-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Dior DiMidnight B2I Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911367285",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367285-lentes-de-sol-dior-dimidnight-b2i-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Dior DiMidnight B2I Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200068",
@@ -6438,41 +6233,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban DiMidnight S1I. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "dimidnight-s1i",
-    "meli_item_id": "MLA1911367287",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367287-lentes-de-sol-dior-dimidnight-s1i-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911367287",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367287-lentes-de-sol-dior-dimidnight-s1i-originales-_JM",
-        "titulo": "Lentes De Sol Dior DiMidnight S1I Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911343295",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343295-lentes-de-sol-dior-dimidnight-s1i-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Dior DiMidnight S1I Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911367313",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367313-lentes-de-sol-dior-dimidnight-s1i-con-estuche-_JM",
-        "titulo": "Lentes De Sol Dior DiMidnight S1I Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911367327",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367327-lentes-de-sol-dior-dimidnight-s1i-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Dior DiMidnight S1I Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911367335",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367335-lentes-de-sol-dior-dimidnight-s1i-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Dior DiMidnight S1I Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200067",
@@ -6542,41 +6306,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban DiPacific B2F. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "dipacific-b2f",
-    "meli_item_id": "MLA1911343323",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343323-lentes-de-sol-dior-dipacific-b2f-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911343323",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343323-lentes-de-sol-dior-dipacific-b2f-originales-_JM",
-        "titulo": "Lentes De Sol Dior DiPacific B2F Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911367361",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367361-lentes-de-sol-dior-dipacific-b2f-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Dior DiPacific B2F Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA3643998064",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998064-lentes-de-sol-dior-dipacific-b2f-con-estuche-_JM",
-        "titulo": "Lentes De Sol Dior DiPacific B2F Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911343335",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343335-lentes-de-sol-dior-dipacific-b2f-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Dior DiPacific B2F Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911367387",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367387-lentes-de-sol-dior-dipacific-b2f-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Dior DiPacific B2F Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200069",
@@ -6613,41 +6346,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban DIPACIFIC S1U. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "dipacific-s1u",
-    "meli_item_id": "MLA1911367391",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367391-lentes-de-sol-dior-dipacific-s1u-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911367391",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367391-lentes-de-sol-dior-dipacific-s1u-originales-_JM",
-        "titulo": "Lentes De Sol Dior DIPACIFIC S1U Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA3643998086",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998086-lentes-de-sol-dior-dipacific-s1u-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Dior DIPACIFIC S1U Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911367421",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367421-lentes-de-sol-dior-dipacific-s1u-con-estuche-_JM",
-        "titulo": "Lentes De Sol Dior DIPACIFIC S1U Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911367431",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367431-lentes-de-sol-dior-dipacific-s1u-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Dior DIPACIFIC S1U Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA3643998110",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998110-lentes-de-sol-dior-dipacific-s1u-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Dior DIPACIFIC S1U Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200043",
@@ -6686,7 +6388,7 @@
     "foto_codigo": "dirsignature-s1u",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -6717,41 +6419,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban DISIGNATURE B2U. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "disignature-b2u",
-    "meli_item_id": "MLA1911343397",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343397-lentes-de-sol-dior-disignature-b2u-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911343397",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343397-lentes-de-sol-dior-disignature-b2u-originales-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE B2U Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911367449",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367449-lentes-de-sol-dior-disignature-b2u-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE B2U Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA3643998134",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998134-lentes-de-sol-dior-disignature-b2u-con-estuche-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE B2U Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911367463",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367463-lentes-de-sol-dior-disignature-b2u-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE B2U Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911343425",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343425-lentes-de-sol-dior-disignature-b2u-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE B2U Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200052",
@@ -6783,7 +6454,7 @@
     "foto_codigo": "disignature-b3u",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -6816,7 +6487,7 @@
     "foto_codigo": "disignature-b5i",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -6847,41 +6518,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban DISIGNATURE B7I. 4 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "disignature-b7i",
-    "meli_item_id": "MLA1911367481",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367481-lentes-de-sol-dior-disignature-b7i-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911367481",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367481-lentes-de-sol-dior-disignature-b7i-originales-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE B7I Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911343447",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343447-lentes-de-sol-dior-disignature-b7i-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE B7I Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911343451",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343451-lentes-de-sol-dior-disignature-b7i-con-estuche-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE B7I Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911343461",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343461-lentes-de-sol-dior-disignature-b7i-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE B7I Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911367509",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367509-lentes-de-sol-dior-disignature-b7i-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE B7I Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200045",
@@ -6934,7 +6574,7 @@
     "foto_codigo": "disignature-m1u",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -6974,7 +6614,7 @@
     "foto_codigo": "disignature-s10f",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -7007,7 +6647,7 @@
     "foto_codigo": "disignature-s4u",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -7038,41 +6678,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban DISIGNATURE S9U. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "disignature-s9u",
-    "meli_item_id": "MLA1911343477",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343477-lentes-de-sol-dior-disignature-s9u-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911343477",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343477-lentes-de-sol-dior-disignature-s9u-originales-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE S9U Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911343489",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343489-lentes-de-sol-dior-disignature-s9u-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE S9U Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA3643998206",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998206-lentes-de-sol-dior-disignature-s9u-con-estuche-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE S9U Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA3643998218",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998218-lentes-de-sol-dior-disignature-s9u-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE S9U Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911367549",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367549-lentes-de-sol-dior-disignature-s9u-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Dior DISIGNATURE S9U Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200050",
@@ -7102,41 +6711,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban DIXTREM MU. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "dixtrem-mu",
-    "meli_item_id": "MLA3643998226",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998226-lentes-de-sol-dior-dixtrem-mu-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3643998226",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998226-lentes-de-sol-dior-dixtrem-mu-originales-_JM",
-        "titulo": "Lentes De Sol Dior DIXTREM MU Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA3643998232",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998232-lentes-de-sol-dior-dixtrem-mu-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Dior DIXTREM MU Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911343527",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343527-lentes-de-sol-dior-dixtrem-mu-con-estuche-_JM",
-        "titulo": "Lentes De Sol Dior DIXTREM MU Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911343535",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343535-lentes-de-sol-dior-dixtrem-mu-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Dior DIXTREM MU Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911343537",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343537-lentes-de-sol-dior-dixtrem-mu-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Dior DIXTREM MU Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200063",
@@ -7216,41 +6794,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban DYNASTY D-FRAME. 3 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "dynasty-d-frame",
-    "meli_item_id": "MLA1911343543",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343543-lentes-de-sol-balenciaga-dynasty-d-frame-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911343543",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343543-lentes-de-sol-balenciaga-dynasty-d-frame-originales-_JM",
-        "titulo": "Lentes De Sol Balenciaga DYNASTY D-FRAME Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911367589",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367589-lentes-de-sol-balenciaga-dynasty-d-frame-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Balenciaga DYNASTY D-FRAME Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911343553",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343553-lentes-de-sol-balenciaga-dynasty-d-frame-con-estuche-_JM",
-        "titulo": "Lentes De Sol Balenciaga DYNASTY D-FRAME Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911343559",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343559-lentes-de-sol-balenciaga-dynasty-d-frame-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Balenciaga DYNASTY D-FRAME Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA3643998278",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998278-lentes-de-sol-balenciaga-dynasty-d-frame-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Balenciaga DYNASTY D-FRAME Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200000",
@@ -7296,7 +6843,7 @@
     "foto_codigo": "dynasty-rectangle",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -7336,7 +6883,7 @@
     "foto_codigo": "edge-large-square-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -8197,35 +7744,10 @@
     "destacado": false,
     "descripcion": "Louis Vuitton Evidence sunglasses. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "evidence-sunglasses",
-    "meli_item_id": "MLA1911367637",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367637-lentes-de-sol-louis-vuitton-evidence-sunglasses-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911367637",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367637-lentes-de-sol-louis-vuitton-evidence-sunglasses-originales-_JM",
-        "titulo": "Lentes De Sol Louis Vuitton Evidence sunglasses Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911343601",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343601-lentes-de-sol-louis-vuitton-evidence-sunglasses-_JM",
-        "titulo": "Lentes De Sol Louis Vuitton Evidence sunglasses",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911367645",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367645-lentes-de-sol-louis-vuitton-evidence-sunglasses-con-estuche-_JM",
-        "titulo": "Lentes De Sol Louis Vuitton Evidence sunglasses Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911343613",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343613-lentes-de-sol-louis-vuitton-evidence-sunglasses-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Louis Vuitton Evidence sunglasses Envio Gratis",
-        "precio": 505900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200504",
@@ -8257,7 +7779,7 @@
     "foto_codigo": "fen-big-first",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -8290,7 +7812,7 @@
     "foto_codigo": "fen-graphy",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -8330,7 +7852,7 @@
     "foto_codigo": "fen-graphy-square",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -8370,7 +7892,7 @@
     "foto_codigo": "fen-o-lock",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -8960,41 +8482,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban Fs FF Evolution. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "fs-ff-evolution",
-    "meli_item_id": "MLA1911367649",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367649-lentes-de-sol-fendi-fs-ff-evolution-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911367649",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367649-lentes-de-sol-fendi-fs-ff-evolution-originales-_JM",
-        "titulo": "Lentes De Sol Fendi Fs FF Evolution Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911367657",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367657-lentes-de-sol-fendi-fs-ff-evolution-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Fendi Fs FF Evolution Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911343631",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343631-lentes-de-sol-fendi-fs-ff-evolution-con-estuche-_JM",
-        "titulo": "Lentes De Sol Fendi Fs FF Evolution Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911343641",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343641-lentes-de-sol-fendi-fs-ff-evolution-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Fendi Fs FF Evolution Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911343645",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343645-lentes-de-sol-fendi-fs-ff-evolution-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Fendi Fs FF Evolution Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200090",
@@ -9031,41 +8522,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban Fs FF Match. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "fs-ff-match",
-    "meli_item_id": "MLA1911367681",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367681-lentes-de-sol-fendi-fs-ff-match-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911367681",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367681-lentes-de-sol-fendi-fs-ff-match-originales-_JM",
-        "titulo": "Lentes De Sol Fendi Fs FF Match Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA3643998364",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998364-lentes-de-sol-fendi-fs-ff-match-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Fendi Fs FF Match Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA3643998372",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998372-lentes-de-sol-fendi-fs-ff-match-con-estuche-_JM",
-        "titulo": "Lentes De Sol Fendi Fs FF Match Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911367699",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367699-lentes-de-sol-fendi-fs-ff-match-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Fendi Fs FF Match Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA3643998386",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998386-lentes-de-sol-fendi-fs-ff-match-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Fendi Fs FF Match Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200092",
@@ -9521,7 +8981,7 @@
     "foto_codigo": "g2032",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -9992,41 +9452,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban GG0809S W. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "gg0809s-w",
-    "meli_item_id": "MLA1911367711",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367711-lentes-de-sol-gucci-gg0809s-w-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911367711",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367711-lentes-de-sol-gucci-gg0809s-w-originales-_JM",
-        "titulo": "Lentes De Sol Gucci GG0809S W Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911367719",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367719-lentes-de-sol-gucci-gg0809s-w-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Gucci GG0809S W Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911343703",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343703-lentes-de-sol-gucci-gg0809s-w-con-estuche-_JM",
-        "titulo": "Lentes De Sol Gucci GG0809S W Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911367733",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367733-lentes-de-sol-gucci-gg0809s-w-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Gucci GG0809S W Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA3643998422",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998422-lentes-de-sol-gucci-gg0809s-w-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Gucci GG0809S W Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200117",
@@ -10063,41 +9492,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban GG0811S. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "gg0811s",
-    "meli_item_id": "MLA3643998438",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998438-lentes-de-sol-gucci-gg0811s-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3643998438",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998438-lentes-de-sol-gucci-gg0811s-originales-_JM",
-        "titulo": "Lentes De Sol Gucci GG0811S Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911367763",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367763-lentes-de-sol-gucci-gg0811s-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Gucci GG0811S Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911343745",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343745-lentes-de-sol-gucci-gg0811s-con-estuche-_JM",
-        "titulo": "Lentes De Sol Gucci GG0811S Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911343757",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343757-lentes-de-sol-gucci-gg0811s-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Gucci GG0811S Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911343767",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343767-lentes-de-sol-gucci-gg0811s-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Gucci GG0811S Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200113",
@@ -10127,41 +9525,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban GG1278s. 3 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "gg1278s",
-    "meli_item_id": "MLA1911343771",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343771-lentes-de-sol-gucci-gg1278s-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911343771",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343771-lentes-de-sol-gucci-gg1278s-originales-_JM",
-        "titulo": "Lentes De Sol Gucci GG1278s Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA3643998482",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3643998482-lentes-de-sol-gucci-gg1278s-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Gucci GG1278s Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911343789",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343789-lentes-de-sol-gucci-gg1278s-con-estuche-_JM",
-        "titulo": "Lentes De Sol Gucci GG1278s Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911367837",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367837-lentes-de-sol-gucci-gg1278s-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Gucci GG1278s Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911343817",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343817-lentes-de-sol-gucci-gg1278s-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Gucci GG1278s Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200110",
@@ -12435,7 +11802,7 @@
     "foto_codigo": "legacy-square",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -12663,7 +12030,7 @@
     "foto_codigo": "lv1051",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -12921,41 +12288,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban MAX SQUARE AF. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "max-square-af",
-    "meli_item_id": "MLA1911410515",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410515-lentes-de-sol-balenciaga-max-square-af-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911410515",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410515-lentes-de-sol-balenciaga-max-square-af-originales-_JM",
-        "titulo": "Lentes De Sol Balenciaga MAX SQUARE AF Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911343825",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343825-lentes-de-sol-balenciaga-max-square-af-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Balenciaga MAX SQUARE AF Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911410529",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410529-lentes-de-sol-balenciaga-max-square-af-con-estuche-_JM",
-        "titulo": "Lentes De Sol Balenciaga MAX SQUARE AF Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911410533",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410533-lentes-de-sol-balenciaga-max-square-af-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Balenciaga MAX SQUARE AF Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911367867",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367867-lentes-de-sol-balenciaga-max-square-af-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Balenciaga MAX SQUARE AF Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200008",
@@ -13140,17 +12476,10 @@
     "destacado": false,
     "descripcion": "Louis Vuitton Millionaires sunglasses. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "millionaires-sunglasses",
-    "meli_item_id": "MLA1911367871",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367871-lentes-de-sol-louis-vuitton-millionaires-sunglasses-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911367871",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367871-lentes-de-sol-louis-vuitton-millionaires-sunglasses-_JM",
-        "titulo": "Lentes De Sol Louis Vuitton Millionaires sunglasses",
-        "precio": 355900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200503",
@@ -13544,7 +12873,7 @@
     "foto_codigo": "moon-rectangular-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -13610,7 +12939,7 @@
     "foto_codigo": "moon-square-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -13967,41 +13296,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban OA Holdbrook. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "oa-holdbrook",
-    "meli_item_id": "MLA1911410555",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410555-lentes-de-sol-oakley-oa-holdbrook-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911410555",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410555-lentes-de-sol-oakley-oa-holdbrook-originales-_JM",
-        "titulo": "Lentes De Sol Oakley OA Holdbrook Originales",
-        "precio": 193900
-      },
-      {
-        "id": "MLA1911367887",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367887-lentes-de-sol-oakley-oa-holdbrook-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Oakley OA Holdbrook Importados Uv400",
-        "precio": 219900
-      },
-      {
-        "id": "MLA1911343877",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343877-lentes-de-sol-oakley-oa-holdbrook-con-estuche-_JM",
-        "titulo": "Lentes De Sol Oakley OA Holdbrook Con Estuche",
-        "precio": 245900
-      },
-      {
-        "id": "MLA1911343887",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343887-lentes-de-sol-oakley-oa-holdbrook-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Oakley OA Holdbrook Envio Gratis",
-        "precio": 275900
-      },
-      {
-        "id": "MLA1911367901",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367901-lentes-de-sol-oakley-oa-holdbrook-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Oakley OA Holdbrook Cuotas Sin Interes",
-        "precio": 292900
-      }
-    ],
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -14210,41 +13508,10 @@
     "destacado": false,
     "descripcion": "Off-White OFF WHITE BRANSON. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "off-white-branson",
-    "meli_item_id": "MLA1911410581",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410581-lentes-de-sol-off-white-off-white-branson-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911410581",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410581-lentes-de-sol-off-white-off-white-branson-originales-_JM",
-        "titulo": "Lentes De Sol Off-White OFF WHITE BRANSON Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911367917",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367917-lentes-de-sol-off-white-off-white-branson-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Off-White OFF WHITE BRANSON Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911343901",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343901-lentes-de-sol-off-white-off-white-branson-con-estuche-_JM",
-        "titulo": "Lentes De Sol Off-White OFF WHITE BRANSON Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911410595",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410595-lentes-de-sol-off-white-off-white-branson-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Off-White OFF WHITE BRANSON Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911343911",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343911-lentes-de-sol-off-white-off-white-branson-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Off-White OFF WHITE BRANSON Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200128",
@@ -15039,41 +14306,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban OVERSIZED S002. 3 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "oversized-s002",
-    "meli_item_id": "MLA1911410607",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410607-lentes-de-sol-celine-oversized-s002-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911410607",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410607-lentes-de-sol-celine-oversized-s002-originales-_JM",
-        "titulo": "Lentes De Sol Celine OVERSIZED S002 Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911410621",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410621-lentes-de-sol-celine-oversized-s002-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Celine OVERSIZED S002 Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911410625",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410625-lentes-de-sol-celine-oversized-s002-con-estuche-_JM",
-        "titulo": "Lentes De Sol Celine OVERSIZED S002 Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911343937",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343937-lentes-de-sol-celine-oversized-s002-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Celine OVERSIZED S002 Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911343947",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343947-lentes-de-sol-celine-oversized-s002-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Celine OVERSIZED S002 Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200037",
@@ -15117,41 +14353,10 @@
     "destacado": false,
     "descripcion": "Off-White OW. 8 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "ow",
-    "meli_item_id": "MLA1911410655",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410655-lentes-de-sol-off-white-ow-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911410655",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410655-lentes-de-sol-off-white-ow-originales-_JM",
-        "titulo": "Lentes De Sol Off-White OW Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911343961",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343961-lentes-de-sol-off-white-ow-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Off-White OW Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911410671",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410671-lentes-de-sol-off-white-ow-con-estuche-_JM",
-        "titulo": "Lentes De Sol Off-White OW Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911367995",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911367995-lentes-de-sol-off-white-ow-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Off-White OW Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911343989",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343989-lentes-de-sol-off-white-ow-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Off-White OW Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200151",
@@ -15286,41 +14491,10 @@
     "destacado": false,
     "descripcion": "Off-White OW ARTHUR. 4 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "ow-arthur",
-    "meli_item_id": "MLA1911343997",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343997-lentes-de-sol-off-white-ow-arthur-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911343997",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911343997-lentes-de-sol-off-white-ow-arthur-originales-_JM",
-        "titulo": "Lentes De Sol Off-White OW ARTHUR Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911410699",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410699-lentes-de-sol-off-white-ow-arthur-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Off-White OW ARTHUR Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911368029",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368029-lentes-de-sol-off-white-ow-arthur-con-estuche-_JM",
-        "titulo": "Lentes De Sol Off-White OW ARTHUR Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911368033",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368033-lentes-de-sol-off-white-ow-arthur-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Off-White OW ARTHUR Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911344021",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344021-lentes-de-sol-off-white-ow-arthur-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Off-White OW ARTHUR Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200138",
@@ -15378,41 +14552,10 @@
     "destacado": false,
     "descripcion": "Off-White OW BRANSON. 3 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "ow-branson",
-    "meli_item_id": "MLA1911344031",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344031-lentes-de-sol-off-white-ow-branson-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911344031",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344031-lentes-de-sol-off-white-ow-branson-originales-_JM",
-        "titulo": "Lentes De Sol Off-White OW BRANSON Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911344043",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344043-lentes-de-sol-off-white-ow-branson-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Off-White OW BRANSON Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911368071",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368071-lentes-de-sol-off-white-ow-branson-con-estuche-_JM",
-        "titulo": "Lentes De Sol Off-White OW BRANSON Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911410747",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410747-lentes-de-sol-off-white-ow-branson-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Off-White OW BRANSON Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911344071",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344071-lentes-de-sol-off-white-ow-branson-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Off-White OW BRANSON Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200125",
@@ -15456,41 +14599,10 @@
     "destacado": false,
     "descripcion": "Off-White OW CATALINA. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "ow-catalina",
-    "meli_item_id": "MLA1911344079",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344079-lentes-de-sol-off-white-ow-catalina-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911344079",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344079-lentes-de-sol-off-white-ow-catalina-originales-_JM",
-        "titulo": "Lentes De Sol Off-White OW CATALINA Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911344089",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344089-lentes-de-sol-off-white-ow-catalina-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Off-White OW CATALINA Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911344095",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344095-lentes-de-sol-off-white-ow-catalina-con-estuche-_JM",
-        "titulo": "Lentes De Sol Off-White OW CATALINA Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911344103",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344103-lentes-de-sol-off-white-ow-catalina-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Off-White OW CATALINA Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911368133",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368133-lentes-de-sol-off-white-ow-catalina-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Off-White OW CATALINA Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200123",
@@ -15529,7 +14641,7 @@
     "foto_codigo": "ow-lecce",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -15595,41 +14707,10 @@
     "destacado": false,
     "descripcion": "Off-White OW MANCHESTER. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "ow-manchester",
-    "meli_item_id": "MLA1911410809",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410809-lentes-de-sol-off-white-ow-manchester-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911410809",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410809-lentes-de-sol-off-white-ow-manchester-originales-_JM",
-        "titulo": "Lentes De Sol Off-White OW MANCHESTER Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911344129",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344129-lentes-de-sol-off-white-ow-manchester-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Off-White OW MANCHESTER Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911368167",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368167-lentes-de-sol-off-white-ow-manchester-con-estuche-_JM",
-        "titulo": "Lentes De Sol Off-White OW MANCHESTER Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911410833",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410833-lentes-de-sol-off-white-ow-manchester-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Off-White OW MANCHESTER Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911344175",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344175-lentes-de-sol-off-white-ow-manchester-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Off-White OW MANCHESTER Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200121",
@@ -15666,41 +14747,10 @@
     "destacado": false,
     "descripcion": "Off-White OW MILANO. 5 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "ow-milano",
-    "meli_item_id": "MLA1911410845",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410845-lentes-de-sol-off-white-ow-milano-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911410845",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410845-lentes-de-sol-off-white-ow-milano-originales-_JM",
-        "titulo": "Lentes De Sol Off-White OW MILANO Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911344185",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344185-lentes-de-sol-off-white-ow-milano-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Off-White OW MILANO Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911410849",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410849-lentes-de-sol-off-white-ow-milano-con-estuche-_JM",
-        "titulo": "Lentes De Sol Off-White OW MILANO Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911368207",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368207-lentes-de-sol-off-white-ow-milano-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Off-White OW MILANO Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911410861",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911410861-lentes-de-sol-off-white-ow-milano-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Off-White OW MILANO Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200141",
@@ -15760,7 +14810,7 @@
     "foto_codigo": "ow-virgil",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -15835,7 +14885,7 @@
     "foto_codigo": "panthere-de-cart",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -16477,7 +15527,7 @@
     "foto_codigo": "re-edition-dna",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -20437,7 +19487,7 @@
     "foto_codigo": "shield-rectangle",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -20510,7 +19560,7 @@
     "foto_codigo": "signature-round",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -20635,41 +19685,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban SKI RECTANGLE. 3 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "ski-rectangle",
-    "meli_item_id": "MLA1911368623",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368623-lentes-de-sol-balenciaga-ski-rectangle-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911368623",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368623-lentes-de-sol-balenciaga-ski-rectangle-originales-_JM",
-        "titulo": "Lentes De Sol Balenciaga SKI RECTANGLE Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911344665",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344665-lentes-de-sol-balenciaga-ski-rectangle-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Balenciaga SKI RECTANGLE Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911368659",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368659-lentes-de-sol-balenciaga-ski-rectangle-con-estuche-_JM",
-        "titulo": "Lentes De Sol Balenciaga SKI RECTANGLE Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911411381",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411381-lentes-de-sol-balenciaga-ski-rectangle-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Balenciaga SKI RECTANGLE Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911344721",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911344721-lentes-de-sol-balenciaga-ski-rectangle-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Balenciaga SKI RECTANGLE Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200005",
@@ -20713,41 +19732,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban SL 309 M. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "sl-309-m",
-    "meli_item_id": "MLA1911368713",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368713-lentes-de-sol-saint-laurent-sl-309-m-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911368713",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368713-lentes-de-sol-saint-laurent-sl-309-m-originales-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 309 M Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911368727",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368727-lentes-de-sol-saint-laurent-sl-309-m-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 309 M Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911411459",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411459-lentes-de-sol-saint-laurent-sl-309-m-con-estuche-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 309 M Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911411485",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411485-lentes-de-sol-saint-laurent-sl-309-m-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 309 M Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911411515",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411515-lentes-de-sol-saint-laurent-sl-309-m-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 309 M Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200203",
@@ -20777,41 +19765,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban SL 312 M. 3 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "sl-312-m",
-    "meli_item_id": "MLA1911411535",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411535-lentes-de-sol-saint-laurent-sl-312-m-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911411535",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411535-lentes-de-sol-saint-laurent-sl-312-m-originales-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 312 M Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911411559",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411559-lentes-de-sol-saint-laurent-sl-312-m-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 312 M Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911411583",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411583-lentes-de-sol-saint-laurent-sl-312-m-con-estuche-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 312 M Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911411597",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411597-lentes-de-sol-saint-laurent-sl-312-m-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 312 M Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911368909",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911368909-lentes-de-sol-saint-laurent-sl-312-m-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 312 M Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200201",
@@ -20855,41 +19812,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban SL 657. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "sl-657",
-    "meli_item_id": "MLA1911411627",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411627-lentes-de-sol-saint-laurent-sl-657-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911411627",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411627-lentes-de-sol-saint-laurent-sl-657-originales-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 657 Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911411653",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411653-lentes-de-sol-saint-laurent-sl-657-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 657 Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911411675",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411675-lentes-de-sol-saint-laurent-sl-657-con-estuche-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 657 Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911345017",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911345017-lentes-de-sol-saint-laurent-sl-657-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 657 Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911345047",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911345047-lentes-de-sol-saint-laurent-sl-657-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL 657 Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200196",
@@ -20926,41 +19852,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban SL M131. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "sl-m131",
-    "meli_item_id": "MLA1911369049",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369049-lentes-de-sol-saint-laurent-sl-m131-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911369049",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369049-lentes-de-sol-saint-laurent-sl-m131-originales-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL M131 Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911369063",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369063-lentes-de-sol-saint-laurent-sl-m131-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL M131 Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911345131",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911345131-lentes-de-sol-saint-laurent-sl-m131-con-estuche-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL M131 Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911345155",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911345155-lentes-de-sol-saint-laurent-sl-m131-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL M131 Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911411869",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411869-lentes-de-sol-saint-laurent-sl-m131-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL M131 Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200204",
@@ -21006,7 +19901,7 @@
     "foto_codigo": "sl001",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -21037,41 +19932,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban SL002. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "sl002",
-    "meli_item_id": "MLA1911369183",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369183-lentes-de-sol-saint-laurent-sl002-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911369183",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369183-lentes-de-sol-saint-laurent-sl002-originales-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL002 Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911411925",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411925-lentes-de-sol-saint-laurent-sl002-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL002 Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911345249",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911345249-lentes-de-sol-saint-laurent-sl002-con-estuche-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL002 Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911411969",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911411969-lentes-de-sol-saint-laurent-sl002-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL002 Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911369265",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369265-lentes-de-sol-saint-laurent-sl002-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Saint Laurent SL002 Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200194",
@@ -21103,7 +19967,7 @@
     "foto_codigo": "sl008",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -21136,7 +20000,7 @@
     "foto_codigo": "sl011",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -21169,7 +20033,7 @@
     "foto_codigo": "sl012",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -21315,7 +20179,7 @@
     "foto_codigo": "spr14y",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -21642,7 +20506,7 @@
     "foto_codigo": "spra06",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -21682,7 +20546,7 @@
     "foto_codigo": "spra14",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -21715,7 +20579,7 @@
     "foto_codigo": "spra16",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -22316,41 +21180,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban Stringer. 6 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "stringer",
-    "meli_item_id": "MLA1911412009",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412009-lentes-de-sol-oakley-stringer-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911412009",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412009-lentes-de-sol-oakley-stringer-originales-_JM",
-        "titulo": "Lentes De Sol Oakley Stringer Originales",
-        "precio": 193900
-      },
-      {
-        "id": "MLA1911369311",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369311-lentes-de-sol-oakley-stringer-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Oakley Stringer Importados Uv400",
-        "precio": 219900
-      },
-      {
-        "id": "MLA1911412051",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412051-lentes-de-sol-oakley-stringer-con-estuche-_JM",
-        "titulo": "Lentes De Sol Oakley Stringer Con Estuche",
-        "precio": 245900
-      },
-      {
-        "id": "MLA1911345387",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911345387-lentes-de-sol-oakley-stringer-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Oakley Stringer Envio Gratis",
-        "precio": 275900
-      },
-      {
-        "id": "MLA1911369381",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369381-lentes-de-sol-oakley-stringer-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Oakley Stringer Cuotas Sin Interes",
-        "precio": 292900
-      }
-    ],
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -22446,7 +21279,7 @@
     "foto_codigo": "the-lv-pilot-sunglasses",
     "meli_item_id": null,
     "meli_permalink": null,
-    "fotos_ok": false,
+    "fotos_ok": true,
     "meli_items": [],
     "variantes": [
       {
@@ -22510,17 +21343,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban TOM FORD FRANCES SUNGLASSES. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "tom-ford-frances-sunglasses",
-    "meli_item_id": "MLA1911345433",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911345433-lentes-de-sol-tom-ford-tom-ford-frances-sunglasses-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911345433",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911345433-lentes-de-sol-tom-ford-tom-ford-frances-sunglasses-_JM",
-        "titulo": "Lentes De Sol Tom Ford TOM FORD FRANCES SUNGLASSES",
-        "precio": 355900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200218",
@@ -22557,17 +21383,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban TOM FORD ICON GEOMETRIC SUNGLASSES. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "tom-ford-icon-geometric-sunglasses",
-    "meli_item_id": "MLA1911412129",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412129-lentes-de-sol-tom-ford-tom-ford-icon-geometric-sunglasses-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911412129",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412129-lentes-de-sol-tom-ford-tom-ford-icon-geometric-sunglasses-_JM",
-        "titulo": "Lentes De Sol Tom Ford TOM FORD ICON GEOMETRIC SUNGLASSES",
-        "precio": 355900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200214",
@@ -22611,17 +21430,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban TOM FORD ICON PILOT SUNGLASSES. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "tom-ford-icon-pilot-sunglasses",
-    "meli_item_id": "MLA1911345471",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911345471-lentes-de-sol-tom-ford-tom-ford-icon-pilot-sunglasses-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911345471",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911345471-lentes-de-sol-tom-ford-tom-ford-icon-pilot-sunglasses-_JM",
-        "titulo": "Lentes De Sol Tom Ford TOM FORD ICON PILOT SUNGLASSES",
-        "precio": 355900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200212",
@@ -22658,17 +21470,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban TOM FORD PHOTOCHROMATIC ACHILLES SUNGLASSES. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "tom-ford-photochromatic-achilles-sunglasses",
-    "meli_item_id": "MLA1911345491",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911345491-lentes-de-sol-tom-ford-tom-ford-photochromatic-achilles-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911345491",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911345491-lentes-de-sol-tom-ford-tom-ford-photochromatic-achilles-_JM",
-        "titulo": "Lentes De Sol Tom Ford TOM FORD PHOTOCHROMATIC ACHILLES",
-        "precio": 355900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200208",
@@ -22705,17 +21510,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban TOM FORD POLARIZED DAX SUNGLASSES. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "tom-ford-polarized-dax-sunglasses",
-    "meli_item_id": "MLA1911369493",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369493-lentes-de-sol-tom-ford-tom-ford-polarized-dax-sunglasses-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911369493",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369493-lentes-de-sol-tom-ford-tom-ford-polarized-dax-sunglasses-_JM",
-        "titulo": "Lentes De Sol Tom Ford TOM FORD POLARIZED DAX SUNGLASSES",
-        "precio": 355900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200220",
@@ -22792,17 +21590,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban TOM FORD ROUND HORN SUNGLASSES. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "tom-ford-round-horn-sunglasses",
-    "meli_item_id": "MLA3644154534",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154534-lentes-de-sol-tom-ford-tom-ford-round-horn-sunglasses-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3644154534",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154534-lentes-de-sol-tom-ford-tom-ford-round-horn-sunglasses-_JM",
-        "titulo": "Lentes De Sol Tom Ford TOM FORD ROUND HORN SUNGLASSES",
-        "precio": 355900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200217",
@@ -22832,17 +21623,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban TOM FORD VINCENT SUNGLASSES. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "tom-ford-vincent-sunglasses",
-    "meli_item_id": "MLA3644154554",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154554-lentes-de-sol-tom-ford-tom-ford-vincent-sunglasses-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3644154554",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154554-lentes-de-sol-tom-ford-tom-ford-vincent-sunglasses-_JM",
-        "titulo": "Lentes De Sol Tom Ford TOM FORD VINCENT SUNGLASSES",
-        "precio": 355900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200211",
@@ -22926,41 +21710,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban Trillbe. 4 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "trillbe",
-    "meli_item_id": "MLA1911412235",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412235-lentes-de-sol-oakley-trillbe-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911412235",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412235-lentes-de-sol-oakley-trillbe-originales-_JM",
-        "titulo": "Lentes De Sol Oakley Trillbe Originales",
-        "precio": 193900
-      },
-      {
-        "id": "MLA1911412263",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412263-lentes-de-sol-oakley-trillbe-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Oakley Trillbe Importados Uv400",
-        "precio": 219900
-      },
-      {
-        "id": "MLA1911412279",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412279-lentes-de-sol-oakley-trillbe-con-estuche-_JM",
-        "titulo": "Lentes De Sol Oakley Trillbe Con Estuche",
-        "precio": 245900
-      },
-      {
-        "id": "MLA3644154650",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154650-lentes-de-sol-oakley-trillbe-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Oakley Trillbe Envio Gratis",
-        "precio": 275900
-      },
-      {
-        "id": "MLA1911412325",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412325-lentes-de-sol-oakley-trillbe-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Oakley Trillbe Cuotas Sin Interes",
-        "precio": 292900
-      }
-    ],
+    "meli_items": [],
     "variantes": []
   },
   {
@@ -22982,41 +21735,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban TRIOMPHE 01. 5 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "triomphe-01",
-    "meli_item_id": "MLA3644154678",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154678-lentes-de-sol-celine-triomphe-01-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3644154678",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154678-lentes-de-sol-celine-triomphe-01-originales-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE 01 Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA3644154702",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154702-lentes-de-sol-celine-triomphe-01-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE 01 Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911369727",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369727-lentes-de-sol-celine-triomphe-01-con-estuche-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE 01 Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911412413",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412413-lentes-de-sol-celine-triomphe-01-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE 01 Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA3644154768",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154768-lentes-de-sol-celine-triomphe-01-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE 01 Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200032",
@@ -23074,41 +21796,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban TRIOMPHE 13. 3 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "triomphe-13",
-    "meli_item_id": "MLA1911369825",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369825-lentes-de-sol-celine-triomphe-13-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911369825",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369825-lentes-de-sol-celine-triomphe-13-originales-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE 13 Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911412495",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412495-lentes-de-sol-celine-triomphe-13-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE 13 Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA3644154850",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154850-lentes-de-sol-celine-triomphe-13-con-estuche-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE 13 Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911369897",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911369897-lentes-de-sol-celine-triomphe-13-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE 13 Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA3644154892",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154892-lentes-de-sol-celine-triomphe-13-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE 13 Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200029",
@@ -23152,41 +21843,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban TRIOMPHE METAL 04. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "triomphe-metal-04",
-    "meli_item_id": "MLA3644154910",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154910-lentes-de-sol-celine-triomphe-metal-04-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3644154910",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644154910-lentes-de-sol-celine-triomphe-metal-04-originales-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE METAL 04 Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911412607",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412607-lentes-de-sol-celine-triomphe-metal-04-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE METAL 04 Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911370021",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370021-lentes-de-sol-celine-triomphe-metal-04-con-estuche-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE METAL 04 Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911412649",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412649-lentes-de-sol-celine-triomphe-metal-04-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE METAL 04 Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911370057",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370057-lentes-de-sol-celine-triomphe-metal-04-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Celine TRIOMPHE METAL 04 Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200027",
@@ -23223,41 +21883,10 @@
     "destacado": false,
     "descripcion": "Versace con la Medusa dorada al costado. Grita, pero con clase.",
     "foto_codigo": "ve4361",
-    "meli_item_id": "MLA3644155012",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3644155012-lentes-de-sol-versace-ve4361-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3644155012",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644155012-lentes-de-sol-versace-ve4361-originales-_JM",
-        "titulo": "Lentes De Sol Versace VE4361 Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA3644155028",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644155028-lentes-de-sol-versace-ve4361-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Versace VE4361 Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911370119",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370119-lentes-de-sol-versace-ve4361-con-estuche-_JM",
-        "titulo": "Lentes De Sol Versace VE4361 Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911412737",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412737-lentes-de-sol-versace-ve4361-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Versace VE4361 Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911412759",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412759-lentes-de-sol-versace-ve4361-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Versace VE4361 Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200223",
@@ -23329,41 +21958,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban VE4405O. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "ve4405o",
-    "meli_item_id": "MLA1911370193",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370193-lentes-de-sol-versace-ve4405o-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911370193",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370193-lentes-de-sol-versace-ve4405o-originales-_JM",
-        "titulo": "Lentes De Sol Versace VE4405O Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911412809",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412809-lentes-de-sol-versace-ve4405o-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Versace VE4405O Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911370241",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370241-lentes-de-sol-versace-ve4405o-con-estuche-_JM",
-        "titulo": "Lentes De Sol Versace VE4405O Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911412865",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412865-lentes-de-sol-versace-ve4405o-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Versace VE4405O Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911412897",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412897-lentes-de-sol-versace-ve4405o-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Versace VE4405O Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200232",
@@ -23393,41 +21991,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban VE4432U. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "ve4432u",
-    "meli_item_id": "MLA1911370305",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370305-lentes-de-sol-versace-ve4432u-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911370305",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370305-lentes-de-sol-versace-ve4432u-originales-_JM",
-        "titulo": "Lentes De Sol Versace VE4432U Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911412937",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412937-lentes-de-sol-versace-ve4432u-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Versace VE4432U Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911370355",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370355-lentes-de-sol-versace-ve4432u-con-estuche-_JM",
-        "titulo": "Lentes De Sol Versace VE4432U Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911412989",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911412989-lentes-de-sol-versace-ve4432u-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Versace VE4432U Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911370393",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370393-lentes-de-sol-versace-ve4432u-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Versace VE4432U Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200228",
@@ -23464,41 +22031,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban VE4438B. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "dg4438",
-    "meli_item_id": "MLA1911413039",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413039-lentes-de-sol-versace-ve4438b-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911413039",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413039-lentes-de-sol-versace-ve4438b-originales-_JM",
-        "titulo": "Lentes De Sol Versace VE4438B Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911370455",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370455-lentes-de-sol-versace-ve4438b-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Versace VE4438B Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911413115",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413115-lentes-de-sol-versace-ve4438b-con-estuche-_JM",
-        "titulo": "Lentes De Sol Versace VE4438B Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911413167",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413167-lentes-de-sol-versace-ve4438b-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Versace VE4438B Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911413217",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413217-lentes-de-sol-versace-ve4438b-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Versace VE4438B Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200230",
@@ -23535,41 +22071,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban VE4469. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "ve4469",
-    "meli_item_id": "MLA1911413233",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413233-lentes-de-sol-versace-ve4469-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911413233",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413233-lentes-de-sol-versace-ve4469-originales-_JM",
-        "titulo": "Lentes De Sol Versace VE4469 Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911413249",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413249-lentes-de-sol-versace-ve4469-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Versace VE4469 Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911370627",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370627-lentes-de-sol-versace-ve4469-con-estuche-_JM",
-        "titulo": "Lentes De Sol Versace VE4469 Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911370641",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370641-lentes-de-sol-versace-ve4469-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Versace VE4469 Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911413315",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413315-lentes-de-sol-versace-ve4469-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Versace VE4469 Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200236",
@@ -23599,41 +22104,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban VE4473U. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "ve4473u",
-    "meli_item_id": "MLA3644155564",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3644155564-lentes-de-sol-versace-ve4473u-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3644155564",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644155564-lentes-de-sol-versace-ve4473u-originales-_JM",
-        "titulo": "Lentes De Sol Versace VE4473U Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911370675",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370675-lentes-de-sol-versace-ve4473u-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Versace VE4473U Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA3644155588",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644155588-lentes-de-sol-versace-ve4473u-con-estuche-_JM",
-        "titulo": "Lentes De Sol Versace VE4473U Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911370701",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370701-lentes-de-sol-versace-ve4473u-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Versace VE4473U Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA3644155624",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644155624-lentes-de-sol-versace-ve4473u-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Versace VE4473U Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200233",
@@ -23663,41 +22137,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban VE4474U. 2 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "ve4474u",
-    "meli_item_id": "MLA1911413433",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413433-lentes-de-sol-versace-ve4474u-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA1911413433",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413433-lentes-de-sol-versace-ve4474u-originales-_JM",
-        "titulo": "Lentes De Sol Versace VE4474U Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA1911370771",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911370771-lentes-de-sol-versace-ve4474u-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Versace VE4474U Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA3644155692",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644155692-lentes-de-sol-versace-ve4474u-con-estuche-_JM",
-        "titulo": "Lentes De Sol Versace VE4474U Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911413507",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413507-lentes-de-sol-versace-ve4474u-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Versace VE4474U Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911413525",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413525-lentes-de-sol-versace-ve4474u-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Versace VE4474U Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200234",
@@ -23734,41 +22177,10 @@
     "destacado": false,
     "descripcion": "Ray-Ban VEO2264. 1 combinaciones de color, 100% original con garantía doble.",
     "foto_codigo": "veo2264",
-    "meli_item_id": "MLA3644155770",
-    "meli_permalink": "http://articulo.mercadolibre.com.ar/MLA-3644155770-lentes-de-sol-versace-veo2264-originales-_JM",
+    "meli_item_id": null,
+    "meli_permalink": null,
     "fotos_ok": true,
-    "meli_items": [
-      {
-        "id": "MLA3644155770",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644155770-lentes-de-sol-versace-veo2264-originales-_JM",
-        "titulo": "Lentes De Sol Versace VEO2264 Originales",
-        "precio": 355900
-      },
-      {
-        "id": "MLA3644155828",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-3644155828-lentes-de-sol-versace-veo2264-importados-uv400-_JM",
-        "titulo": "Lentes De Sol Versace VEO2264 Importados Uv400",
-        "precio": 402900
-      },
-      {
-        "id": "MLA1911413593",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413593-lentes-de-sol-versace-veo2264-con-estuche-_JM",
-        "titulo": "Lentes De Sol Versace VEO2264 Con Estuche",
-        "precio": 449900
-      },
-      {
-        "id": "MLA1911413617",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413617-lentes-de-sol-versace-veo2264-envio-gratis-_JM",
-        "titulo": "Lentes De Sol Versace VEO2264 Envio Gratis",
-        "precio": 505900
-      },
-      {
-        "id": "MLA1911413647",
-        "permalink": "http://articulo.mercadolibre.com.ar/MLA-1911413647-lentes-de-sol-versace-veo2264-cuotas-sin-interes-_JM",
-        "titulo": "Lentes De Sol Versace VEO2264 Cuotas Sin Interes",
-        "precio": 535900
-      }
-    ],
+    "meli_items": [],
     "variantes": [
       {
         "sku": "200237",

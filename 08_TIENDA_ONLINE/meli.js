@@ -458,10 +458,11 @@ async function handler(req, res, urlObj) {
 
     /* Reactiva una publicación y/o le corrige precio, stock y título. */
     if (p === '/api/meli/reactivar' && req.method === 'POST') {
-      const { id, precio, stock, titulo, activar } = await body(req);
+      const { id, precio, stock, titulo, activar, pausar } = await body(req);
       if (!id) return json(res, 400, { error: 'falta id' });
       const cambios = {};
-      if (activar !== false) cambios.status = 'active';
+      if (pausar) cambios.status = 'paused';
+      else if (activar !== false) cambios.status = 'active';
       if (titulo) cambios.title = String(titulo).slice(0, 60);
       if (precio) cambios.price = Number(precio);
       if (stock != null) cambios.available_quantity = Number(stock);

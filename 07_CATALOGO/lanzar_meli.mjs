@@ -64,11 +64,17 @@ function armarTitulo(p, gancho, iEnc = 0) {
   const limpio = String(p.modelo).replace(/scuderia\s+ferrari/ig, '').replace(/\d{3,4}\s*[a-zA-Z]?/g, '').replace(/\s+/g, ' ').trim();
   const enc = ENCABEZADOS[iEnc % ENCABEZADOS.length];
 
+  // el modelo a veces ya trae la marca adentro ("Amore Fashion 4390"):
+  // sin esto el título queda "Amore Fashion Amore Fashion 4390"
+  const modeloSinMarca = String(p.modelo)
+    .replace(new RegExp(marca.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'ig'), '')
+    .replace(/\s+/g, ' ').trim() || p.modelo;
+
   const base = esFerrari
     ? `${enc} Rayban X Escudería Ferrari ${codigo}`
     : /ray-?ban/i.test(marca)
       ? `${enc} Rayban ${limpio} ${codigo}`.replace(/\s+/g, ' ').trim()
-      : `${enc} ${marca} ${p.modelo}`.replace(/\s+/g, ' ').trim();
+      : `${enc} ${marca} ${modeloSinMarca}`.replace(/\s+/g, ' ').trim();
 
   const full = `${base} ${gancho}`.replace(/\s+/g, ' ').trim();
   if (full.length <= 60) return full;
