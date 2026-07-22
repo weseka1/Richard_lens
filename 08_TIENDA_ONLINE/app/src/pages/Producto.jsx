@@ -28,6 +28,7 @@ export default function Producto() {
   const [variante, setVariante] = useState(null);
   const [probador, setProbador] = useState(false);
   const [zoom, setZoom] = useState(false);
+  const [verTodosColores, setVerTodosColores] = useState(false);
   useEffect(() => { setFotoActiva(0); }, [variante?.sku]); // al cambiar color, la galería arranca en su primera foto
   // llegar con ?probar=1 abre el probador directo (el CTA del hero)
   useEffect(() => { if (new URLSearchParams(location.search).get('probar')) setProbador(true); }, [id]);
@@ -108,7 +109,7 @@ export default function Producto() {
             )}
           </div>
           {v?.color && variosColores && !fotosDeColor.length && fotos.length > 0 && (
-            <p className="galeria-aviso">📷 Fotos oficiales del modelo. La galería muestra la línea completa, no solo el color "{v.color}" — escribinos y te confirmamos el detalle exacto de esa variante antes de cerrar.</p>
+            <p className="galeria-aviso">Fotos oficiales del modelo. La galería muestra la línea completa, no solo el color "{v.color}" — escribinos y te confirmamos el detalle exacto de esa variante antes de cerrar.</p>
           )}
           {zoom && galeria.length > 0 && (
             <div className="lightbox" onClick={() => setZoom(false)}>
@@ -135,13 +136,22 @@ export default function Producto() {
 
           {p.variantes?.length > 0 && (() => {
             const conStock = x => x.stock === 'STOCK' || x.stock === 'POCO STOCK';
-            const colores = [...new Set(p.variantes.map(x => x.color))];
+            const todos = [...new Set(p.variantes.map(x => x.color))];
+            /* Los colores que TIENEN foto propia van primero y son los que
+             * el cliente ve de entrada: elegir uno cambia la imagen de verdad.
+             * Los demás quedan detrás de un "ver más", porque ofrecer veinte
+             * colores donde la foto no cambia marea y hace desconfiar. */
+            const tieneFoto = c => fotos.some(f => norm(mapaFotos[f.split('/').pop()]) === norm(c));
+            const conFoto = todos.filter(tieneFoto);
+            const sinFoto = todos.filter(c => !tieneFoto(c));
+            const colores = conFoto.length ? [...conFoto, ...(verTodosColores ? sinFoto : [])] : todos;
             const colorSel = v?.color || colores[0];
             const deColor = p.variantes.filter(x => x.color === colorSel);
             const [labelSel, bgSel, fgSel] = PILL_STOCK[v?.stock] || PILL_STOCK['CONSULTAR'];
+            const elegir = c => setVariante(p.variantes.find(x => x.color === c && conStock(x)) || p.variantes.find(x => x.color === c));
             return (
               <div className="selector-variantes">
-                <p className="selector-label">Color <span>· {colores.length} disponibles</span></p>
+                <p className="selector-label">Color <span>· {todos.length} disponibles</span></p>
                 <div className="selector-chips">
                   {colores.map(c => {
                     const hay = p.variantes.some(x => x.color === c && conStock(x));
@@ -149,10 +159,15 @@ export default function Producto() {
                       <button
                         key={c}
                         className={'chip-var' + (colorSel === c ? ' activo' : '') + (hay ? '' : ' agotado')}
-                        onClick={() => setVariante(p.variantes.find(x => x.color === c && conStock(x)) || p.variantes.find(x => x.color === c))}
+                        onClick={() => elegir(c)}
                       >{c}</button>
                     );
                   })}
+                  {conFoto.length > 0 && sinFoto.length > 0 && !verTodosColores && (
+                    <button className="chip-var chip-mas" onClick={() => setVerTodosColores(true)}>
+                      +{sinFoto.length} colores a pedido
+                    </button>
+                  )}
                 </div>
                 <p className="selector-label">Talle</p>
                 <div className="selector-chips">

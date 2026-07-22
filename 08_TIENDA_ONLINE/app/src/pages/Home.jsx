@@ -125,10 +125,10 @@ export default function Home() {
             <Link to="/catalogo?orden=vendidos" className="btn-pill pill-claro">Ver todos →</Link>
           </div>
           <div className="beneficios reveal">
-            <span>🚚 Envío gratis a todo el país</span>
-            <span>💳 {cfg?.cuotas || 6} cuotas con tarjeta</span>
-            <span>⚡ {cfg?.descuento_transferencia || 10}% off por transferencia</span>
-            <span>🛡️ Garantía doble de autenticidad</span>
+            <span>Envío gratis a todo el país</span>
+            <span>{cfg?.cuotas || 6} cuotas con tarjeta</span>
+            <span>{cfg?.descuento_transferencia || 10}% off por transferencia</span>
+            <span>Garantía doble de autenticidad</span>
           </div>
           <div className="grid-productos">
             {vendidos.map((p, i) => <CardProducto key={p.id} p={p} i={i} cfg={cfg} />)}
@@ -246,7 +246,7 @@ export default function Home() {
                 <svg viewBox="0 0 24 24"><path d="M22 3 2 10.5l7 2.5M22 3l-5.5 18L12 13M22 3 12 13" /></svg>
                 <svg viewBox="0 0 24 24" style={{ marginLeft: 'auto' }}><path d="M6 3h12v18l-6-4.5L6 21V3Z" /></svg>
               </div>
-              <p className="ig-caption"><b>{cfg?.instagram || 'richardlens.ar'}</b> Dobles en el club. Los ojos, cubiertos. 🎾</p>
+              <p className="ig-caption"><b>{cfg?.instagram || 'richardlens.ar'}</b> Dobles en el club. Los ojos, cubiertos.</p>
             </div>
           </a>
         </div>

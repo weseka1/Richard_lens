@@ -698,7 +698,11 @@ footer { border-top: 1px solid var(--linea-suave); padding: 46px 0 100px; backgr
   95% { opacity: 0; }
   100% { stroke-dashoffset: 420; opacity: 0; }
 }
-main, header, footer { position: relative; z-index: 2; } /* ojo: jamás pisar el position de drawer/chat/fabs (son fixed) */
+/* main NO puede compartir z-index con el header: el header es fixed y va
+ * arriba de todo. Antes esta regla lo bajaba a z-index 2 y el contenido se
+ * dibujaba encima del menú abierto. */
+main { position: relative; z-index: 1; }
+footer { position: relative; z-index: 1; }
 
 /* ---------- sección Instagram: el reel en un teléfono ---------- */
 .ig-in { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
@@ -770,8 +774,19 @@ main, header, footer { position: relative; z-index: 2; } /* ojo: jamás pisar el
   .hero-modelo { width: min(92%, 420px); }
 }
 @media (max-width: 860px) {
-  nav { display: none; position: fixed; top: 92px; left: 0; right: 0; background: rgba(251, 251, 253, .95); backdrop-filter: blur(20px); flex-direction: column; padding: 24px; gap: 18px; border-bottom: 1px solid var(--linea-suave); }
+  /* El menú abría a 92px fijos y se montaba sobre el contenido. Ahora
+   * cuelga del header real y ocupa lo que le queda de pantalla. */
+  nav {
+    display: none; position: fixed; top: var(--alto-header, 104px); left: 0; right: 0;
+    max-height: calc(100dvh - var(--alto-header, 104px)); overflow-y: auto;
+    background: #FBFBFD; flex-direction: column; align-items: stretch;
+    padding: 20px 22px 32px; gap: 4px; z-index: 120;
+    border-bottom: 1px solid var(--linea-suave);
+    box-shadow: 0 24px 40px -24px rgba(0, 0, 0, .28);
+  }
   nav.abierta { display: flex; }
+  nav a, nav .nav-boton { padding: 13px 0; font-size: .95rem; text-align: left; border-bottom: 1px solid var(--linea-suave); }
+  nav .btn-wa-mini, nav .btn-cart-head { margin-top: 12px; text-align: center; }
   .menu-btn { display: block; }
   .producto-layout { grid-template-columns: 1fr; gap: 32px; padding-top: 140px; }
   .seccion { padding: 64px 0; }
@@ -836,6 +851,8 @@ main, header, footer { position: relative; z-index: 2; } /* ojo: jamás pisar el
   .hero-cine-contenido { padding: 0 16px 36px 18px; }
 }
 
+.chip-var.chip-mas { border-style: dashed; color: var(--gris-label); font-weight: 500; }
+
 /* ---------- probador: estado de detección y ajuste plegable ---------- */
 .probador-cargando {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
@@ -859,8 +876,13 @@ main, header, footer { position: relative; z-index: 2; } /* ojo: jamás pisar el
   /* el teléfono de Instagram se desbordaba del ancho */
   .ig-telefono { width: min(300px, 88vw); }
   .ig-telefono video, .ig-telefono img { width: 100%; height: auto; display: block; }
-  /* la burbuja del scroll amplificaba el jank: más sutil */
-  .reveal { transform: translateY(26px) scale(.97); filter: blur(4px); }
+  /* SIN desenfoque en celular: el blur sobre decenas de tarjetas deja la
+   * pantalla lechosa y si el observador tarda, queda así. Sólo un fundido. */
+  .reveal, .card { filter: none !important; transform: none !important; }
+  .reveal { opacity: 0; transition: opacity .45s ease; }
+  .reveal.visible { opacity: 1; }
+  .card { opacity: 0; transition: opacity .4s ease, box-shadow .3s; }
+  .card.visible { opacity: 1; }
 }
 
 @media (max-width: 640px) {

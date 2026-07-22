@@ -66,9 +66,12 @@ export default function Probador({ abierto, onCerrar, fotoGafas, nombre, precio,
       const distOjos = Math.hypot(ojoI.x - ojoD.x, ojoI.y - ojoD.y);
       const angulo = Math.atan2(ojoI.y - ojoD.y, ojoI.x - ojoD.x) * 180 / Math.PI;
 
-      // unas gafas cubren aproximadamente 2,2 veces la distancia entre ojos
-      setPos({ x: (cx / W) * 100, y: (cy / H) * 100 });
-      setEscala(Math.max(0.2, Math.min(1.1, (distOjos * 2.2) / W)));
+      // unas gafas cubren aproximadamente 2,4 veces la distancia entre ojos,
+      // y se apoyan un poco POR ENCIMA del centro del ojo: si las centramos
+      // exacto quedan caídas sobre la nariz
+      const alto = distOjos * 0.16;
+      setPos({ x: (cx / W) * 100, y: ((cy - alto) / H) * 100 });
+      setEscala(Math.max(0.2, Math.min(1.1, (distOjos * 2.4) / W)));
       setRot(Math.max(-25, Math.min(25, angulo)));
       setEstado('listo');
     } catch (e) {
@@ -186,7 +189,7 @@ export default function Probador({ abierto, onCerrar, fotoGafas, nombre, precio,
                 </button>
               )}
             </div>
-            <p className="probador-tip" style={{ fontSize: '.72rem' }}>🛡️ Y si al recibirlas no te convencen: 30 días de cambio, sin drama.</p>
+            <p className="probador-tip" style={{ fontSize: '.72rem' }}>Y si al recibirlas no te convencen: 30 días de cambio, sin drama.</p>
           </>
         )}
       </div>

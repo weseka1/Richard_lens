@@ -12,7 +12,8 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
-const RAIZ = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
+import { fileURLToPath } from 'url';
+const RAIZ = path.dirname(fileURLToPath(import.meta.url));
 const mensaje = process.argv[2] || 'Actualizacion';
 
 function hook() {

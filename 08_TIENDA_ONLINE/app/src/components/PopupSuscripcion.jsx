@@ -40,7 +40,7 @@ export default function PopupSuscripcion() {
         <h3>Enterate antes que nadie</h3>
         <p>Drops, llegadas y precios exclusivos de la casa, primero en tu casilla. Sin spam.</p>
         {listo ? (
-          <p className="news-ok" style={{ textAlign: 'center' }}>Adentro. Bienvenido a la lista. 👑</p>
+          <p className="news-ok" style={{ textAlign: 'center' }}>Adentro. Bienvenido a la lista.</p>
         ) : (
           <form onSubmit={suscribir}>
             <input type="email" required placeholder="tu@email.com" value={email} onChange={e => setEmail(e.target.value)} />

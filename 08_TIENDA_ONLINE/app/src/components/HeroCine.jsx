@@ -64,7 +64,6 @@ export default function HeroCine({ drop, cfg }) {
       )}
       {drop && (
         <Link to={`/producto/${drop.id}?probar=1`} className="btn-probador">
-          <span className="btn-probador-emoji" aria-hidden="true">🤳</span>
           <span>Probátelas con tu selfie</span>
           <em>Probador virtual →</em>
         </Link>

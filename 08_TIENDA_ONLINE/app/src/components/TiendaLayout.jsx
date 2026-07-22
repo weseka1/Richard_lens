@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { linkWA, track } from '../lib/api.js';
@@ -7,10 +7,7 @@ import ChatRich from './ChatRich.jsx';
 import CartDrawer from './CartDrawer.jsx';
 import { useCarrito } from '../lib/carrito.js';
 import Lenis from 'lenis';
-import IntroGraffiti from './IntroGraffiti.jsx';
-import FondoDoodles from './FondoDoodles.jsx';
 import PopupSuscripcion from './PopupSuscripcion.jsx';
-import EfectoBurbuja from './EfectoBurbuja.jsx';
 
 const ConfigContext = createContext(null);
 export const useCfg = () => useContext(ConfigContext);
@@ -53,13 +50,27 @@ export default function TiendaLayout() {
     return () => { cancelAnimationFrame(id); lenis.destroy(); };
   }, []);
 
+  /* el menú móvil cuelga del header: si el alto cambia (ticker, notch, zoom)
+   * el desplegable tiene que seguirlo, si no se monta sobre el contenido */
+  const headerRef = useRef(null);
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const medir = () => document.documentElement.style.setProperty('--alto-header', el.offsetHeight + 'px');
+    medir();
+    const ro = new ResizeObserver(medir);
+    ro.observe(el);
+    addEventListener('resize', medir);
+    return () => { ro.disconnect(); removeEventListener('resize', medir); };
+  }, []);
+
+  // al navegar, el menú se cierra solo
+  useEffect(() => { setMenu(false); setMega(false); }, [loc.pathname, loc.search]);
+
   return (
     <ConfigContext.Provider value={cfg}>
-      <IntroGraffiti />
-      <FondoDoodles />
       <PopupSuscripcion />
-      <EfectoBurbuja />
-      <header>
+      <header ref={headerRef}>
         <div className="anuncio" aria-hidden="true">
           <div className="anuncio-in">
             {[0, 1].map(v => (

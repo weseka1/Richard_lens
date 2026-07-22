@@ -11,7 +11,7 @@ export default function CartDrawer({ cfg, abierto, onCerrar }) {
     const lineas = items.map(x =>
       `• ${x.cant}x ${x.marca} ${x.modelo}${x.color ? ` (${x.color}${x.codigo ? ', ' + x.codigo : ''})` : ''} — ${plata(x.precio * x.cant)}`
     ).join('\n');
-    const msg = `¡Hola! Pedido desde la web 👑\n${lineas}\nTOTAL: ${plata(total)}\n¿Cómo seguimos?`;
+    const msg = `¡Hola! Pedido desde la web\n${lineas}\nTOTAL: ${plata(total)}\n¿Cómo seguimos?`;
     track('carrito_pedido', `${items.length} items · ${plata(total)}`);
     window.open(linkWA(cfg, msg), '_blank', 'noopener');
   }
@@ -23,7 +23,7 @@ export default function CartDrawer({ cfg, abierto, onCerrar }) {
         <button onClick={onCerrar} aria-label="Cerrar">×</button>
       </div>
       <div className="cart-items">
-        {items.length === 0 && <p className="cart-vacio">Todavía no agregaste nada.<br />El que quiere, puede. 👑</p>}
+        {items.length === 0 && <p className="cart-vacio">Todavía no agregaste nada.<br />El que quiere, puede.</p>}
         {items.map(x => (
           <div className="cart-item" key={x.k}>
             <div style={{ flex: 1 }}>
