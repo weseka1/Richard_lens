@@ -12,6 +12,67 @@ import PopupSuscripcion from './PopupSuscripcion.jsx';
 const ConfigContext = createContext(null);
 export const useCfg = () => useContext(ConfigContext);
 
+/* Las columnas del menú de catálogo. Se usan dos veces: en escritorio dentro
+ * del mega desplegable, en celular como acordeón adentro del menú. */
+const COLUMNAS_MENU = (
+  <>
+    <div className="mega-col">
+      <b>Destacados</b>
+      <Link to="/catalogo?orden=vendidos">Más vendidos</Link>
+      <Link to="/catalogo?promo=1">En promoción</Link>
+      <Link to="/catalogo?estado=disponible">Stock inmediato</Link>
+      <Link to="/catalogo">Ver todo</Link>
+    </div>
+    <div className="mega-col">
+      <b>Ray-Ban</b>
+      <Link to="/catalogo?marca=Ray-Ban">Toda la línea</Link>
+      <Link to="/catalogo?marca=Ray-Ban%20·%20Ferrari">Ferrari Edition</Link>
+      <Link to="/catalogo?marca=Ray-Ban%20·%20A%24AP%20Rocky">A$AP Rocky</Link>
+      <Link to="/catalogo?marca=Oakley">Oakley</Link>
+    </div>
+    <div className="mega-col">
+      <b>La Caja Fuerte</b>
+      <Link to="/catalogo?marca=Louis%20Vuitton">Louis Vuitton</Link>
+      <Link to="/catalogo?marca=Dior">Dior</Link>
+      <Link to="/catalogo?marca=Gucci">Gucci</Link>
+      <Link to="/catalogo?marca=Prada">Prada</Link>
+      <Link to="/catalogo?marca=Fendi">Fendi</Link>
+      <Link to="/catalogo?marca=Off-White">Off-White</Link>
+      <Link to="/catalogo?marca=Saint%20Laurent">Saint Laurent</Link>
+      <Link to="/catalogo?canal=WEB">Todo el lujo</Link>
+    </div>
+    <div className="mega-col">
+      <b>Más lujo</b>
+      <Link to="/catalogo?marca=Versace">Versace</Link>
+      <Link to="/catalogo?marca=Balenciaga">Balenciaga</Link>
+      <Link to="/catalogo?marca=Celine">Celine</Link>
+      <Link to="/catalogo?marca=Tom%20Ford">Tom Ford</Link>
+      <Link to="/catalogo?marca=Cartier">Cartier</Link>
+      <Link to="/catalogo?marca=Dolce%20%26%20Gabbana">Dolce &amp; Gabbana</Link>
+      <Link to="/catalogo?marca=Miu%20Miu">Miu Miu</Link>
+    </div>
+    <div className="mega-col">
+      <b>Colecciones</b>
+      <Link to="/catalogo?genero=hombre">Gafas Hombre</Link>
+      <Link to="/catalogo?genero=mujer">Gafas Mujer</Link>
+      <Link to="/catalogo?forma=armazón recetado">Armazones recetados</Link>
+      <Link to="/catalogo?forma=collab">Collabs</Link>
+    </div>
+  </>
+);
+
+/* ¿estamos en el layout de celular? el mega se comporta distinto */
+function useEsCelular() {
+  const [es, setEs] = useState(() => typeof matchMedia !== 'undefined' && matchMedia('(max-width: 860px)').matches);
+  useEffect(() => {
+    const mq = matchMedia('(max-width: 860px)');
+    const cambio = e => setEs(e.matches);
+    mq.addEventListener('change', cambio);
+    return () => mq.removeEventListener('change', cambio);
+  }, []);
+  return es;
+}
+
 function BotonWA({ cfg, texto, className, children }) {
   if (!cfg) return null;
   return (
@@ -52,6 +113,7 @@ export default function TiendaLayout() {
 
   /* el menú móvil cuelga del header: si el alto cambia (ticker, notch, zoom)
    * el desplegable tiene que seguirlo, si no se monta sobre el contenido */
+  const esCelular = useEsCelular();
   const headerRef = useRef(null);
   useEffect(() => {
     const el = headerRef.current;
@@ -87,52 +149,18 @@ export default function TiendaLayout() {
           <nav className={menu ? 'abierta' : ''}>
             <NavLink to="/" end className={({ isActive }) => isActive ? 'activa' : ''}>Inicio</NavLink>
             <div className="mega-wrap">
-              <button className={'nav-boton' + (mega ? ' activa' : '')} onClick={() => setMega(m => !m)}>Catálogo ▾</button>
-              {mega && createPortal(<div className="mega-overlay" onClick={() => setMega(false)} />, document.body)}
-              {mega && createPortal(<div className="mega abierta" onClick={() => setMega(false)}>
-                <div className="mega-col">
-                  <b>Destacados</b>
-                  <Link to="/catalogo?orden=vendidos">Más vendidos</Link>
-                  <Link to="/catalogo?promo=1">En promoción</Link>
-                  <Link to="/catalogo?estado=disponible">Stock inmediato</Link>
-                  <Link to="/catalogo">Ver todo</Link>
-                </div>
-                <div className="mega-col">
-                  <b>Ray-Ban</b>
-                  <Link to="/catalogo?marca=Ray-Ban">Toda la línea</Link>
-                  <Link to="/catalogo?marca=Ray-Ban%20·%20Ferrari">Ferrari Edition</Link>
-                  <Link to="/catalogo?marca=Ray-Ban%20·%20A%24AP%20Rocky">A$AP Rocky</Link>
-                  <Link to="/catalogo?marca=Oakley">Oakley</Link>
-                </div>
-                <div className="mega-col">
-                  <b>La Caja Fuerte</b>
-                  <Link to="/catalogo?marca=Louis%20Vuitton">Louis Vuitton</Link>
-                  <Link to="/catalogo?marca=Dior">Dior</Link>
-                  <Link to="/catalogo?marca=Gucci">Gucci</Link>
-                  <Link to="/catalogo?marca=Prada">Prada</Link>
-                  <Link to="/catalogo?marca=Fendi">Fendi</Link>
-                  <Link to="/catalogo?marca=Off-White">Off-White</Link>
-                  <Link to="/catalogo?marca=Saint%20Laurent">Saint Laurent</Link>
-                  <Link to="/catalogo?canal=WEB">Todo el lujo</Link>
-                </div>
-                <div className="mega-col">
-                  <b>Más lujo</b>
-                  <Link to="/catalogo?marca=Versace">Versace</Link>
-                  <Link to="/catalogo?marca=Balenciaga">Balenciaga</Link>
-                  <Link to="/catalogo?marca=Celine">Celine</Link>
-                  <Link to="/catalogo?marca=Tom%20Ford">Tom Ford</Link>
-                  <Link to="/catalogo?marca=Cartier">Cartier</Link>
-                  <Link to="/catalogo?marca=Dolce%20%26%20Gabbana">Dolce &amp; Gabbana</Link>
-                  <Link to="/catalogo?marca=Miu%20Miu">Miu Miu</Link>
-                </div>
-                <div className="mega-col">
-                  <b>Colecciones</b>
-                  <Link to="/catalogo?genero=hombre">Gafas Hombre</Link>
-                  <Link to="/catalogo?genero=mujer">Gafas Mujer</Link>
-                  <Link to="/catalogo?forma=armazón recetado">Armazones recetados</Link>
-                  <Link to="/catalogo?forma=collab">Collabs</Link>
-                </div>
-              </div>, document.body)}
+              <button className={'nav-boton' + (mega ? ' activa' : '')} onClick={() => setMega(m => !m)}>
+                Catálogo <span className="nav-flecha" aria-hidden="true">{mega ? '−' : '+'}</span>
+              </button>
+              {/* En escritorio el mega va al body (si no, el blur del header lo
+                * ancla mal). En celular NO se puede portalear: tiene que
+                * desplegarse dentro del menú, como un acordeón. */}
+              {mega && esCelular && <div className="mega-acordeon">{COLUMNAS_MENU}</div>}
+              {mega && !esCelular && createPortal(<div className="mega-overlay" onClick={() => setMega(false)} />, document.body)}
+              {mega && !esCelular && createPortal(
+                <div className="mega abierta" onClick={() => setMega(false)}>{COLUMNAS_MENU}</div>,
+                document.body
+              )}
             </div>
             <Link to="/catalogo?canal=WEB">La Caja Fuerte</Link>
             <a href="/#por-que">Por qué nosotros</a>

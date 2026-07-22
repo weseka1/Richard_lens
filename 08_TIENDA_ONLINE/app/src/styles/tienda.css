@@ -786,6 +786,19 @@ footer { position: relative; z-index: 1; }
   }
   nav.abierta { display: flex; }
   nav a, nav .nav-boton { padding: 13px 0; font-size: .95rem; text-align: left; border-bottom: 1px solid var(--linea-suave); }
+  nav .mega-wrap { display: block; }
+  nav .nav-boton { display: flex; width: 100%; justify-content: space-between; align-items: center; }
+  .nav-flecha { font-size: 1.2rem; color: var(--gris-label); font-weight: 400; }
+  /* el catálogo se despliega como acordeón, no como panel flotante */
+  .mega-acordeon { padding: 4px 0 10px 14px; border-bottom: 1px solid var(--linea-suave); }
+  .mega-acordeon .mega-col { display: flex; flex-direction: column; padding: 10px 0 4px; }
+  .mega-acordeon .mega-col b {
+    font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--gris-label); font-weight: 700; margin-bottom: 4px;
+  }
+  .mega-acordeon .mega-col a {
+    font-size: .92rem; padding: 9px 0; border-bottom: none; color: var(--hueso);
+  }
   nav .btn-wa-mini, nav .btn-cart-head { margin-top: 12px; text-align: center; }
   .menu-btn { display: block; }
   .producto-layout { grid-template-columns: 1fr; gap: 32px; padding-top: 140px; }
