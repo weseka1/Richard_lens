@@ -62,12 +62,9 @@ export default function HeroCine({ drop, cfg }) {
           Drop en stock — {drop.marca} {drop.modelo}{drop.precio_web > 0 ? ` · ${plata(drop.precio_web)}` : ''} →
         </Link>
       )}
-      {drop && (
-        <Link to={`/producto/${drop.id}?probar=1`} className="btn-probador">
-          <span>Probátelas con tu selfie</span>
-          <em>Probador virtual →</em>
-        </Link>
-      )}
+      {/* El probador de selfie queda fuera del lanzamiento: el encuadre todavía
+          deforma la cara y era lo primero que ofrecía el hero. El componente
+          sigue en components/Probador.jsx para retomarlo cuando esté fino. */}
     </div>
   );
 

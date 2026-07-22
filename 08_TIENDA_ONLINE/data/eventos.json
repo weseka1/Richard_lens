@@ -1,5 +1,130 @@
 [
   {
+    "fecha": "2026-07-22T21:39:40.592Z",
+    "tipo": "visita_producto",
+    "detalle": "30montaigne-su"
+  },
+  {
+    "fecha": "2026-07-22T21:39:25.282Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-22T21:39:18.755Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-22T21:39:11.109Z",
+    "tipo": "visita_producto",
+    "detalle": "30montaigne-su"
+  },
+  {
+    "fecha": "2026-07-22T21:39:05.888Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-22T21:38:41.613Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-22T21:37:17.626Z",
+    "tipo": "visita_producto",
+    "detalle": "30montaigne-su"
+  },
+  {
+    "fecha": "2026-07-22T21:37:11.753Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-22T21:37:03.592Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-22T21:34:16.410Z",
+    "tipo": "visita_producto",
+    "detalle": "30montaigne-su"
+  },
+  {
+    "fecha": "2026-07-22T21:34:10.879Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-22T21:33:58.053Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-22T21:28:39.765Z",
+    "tipo": "visita_producto",
+    "detalle": "30montaigne-su"
+  },
+  {
+    "fecha": "2026-07-22T21:28:34.648Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-22T21:28:26.208Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-22T21:26:53.910Z",
+    "tipo": "visita_producto",
+    "detalle": "30montaigne-su"
+  },
+  {
+    "fecha": "2026-07-22T21:26:38.760Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-22T21:26:27.885Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-22T21:24:10.755Z",
+    "tipo": "visita_producto",
+    "detalle": "30montaigne-su"
+  },
+  {
+    "fecha": "2026-07-22T21:24:05.706Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-22T21:23:59.614Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-22T21:22:22.822Z",
+    "tipo": "visita_producto",
+    "detalle": "30montaigne-su"
+  },
+  {
+    "fecha": "2026-07-22T21:22:18.071Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-22T21:22:11.574Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-22T21:18:56.220Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-21T16:55:56.265Z",
     "tipo": "visita_producto",
     "detalle": "spr15y"

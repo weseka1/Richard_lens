@@ -70,7 +70,13 @@ export default function CardProducto({ p, i = 0, cfg }) {
       <div className="card-info">
         <div className="card-marca">{p.marca}</div>
         <div className="card-modelo">{p.modelo}</div>
-        <div className="card-detalle">{p.color} · {p.cristal}</div>
+        {/* "según variante" es como quedó cargado el cristal en casi todo el
+            catálogo: al comprador le suena a base de datos, no a producto.
+            Y el color viene como "1 colores", que se lee mal. */}
+        <div className="card-detalle">
+          {[String(p.color || '').replace(/^1 colores$/i, 'Color único'), p.cristal]
+            .filter(x => x && !/seg[úu]n variante/i.test(x)).join(' · ')}
+        </div>
         {p.precio_web > 0 && cfg ? (
           <div className="card-precios">
             <span className="precio-lista">{plata(precioLista(p.precio_web))}</span>

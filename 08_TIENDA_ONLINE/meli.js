@@ -504,6 +504,8 @@ async function handler(req, res, urlObj) {
           for (const a of v.attributes || []) enVariantes.add(a.id);
         }
         const DE_VARIANTE = new Set(['EMPTY_GTIN_REASON', 'GTIN', 'LENS_WIDTH', 'LENS_HEIGHT', 'BRIDGE_LENGTH', 'TEMPLE_LENGTH']);
+        // los que MELI marca allow_variations: son los que pueden chocar
+        const PUEDEN_VARIAR = new Set([...DE_VARIANTE, 'COLOR', 'FRAME_COLOR', 'LENS_COLOR', 'TEMPLE_COLOR', 'DESIGN']);
 
         const libres = attributes.filter(a => !enVariantes.has(a.id));
         const cuerpo = { attributes: libres.filter(a => !variantes.length || !DE_VARIANTE.has(a.id)) };
@@ -512,8 +514,19 @@ async function handler(req, res, urlObj) {
           if (porVariante.length) cuerpo.variations = variantes.map(v => ({ id: v.id, attributes: porVariante }));
         }
 
-        await api(`/items/${id}`, 'PUT', cuerpo);
-        return json(res, 200, { ok: true, item: cuerpo.attributes.length, variantes: variantes.length });
+        try {
+          await api(`/items/${id}`, 'PUT', cuerpo);
+          return json(res, 200, { ok: true, item: cuerpo.attributes.length, variantes: variantes.length });
+        } catch (e) {
+          if (!/more than/i.test(e.message)) throw e;
+          /* Quedan casos en que MELI ve el choque igual, normalmente porque una
+           * corrida anterior dejó a nivel ítem algo que ahora va por variante.
+           * Antes que perder la publicación entera, va lo que describe al
+           * modelo y se dejan afuera los que admiten variante. */
+          const seguros = cuerpo.attributes.filter(a => !PUEDEN_VARIAR.has(a.id));
+          await api(`/items/${id}`, 'PUT', { attributes: seguros });
+          return json(res, 200, { ok: true, item: seguros.length, variantes: variantes.length, reducido: true });
+        }
       } catch (e) { return json(res, 400, { error: e.message }); }
     }
 

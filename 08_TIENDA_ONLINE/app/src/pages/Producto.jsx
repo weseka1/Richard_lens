@@ -5,10 +5,22 @@ import { useProductos, useReveals } from '../lib/hooks.js';
 import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
 import CardProducto, { Badge, TileMarca, popColor } from '../components/CardProducto.jsx';
 import { agregar, precioLista } from '../lib/carrito.js';
-import Probador from '../components/Probador.jsx';
+// El probador de selfie queda fuera del lanzamiento hasta que el encuadre
+// deje de deformar la cara. Vive en components/Probador.jsx.
 
 /* mismo color escrito distinto ("marrón degradé" / "marron degrade") tiene que matchear */
 const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim();
+
+/* Las formas que le dicen algo al comprador. El resto de los valores de
+ * `forma` ("lujo", "collab", "highstreet", "blaze") son cómo agrupamos el
+ * catálogo nosotros, y en la ficha quedaban como si fueran una característica
+ * del armazón. */
+const FORMAS_VISIBLES = {
+  aviador: 'Aviador', wayfarer: 'Wayfarer', clubmaster: 'Clubmaster',
+  redondo: 'Redondo', cuadrado: 'Cuadrado', cats: 'Ojo de gato',
+  deportivo: 'Deportivo', 'armazón recetado': 'Armazón recetado',
+  'armazon recetado': 'Armazón recetado',
+};
 
 const PILL_STOCK = {
   'STOCK': ['Stock ya', '#C6A75E', '#0A0A0B'],
@@ -26,12 +38,9 @@ export default function Producto() {
   const [mapaFotos, setMapaFotos] = useState({});
   const [fotoActiva, setFotoActiva] = useState(0);
   const [variante, setVariante] = useState(null);
-  const [probador, setProbador] = useState(false);
   const [zoom, setZoom] = useState(false);
   const [verTodosColores, setVerTodosColores] = useState(false);
   useEffect(() => { setFotoActiva(0); }, [variante?.sku]); // al cambiar color, la galería arranca en su primera foto
-  // llegar con ?probar=1 abre el probador directo (el CTA del hero)
-  useEffect(() => { if (new URLSearchParams(location.search).get('probar')) setProbador(true); }, [id]);
   // flechas del teclado para recorrer la galería
   useEffect(() => {
     const tecla = e => {
@@ -211,11 +220,17 @@ export default function Producto() {
 
           <div className="prod-specs">
             {!p.variantes?.length && <div className="spec"><small>Color</small><span>{p.color}</span></div>}
-            {!p.variantes?.length && <div className="spec"><small>Cristal</small><span>{p.cristal}</span></div>}
-            <div className="spec"><small>Forma</small><span>{p.forma}</span></div>
+            {/* "según variante" y "lujo"/"collab"/"highstreet" son etiquetas
+                nuestras de catálogo: al cliente le suenan a planilla interna */}
+            {!p.variantes?.length && p.cristal && !/seg[úu]n variante/i.test(p.cristal) &&
+              <div className="spec"><small>Cristal</small><span>{p.cristal}</span></div>}
+            {FORMAS_VISIBLES[String(p.forma || '').toLowerCase()] &&
+              <div className="spec"><small>Forma</small><span>{FORMAS_VISIBLES[String(p.forma).toLowerCase()]}</span></div>}
             <div className="spec"><small>Material</small><span>{p.material}</span></div>
             <div className="spec"><small>Autenticidad</small><span>Grabados + estuche + factura</span></div>
             <div className="spec"><small>Envío</small><span>24-48 h, asegurado, todo el país</span></div>
+            {/* además de ser cierto, llena el hueco que quedaba en la grilla */}
+            <div className="spec"><small>Garantía</small><span>30 días para cambio</span></div>
           </div>
 
           {p.precio_web > 0 && cfg ? (
@@ -247,20 +262,7 @@ export default function Producto() {
               </BotonWA>
             )}
             <BotonWA cfg={cfg} className="btn-pill pill-claro" texto={msgWA}>Consultar por WhatsApp</BotonWA>
-            <button className="btn-pill pill-claro" onClick={() => setProbador(true)}>Probátelas con tu selfie</button>
           </div>
-
-          <Probador
-            abierto={probador}
-            onCerrar={() => setProbador(false)}
-            fotoGafas={`/img/tryon/${p.id}.png`}
-            nombre={`${p.marca} ${p.modelo}`}
-            precio={p.precio_web > 0 ? plata(p.precio_web) : ''}
-            onComprar={p.precio_web > 0 && p.estado === 'disponible' ? () => agregar({
-              id: p.id, marca: p.marca, modelo: p.modelo, precio: p.precio_web,
-              sku: v?.sku, color: v?.color, codigo: v?.codigo, talle: v?.talle
-            }) : null}
-          />
         </div>
       </div>
 

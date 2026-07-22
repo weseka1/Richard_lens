@@ -10,6 +10,8 @@
  *
  * Uso: node calidad_meli.mjs [--dry] [--limite N]
  */
+import fs from 'node:fs';
+import path from 'node:path';
 import { createRequire } from 'node:module';
 // mismo mapeo que usa el publicador, para que no se separen con el tiempo
 const { ficha, cruzar } = createRequire(import.meta.url)('../08_TIENDA_ONLINE/fichaMeli.js');
@@ -46,7 +48,7 @@ const pocasFotos = activos.filter(i => i.fotos < 4);
 if (pocasFotos.length) console.log(`⚠ ${pocasFotos.length} con menos de 4 fotos\n`); else console.log('Todas con 4 fotos o más\n');
 
 let ok = 0, fallos = 0, sinCruce = 0;
-const stats = {}, cuantos = [], motivos = {};
+const stats = {}, cuantos = [], motivos = {}, caidas = [];
 for (const it of activos) {
   if (ok + fallos >= limite) break;
   const p = cruzar(it.titulo, productos);
@@ -67,8 +69,8 @@ for (const it of activos) {
     });
     const j = await r.json();
     if (j.ok) ok++;
-    else { fallos++; motivos[j.error] = (motivos[j.error] || 0) + 1; }
-  } catch (e) { fallos++; motivos[e.message] = (motivos[e.message] || 0) + 1; }
+    else { fallos++; motivos[j.error] = (motivos[j.error] || 0) + 1; caidas.push(`${it.id}  ${it.titulo}  →  ${j.error}`); }
+  } catch (e) { fallos++; motivos[e.message] = (motivos[e.message] || 0) + 1; caidas.push(`${it.id}  ${it.titulo}  →  ${e.message}`); }
   if ((ok + fallos) % 25 === 0) process.stdout.write(`\r  ${ok + fallos}/${activos.length}`);
 }
 
@@ -83,4 +85,9 @@ if (dry) {
 
 console.log(`\n\n${ok} enriquecidas · ${fallos} fallaron · ${sinCruce} sin cruce.`);
 for (const [m, n] of Object.entries(motivos).sort((a, b) => b[1] - a[1])) console.log(`  ${n}× ${m}`);
+if (caidas.length) {
+  // sin los ids no hay forma de ir a mirar qué tienen de distinto
+  fs.writeFileSync(path.join(import.meta.dirname, 'CALIDAD_FALLIDAS.txt'), caidas.join('\n') + '\n', 'utf8');
+  console.log(`\nLas ${caidas.length} que fallaron quedaron en 07_CATALOGO/CALIDAD_FALLIDAS.txt`);
+}
 console.log('MELI recalcula la calidad en unas horas.\n');
