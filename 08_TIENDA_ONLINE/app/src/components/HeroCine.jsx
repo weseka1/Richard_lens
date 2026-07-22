@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { plata } from '../lib/api.js';
 import { BotonWA } from './TiendaLayout.jsx';
+import VideoAdaptativo from './VideoAdaptativo.jsx';
 
 /* El hero maison: split editorial GRANDE — copy sobre porcelana a la izquierda,
  * la foto editorial (el negro) full-bleed a la derecha. Tilt 3D sutil tipo iPhone:
@@ -74,7 +75,12 @@ export default function HeroCine({ drop, cfg }) {
       <div className="wrap">
         <div className="hero-tilt" ref={tiltRef}>
           <div className="hero-cine">
-            <video src="/img/hero.mp4" autoPlay muted loop playsInline onError={() => setHayVideo(false)} />
+            <VideoAdaptativo
+              src="/img/hero.mp4"
+              movil="/img/hero-movil.mp4"
+              poster="/img/hero-poster.jpg"
+              onError={() => setHayVideo(false)}
+            />
             <div className="hero-cine-velo" />
             <div className="hero-cine-contenido">{copy(false)}</div>
           </div>

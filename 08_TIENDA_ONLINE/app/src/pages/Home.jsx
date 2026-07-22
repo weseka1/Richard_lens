@@ -5,6 +5,7 @@ import { useProductos, useReveals } from '../lib/hooks.js';
 import { useCfg, BotonWA } from '../components/TiendaLayout.jsx';
 import CardProducto from '../components/CardProducto.jsx';
 import HeroCine from '../components/HeroCine.jsx';
+import VideoAdaptativo from '../components/VideoAdaptativo.jsx';
 
 const MARCAS = ['RAY-BAN', 'OAKLEY', 'PRADA', 'GUCCI', 'DIOR', 'LOUIS VUITTON', 'CARTIER', 'SAINT LAURENT', 'BALENCIAGA', 'FENDI', 'VERSACE', 'CELINE', 'TOM FORD', 'MIU MIU', 'OFF-WHITE'];
 
@@ -237,7 +238,7 @@ export default function Home() {
               </div>
               <em>Seguir</em>
             </div>
-            <video src="/img/ig.mp4" autoPlay muted loop playsInline />
+            <VideoAdaptativo src="/img/ig.mp4" movil="/img/ig-movil.mp4" poster="/img/ig-poster.jpg" />
             <div className="ig-pie">
               <div className="ig-acciones">
                 <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-9.5-9A5.4 5.4 0 0 1 12 6.2 5.4 5.4 0 0 1 21.5 12c-2 4.1-9.5 9-9.5 9Z" /></svg>
@@ -295,8 +296,10 @@ function VideoRich() {
   if (!hay) return null;
   return (
     <>
-      <video
-        src="/img/rich001.mp4" autoPlay muted loop playsInline
+      <VideoAdaptativo
+        src="/img/rich001.mp4"
+        movil="/img/rich001-movil.mp4"
+        poster="/img/rich001-poster.jpg"
         onError={() => setHay(false)}
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: .5 }}
       />
