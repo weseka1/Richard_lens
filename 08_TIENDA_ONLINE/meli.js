@@ -394,17 +394,24 @@ async function handler(req, res, urlObj) {
       // "all" no es un status válido en MELI: hay que pedir cada uno.
       // Sin parámetro sólo devuelve las activas, y las pausadas son justo
       // las que nos interesan rescatar.
+      /* Con paginado por offset MELI corta en 1000 y acá había un tope de 500:
+       * veíamos 592 publicaciones de las 2182 que hay. El barrido con scroll
+       * no tiene tope, que es lo que necesitamos para no dejar ninguna afuera. */
       for (const st of ['', 'active', 'paused', 'closed', 'under_review', 'inactive']) {
-        let offset = 0;
-        for (;;) {
+        let scroll = null;
+        for (let vuelta = 0; vuelta < 60; vuelta++) {
           let r;
-          try { r = await api(`/users/${me.id}/items/search?limit=100&offset=${offset}${st ? '&status=' + st : ''}`); }
-          catch { break; }
+          try {
+            r = await api(`/users/${me.id}/items/search?search_type=scan&limit=100${st ? '&status=' + st : ''}${scroll ? '&scroll_id=' + scroll : ''}`);
+          } catch { break; }
           const res_ = r.results || [];
+          if (vuelta === 0) porEstado[st || 'default'] = r.paging?.total ?? res_.length;
+          if (!res_.length) break;
+          const antes = ids.size;
           res_.forEach(x => ids.add(x));
-          porEstado[st || 'default'] = r.paging?.total ?? res_.length;
-          offset += 100;
-          if (res_.length < 100 || offset >= (r.paging?.total || 0) || offset >= 500) break;
+          // el scroll agotado devuelve siempre la misma página: sin esto no corta
+          if (ids.size === antes && vuelta > 0) break;
+          scroll = r.scroll_id;
         }
       }
       if (!ids.size) return json(res, 200, { total: 0, items: [], diagnostico: { usuario: me.nickname, user_id: me.id, porEstado } });
@@ -425,11 +432,9 @@ async function handler(req, res, urlObj) {
           });
         }
       }
-      // visitas de los últimos 30 días, en un solo pedido
-      try {
-        const v = await api(`/items/visits?ids=${items.map(i => i.id).join(',')}&date_from=${new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10)}&date_to=${new Date().toISOString().slice(0, 10)}`);
-        for (const it of items) if (v[it.id] != null) it.visitas = v[it.id];
-      } catch {}
+      /* Las visitas ya no se pueden pedir por lote (MELI acepta un id por vez),
+       * y de a una son 2000 llamadas. El total y el detalle salen por
+       * 07_CATALOGO/visitas_meli.mjs, que es donde tiene sentido esperarlas. */
 
       items.sort((a, b) => (b.vendidos - a.vendidos) || ((b.visitas || 0) - (a.visitas || 0)));
       return json(res, 200, { total: items.length, items, diagnostico: { usuario: me.nickname, user_id: me.id, porEstado } });
@@ -524,19 +529,22 @@ async function handler(req, res, urlObj) {
         if (tiene >= minimo) return json(res, 200, { ok: true, sinCambios: true, fotos: tiene });
 
         const { dir, files } = fotosDe(codigo);
-        if (!files.length) return json(res, 400, { error: 'sin fotos locales' });
-
-        const subidas = await subirFotos(dir, files);
-        const nuevas = files.filter(f => subidas[f]).map(f => ({ id: subidas[f] }));
-        // si en disco no hay más que en MELI, no falló la subida: faltan fotos
-        if (nuevas.length <= tiene) return json(res, 400, {
-          error: files.length <= tiene
-            ? `en disco solo hay ${files.length} fotos usables: hay que pedirlas al proveedor`
-            : `MELI aceptó ${nuevas.length} de ${files.length}`
+        if (files.length <= tiene) return json(res, 400, {
+          error: `en disco solo hay ${files.length} fotos usables: hay que pedirlas al proveedor`
         });
 
-        await api(`/items/${id}`, 'PUT', { pictures: nuevas });
-        return json(res, 200, { ok: true, antes: tiene, ahora: nuevas.length });
+        /* Se AGREGAN, no se reemplazan. Reemplazando, las variantes quedaban
+         * apuntando a fotos que dejaban de existir y MELI rechazaba el PUT.
+         * Las fotos ya publicadas salieron de estos mismos archivos ordenados,
+         * así que las que faltan son las del final. */
+        const pendientes = files.slice(tiene);
+        const subidas = await subirFotos(dir, pendientes);
+        const agregadas = pendientes.filter(f => subidas[f]).map(f => ({ id: subidas[f] }));
+        if (!agregadas.length) return json(res, 400, { error: `MELI rechazó las ${pendientes.length} fotos nuevas` });
+
+        const pictures = [...(item.pictures || []).map(x => ({ id: x.id })), ...agregadas];
+        await api(`/items/${id}`, 'PUT', { pictures });
+        return json(res, 200, { ok: true, antes: tiene, ahora: pictures.length });
       } catch (e) { return json(res, 400, { error: e.message }); }
     }
 
