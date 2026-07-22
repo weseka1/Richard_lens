@@ -28,8 +28,49 @@ const MIME = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png',
-  '.svg': 'image/svg+xml', '.webp': 'image/webp', '.ico': 'image/x-icon'
+  '.svg': 'image/svg+xml', '.webp': 'image/webp', '.ico': 'image/x-icon',
+  // sin el tipo correcto Safari en iOS se niega a reproducir el video
+  '.mp4': 'video/mp4', '.webm': 'video/webm', '.mov': 'video/quicktime',
+  '.woff2': 'font/woff2', '.woff': 'font/woff'
 };
+
+/* Envía un archivo soportando Range.
+ * Safari en iOS pide el video por tramos ("Range: bytes=0-1" primero) y si el
+ * servidor le contesta 200 con todo el archivo en vez de 206, no reproduce
+ * nada. Sin esto los videos simplemente no se ven en iPhone. */
+function servirArchivo(req, res, file, cache = 'max-age=3600') {
+  const tipo = MIME[path.extname(file).toLowerCase()] || 'application/octet-stream';
+  const total = fs.statSync(file).size;
+  const rango = req.headers.range;
+
+  if (rango) {
+    const m = /bytes=(\d*)-(\d*)/.exec(rango);
+    if (m) {
+      const inicio = m[1] ? parseInt(m[1], 10) : 0;
+      const fin = m[2] ? parseInt(m[2], 10) : total - 1;
+      if (inicio >= total || fin >= total || inicio > fin) {
+        res.writeHead(416, { 'Content-Range': `bytes */${total}` });
+        return res.end();
+      }
+      res.writeHead(206, {
+        'Content-Type': tipo,
+        'Content-Range': `bytes ${inicio}-${fin}/${total}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': fin - inicio + 1,
+        'Cache-Control': cache
+      });
+      return fs.createReadStream(file, { start: inicio, end: fin }).pipe(res);
+    }
+  }
+
+  res.writeHead(200, {
+    'Content-Type': tipo,
+    'Content-Length': total,
+    'Accept-Ranges': 'bytes',
+    'Cache-Control': cache
+  });
+  return fs.createReadStream(file).pipe(res);
+}
 
 // ---------- helpers de datos ----------
 function leer(archivo, fallback) {
@@ -465,10 +506,7 @@ const server = http.createServer(async (req, res) => {
     if (p.startsWith('/fotos/')) {
       const rel = p.replace('/fotos/', '').split('/').filter(x => x && x !== '..');
       const file = path.join(FOTOS_DIR, ...rel);
-      if (fs.existsSync(file) && fs.statSync(file).isFile()) {
-        res.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Cache-Control': 'max-age=3600' });
-        return fs.createReadStream(file).pipe(res);
-      }
+      if (fs.existsSync(file) && fs.statSync(file).isFile()) return servirArchivo(req, res, file);
       res.writeHead(404); return res.end();
     }
 
@@ -480,9 +518,10 @@ const server = http.createServer(async (req, res) => {
       file = path.join(DIST, 'index.html'); // rutas de la SPA (/catalogo, /producto/x, /panel...)
     }
     if (fs.existsSync(file)) {
-      const cache = /\/assets\//.test(p) ? 'max-age=31536000, immutable' : 'no-cache';
-      res.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Cache-Control': cache });
-      return fs.createReadStream(file).pipe(res);
+      const cache = /\/assets\//.test(p) ? 'max-age=31536000, immutable'
+        : /\.(mp4|webm|mov|jpe?g|png|webp)$/i.test(p) ? 'max-age=86400'
+        : 'no-cache';
+      return servirArchivo(req, res, file, cache);
     }
     res.writeHead(503, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end('<h1 style="font-family:sans-serif;color:#F2EDE3;background:#0E0D0B;padding:40px">Falta el build: corré <code>cd app && npm run build</code></h1>');
