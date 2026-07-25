@@ -914,29 +914,28 @@ footer { position: relative; z-index: 1; }
   .hero .wrap { padding: 0; max-width: none; }
   .hero-cine {
     display: block; position: relative;
-    height: 100svh; min-height: 600px; max-height: 1040px;
+    height: 92svh; min-height: 580px; max-height: 960px;
     overflow: hidden; animation: none;
+    background: var(--negro);         /* porcelana de base */
   }
+  /* la gafa CENTRADA (los dos lentes + puente) en la banda de arriba, y se
+   * disuelve en porcelana hacia abajo; el copy va debajo sobre porcelana limpia.
+   * Full-screen y potente, pero el lente entero y el texto siempre legible. */
   .hero-cine video,
   .hero-cine > img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: 50% 40%; border-radius: 0;
-    -webkit-mask-image: none; mask-image: none;
+    position: absolute; top: 0; left: 0; inset: auto;
+    width: 100%; height: 58%;
+    object-fit: cover; object-position: 50% 46%; border-radius: 0;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
   }
-  /* velo: apenas arriba (bajo el header) y fuerte abajo hacia porcelana */
-  .hero-cine-velo {
-    display: block; position: absolute; inset: 0; pointer-events: none;
-    background:
-      linear-gradient(180deg, rgba(245,245,247,.55) 0%, transparent 15%),
-      linear-gradient(180deg, transparent 42%, rgba(245,245,247,.38) 62%, rgba(245,245,247,.95) 100%);
-  }
+  .hero-cine-velo,
   .hero-cine::after,
   .hero-cine-contenido::before { display: none; }
 
   .hero-cine-contenido {
     position: absolute; left: 0; right: 0; bottom: 0;
-    max-width: 100%; padding: 0 24px 46px; margin: 0; z-index: 3;
+    max-width: 100%; padding: 0 24px 48px; margin: 0; z-index: 3;
   }
   .hero-cine-contenido .hero-kicker { font-size: .62rem; }
   .hero-cine-contenido h1 .l1 { font-size: clamp(2.2rem, 10vw, 3.1rem) !important; }
