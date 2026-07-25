@@ -45,6 +45,30 @@ const CONFIANZA = [
   ['IV', 'Cambios sin fricción', '30 días para cambiar, por el mismo canal donde compraste.']
 ];
 
+/* Barra de confianza: va JUSTO debajo del hero. Para una tienda nueva que
+ * vende "originales", la desconfianza es el freno #1 de compra — hay que
+ * despejarla antes de que la persona empiece a mirar precios. */
+function BarraConfianza({ cfg }) {
+  const PILARES = [
+    ['100% Originales', 'Grabados de fábrica que verificás vos'],
+    ['Garantía doble', 'Si no es original, te devolvemos el doble'],
+    ['Envíos a todo el país', 'Asegurado y con seguimiento · 24-48 h'],
+    [`${cfg?.cuotas || 6} cuotas o ${cfg?.descuento_transferencia || 10}% off`, 'Con tarjeta, o descuento por transferencia'],
+  ];
+  return (
+    <section className="barra-confianza reveal" aria-label="Por qué comprarnos">
+      <div className="wrap barra-confianza-in">
+        {PILARES.map(([t, d]) => (
+          <div className="pilar" key={t}>
+            <svg className="pilar-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5 11-12" /></svg>
+            <div><b>{t}</b><span>{d}</span></div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Newsletter() {
   const [email, setEmail] = useState('');
   const [estado, setEstado] = useState('');
@@ -105,6 +129,9 @@ export default function Home() {
       {/* HERO: video real si existe /img/hero.mp4, si no producto flotante */}
       <HeroCine drop={drop} cfg={cfg} />
 
+      {/* CONFIANZA INMEDIATA — despeja el freno #1 antes de mirar precios */}
+      <BarraConfianza cfg={cfg} />
+
       {/* TICKER MARCAS */}
       <div className="marquee" aria-hidden="true">
         <div className="marquee-in">
@@ -114,8 +141,19 @@ export default function Home() {
         </div>
       </div>
 
-      {/* MÁS VENDIDOS — primero: el inicio es pura venta */}
+      {/* CATEGORÍAS — la puerta de entrada: que cada uno encuentre lo suyo rápido */}
       <section className="seccion" style={{ paddingBottom: 40 }}>
+        <div className="wrap">
+          <p className="sec-kicker reveal">Comprá por categoría</p>
+          <h2 className="sec-titulo reveal">¿Qué estás buscando?</h2>
+          <div className="grid-categorias">
+            {CATEGORIAS.map((c, i) => <TileCategoria key={c.titulo} c={c} i={i} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* MÁS VENDIDOS — la vidriera caliente, apenas entrás */}
+      <section className="seccion" style={{ paddingTop: 40, paddingBottom: 40 }}>
         <div className="wrap">
           <div className="sec-fila reveal">
             <div>
@@ -124,25 +162,8 @@ export default function Home() {
             </div>
             <Link to="/catalogo?orden=vendidos" className="btn-pill pill-claro">Ver todos →</Link>
           </div>
-          <div className="beneficios reveal">
-            <span>Envío gratis a todo el país</span>
-            <span>{cfg?.cuotas || 6} cuotas con tarjeta</span>
-            <span>{cfg?.descuento_transferencia || 10}% off por transferencia</span>
-            <span>Garantía doble de autenticidad</span>
-          </div>
           <div className="grid-productos">
             {vendidos.map((p, i) => <CardProducto key={p.id} p={p} i={i} cfg={cfg} />)}
-          </div>
-        </div>
-      </section>
-
-      {/* CATEGORÍAS (la grilla Nike) */}
-      <section className="seccion" style={{ paddingTop: 40 }}>
-        <div className="wrap">
-          <p className="sec-kicker reveal">Comprá por categoría</p>
-          <h2 className="sec-titulo reveal">¿Qué estás buscando?</h2>
-          <div className="grid-categorias">
-            {CATEGORIAS.map((c, i) => <TileCategoria key={c.titulo} c={c} i={i} />)}
           </div>
         </div>
       </section>
@@ -179,36 +200,6 @@ export default function Home() {
           <h2 className="sec-titulo reveal">RICH 001</h2>
           <p className="sec-bajada reveal" style={{ margin: '0 auto 30px' }}>La línea propia. Edición numerada, polarizado UV400, drop limitado. El rich estaba en el nombre.</p>
           <Newsletter3dCta cfg={cfg} />
-        </div>
-      </section>
-
-      {/* POR QUÉ NOSOTROS */}
-      <section className="seccion" id="por-que">
-        <div className="wrap">
-          <p className="sec-kicker reveal">Por qué nosotros</p>
-          <h2 className="sec-titulo reveal">Lo que a otros les falta, acá sobra</h2>
-          <div className="grid-confianza reveal">
-            {CONFIANZA.map(([num, t, d]) => (
-              <div className="conf-item" key={num}>
-                <div className="conf-num">{num}</div>
-                <h3>{t}</h3>
-                <p>{d}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="seccion" style={{ paddingTop: 0 }}>
-        <div className="wrap">
-          <p className="sec-kicker reveal">Las dudas de siempre</p>
-          <h2 className="sec-titulo reveal">Preguntá tranquilo</h2>
-          <div className="faq reveal">
-            {FAQS.map(([q, a]) => (
-              <details key={q}><summary>{q}</summary><p>{a}</p></details>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -249,6 +240,36 @@ export default function Home() {
               <p className="ig-caption"><b>{cfg?.instagram || 'richardlens.ar'}</b> Dobles en el club. Los ojos, cubiertos.</p>
             </div>
           </a>
+        </div>
+      </section>
+
+      {/* POR QUÉ NOSOTROS — el explicador de confianza, para el que baja a investigar */}
+      <section className="seccion" id="por-que">
+        <div className="wrap">
+          <p className="sec-kicker reveal">Por qué nosotros</p>
+          <h2 className="sec-titulo reveal">Lo que a otros les falta, acá sobra</h2>
+          <div className="grid-confianza reveal">
+            {CONFIANZA.map(([num, t, d]) => (
+              <div className="conf-item" key={num}>
+                <div className="conf-num">{num}</div>
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ — las objeciones, resueltas */}
+      <section className="seccion" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <p className="sec-kicker reveal">Las dudas de siempre</p>
+          <h2 className="sec-titulo reveal">Preguntá tranquilo</h2>
+          <div className="faq reveal">
+            {FAQS.map(([q, a]) => (
+              <details key={q}><summary>{q}</summary><p>{a}</p></details>
+            ))}
+          </div>
         </div>
       </section>
 
