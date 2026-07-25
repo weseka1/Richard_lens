@@ -2,10 +2,20 @@
 
 export const plata = n => '$' + Number(n || 0).toLocaleString('es-AR');
 
+// la llave de admin (si el dueño la cargó en el panel) viaja en cada llamada;
+// los endpoints públicos la ignoran, los de admin la exigen cuando está activa
+export function claveAdmin() {
+  try { return localStorage.getItem('rl_admin_key') || ''; } catch { return ''; }
+}
+
 export async function api(ruta, metodo = 'GET', datos) {
+  const headers = {};
+  if (datos) headers['Content-Type'] = 'application/json';
+  const clave = claveAdmin();
+  if (clave) headers['x-rl-admin'] = clave;
   const r = await fetch('/api/' + ruta, {
     method: metodo,
-    headers: datos ? { 'Content-Type': 'application/json' } : undefined,
+    headers: Object.keys(headers).length ? headers : undefined,
     body: datos ? JSON.stringify(datos) : undefined
   });
   if (!r.ok) throw new Error(`API ${ruta} → ${r.status}`);

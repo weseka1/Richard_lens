@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
+import { claveAdmin } from '../lib/api.js';
 import Tablero from './Tablero.jsx';
 import Productos from './Productos.jsx';
 import Ventas from './Ventas.jsx';
@@ -17,6 +18,11 @@ const LINKS = [
 ];
 
 export default function Panel() {
+  const [clave, setClave] = useState(claveAdmin());
+  const guardarClave = v => {
+    setClave(v);
+    try { v ? localStorage.setItem('rl_admin_key', v) : localStorage.removeItem('rl_admin_key'); } catch {}
+  };
   return (
     <div className="panel-root">
       <aside className="sidebar">
@@ -31,6 +37,13 @@ export default function Panel() {
             >{nombre}</NavLink>
           ))}
         </nav>
+        {/* llave de admin: pegala una vez (la misma que pusiste en ADMIN_KEY en
+            Render). Queda guardada en este navegador. Sin ADMIN_KEY no hace falta. */}
+        <label className="side-clave">
+          <span>🔑 Llave de admin</span>
+          <input type="password" value={clave} placeholder="solo si activaste ADMIN_KEY"
+            onChange={e => guardarClave(e.target.value.trim())} autoComplete="off" />
+        </label>
         <a className="side-tienda" href="/" target="_blank" rel="noopener noreferrer">Ver la tienda →</a>
       </aside>
       <main>

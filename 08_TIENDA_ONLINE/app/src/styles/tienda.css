@@ -891,36 +891,39 @@ footer { position: relative; z-index: 1; }
   .hero-cine-contenido { padding: 0 16px 36px 18px; }
 }
 
-/* ---------- hero en celular: la foto arriba, el texto abajo ----------
- * En desktop el copy va abajo a la izquierda y el producto respira a la
- * derecha, así que superponerlos funciona. En celular el copy ocupa casi todo
- * el ancho y caía justo sobre el cristal oscuro: gris sobre gris. Velarlo más
- * arreglaba la lectura pero borraba la gafa, y una casa de anteojos sin
- * anteojos en la portada no vende. Acá se separan: la foto se ve entera y
- * nítida, y el texto va debajo sobre porcelana limpia. */
+/* ---------- hero en celular: video INTEGRADO, no una tarjeta pegada ----------
+ * Antes el video iba en un recuadro redondeado con márgenes: se veía "pegado"
+ * encima de la página. Acá va de borde a borde (full-bleed), sin esquinas, y su
+ * parte de abajo se FUNDE en la porcelana con una máscara — el texto emerge del
+ * video sin costura y todo se siente parte de la misma página. */
 @media (max-width: 640px) {
+  .hero { padding-top: 100px; }
+  .hero .wrap { padding: 0; }        /* el hero ocupa todo el ancho en mobile */
   .hero-cine {
     display: block;
     min-height: 0;
     overflow: visible;
-    animation: none;              /* el flote descolocaba la banda de foto */
+    animation: none;                 /* el flote descolocaba la banda */
   }
-  /* la banda va justa: si crece, el botón de "Ver la colección" se cae de la
-   * primera pantalla y hay que scrollear para encontrar por dónde comprar */
   .hero-cine video,
   .hero-cine > img {
     position: relative; inset: auto;
-    width: 100%; height: 34svh; max-height: 290px; min-height: 200px;
-    object-fit: cover; object-position: 50% 42%; border-radius: 20px;
+    width: 100%; height: 56svh; max-height: 500px; min-height: 320px;
+    object-fit: cover; object-position: 50% 40%; border-radius: 0;
+    /* se disuelve hacia abajo en la porcelana (#F5F5F7): deja de ser tarjeta */
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 99%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 99%);
   }
-  /* velo y viñeta existen para poder leer ENCIMA de la foto: acá sobran */
+  /* velo y viñeta existen para leer ENCIMA de la foto: acá sobran */
   .hero-cine-velo,
   .hero-cine::after,
   .hero-cine-contenido::before { display: none; }
 
   .hero-cine-contenido {
     max-width: 100%;
-    padding: 20px 2px 8px;
+    padding: 0 22px 8px;
+    margin-top: -36px;               /* el texto sube y emerge del fundido */
+    position: relative; z-index: 3;
   }
   .hero-cine-contenido .hero-kicker { font-size: .62rem; }
   .hero-cine-contenido h1 .l1,

@@ -24,6 +24,10 @@
 .panel-root .side-link.activo { background: #1D1D1F; color: #fff; box-shadow: 0 6px 18px -8px rgba(0, 0, 0, .35); }
 .panel-root .side-tienda { color: var(--p-azul); font-size: .8rem; text-decoration: none; font-weight: 500; }
 .panel-root .side-tienda:hover { text-decoration: underline; }
+.panel-root .side-clave { display: flex; flex-direction: column; gap: 6px; margin: 6px 0 12px; }
+.panel-root .side-clave span { font-size: .68rem; letter-spacing: .06em; color: var(--p-gris); font-weight: 600; }
+.panel-root .side-clave input { width: 100%; padding: 8px 10px; border: 1px solid rgba(0,0,0,.14); border-radius: 8px; font-size: .8rem; font-family: inherit; background: #fff; color: var(--p-tinta); }
+.panel-root .side-clave input:focus { outline: none; border-color: #1D1D1F; }
 
 /* main */
 .panel-root main { flex: 1; padding: 34px 38px; max-width: 1200px; }

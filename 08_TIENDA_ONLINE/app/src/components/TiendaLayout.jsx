@@ -151,7 +151,7 @@ export default function TiendaLayout() {
         <div className="anuncio" aria-hidden="true">
           <div className="anuncio-in">
             {[0, 1].map(v => (
-              <span key={v}>ENVÍO GRATIS A TODO EL PAÍS<i>●</i> 100% ORIGINALES CON GARANTÍA DOBLE<i>●</i> PROBADOR VIRTUAL — PROBÁTELAS CON TU SELFIE<i>●</i> CUOTAS + DESCUENTO POR TRANSFERENCIA<i>●</i></span>
+              <span key={v}>ENVÍO GRATIS A TODO EL PAÍS<i>●</i> 100% ORIGINALES CON GARANTÍA DOBLE<i>●</i> CAMBIOS DENTRO DE LOS 30 DÍAS<i>●</i> CUOTAS + DESCUENTO POR TRANSFERENCIA<i>●</i></span>
             ))}
           </div>
         </div>

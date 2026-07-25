@@ -19,6 +19,29 @@ const DATA = p => path.join(ROOT, 'data', p);
 const FOTOS_DIR = path.join(ROOT, '..', '07_CATALOGO', 'imagenes');
 const STOCK_CSV = path.join(ROOT, '..', '07_CATALOGO', 'STOCK.csv');
 
+/* Códigos con al menos una foto usable. Se escanea una vez y se cachea 60s:
+ * sirve para no mostrar en la vidriera un producto "disponible" sin foto (queda
+ * un mosaico de marca que en el lanzamiento se ve incompleto). Los "a pedido"
+ * sin foto sí se muestran: son dropshipping y el cliente pide fotos por WhatsApp. */
+let _fotosCache = { t: 0, set: new Set() };
+function tieneFotos(codigo) {
+  const ahora = Date.now();
+  if (ahora - _fotosCache.t > 60000) {
+    const set = new Set();
+    try {
+      for (const dir of fs.readdirSync(FOTOS_DIR)) {
+        try {
+          const hay = fs.readdirSync(path.join(FOTOS_DIR, dir))
+            .some(f => /\.(jpe?g|png|webp)$/i.test(f) && !f.startsWith('_'));
+          if (hay) set.add(dir);
+        } catch {}
+      }
+    } catch {}
+    _fotosCache = { t: ahora, set };
+  }
+  return !!codigo && _fotosCache.set.has(codigo);
+}
+
 const PORT = process.env.PORT || 5250;
 // en la nube (Render inyecta PORT) hay que escuchar en todas las interfaces;
 // en local queda cerrado al equipo salvo que pidas lo contrario
@@ -31,7 +54,9 @@ const MIME = {
   '.svg': 'image/svg+xml', '.webp': 'image/webp', '.ico': 'image/x-icon',
   // sin el tipo correcto Safari en iOS se niega a reproducir el video
   '.mp4': 'video/mp4', '.webm': 'video/webm', '.mov': 'video/quicktime',
-  '.woff2': 'font/woff2', '.woff': 'font/woff'
+  '.woff2': 'font/woff2', '.woff': 'font/woff',
+  // robots.txt y sitemap.xml: Google los quiere con su tipo, no octet-stream
+  '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml; charset=utf-8'
 };
 
 /* Envía un archivo soportando Range.
@@ -203,6 +228,20 @@ const server = http.createServer(async (req, res) => {
       const cfg = leer('config.json', {});
       const productos = leer('productos.json', []);
 
+      /* Llave de admin BLANDA: mientras no exista la variable ADMIN_KEY, todo
+       * funciona como siempre (no te deja afuera). Cuando la seteás en Render,
+       * las escrituras y los datos internos (stats, /admin) piden la llave —
+       * el público sigue pudiendo ver la tienda, sumarse al newsletter y chatear.
+       * MELI se maneja aparte (línea de arriba) con su propio secreto. */
+      const ADMIN_KEY = process.env.ADMIN_KEY;
+      if (ADMIN_KEY) {
+        const PUBLICO = new Set(['/api/eventos', '/api/suscriptores', '/api/ia']);
+        const interno = p === '/api/stats' || p.startsWith('/api/admin/');
+        const necesita = interno || (req.method !== 'GET' && !PUBLICO.has(p));
+        if (necesita && req.headers['x-rl-admin'] !== ADMIN_KEY)
+          return json(res, 401, { error: 'No autorizado' });
+      }
+
       if (p === '/api/config' && req.method === 'GET') return json(res, 200, cfg);
       if (p === '/api/config' && req.method === 'POST') {
         const b = await body(req); guardar('config.json', { ...cfg, ...b });
@@ -210,7 +249,11 @@ const server = http.createServer(async (req, res) => {
       }
 
       if (p === '/api/productos' && req.method === 'GET')
-        return json(res, 200, productos.filter(x => x.estado !== 'pausado').map(publico));
+        return json(res, 200, productos
+          .filter(x => x.estado !== 'pausado')
+          // un "disponible" sin foto no va a la vidriera; el resto (a pedido) sí
+          .filter(x => x.estado !== 'disponible' || tieneFotos(x.foto_codigo))
+          .map(publico));
       if (p === '/api/admin/productos' && req.method === 'GET')
         return json(res, 200, productos);
       if (p === '/api/productos' && req.method === 'POST') {

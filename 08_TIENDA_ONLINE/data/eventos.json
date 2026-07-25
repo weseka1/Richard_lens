@@ -1,5 +1,55 @@
 [
   {
+    "fecha": "2026-07-25T18:56:09.217Z",
+    "tipo": "visita_producto",
+    "detalle": "30montaigne-su"
+  },
+  {
+    "fecha": "2026-07-25T18:56:04.762Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-25T18:55:59.069Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-25T18:44:48.223Z",
+    "tipo": "test",
+    "detalle": "audit"
+  },
+  {
+    "fecha": "2026-07-25T16:53:57.706Z",
+    "tipo": "visita_producto",
+    "detalle": "30montaigne-su"
+  },
+  {
+    "fecha": "2026-07-25T16:53:52.865Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-25T16:53:42.277Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
+    "fecha": "2026-07-25T16:38:12.718Z",
+    "tipo": "visita_producto",
+    "detalle": "30montaigne-su"
+  },
+  {
+    "fecha": "2026-07-25T16:38:03.189Z",
+    "tipo": "visita",
+    "detalle": "catalogo"
+  },
+  {
+    "fecha": "2026-07-25T16:37:52.702Z",
+    "tipo": "visita",
+    "detalle": "home"
+  },
+  {
     "fecha": "2026-07-22T21:39:40.592Z",
     "tipo": "visita_producto",
     "detalle": "30montaigne-su"
