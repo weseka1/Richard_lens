@@ -9,8 +9,9 @@
 }
 .panel-root h1 { font-family: inherit; font-weight: 700; font-size: 1.7rem; letter-spacing: -0.025em; text-transform: none; margin-bottom: 22px; line-height: 1.1; color: var(--p-tinta); text-shadow: none; }
 .panel-root h2 { font-family: inherit; font-size: .74rem; text-transform: uppercase; letter-spacing: .16em; color: var(--p-gris); margin-bottom: 16px; font-weight: 600; }
-.panel-root input, .panel-root select { font-family: inherit; background: var(--p-fondo); border: 1px solid var(--p-borde); color: var(--p-tinta); padding: 9px 12px; border-radius: 10px; font-size: .9rem; width: 100%; outline: none; transition: border-color .2s; }
-.panel-root input:focus, .panel-root select:focus { border-color: var(--p-tinta); }
+.panel-root input, .panel-root select, .panel-root textarea { font-family: inherit; background: var(--p-fondo); border: 1px solid var(--p-borde); color: var(--p-tinta); padding: 9px 12px; border-radius: 10px; font-size: .9rem; width: 100%; outline: none; transition: border-color .2s; }
+.panel-root input:focus, .panel-root select:focus, .panel-root textarea:focus { border-color: var(--p-tinta); }
+.panel-root textarea { resize: vertical; min-height: 62px; line-height: 1.45; }
 .panel-root code { color: var(--p-azul); font-size: .85em; }
 
 /* sidebar: columna blanca con glass */
@@ -73,7 +74,7 @@
 .panel-root .g-valor { font-size: .72rem; color: var(--p-tinta-60); font-variant-numeric: tabular-nums; }
 
 /* config */
-.panel-root .form-config { max-width: 460px; display: flex; flex-direction: column; gap: 14px; }
+.panel-root .form-config { max-width: 560px; display: flex; flex-direction: column; gap: 14px; }
 .panel-root .form-config label { font-size: .78rem; color: var(--p-tinta-60); display: flex; flex-direction: column; gap: 6px; font-weight: 500; }
 
 /* modal (glass claro) */

@@ -244,7 +244,11 @@ const server = http.createServer(async (req, res) => {
 
       if (p === '/api/config' && req.method === 'GET') return json(res, 200, cfg);
       if (p === '/api/config' && req.method === 'POST') {
-        const b = await body(req); guardar('config.json', { ...cfg, ...b });
+        const b = await body(req);
+        const nueva = { ...cfg, ...b };
+        guardar('config.json', nueva);
+        // fuente de verdad en Supabase (secreto 'config') para que persista en Render
+        if (supa.activo()) supa.secretoSet('config', nueva).catch(e => console.error('[config] supabase:', e.message));
         return json(res, 200, { ok: true });
       }
 
@@ -261,6 +265,13 @@ const server = http.createServer(async (req, res) => {
         b.id = b.id || slug(b.codigo || b.modelo || String(Date.now()));
         b.foto_codigo = b.foto_codigo || b.id;
         productos.push(b); guardar('productos.json', productos);
+        // el producto nuevo también sube a Supabase (si no, se perdía al re-sync en Render)
+        if (supa.activo()) {
+          const { variantes, ...fila } = b;
+          supa.upsertProductos([fila]);
+          if (Array.isArray(variantes) && variantes.length)
+            supa.upsertVariantes(variantes.map(v => ({ ...v, producto_id: b.id })));
+        }
         return json(res, 200, { ok: true, id: b.id });
       }
       const mProd = p.match(/^\/api\/productos\/([\w-]+)$/);
@@ -345,15 +356,21 @@ const server = http.createServer(async (req, res) => {
         return json(res, 200, { ok: true });
       }
 
-      // asignar color a una foto DESDE EL PANEL (escribe fotos.json — mismo formato que la auditoría IA)
+      // asignar color a una foto (para que la ficha muestre esa foto cuando eligen el
+      // color). Fuente de verdad: foto_colores del producto (Supabase). Espejo local
+      // en productos.json y en el fotos.json de la carpeta (que usa la publicación MELI).
       const mColorF = p.match(/^\/api\/fotos-color\/([\w-]+)$/);
       if (mColorF && req.method === 'POST') {
         const { archivo, color } = await body(req);
-        const ruta = path.join(FOTOS_DIR, mColorF[1], 'fotos.json');
-        let mapa = {};
-        try { mapa = JSON.parse(fs.readFileSync(ruta, 'utf8')); } catch {}
+        const codigo = mColorF[1];
+        const prods = leer('productos.json', []);
+        const idx = prods.findIndex(x => (x.foto_codigo || x.id) === codigo);
+        let mapa = (idx >= 0 && prods[idx].foto_colores) ? { ...prods[idx].foto_colores } : {};
+        if (!Object.keys(mapa).length) { try { mapa = JSON.parse(fs.readFileSync(path.join(FOTOS_DIR, codigo, 'fotos.json'), 'utf8')); } catch {} }
         if (color) mapa[archivo] = color; else delete mapa[archivo];
-        fs.writeFileSync(ruta, JSON.stringify(mapa, null, 2), 'utf8');
+        if (idx >= 0) { prods[idx].foto_colores = mapa; guardar('productos.json', prods); }
+        try { fs.mkdirSync(path.join(FOTOS_DIR, codigo), { recursive: true }); fs.writeFileSync(path.join(FOTOS_DIR, codigo, 'fotos.json'), JSON.stringify(mapa, null, 2), 'utf8'); } catch {}
+        if (supa.activo() && idx >= 0) supa.setFotoColores(prods[idx].id, mapa);
         return json(res, 200, { ok: true });
       }
 
@@ -382,9 +399,12 @@ const server = http.createServer(async (req, res) => {
         return json(res, 200, { ok: true });
       }
 
-      // mapa foto→color de variante (lo escribe la auditoría IA como fotos.json en cada carpeta)
+      // mapa foto→color: fuente de verdad = foto_colores del producto (Supabase→espejo);
+      // si no lo tiene, cae al fotos.json de la carpeta (lo que dejó la auditoría IA).
       const mMapa = p.match(/^\/api\/fotos-mapa\/([\w-]+)$/);
       if (mMapa) {
+        const prod = leer('productos.json', []).find(x => (x.foto_codigo || x.id) === mMapa[1]);
+        if (prod && prod.foto_colores && Object.keys(prod.foto_colores).length) return json(res, 200, prod.foto_colores);
         try { return json(res, 200, JSON.parse(fs.readFileSync(path.join(FOTOS_DIR, mMapa[1], 'fotos.json'), 'utf8'))); }
         catch { return json(res, 200, {}); }
       }
@@ -608,6 +628,11 @@ server.listen(PORT, HOST, () => {
   if (supa.activo()) {
     supa.pullCatalogo().then(n => console.log(`  Supabase: catálogo sincronizado (${n} productos)`)).catch(e => console.error('  Supabase pull:', e.message));
     setInterval(() => supa.pullCatalogo().catch(() => {}), 5 * 60 * 1000);
+    // la config (cuotas, envíos, textos…) también vive en Supabase para sobrevivir
+    // al deploy: la bajamos y la mezclamos sobre el config.json base del repo.
+    supa.secretoGet('config').then(c => {
+      if (c && typeof c === 'object') { guardar('config.json', { ...leer('config.json', {}), ...c }); console.log('  Supabase: config sincronizada'); }
+    }).catch(e => console.error('  Supabase config:', e.message));
   }
   console.log(`\n  RICHARD LENS corriendo:`);
   console.log(`  Tienda → http://localhost:${PORT}`);

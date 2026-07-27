@@ -80,5 +80,6 @@ module.exports = {
   /* fotos del producto (orden/lista) → fuente de verdad en Supabase. Sin `seguro`:
    * el panel necesita confirmar que guardó. */
   setFotos: (id, fotos) => rpc('rl_admin_set_fotos', { p_id: id, p_fotos: fotos }),
+  setFotoColores: seguro((id, colores) => rpc('rl_admin_set_foto_colores', { p_id: id, p_colores: colores })),
   subirStorage
 };
