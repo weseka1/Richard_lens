@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { api, plata, invalidarProductos } from '../lib/api.js';
+import { api, plata, invalidarProductos, claveAdmin } from '../lib/api.js';
+
+// headers para escribir fotos: JSON + el token de sesión (si no, da 401 con auth activa)
+const authJSON = () => ({ 'Content-Type': 'application/json', 'x-rl-admin': claveAdmin() });
 import Modal from './Modal.jsx';
 
 /* Grilla de fotos ordenable estilo MercadoLibre: arrastrás una foto (con mouse o
@@ -200,7 +203,7 @@ export default function Productos() {
     setFotos(nueva);
     try {
       const r = await fetch('/api/fotos-set/' + fotosDe.id, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: authJSON(),
         body: JSON.stringify({ fotos: nueva })
       });
       if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || 'error');
@@ -210,7 +213,7 @@ export default function Productos() {
   async function asignarColor(src, color) {
     const archivo = src.split('/').pop().split('?')[0];
     await fetch('/api/fotos-color/' + fotosDe.foto_codigo, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: authJSON(),
       body: JSON.stringify({ archivo, color: color || null })
     });
     setMapaColores(m => { const n = { ...m }; if (color) n[archivo] = color; else delete n[archivo]; return n; });
@@ -225,7 +228,7 @@ export default function Productos() {
       const base64 = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(f); });
       try {
         const r = await fetch('/api/fotos-subir/' + fotosDe.foto_codigo, {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          method: 'POST', headers: authJSON(),
           body: JSON.stringify({ base64, ext: (f.name.split('.').pop() || 'jpg') })
         });
         const j = await r.json();
