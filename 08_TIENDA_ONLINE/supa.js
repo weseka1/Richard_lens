@@ -49,6 +49,19 @@ async function pullCatalogo() {
  * Las de administración van por RPC con clave secreta (SECURITY DEFINER en la base). */
 const seguro = fn => (...args) => fn(...args).catch(e => console.error('[supabase]', e.message));
 const rpc = (fn, args) => rest(`rpc/${fn}`, 'POST', { ...args, clave: cfg().clave });
+
+/* sube un archivo al Storage de Supabase (bucket público 'richardlens') y devuelve
+ * su URL pública. Persiste en la nube — clave porque el disco de Render es efímero. */
+async function subirStorage(ruta, buffer, contentType) {
+  const c = cfg();
+  const r = await fetch(`${c.url}/storage/v1/object/richardlens/${ruta}`, {
+    method: 'POST',
+    headers: { apikey: c.service, Authorization: `Bearer ${c.service}`, 'Content-Type': contentType, 'x-upsert': 'true' },
+    body: buffer
+  });
+  if (!r.ok) throw new Error(`Storage ${ruta} → ${r.status}: ${(await r.text()).slice(0, 160)}`);
+  return `${c.url}/storage/v1/object/public/richardlens/${ruta}`;
+}
 module.exports = {
   activo,
   pullCatalogo,
@@ -63,5 +76,9 @@ module.exports = {
    * efímero y cada redeploy borraba los tokens de MELI. Van sin `seguro`
    * porque acá sí necesitamos enterarnos si fallan. */
   secretoGet: nombre => rpc('rl_admin_secreto_get', { p_nombre: nombre }),
-  secretoSet: (nombre, valor) => rpc('rl_admin_secreto_set', { p_nombre: nombre, p_valor: valor })
+  secretoSet: (nombre, valor) => rpc('rl_admin_secreto_set', { p_nombre: nombre, p_valor: valor }),
+  /* fotos del producto (orden/lista) → fuente de verdad en Supabase. Sin `seguro`:
+   * el panel necesita confirmar que guardó. */
+  setFotos: (id, fotos) => rpc('rl_admin_set_fotos', { p_id: id, p_fotos: fotos }),
+  subirStorage
 };

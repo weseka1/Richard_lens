@@ -287,29 +287,60 @@ const server = http.createServer(async (req, res) => {
 
       const mFotos = p.match(/^\/api\/fotos\/([\w-]+)$/);
       if (mFotos) {
-        const dir = path.join(FOTOS_DIR, mFotos[1]);
+        const codigo = mFotos[1];
+        // FUENTE DE VERDAD: la lista `fotos` del producto (Supabase → espejo). Es un
+        // array ordenado de URLs (la primera = portada). Si el producto todavía no la
+        // tiene (migración lazy: se puebla la primera vez que lo editás en el panel),
+        // caemos al escaneo del directorio, alfabético, como siempre.
+        const prod = leer('productos.json', []).find(x => (x.foto_codigo || x.id) === codigo);
+        if (prod && Array.isArray(prod.fotos) && prod.fotos.length) return json(res, 200, prod.fotos);
+        const dir = path.join(FOTOS_DIR, codigo);
         let files = [];
         try { files = fs.readdirSync(dir).filter(f => /\.(jpe?g|png|webp)$/i.test(f) && !f.startsWith('_')).sort(); } catch {}
-        return json(res, 200, files.map(f => `/fotos/${mFotos[1]}/${f}`));
+        return json(res, 200, files.map(f => `/fotos/${codigo}/${f}`));
       }
-      // subir foto desde el panel (base64) → 07_CATALOGO/imagenes/<codigo>/
+      // subir foto desde el panel (base64). En producción va a Supabase Storage y
+      // PERSISTE (el disco de Render es efímero); en local, al directorio del catálogo.
+      // Devuelve la URL, que el panel agrega a la lista `fotos` del producto.
       const mSubir = p.match(/^\/api\/fotos-subir\/([\w-]+)$/);
       if (mSubir && req.method === 'POST') {
         const { base64, ext } = await body(req);
         if (!base64) return json(res, 400, { error: 'falta base64' });
-        const dir = path.join(FOTOS_DIR, mSubir[1]);
+        const codigo = mSubir[1];
+        const e = (ext || 'jpg').replace(/[^a-z0-9]/gi, '').toLowerCase() || 'jpg';
+        const buffer = Buffer.from(base64.replace(/^data:[^,]+,/, ''), 'base64');
+        const nombre = Date.now().toString(36) + Math.random().toString(36).slice(2, 7) + '.' + e;
+        if (supa.activo()) {
+          try {
+            const url = await supa.subirStorage(`${codigo}/${nombre}`, buffer, 'image/' + (e === 'jpg' ? 'jpeg' : e));
+            return json(res, 200, { ok: true, url });
+          } catch (err) { return json(res, 500, { error: 'Storage: ' + err.message }); }
+        }
+        const dir = path.join(FOTOS_DIR, codigo);
         fs.mkdirSync(dir, { recursive: true });
-        const existentes = fs.readdirSync(dir).filter(f => /^\d\d\./.test(f)).length;
-        const nombre = String(existentes + 1).padStart(2, '0') + '.' + (ext || 'jpg').replace(/[^a-z]/gi, '').toLowerCase();
-        fs.writeFileSync(path.join(dir, nombre), Buffer.from(base64.replace(/^data:[^,]+,/, ''), 'base64'));
-        return json(res, 200, { ok: true, archivo: nombre });
+        fs.writeFileSync(path.join(dir, nombre), buffer);
+        return json(res, 200, { ok: true, url: `/fotos/${codigo}/${nombre}` });
       }
-      // ocultar foto (renombra con _descartada_, la web deja de mostrarla)
+      // guardar la LISTA/ORDEN de fotos del producto (fuente de verdad en Supabase).
+      // La primera del array es la portada. Espejo local para que la web lo vea al toque.
+      const mSetF = p.match(/^\/api\/fotos-set\/([\w-]+)$/);
+      if (mSetF && req.method === 'POST') {
+        const { fotos } = await body(req);
+        if (!Array.isArray(fotos)) return json(res, 400, { error: 'falta fotos[]' });
+        const id = mSetF[1];
+        const prods = leer('productos.json', []);
+        const i = prods.findIndex(x => x.id === id);
+        if (i >= 0) { prods[i].fotos = fotos; guardar('productos.json', prods); }
+        if (supa.activo()) { try { await supa.setFotos(id, fotos); } catch (err) { return json(res, 500, { error: err.message }); } }
+        return json(res, 200, { ok: true });
+      }
+      // (compat) ocultar foto físico del directorio — ya casi no se usa: la fuente de
+      // verdad es la lista `fotos`. Se mantiene por si borrás archivos en local.
       const mBorrarF = p.match(/^\/api\/fotos-borrar\/([\w-]+)$/);
       if (mBorrarF && req.method === 'POST') {
         const { archivo } = await body(req);
         const origen = path.join(FOTOS_DIR, mBorrarF[1], (archivo || '').replace(/[\\/]/g, ''));
-        if (!fs.existsSync(origen)) return json(res, 404, { error: 'no existe' });
+        if (!fs.existsSync(origen)) return json(res, 200, { ok: true });
         fs.renameSync(origen, path.join(FOTOS_DIR, mBorrarF[1], '_descartada_' + path.basename(origen)));
         return json(res, 200, { ok: true });
       }

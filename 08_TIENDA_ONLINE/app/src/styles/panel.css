@@ -93,3 +93,18 @@
   .panel-root main { padding: 22px 16px; }
   .panel-root .modal-campos { grid-template-columns: 1fr; }
 }
+
+/* ---------- gestor de fotos estilo MercadoLibre (arrastrar para reordenar) ---------- */
+.panel-root .ml-grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(122px, 1fr)); gap: 12px; }
+.panel-root .ml-foto { position: relative; background: #fff; border: 1px solid rgba(0,0,0,.1); border-radius: 12px; padding: 8px; cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; transition: box-shadow .15s, transform .12s, border-color .15s; }
+.panel-root .ml-foto:hover { border-color: rgba(0,0,0,.28); box-shadow: 0 6px 20px -10px rgba(0,0,0,.35); }
+.panel-root .ml-foto.portada { border-color: var(--p-tinta, #1D1D1F); border-width: 2px; padding: 7px; }
+.panel-root .ml-foto.agarrada { cursor: grabbing; transform: scale(1.05); box-shadow: 0 16px 40px -12px rgba(0,0,0,.5); z-index: 5; opacity: .97; }
+.panel-root .ml-foto img { width: 100%; aspect-ratio: 1; object-fit: contain; background: #fff; border-radius: 8px; display: block; pointer-events: none; }
+.panel-root .ml-pos { position: absolute; top: 10px; left: 10px; z-index: 2; font-size: .62rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; background: rgba(29,29,31,.82); color: #fff; padding: 3px 8px; border-radius: 999px; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.panel-root .ml-foto.portada .ml-pos { background: var(--p-tinta, #1D1D1F); }
+.panel-root .ml-acc { position: absolute; top: 8px; right: 8px; z-index: 3; display: flex; gap: 4px; opacity: 0; transition: opacity .15s; }
+.panel-root .ml-foto:hover .ml-acc, .panel-root .ml-foto.agarrada .ml-acc { opacity: 1; }
+.panel-root .ml-acc .btn-mini { padding: 2px 8px; line-height: 1.5; }
+.panel-root .ml-color { margin-top: 6px; width: 100%; font-size: .72rem; padding: 5px 8px; }
+@media (hover: none) { .panel-root .ml-acc { opacity: 1; } }

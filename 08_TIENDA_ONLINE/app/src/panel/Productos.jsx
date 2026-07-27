@@ -1,6 +1,71 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { api, plata, invalidarProductos } from '../lib/api.js';
 import Modal from './Modal.jsx';
+
+/* Grilla de fotos ordenable estilo MercadoLibre: arrastrás una foto (con mouse o
+ * con el dedo) y las demás se corren. La PRIMERA es la portada. El orden es la
+ * fuente de verdad y se guarda en Supabase apenas soltás. */
+function GrillaFotos({ fotos, mapaColores, colores, onOrden, onPortada, onBorrar, onColor }) {
+  const [orden, setOrden] = useState(fotos);
+  const [drag, setDrag] = useState(null);
+  const refs = useRef({});
+  useEffect(() => { setOrden(fotos); }, [fotos.join('§')]);
+
+  function onDown(e, src) { setDrag(src); try { e.currentTarget.setPointerCapture(e.pointerId); } catch {} }
+  function onMove(e) {
+    if (!drag) return;
+    e.preventDefault();
+    for (const src of orden) {
+      if (src === drag) continue;
+      const r = refs.current[src]?.getBoundingClientRect();
+      if (r && e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) {
+        setOrden(o => {
+          const from = o.indexOf(drag), to = o.indexOf(src);
+          if (from < 0 || from === to) return o;
+          const n = o.slice(); n.splice(from, 1); n.splice(to, 0, drag); return n;
+        });
+        break;
+      }
+    }
+  }
+  function onUp() {
+    if (!drag) return;
+    setDrag(null);
+    if (orden.join('§') !== fotos.join('§')) onOrden(orden);
+  }
+
+  if (!orden.length) return <p className="ayuda">Sin fotos todavía — subí las primeras abajo.</p>;
+  return (
+    <div className="ml-grilla" onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
+      {orden.map((src, i) => {
+        const archivo = src.split('/').pop().split('?')[0];
+        const portada = i === 0;
+        return (
+          <div
+            key={src}
+            ref={el => (refs.current[src] = el)}
+            className={'ml-foto' + (portada ? ' portada' : '') + (drag === src ? ' agarrada' : '')}
+            onPointerDown={e => onDown(e, src)}
+            title="Arrastrá para reordenar"
+          >
+            <span className="ml-pos">{portada ? '★ Portada' : i + 1}</span>
+            <img src={src} alt="" draggable={false} />
+            <div className="ml-acc" onPointerDown={e => e.stopPropagation()}>
+              {!portada && <button className="btn-mini" title="Poner de portada" onClick={() => onPortada(src)}>★</button>}
+              <button className="btn-mini" title="Quitar" onClick={() => onBorrar(src)}>×</button>
+            </div>
+            {colores.length > 0 && (
+              <select className="ml-color" onPointerDown={e => e.stopPropagation()} value={mapaColores[archivo] || ''} onChange={e => onColor(src, e.target.value)}>
+                <option value="">— color —</option>
+                {colores.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 const CAMPOS = p => [
   { id: 'marca', label: 'Marca', valor: p?.marca },
@@ -116,18 +181,34 @@ export default function Productos() {
   const totalPags = Math.max(1, Math.ceil(filtrada.length / POR_PAGINA));
   const visibles = filtrada.slice(pag * POR_PAGINA, (pag + 1) * POR_PAGINA);
 
-  /* ---- gestor de fotos (con asignación de color por foto → la ficha obedece) ---- */
+  /* ---- gestor de fotos MercadoLibre: subir, quitar y ARRASTRAR para reordenar.
+   *      La lista `fotos` (array de URLs, la 1ª = portada) es la fuente de verdad,
+   *      vive en Supabase y se guarda en cada cambio. ---- */
   const [fotosDe, setFotosDe] = useState(null);   // producto en edición de fotos
   const [fotos, setFotos] = useState([]);
   const [mapaColores, setMapaColores] = useState({});
+  const [subiendo, setSubiendo] = useState(false);
   const [variantesDe, setVariantesDe] = useState(null);
+
   async function abrirFotos(p) {
     setFotosDe(p);
     setFotos(await fetch('/api/fotos/' + p.foto_codigo).then(r => r.json()).catch(() => []));
     setMapaColores(await fetch('/api/fotos-mapa/' + p.foto_codigo).then(r => r.json()).catch(() => ({})));
   }
+  // guarda la lista (orden / altas / bajas) en Supabase + espejo. Optimista en pantalla.
+  async function guardarLista(nueva) {
+    setFotos(nueva);
+    try {
+      const r = await fetch('/api/fotos-set/' + fotosDe.id, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fotos: nueva })
+      });
+      if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || 'error');
+      invalidarProductos();
+    } catch (e) { alert('No se pudo guardar: ' + e.message); abrirFotos(fotosDe); }
+  }
   async function asignarColor(src, color) {
-    const archivo = src.split('/').pop();
+    const archivo = src.split('/').pop().split('?')[0];
     await fetch('/api/fotos-color/' + fotosDe.foto_codigo, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ archivo, color: color || null })
@@ -135,29 +216,27 @@ export default function Productos() {
     setMapaColores(m => { const n = { ...m }; if (color) n[archivo] = color; else delete n[archivo]; return n; });
   }
   async function subirFotos(e) {
-    for (const f of e.target.files) {
+    const files = [...e.target.files];
+    e.target.value = '';
+    if (!files.length) return;
+    setSubiendo(true);
+    const nuevas = [];
+    for (const f of files) {
       const base64 = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(f); });
-      await fetch('/api/fotos-subir/' + fotosDe.foto_codigo, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ base64, ext: f.name.split('.').pop() })
-      });
+      try {
+        const r = await fetch('/api/fotos-subir/' + fotosDe.foto_codigo, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ base64, ext: (f.name.split('.').pop() || 'jpg') })
+        });
+        const j = await r.json();
+        if (j.url) nuevas.push(j.url); else alert('No subió una foto: ' + (j.error || ''));
+      } catch (err) { alert('Error al subir: ' + err.message); }
     }
-    abrirFotos(fotosDe);
+    setSubiendo(false);
+    if (nuevas.length) await guardarLista([...fotos, ...nuevas]);
   }
-  async function borrarFoto(src) {
-    await fetch('/api/fotos-borrar/' + fotosDe.foto_codigo, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ archivo: src.split('/').pop() })
-    });
-    abrirFotos(fotosDe);
-  }
-  async function hacerPortada(src) {
-    await fetch('/api/fotos-portada/' + fotosDe.foto_codigo, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ archivo: src.split('/').pop() })
-    });
-    abrirFotos(fotosDe);
-  }
+  const borrarFoto = src => guardarLista(fotos.filter(x => x !== src));
+  const hacerPortada = src => guardarLista([src, ...fotos.filter(x => x !== src)]);
 
   function editar(p) {
     setModal({
@@ -272,7 +351,7 @@ export default function Productos() {
 
       {fotosDe && (
         <div className="modal-fondo abierto" onClick={e => e.target === e.currentTarget && setFotosDe(null)}>
-          <div className="modal-caja">
+          <div className="modal-caja" style={{ width: 'min(780px, 100%)' }}>
             <h2>Fotos — {fotosDe.marca} {fotosDe.modelo}</h2>
             <p className="ayuda">Asignale el color a cada foto: cuando el cliente elige ese color en la ficha, ve ESA foto. La portada ★ es la que sale en el catálogo — elegí siempre una donde la gafa apunte a la izquierda.</p>
             {(() => {
@@ -287,33 +366,18 @@ export default function Productos() {
                 </p>
               );
             })()}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 12, margin: '14px 0 18px' }}>
-              {fotos.map(src => {
-                const archivo = src.split('/').pop();
-                const esPortada = /^00[_.]/.test(archivo);
-                const coloresProducto = [...new Set((fotosDe.variantes || []).map(v => v.color))];
-                return (
-                  <div key={src} style={{ position: 'relative' }}>
-                    <img src={src} alt="" style={{ width: '100%', aspectRatio: '1', objectFit: 'contain', background: '#fff', borderRadius: 10, border: esPortada ? '2px solid #1D1D1F' : mapaColores[archivo] ? '2px solid #1D7A3E' : '1px solid rgba(0,0,0,.08)' }} />
-                    <button
-                      className="btn-mini"
-                      title={esPortada ? 'Es la portada' : 'Usar como portada'}
-                      style={{ position: 'absolute', top: 4, left: 4, background: esPortada ? '#1D1D1F' : undefined, color: esPortada ? '#fff' : undefined }}
-                      onClick={() => hacerPortada(src)}
-                    >★</button>
-                    <button className="btn-mini" style={{ position: 'absolute', top: 4, right: 4 }} onClick={() => borrarFoto(src)}>×</button>
-                    <select
-                      style={{ marginTop: 6, fontSize: '.72rem', padding: '5px 8px' }}
-                      value={mapaColores[archivo] || ''}
-                      onChange={e => asignarColor(src, e.target.value)}
-                    >
-                      <option value="">— sin color —</option>
-                      {coloresProducto.map(c => <option key={c} value={c}>{c}</option>)}
-                    </select>
-                  </div>
-                );
-              })}
-              {!fotos.length && <p className="ayuda">Sin fotos todavía — subí las primeras.</p>}
+            <p className="ayuda" style={{ margin: '10px 0 0' }}>Arrastrá las fotos para reordenarlas — la primera es la portada. ★ = pasar al frente, × = quitar.</p>
+            <div style={{ margin: '12px 0 18px' }}>
+              <GrillaFotos
+                fotos={fotos}
+                mapaColores={mapaColores}
+                colores={[...new Set((fotosDe.variantes || []).map(v => v.color))].filter(Boolean)}
+                onOrden={guardarLista}
+                onPortada={hacerPortada}
+                onBorrar={borrarFoto}
+                onColor={asignarColor}
+              />
+              {subiendo && <p className="ayuda" style={{ marginTop: 10 }}>Subiendo fotos…</p>}
             </div>
             <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: '.82rem', marginBottom: 14, cursor: 'pointer' }}>
               <input
