@@ -107,6 +107,37 @@ function guardar(archivo, datos) {
   fs.writeFileSync(DATA(archivo), JSON.stringify(datos, null, 2), 'utf8');
 }
 
+/* ---- resolución de fotos por producto ----
+ * IDENTIDAD = `id` (único). Antes se leía por `foto_codigo`, que VARIOS productos
+ * comparten (p. ej. toda la familia RB3025 aviador) → se editaba uno y se leía otro,
+ * y las fotos "desaparecían". Ahora: se resuelve por id (y por foto_codigo sólo como
+ * compat para llamadas viejas), y se lee/guarda siempre la lista del propio producto.
+ * El directorio físico en disco está nombrado por id (07_CATALOGO/imagenes/<id>). */
+function resolverProd(codigo) {
+  const prods = leer('productos.json', []);
+  return prods.find(x => x.id === codigo) || prods.find(x => x.foto_codigo === codigo) || null;
+}
+function listaFotos(codigo) {
+  const prods = leer('productos.json', []);
+  const prod = prods.find(x => x.id === codigo) || prods.find(x => x.foto_codigo === codigo);
+  // 1) lista propia (fuente de verdad: Supabase → espejo productos.json)
+  if (prod && Array.isArray(prod.fotos) && prod.fotos.length) return prod.fotos;
+  // 2) escaneo del directorio físico propio (carpeta por id; migración lazy)
+  const carpeta = prod ? prod.id : codigo;
+  try {
+    const files = fs.readdirSync(path.join(FOTOS_DIR, carpeta))
+      .filter(f => /\.(jpe?g|png|webp)$/i.test(f) && !f.startsWith('_')).sort();
+    if (files.length) return files.map(f => `/fotos/${carpeta}/${f}`);
+  } catch {}
+  // 3) último recurso: prestar de un hermano con el mismo foto_codigo que SÍ tenga
+  //    fotos, para que la ficha de la tienda nunca quede vacía.
+  if (prod && prod.foto_codigo) {
+    const h = prods.find(x => x.foto_codigo === prod.foto_codigo && Array.isArray(x.fotos) && x.fotos.length);
+    if (h) return h.fotos;
+  }
+  return [];
+}
+
 /* ---- cuenta de administrador (login con usuario + contraseña) ----
  * La contraseña se guarda HASHEADA (scrypt) en Supabase (secreto 'admin_auth')
  * + espejo local. El login devuelve un token FIRMADO (HMAC con ADMIN_KEY) que
@@ -350,17 +381,9 @@ const server = http.createServer(async (req, res) => {
 
       const mFotos = p.match(/^\/api\/fotos\/([\w-]+)$/);
       if (mFotos) {
-        const codigo = mFotos[1];
-        // FUENTE DE VERDAD: la lista `fotos` del producto (Supabase → espejo). Es un
-        // array ordenado de URLs (la primera = portada). Si el producto todavía no la
-        // tiene (migración lazy: se puebla la primera vez que lo editás en el panel),
-        // caemos al escaneo del directorio, alfabético, como siempre.
-        const prod = leer('productos.json', []).find(x => (x.foto_codigo || x.id) === codigo);
-        if (prod && Array.isArray(prod.fotos) && prod.fotos.length) return json(res, 200, prod.fotos);
-        const dir = path.join(FOTOS_DIR, codigo);
-        let files = [];
-        try { files = fs.readdirSync(dir).filter(f => /\.(jpe?g|png|webp)$/i.test(f) && !f.startsWith('_')).sort(); } catch {}
-        return json(res, 200, files.map(f => `/fotos/${codigo}/${f}`));
+        // Identidad = id del producto (ver resolverProd/listaFotos). El panel y la
+        // tienda piden por id; se acepta foto_codigo por compat con llamadas viejas.
+        return json(res, 200, listaFotos(mFotos[1]));
       }
       // subir foto desde el panel (base64). En producción va a Supabase Storage y
       // PERSISTE (el disco de Render es efímero); en local, al directorio del catálogo.
@@ -414,14 +437,15 @@ const server = http.createServer(async (req, res) => {
       const mColorF = p.match(/^\/api\/fotos-color\/([\w-]+)$/);
       if (mColorF && req.method === 'POST') {
         const { archivo, color } = await body(req);
-        const codigo = mColorF[1];
+        // resolvemos por id (identidad); el panel manda el id del producto editado
         const prods = leer('productos.json', []);
-        const idx = prods.findIndex(x => (x.foto_codigo || x.id) === codigo);
+        const idx = prods.findIndex(x => x.id === mColorF[1]);
+        const carpeta = idx >= 0 ? prods[idx].id : mColorF[1];
         let mapa = (idx >= 0 && prods[idx].foto_colores) ? { ...prods[idx].foto_colores } : {};
-        if (!Object.keys(mapa).length) { try { mapa = JSON.parse(fs.readFileSync(path.join(FOTOS_DIR, codigo, 'fotos.json'), 'utf8')); } catch {} }
+        if (!Object.keys(mapa).length) { try { mapa = JSON.parse(fs.readFileSync(path.join(FOTOS_DIR, carpeta, 'fotos.json'), 'utf8')); } catch {} }
         if (color) mapa[archivo] = color; else delete mapa[archivo];
         if (idx >= 0) { prods[idx].foto_colores = mapa; guardar('productos.json', prods); }
-        try { fs.mkdirSync(path.join(FOTOS_DIR, codigo), { recursive: true }); fs.writeFileSync(path.join(FOTOS_DIR, codigo, 'fotos.json'), JSON.stringify(mapa, null, 2), 'utf8'); } catch {}
+        try { fs.mkdirSync(path.join(FOTOS_DIR, carpeta), { recursive: true }); fs.writeFileSync(path.join(FOTOS_DIR, carpeta, 'fotos.json'), JSON.stringify(mapa, null, 2), 'utf8'); } catch {}
         if (supa.activo() && idx >= 0) supa.setFotoColores(prods[idx].id, mapa);
         return json(res, 200, { ok: true });
       }
@@ -455,9 +479,10 @@ const server = http.createServer(async (req, res) => {
       // si no lo tiene, cae al fotos.json de la carpeta (lo que dejó la auditoría IA).
       const mMapa = p.match(/^\/api\/fotos-mapa\/([\w-]+)$/);
       if (mMapa) {
-        const prod = leer('productos.json', []).find(x => (x.foto_codigo || x.id) === mMapa[1]);
+        const prod = resolverProd(mMapa[1]);   // por id (identidad); foto_codigo por compat
         if (prod && prod.foto_colores && Object.keys(prod.foto_colores).length) return json(res, 200, prod.foto_colores);
-        try { return json(res, 200, JSON.parse(fs.readFileSync(path.join(FOTOS_DIR, mMapa[1], 'fotos.json'), 'utf8'))); }
+        const carpeta = prod ? prod.id : mMapa[1];
+        try { return json(res, 200, JSON.parse(fs.readFileSync(path.join(FOTOS_DIR, carpeta, 'fotos.json'), 'utf8'))); }
         catch { return json(res, 200, {}); }
       }
 

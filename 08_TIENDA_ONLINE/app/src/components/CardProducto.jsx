@@ -39,7 +39,7 @@ export function TileMarca({ p, nota }) {
 export default function CardProducto({ p, i = 0, cfg }) {
   const [foto, setFoto] = useState(null);
   const [agregado, setAgregado] = useState(false);
-  useEffect(() => { getFotos(p.foto_codigo).then(fs => setFoto(fs[0] || null)); }, [p.foto_codigo]);
+  useEffect(() => { getFotos(p.id).then(fs => setFoto(fs[0] || null)); }, [p.id]);
 
   function alCarrito(e) {
     e.preventDefault();

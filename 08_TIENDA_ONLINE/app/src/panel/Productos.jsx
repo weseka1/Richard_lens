@@ -195,8 +195,9 @@ export default function Productos() {
 
   async function abrirFotos(p) {
     setFotosDe(p);
-    setFotos(await fetch('/api/fotos/' + p.foto_codigo).then(r => r.json()).catch(() => []));
-    setMapaColores(await fetch('/api/fotos-mapa/' + p.foto_codigo).then(r => r.json()).catch(() => ({})));
+    // identidad = id del producto (no foto_codigo, que varios modelos comparten)
+    setFotos(await fetch('/api/fotos/' + p.id).then(r => r.json()).catch(() => []));
+    setMapaColores(await fetch('/api/fotos-mapa/' + p.id).then(r => r.json()).catch(() => ({})));
   }
   // guarda la lista (orden / altas / bajas) en Supabase + espejo. Optimista en pantalla.
   async function guardarLista(nueva) {
@@ -212,7 +213,7 @@ export default function Productos() {
   }
   async function asignarColor(src, color) {
     const archivo = src.split('/').pop().split('?')[0];
-    await fetch('/api/fotos-color/' + fotosDe.foto_codigo, {
+    await fetch('/api/fotos-color/' + fotosDe.id, {
       method: 'POST', headers: authJSON(),
       body: JSON.stringify({ archivo, color: color || null })
     });
@@ -227,7 +228,7 @@ export default function Productos() {
     for (const f of files) {
       const base64 = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(f); });
       try {
-        const r = await fetch('/api/fotos-subir/' + fotosDe.foto_codigo, {
+        const r = await fetch('/api/fotos-subir/' + fotosDe.id, {
           method: 'POST', headers: authJSON(),
           body: JSON.stringify({ base64, ext: (f.name.split('.').pop() || 'jpg') })
         });

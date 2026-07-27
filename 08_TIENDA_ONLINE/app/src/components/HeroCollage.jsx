@@ -11,7 +11,7 @@ export default function HeroCollage({ drop, cfg }) {
   const glassRef = useRef(null);
 
   useEffect(() => {
-    if (drop) getFotos(drop.foto_codigo).then(fs => setFotoDrop(fs[0] || null));
+    if (drop) getFotos(drop.id).then(fs => setFotoDrop(fs[0] || null));
   }, [drop?.id]);
 
   /* parallax sutil del panel de vidrio (solo mouse, el modelo queda clavado) */

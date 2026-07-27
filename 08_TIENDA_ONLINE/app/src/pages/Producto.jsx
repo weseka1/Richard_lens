@@ -65,8 +65,8 @@ export default function Producto() {
       jsonld: jsonldProducto(p, cfg)
     }));
     setFotoActiva(0);
-    getFotos(p.foto_codigo).then(setFotos);
-    fetch('/api/fotos-mapa/' + p.foto_codigo).then(r => r.json()).then(setMapaFotos).catch(() => setMapaFotos({}));
+    getFotos(p.id).then(setFotos);
+    fetch('/api/fotos-mapa/' + p.id).then(r => r.json()).then(setMapaFotos).catch(() => setMapaFotos({}));
     track('visita_producto', p.id);
     return () => { document.title = 'RICHARD LENS — Anteojos 100% originales. Se te nota lo rich.'; };
   }, [p?.id]);

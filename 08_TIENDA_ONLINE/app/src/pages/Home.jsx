@@ -302,7 +302,7 @@ export default function Home() {
 /* mini vidriera para la sección IG — nada de aire muerto, siempre producto a la vista */
 function MiniProducto({ p }) {
   const [foto, setFoto] = useState(null);
-  useEffect(() => { getFotos(p.foto_codigo).then(fs => setFoto(fs[0] || null)); }, [p.foto_codigo]);
+  useEffect(() => { getFotos(p.id).then(fs => setFoto(fs[0] || null)); }, [p.id]);
   return (
     <Link to={`/producto/${p.id}`} className="ig-mini">
       {foto && <img src={foto} alt={`${p.marca} ${p.modelo}`} loading="lazy" />}
