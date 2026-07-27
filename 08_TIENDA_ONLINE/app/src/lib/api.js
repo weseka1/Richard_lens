@@ -2,10 +2,42 @@
 
 export const plata = n => '$' + Number(n || 0).toLocaleString('es-AR');
 
-// la llave de admin (si el dueño la cargó en el panel) viaja en cada llamada;
+// la llave (token de sesión, o la maestra ADMIN_KEY) viaja en cada llamada;
 // los endpoints públicos la ignoran, los de admin la exigen cuando está activa
 export function claveAdmin() {
   try { return localStorage.getItem('rl_admin_key') || ''; } catch { return ''; }
+}
+export function setClaveAdmin(v) {
+  try { v ? localStorage.setItem('rl_admin_key', v) : localStorage.removeItem('rl_admin_key'); } catch {}
+}
+
+/* ---- login con cuenta (usuario + contraseña) ---- */
+export async function estadoAuth() {
+  try { return await (await fetch('/api/existe-cuenta')).json(); } catch { return { authOn: false, existe: false }; }
+}
+export async function whoami() {
+  try {
+    const r = await fetch('/api/admin/whoami', { headers: { 'x-rl-admin': claveAdmin() } });
+    if (!r.ok) return null;
+    return (await r.json()).usuario || null;
+  } catch { return null; }
+}
+export async function login(usuario, password) {
+  const r = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ usuario, password }) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || 'No se pudo entrar');
+  setClaveAdmin(j.token);
+  return j;
+}
+export async function crearCuenta(usuario, password, llaveMaestra) {
+  const r = await fetch('/api/admin/crear-cuenta', {
+    method: 'POST', headers: { 'Content-Type': 'application/json', 'x-rl-admin': llaveMaestra || '' },
+    body: JSON.stringify({ usuario, password })
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(r.status === 401 ? 'La llave maestra no es correcta' : (j.error || 'No se pudo crear la cuenta'));
+  setClaveAdmin(j.token);
+  return j;
 }
 
 export async function api(ruta, metodo = 'GET', datos) {

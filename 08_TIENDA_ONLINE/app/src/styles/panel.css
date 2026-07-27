@@ -109,3 +109,23 @@
 .panel-root .ml-acc .btn-mini { padding: 2px 8px; line-height: 1.5; }
 .panel-root .ml-color { margin-top: 6px; width: 100%; font-size: .72rem; padding: 5px 8px; }
 @media (hover: none) { .panel-root .ml-acc { opacity: 1; } }
+
+/* ---------- login del panel (cuenta usuario + contraseña) ---------- */
+.login-fondo { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: radial-gradient(120% 100% at 50% 0%, #f4f4f2 0%, #e7e7e4 100%); }
+.login-caja { width: min(400px, 100%); background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 20px; padding: 34px 30px; box-shadow: 0 40px 90px -30px rgba(0,0,0,.35); display: flex; flex-direction: column; gap: 14px; }
+.login-logo { font-family: 'Marcellus', 'Cormorant Garamond', serif; font-size: 1.35rem; letter-spacing: .12em; color: #1D1D1F; text-align: center; }
+.login-logo b { font-weight: 400; }
+.login-logo span { display: block; font-family: system-ui, sans-serif; font-size: .56rem; letter-spacing: .34em; text-transform: uppercase; color: #9a9a97; margin-top: 5px; }
+.login-caja h2 { font-size: 1.05rem; text-align: center; color: #1D1D1F; margin: 4px 0 4px; font-weight: 700; }
+.login-caja label { font-size: .78rem; color: #666; display: flex; flex-direction: column; gap: 6px; font-weight: 500; }
+.login-caja input { font-family: inherit; background: #F5F5F7; border: 1px solid rgba(0,0,0,.1); color: #1D1D1F; padding: 10px 12px; border-radius: 10px; font-size: .95rem; width: 100%; outline: none; transition: border-color .2s; }
+.login-caja input:focus { border-color: #1D1D1F; }
+.login-caja .btn-oro { margin-top: 10px; width: 100%; background: #1D1D1F; color: #fff; border: none; font-weight: 600; padding: 12px 22px; border-radius: 999px; font-size: .92rem; cursor: pointer; transition: background .2s, transform .15s; }
+.login-caja .btn-oro:hover:not(:disabled) { background: #000; transform: scale(1.02); }
+.login-caja .btn-oro:disabled { opacity: .6; cursor: default; }
+.login-err { color: #B4531F; font-size: .82rem; margin: -2px 0 2px; text-align: center; }
+/* sesión en el sidebar */
+.side-sesion { margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.side-user { font-size: .8rem; color: var(--p-tinta, #1D1D1F); font-weight: 600; }
+.side-salir { background: transparent; border: 1px solid var(--p-borde, rgba(0,0,0,.14)); color: var(--p-tinta-60, #666); padding: 7px 12px; border-radius: 10px; font-size: .78rem; cursor: pointer; font-family: inherit; transition: border-color .2s, color .2s; }
+.side-salir:hover { border-color: #B4531F; color: #B4531F; }

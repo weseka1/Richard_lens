@@ -13,3 +13,4 @@ chrome-profile/
 
 # dist/ SÃ va al repo: clonÃ¡s y `node server.js` corre sin build
 08_TIENDA_ONLINE/data/render.json
+08_TIENDA_ONLINE/data/admin.json

@@ -11,6 +11,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const meli = require('./meli.js');
 const supa = require('./supa.js');
 
@@ -104,6 +105,26 @@ function leer(archivo, fallback) {
 }
 function guardar(archivo, datos) {
   fs.writeFileSync(DATA(archivo), JSON.stringify(datos, null, 2), 'utf8');
+}
+
+/* ---- cuenta de administrador (login con usuario + contraseña) ----
+ * La contraseña se guarda HASHEADA (scrypt) en Supabase (secreto 'admin_auth')
+ * + espejo local. El login devuelve un token FIRMADO (HMAC con ADMIN_KEY) que
+ * expira a los 30 días. Nunca se guarda ni viaja la contraseña en texto plano. */
+const leerCuenta = () => leer('admin.json', null);
+const hashPass = (pw, salt) => crypto.scryptSync(String(pw), salt, 32).toString('hex');
+function firmarToken(usuario) {
+  const secret = process.env.ADMIN_KEY || 'rl';
+  const payload = Buffer.from(JSON.stringify({ u: usuario, exp: Date.now() + 30 * 864e5 })).toString('base64url');
+  return payload + '.' + crypto.createHmac('sha256', secret).update(payload).digest('base64url');
+}
+function verificarToken(token) {
+  if (typeof token !== 'string' || !token.includes('.')) return null;
+  const secret = process.env.ADMIN_KEY || 'rl';
+  const [payload, firma] = token.split('.');
+  const esperada = crypto.createHmac('sha256', secret).update(payload).digest('base64url');
+  if (!firma || firma.length !== esperada.length || !crypto.timingSafeEqual(Buffer.from(firma), Buffer.from(esperada))) return null;
+  try { const d = JSON.parse(Buffer.from(payload, 'base64url').toString()); return d.exp > Date.now() ? d.u : null; } catch { return null; }
 }
 function slug(s) {
   return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -235,11 +256,42 @@ const server = http.createServer(async (req, res) => {
        * MELI se maneja aparte (línea de arriba) con su propio secreto. */
       const ADMIN_KEY = process.env.ADMIN_KEY;
       if (ADMIN_KEY) {
-        const PUBLICO = new Set(['/api/eventos', '/api/suscriptores', '/api/ia']);
-        const interno = p === '/api/stats' || p.startsWith('/api/admin/');
-        const necesita = interno || (req.method !== 'GET' && !PUBLICO.has(p));
-        if (necesita && req.headers['x-rl-admin'] !== ADMIN_KEY)
-          return json(res, 401, { error: 'No autorizado' });
+        // libres SIEMPRE: lo público de la tienda + login y chequeo de cuenta
+        const LIBRE = new Set(['/api/eventos', '/api/suscriptores', '/api/ia', '/api/login', '/api/existe-cuenta']);
+        if (!LIBRE.has(p)) {
+          const interno = p === '/api/stats' || p.startsWith('/api/admin/');
+          const necesita = interno || req.method !== 'GET';
+          const h = req.headers['x-rl-admin'] || '';
+          // pasa con la llave maestra (ADMIN_KEY) o con un token de sesión válido
+          if (necesita && h !== ADMIN_KEY && !verificarToken(h))
+            return json(res, 401, { error: 'No autorizado' });
+        }
+      }
+
+      // ---- cuenta de admin: existe / login / crear / quién soy ----
+      if (p === '/api/existe-cuenta' && req.method === 'GET')
+        return json(res, 200, { authOn: !!process.env.ADMIN_KEY, existe: !!leerCuenta() });
+      if (p === '/api/login' && req.method === 'POST') {
+        const { usuario, password } = await body(req);
+        const c = leerCuenta();
+        if (!c || String(usuario || '').toLowerCase() !== String(c.usuario).toLowerCase() || hashPass(password, c.salt) !== c.hash)
+          return json(res, 401, { error: 'Usuario o contraseña incorrectos' });
+        return json(res, 200, { token: firmarToken(c.usuario), usuario: c.usuario });
+      }
+      if (p === '/api/admin/whoami' && req.method === 'GET') {
+        const h = req.headers['x-rl-admin'] || '';
+        const u = verificarToken(h) || (process.env.ADMIN_KEY && h === process.env.ADMIN_KEY ? 'admin (llave maestra)' : null);
+        return json(res, 200, { usuario: u });
+      }
+      if (p === '/api/admin/crear-cuenta' && req.method === 'POST') {
+        const { usuario, password } = await body(req);
+        if (!usuario || !password || String(password).length < 6)
+          return json(res, 400, { error: 'Usuario y contraseña (mínimo 6 caracteres) requeridos' });
+        const salt = crypto.randomBytes(16).toString('hex');
+        const cuenta = { usuario: String(usuario).trim(), salt, hash: hashPass(password, salt), creada: new Date().toISOString() };
+        guardar('admin.json', cuenta);
+        if (supa.activo()) { try { await supa.secretoSet('admin_auth', cuenta); } catch (e) { return json(res, 500, { error: 'Supabase: ' + e.message }); } }
+        return json(res, 200, { ok: true, token: firmarToken(cuenta.usuario), usuario: cuenta.usuario });
       }
 
       if (p === '/api/config' && req.method === 'GET') return json(res, 200, cfg);
@@ -633,6 +685,8 @@ server.listen(PORT, HOST, () => {
     supa.secretoGet('config').then(c => {
       if (c && typeof c === 'object') { guardar('config.json', { ...leer('config.json', {}), ...c }); console.log('  Supabase: config sincronizada'); }
     }).catch(e => console.error('  Supabase config:', e.message));
+    // la cuenta de admin también vive en Supabase para sobrevivir al deploy
+    supa.secretoGet('admin_auth').then(c => { if (c && c.usuario) { guardar('admin.json', c); console.log('  Supabase: cuenta admin sincronizada'); } }).catch(() => {});
   }
   console.log(`\n  RICHARD LENS corriendo:`);
   console.log(`  Tienda → http://localhost:${PORT}`);
