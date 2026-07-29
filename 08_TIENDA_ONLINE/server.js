@@ -107,6 +107,15 @@ function guardar(archivo, datos) {
   fs.writeFileSync(DATA(archivo), JSON.stringify(datos, null, 2), 'utf8');
 }
 
+/* Los pedidos/ventas tienen que SOBREVIVIR al disco efímero de Render. El insert
+ * directo a rl_pedidos lo bloquea la RLS (la anon key no puede escribir), así que
+ * los persistimos con el mismo mecanismo de "secretos" que usamos para config y
+ * los tokens de MELI (RPC SECURITY DEFINER con clave). Se restauran al arrancar. */
+function guardarPedidos(pedidos) {
+  guardar('pedidos.json', pedidos);
+  if (supa.activo()) supa.secretoSet('pedidos', pedidos).catch(e => console.error('  pedidos→supa:', e.message));
+}
+
 /* ---- resolución de fotos por producto ----
  * IDENTIDAD = `id` (único). Antes se leía por `foto_codigo`, que VARIOS productos
  * comparten (p. ej. toda la familia RB3025 aviador) → se editaba uno y se leía otro,
@@ -492,8 +501,7 @@ const server = http.createServer(async (req, res) => {
         const b = await body(req);
         const nuevo = { id: 'P' + Date.now(), fecha: new Date().toISOString(), estado: 'nuevo', ...b };
         pedidos.unshift(nuevo);
-        guardar('pedidos.json', pedidos);
-        if (supa.activo()) supa.insertar('rl_pedidos', { producto: nuevo.producto, cantidad: nuevo.cantidad, monto: nuevo.monto, canal: nuevo.canal, cliente: nuevo.cliente, estado: nuevo.estado, detalle: { local_id: nuevo.id } });
+        guardarPedidos(pedidos);
         return json(res, 200, { ok: true });
       }
       const mPed = p.match(/^\/api\/pedidos\/([\w-]+)$/);
@@ -503,13 +511,11 @@ const server = http.createServer(async (req, res) => {
         if (i < 0) return json(res, 404, { error: 'no existe' });
         const cambios = await body(req);
         pedidos[i] = { ...pedidos[i], ...cambios, id: mPed[1] };
-        guardar('pedidos.json', pedidos);
-        if (supa.activo()) supa.pedidoUpdate(mPed[1], cambios);
+        guardarPedidos(pedidos);
         return json(res, 200, { ok: true });
       }
       if (mPed && req.method === 'DELETE') {
-        guardar('pedidos.json', leer('pedidos.json', []).filter(x => x.id !== mPed[1]));
-        if (supa.activo()) supa.pedidoDelete(mPed[1]);
+        guardarPedidos(leer('pedidos.json', []).filter(x => x.id !== mPed[1]));
         return json(res, 200, { ok: true });
       }
 
@@ -712,6 +718,9 @@ server.listen(PORT, HOST, () => {
     }).catch(e => console.error('  Supabase config:', e.message));
     // la cuenta de admin también vive en Supabase para sobrevivir al deploy
     supa.secretoGet('admin_auth').then(c => { if (c && c.usuario) { guardar('admin.json', c); console.log('  Supabase: cuenta admin sincronizada'); } }).catch(() => {});
+    // los pedidos/ventas también: el disco de Render es efímero y se borraban en cada
+    // reinicio (por eso "desaparecían" del tablero). Los restauramos desde el secreto.
+    supa.secretoGet('pedidos').then(ps => { if (Array.isArray(ps)) { guardar('pedidos.json', ps); console.log(`  Supabase: pedidos sincronizados (${ps.length})`); } }).catch(() => {});
   }
   console.log(`\n  RICHARD LENS corriendo:`);
   console.log(`  Tienda → http://localhost:${PORT}`);
