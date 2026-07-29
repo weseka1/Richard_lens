@@ -34,9 +34,20 @@ async function rest(ruta, metodo = 'GET', datos, prefer) {
   return txt ? JSON.parse(txt) : null;
 }
 
+/* marca de la última edición local (fotos, colores, alta/edición de producto). El
+ * pull la usa para NO pisar el espejo con datos que bajó justo antes de esa edición
+ * (esa carrera borraba fotos recién guardadas hasta el próximo sync). */
+let ultimaEdicion = 0;
+const marcarEdicion = () => { ultimaEdicion = Date.now(); };
+
 /* baja el catálogo entero y reescribe el espejo productos.json (misma forma que siempre) */
 async function pullCatalogo() {
+  const inicio = Date.now();
   const filas = await rest('rl_productos?select=*,rl_variantes(*)&order=id');
+  // si hubo una edición local mientras bajábamos los datos, NO pisamos el espejo:
+  // lo que trajimos podría ser anterior a esa edición (la escritura a Supabase todavía
+  // propagando) y borraría, p. ej., una foto recién guardada. El próximo pull ya la trae.
+  if (ultimaEdicion >= inicio) return -1;
   const productos = filas.map(({ rl_variantes, creado, actualizado, ...p }) => ({
     ...p,
     variantes: (rl_variantes || []).map(({ producto_id, actualizado, ...v }) => v)
@@ -65,6 +76,7 @@ async function subirStorage(ruta, buffer, contentType) {
 module.exports = {
   activo,
   pullCatalogo,
+  marcarEdicion,
   insertar: seguro((tabla, fila) => rest(tabla, 'POST', fila, 'resolution=merge-duplicates')),
   actualizarProducto: seguro((id, campos) => rpc('rl_admin_update_producto', { p_id: id, campos })),
   upsertProductos: seguro(filas => rpc('rl_admin_upsert_productos', { filas })),

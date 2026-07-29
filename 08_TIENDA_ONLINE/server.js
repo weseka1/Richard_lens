@@ -217,6 +217,7 @@ function syncCsv() {
       nuevos++;
     }
   }
+  if (supa.activo()) supa.marcarEdicion();
   guardar('productos.json', productos);
   return { ok: true, nuevos, actualizados, total: productos.length };
 }
@@ -356,7 +357,10 @@ const server = http.createServer(async (req, res) => {
         const b = await body(req);
         b.id = b.id || slug(b.codigo || b.modelo || String(Date.now()));
         b.foto_codigo = b.foto_codigo || b.id;
-        productos.push(b); guardar('productos.json', productos);
+        if (supa.activo()) supa.marcarEdicion();
+        // releemos el espejo FRESCO (no la copia del inicio del request) para no pisar
+        // una edición concurrente — p. ej. fotos que se estaban guardando en paralelo
+        const prods = leer('productos.json', []); prods.push(b); guardar('productos.json', prods);
         // el producto nuevo también sube a Supabase (si no, se perdía al re-sync en Render)
         if (supa.activo()) {
           const { variantes, ...fila } = b;
@@ -368,11 +372,14 @@ const server = http.createServer(async (req, res) => {
       }
       const mProd = p.match(/^\/api\/productos\/([\w-]+)$/);
       if (mProd && req.method === 'PUT') {
-        const i = productos.findIndex(x => x.id === mProd[1]);
-        if (i < 0) return json(res, 404, { error: 'no existe' });
         const cambios = await body(req);
-        productos[i] = { ...productos[i], ...cambios, id: mProd[1] };
-        guardar('productos.json', productos);
+        if (supa.activo()) supa.marcarEdicion();
+        // releemos fresco DESPUÉS del await (una edición de fotos pudo entrar en el medio)
+        const prods = leer('productos.json', []);
+        const i = prods.findIndex(x => x.id === mProd[1]);
+        if (i < 0) return json(res, 404, { error: 'no existe' });
+        prods[i] = { ...prods[i], ...cambios, id: mProd[1] };
+        guardar('productos.json', prods);
         if (supa.activo()) {
           const { variantes, ...campos } = cambios;
           if (Object.keys(campos).length) supa.actualizarProducto(mProd[1], campos);
@@ -383,7 +390,8 @@ const server = http.createServer(async (req, res) => {
         return json(res, 200, { ok: true });
       }
       if (mProd && req.method === 'DELETE') {
-        guardar('productos.json', productos.filter(x => x.id !== mProd[1]));
+        if (supa.activo()) supa.marcarEdicion();
+        guardar('productos.json', leer('productos.json', []).filter(x => x.id !== mProd[1]));
         if (supa.activo()) supa.borrarProducto(mProd[1]);
         return json(res, 200, { ok: true });
       }
@@ -423,6 +431,7 @@ const server = http.createServer(async (req, res) => {
         const { fotos } = await body(req);
         if (!Array.isArray(fotos)) return json(res, 400, { error: 'falta fotos[]' });
         const id = mSetF[1];
+        if (supa.activo()) supa.marcarEdicion();
         const prods = leer('productos.json', []);
         const i = prods.findIndex(x => x.id === id);
         if (i >= 0) { prods[i].fotos = fotos; guardar('productos.json', prods); }
@@ -446,6 +455,7 @@ const server = http.createServer(async (req, res) => {
       const mColorF = p.match(/^\/api\/fotos-color\/([\w-]+)$/);
       if (mColorF && req.method === 'POST') {
         const { archivo, color } = await body(req);
+        if (supa.activo()) supa.marcarEdicion();
         // resolvemos por id (identidad); el panel manda el id del producto editado
         const prods = leer('productos.json', []);
         const idx = prods.findIndex(x => x.id === mColorF[1]);
