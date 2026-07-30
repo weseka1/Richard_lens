@@ -192,6 +192,7 @@ export default function Productos() {
   const [mapaColores, setMapaColores] = useState({});
   const [subiendo, setSubiendo] = useState(false);
   const [variantesDe, setVariantesDe] = useState(null);
+  const [link, setLink] = useState('');
 
   async function abrirFotos(p) {
     setFotosDe(p);
@@ -235,6 +236,42 @@ export default function Productos() {
         const j = await r.json();
         if (j.url) nuevas.push(j.url); else alert('No subió una foto: ' + (j.error || ''));
       } catch (err) { alert('Error al subir: ' + err.message); }
+    }
+    setSubiendo(false);
+    if (nuevas.length) await guardarLista([...fotos, ...nuevas]);
+  }
+  // importar fotos pegando el LINK de una página de producto (MELI, tienda, etc.) o de una imagen
+  async function importarDeLink(url) {
+    const u = (url || '').trim();
+    if (!/^https?:\/\//i.test(u)) { alert('Pegá un link que empiece con http'); return; }
+    setSubiendo(true);
+    try {
+      const r = await fetch('/api/fotos-importar/' + fotosDe.id, {
+        method: 'POST', headers: authJSON(), body: JSON.stringify({ url: u })
+      });
+      const j = await r.json();
+      if (!r.ok) { alert('No se pudo importar: ' + (j.error || r.status)); return; }
+      if (j.urls?.length) { setLink(''); await guardarLista([...fotos, ...j.urls]); }
+      else alert('No encontré imágenes en ese link.');
+    } catch (e) { alert('Error al importar: ' + e.message); }
+    finally { setSubiendo(false); }
+  }
+  // Ctrl+V de una imagen copiada → la sube directo (si pegás texto, no interfiere)
+  async function pegarImagen(e) {
+    const imgs = [...(e.clipboardData?.items || [])].filter(it => it.type.startsWith('image/'));
+    if (!imgs.length) return;
+    e.preventDefault();
+    setSubiendo(true);
+    const nuevas = [];
+    for (const it of imgs) {
+      const f = it.getAsFile(); if (!f) continue;
+      const base64 = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(f); });
+      try {
+        const r = await fetch('/api/fotos-subir/' + fotosDe.id, {
+          method: 'POST', headers: authJSON(), body: JSON.stringify({ base64, ext: (f.type.split('/')[1] || 'png') })
+        });
+        const j = await r.json(); if (j.url) nuevas.push(j.url);
+      } catch {}
     }
     setSubiendo(false);
     if (nuevas.length) await guardarLista([...fotos, ...nuevas]);
@@ -355,7 +392,7 @@ export default function Productos() {
 
       {fotosDe && (
         <div className="modal-fondo abierto" onClick={e => e.target === e.currentTarget && setFotosDe(null)}>
-          <div className="modal-caja" style={{ width: 'min(780px, 100%)' }}>
+          <div className="modal-caja" style={{ width: 'min(780px, 100%)' }} onPaste={pegarImagen}>
             <h2>Fotos — {fotosDe.marca} {fotosDe.modelo}</h2>
             <p className="ayuda">Asignale el color a cada foto: cuando el cliente elige ese color en la ficha, ve ESA foto. La portada ★ es la que sale en el catálogo — elegí siempre una donde la gafa apunte a la izquierda.</p>
             {(() => {
@@ -381,8 +418,21 @@ export default function Productos() {
                 onBorrar={borrarFoto}
                 onColor={asignarColor}
               />
-              {subiendo && <p className="ayuda" style={{ marginTop: 10 }}>Subiendo fotos…</p>}
+              {subiendo && <p className="ayuda" style={{ marginTop: 10 }}>Trayendo fotos…</p>}
             </div>
+            {/* Traer fotos pegando un link — sin descargar nada a mano */}
+            <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+              <input
+                type="url"
+                placeholder="Pegá el link de una página (MELI, tienda…) o de una imagen"
+                value={link}
+                onChange={e => setLink(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); importarDeLink(link); } }}
+                style={{ flex: 1 }}
+              />
+              <button className="btn-oro" disabled={subiendo || !link.trim()} onClick={() => importarDeLink(link)}>Traer fotos</button>
+            </div>
+            <p className="ayuda" style={{ margin: '0 0 14px' }}>💡 Pegá el link de una página de producto y traigo las fotos solas · o hacé <b>Ctrl+V</b> de una imagen copiada.</p>
             <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: '.82rem', marginBottom: 14, cursor: 'pointer' }}>
               <input
                 type="checkbox"

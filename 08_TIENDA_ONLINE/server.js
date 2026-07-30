@@ -147,6 +147,51 @@ function listaFotos(codigo) {
   return [];
 }
 
+/* ---- importar fotos desde un link (para no descargar imágenes a mano) ----
+ * Acepta el link de una IMAGEN (la baja directo) o el de una PÁGINA de producto
+ * (MELI, Oakley, sun-bh…): saca las imágenes del HTML (og:image, JSON-LD, <img>). */
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125 Safari/537.36';
+async function bajarImagen(url) {
+  const r = await fetch(url, { headers: { 'User-Agent': UA, Referer: url } });
+  if (!r.ok) throw new Error(`${r.status} al bajar la imagen`);
+  const ct = r.headers.get('content-type') || '';
+  if (!/^image\//.test(ct)) throw new Error('el link no es una imagen');
+  const ext = (ct.split('/')[1] || 'jpg').split(';')[0].replace('jpeg', 'jpg').replace(/[^a-z0-9]/gi, '') || 'jpg';
+  return { buffer: Buffer.from(await r.arrayBuffer()), ext };
+}
+async function extraerImagenes(pageUrl) {
+  // MELI bloquea a los bots en el HTML, pero tenemos la API con token: si el link es
+  // de MercadoLibre, sacamos las fotos del item directo por la API (mucho más fiable).
+  const idMeli = (pageUrl.match(/ML[A-Z]-?\d{6,}/i) || [])[0];
+  if (/mercadolibre|mercadolivre/i.test(pageUrl) && idMeli) {
+    try {
+      const tok = await meli.token();
+      const it = await (await fetch(`https://api.mercadolibre.com/items/${idMeli.replace(/-/g, '').toUpperCase()}`, { headers: { Authorization: 'Bearer ' + tok } })).json();
+      const pics = (it.pictures || []).map(p => p.secure_url || p.url).filter(Boolean);
+      if (pics.length) return pics.slice(0, 12);
+    } catch {}
+  }
+  const r = await fetch(pageUrl, { headers: { 'User-Agent': UA } });
+  const ct = r.headers.get('content-type') || '';
+  if (/^image\//.test(ct)) return [pageUrl];        // el link YA es una imagen
+  const html = await r.text();
+  const urls = [];
+  const add = u => { try { const abs = new URL(u.replace(/&amp;/g, '&'), pageUrl).href; if (/^https?:/.test(abs)) urls.push(abs); } catch {} };
+  for (const m of html.matchAll(/<meta[^>]+(?:property|name)=["'](?:og:image|twitter:image)(?::secure_url)?["'][^>]+content=["']([^"']+)["']/gi)) add(m[1]);
+  for (const m of html.matchAll(/"image"\s*:\s*(\[[^\]]*\]|"[^"]+")/gi)) { try { const v = JSON.parse(m[1]); (Array.isArray(v) ? v : [v]).forEach(add); } catch {} }
+  for (const m of html.matchAll(/<img[^>]+(?:data-zoom-image|data-src|data-flickity-lazyload|src)=["']([^"']+\.(?:jpe?g|png|webp)[^"']*)["']/gi)) add(m[1]);
+  // MELI: subir la miniatura a resolución original (-O). Dedupe por "id" de imagen.
+  const norm = u => u.replace(/-[A-Z]\.(jpe?g|webp|png)/i, '-O.$1');
+  const vistas = new Set(); const limpias = [];
+  for (const u of urls.map(norm)) {
+    const clave = (u.match(/\/([^/]+?)(?:-[A-Z])?\.(?:jpe?g|png|webp)/i) || [])[1] || u;
+    if (vistas.has(clave)) continue; vistas.add(clave);
+    if (/sprite|logo|icon|avatar|placeholder|pixel|1x1/i.test(u)) continue;
+    limpias.push(u);
+  }
+  return limpias.slice(0, 10);
+}
+
 /* ---- cuenta de administrador (login con usuario + contraseña) ----
  * La contraseña se guarda HASHEADA (scrypt) en Supabase (secreto 'admin_auth')
  * + espejo local. El login devuelve un token FIRMADO (HMAC con ADMIN_KEY) que
@@ -423,6 +468,30 @@ const server = http.createServer(async (req, res) => {
         fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(path.join(dir, nombre), buffer);
         return json(res, 200, { ok: true, url: `/fotos/${codigo}/${nombre}` });
+      }
+      // importar fotos desde un LINK (página de producto o imagen). Baja las imágenes,
+      // las sube a Storage y devuelve las URLs para que el panel las agregue a la lista.
+      const mImp = p.match(/^\/api\/fotos-importar\/([\w-]+)$/);
+      if (mImp && req.method === 'POST') {
+        const { url } = await body(req);
+        if (!url || !/^https?:\/\//i.test(url)) return json(res, 400, { error: 'pegá un link http(s) válido' });
+        const codigo = mImp[1];
+        let candidatas;
+        try { candidatas = await extraerImagenes(url.trim()); }
+        catch (e) { return json(res, 502, { error: 'No pude leer esa página: ' + e.message }); }
+        if (!candidatas.length) return json(res, 404, { error: 'No encontré imágenes en ese link. Probá pegando el link directo de una imagen.' });
+        const subidas = [], fallos = [];
+        for (const u of candidatas) {
+          try {
+            const { buffer, ext } = await bajarImagen(u);
+            if (buffer.length < 3000) continue; // descarta íconos/miniaturas basura
+            const nombre = Date.now().toString(36) + Math.random().toString(36).slice(2, 7) + '.' + ext;
+            if (supa.activo()) subidas.push(await supa.subirStorage(`${codigo}/${nombre}`, buffer, 'image/' + (ext === 'jpg' ? 'jpeg' : ext)));
+            else { const dir = path.join(FOTOS_DIR, codigo); fs.mkdirSync(dir, { recursive: true }); fs.writeFileSync(path.join(dir, nombre), buffer); subidas.push(`/fotos/${codigo}/${nombre}`); }
+          } catch (e) { fallos.push(u); }
+        }
+        if (!subidas.length) return json(res, 502, { error: 'Encontré imágenes pero no pude bajarlas (el sitio las bloquea). Probá con el link directo de la imagen.' });
+        return json(res, 200, { ok: true, urls: subidas, encontradas: candidatas.length, subidas: subidas.length });
       }
       // guardar la LISTA/ORDEN de fotos del producto (fuente de verdad en Supabase).
       // La primera del array es la portada. Espejo local para que la web lo vea al toque.

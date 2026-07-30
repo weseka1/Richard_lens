@@ -718,4 +718,4 @@ async function handler(req, res, urlObj) {
   }
 }
 
-module.exports = { handler };
+module.exports = { handler, token };
