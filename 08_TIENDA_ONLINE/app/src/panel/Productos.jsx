@@ -265,9 +265,13 @@ export default function Productos() {
   const [subiendo, setSubiendo] = useState(false);
   const [variantesDe, setVariantesDe] = useState(null);
   const [link, setLink] = useState('');
+  const [mlLista, setMlLista] = useState(null);   // candidatos de ML para "Actualizar en ML"
+  const [mlSel, setMlSel] = useState(new Set());
+  const [mlMsg, setMlMsg] = useState('');
 
   async function abrirFotos(p) {
     setFotosDe(p);
+    setMlLista(null); setMlMsg(''); setMlSel(new Set());
     // identidad = id del producto (no foto_codigo, que varios modelos comparten)
     setFotos(await fetch('/api/fotos/' + p.id).then(r => r.json()).catch(() => []));
     setMapaColores(await fetch('/api/fotos-mapa/' + p.id).then(r => r.json()).catch(() => ({})));
@@ -350,6 +354,32 @@ export default function Productos() {
   }
   const borrarFoto = src => guardarLista(fotos.filter(x => x !== src));
   const hacerPortada = src => guardarLista([src, ...fotos.filter(x => x !== src)]);
+
+  // --- Actualizar en ML: buscar publicaciones del modelo y empujar estas fotos a las elegidas ---
+  async function buscarML() {
+    setMlMsg('Buscando en MercadoLibre…'); setMlLista(null); setMlSel(new Set());
+    try {
+      const r = await fetch('/api/sync-ml/buscar/' + fotosDe.id, { method: 'POST', headers: authJSON() });
+      const j = await r.json();
+      if (!r.ok) { setMlMsg('Error: ' + (j.error || r.status)); return; }
+      setMlLista(j.candidatos || []);
+      setMlMsg((j.candidatos || []).length ? 'Elegí las publicaciones que son de ESTE color y actualizo sus fotos:' : 'No encontré publicaciones de este modelo en ML.');
+    } catch (e) { setMlMsg('Error: ' + e.message); }
+  }
+  async function pushML() {
+    const itemIds = [...mlSel];
+    if (!itemIds.length) return;
+    setMlMsg('Actualizando fotos en ML…');
+    try {
+      const r = await fetch('/api/sync-ml/push/' + fotosDe.id, { method: 'POST', headers: authJSON(), body: JSON.stringify({ itemIds }) });
+      const j = await r.json();
+      if (!r.ok) { setMlMsg('Error: ' + (j.error || r.status)); return; }
+      const ok = (j.resultados || []).filter(x => x.ok).length;
+      setMlMsg(`✓ Actualizadas ${ok} de ${itemIds.length} publicaciones con estas ${j.fotos} fotos. (ML tarda 1-2 min en mostrarlas)`);
+      setMlSel(new Set());
+    } catch (e) { setMlMsg('Error: ' + e.message); }
+  }
+  const toggleML = id => setMlSel(s => { const n = new Set(s); n.has(id) ? n.delete(id) : n.add(id); return n; });
 
   function editar(p) {
     setModal({
@@ -519,6 +549,26 @@ export default function Productos() {
               />
               Fotos revisadas — confirmo que todas son de <b>este</b> modelo
             </label>
+            {/* Actualizar estas fotos en MercadoLibre (elegís la publicación del color correcto) */}
+            <div style={{ borderTop: '1px solid #e8e2d5', margin: '2px 0 14px', paddingTop: 14 }}>
+              <button className="btn-sec" onClick={buscarML}>🔄 Actualizar estas fotos en MercadoLibre</button>
+              {mlMsg && <p className="ayuda" style={{ margin: '10px 0 0' }}>{mlMsg}</p>}
+              {mlLista && mlLista.length > 0 && (
+                <>
+                  <div style={{ maxHeight: 230, overflowY: 'auto', margin: '10px 0', border: '1px solid #eee6d6', borderRadius: 8 }}>
+                    {mlLista.map(c => (
+                      <label key={c.id} style={{ display: 'flex', gap: 10, alignItems: 'center', padding: '7px 8px', cursor: 'pointer', fontSize: '.8rem', borderBottom: '1px solid #f3eee2' }}>
+                        <input type="checkbox" style={{ width: 'auto', margin: 0 }} checked={mlSel.has(c.id)} onChange={() => toggleML(c.id)} />
+                        {c.thumbnail && <img src={c.thumbnail} alt="" style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 6, flex: '0 0 auto' }} />}
+                        <span style={{ flex: 1, lineHeight: 1.2 }}>{c.title}</span>
+                        <span style={{ whiteSpace: 'nowrap' }}>{c.status === 'active' ? '🟢' : '⏸'} {c.fotos}📷</span>
+                      </label>
+                    ))}
+                  </div>
+                  <button className="btn-oro" disabled={!mlSel.size} onClick={pushML}>Actualizar {mlSel.size ? mlSel.size + ' ' : ''}en ML</button>
+                </>
+              )}
+            </div>
             <div className="modal-botones" style={{ justifyContent: 'space-between' }}>
               <label className="btn-oro" style={{ cursor: 'pointer' }}>
                 + Agregar fotos

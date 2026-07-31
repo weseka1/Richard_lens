@@ -390,6 +390,48 @@ const server = http.createServer(async (req, res) => {
         return json(res, 200, { ok: true });
       }
 
+      // ---- botón "Actualizar en ML": empujar las fotos de la web a MercadoLibre ----
+      // 467205904 = vendedor RICHARD LENS (fijo). Buscar candidatos para que el usuario
+      // elija la publicación correcta (respeta color/variante — no adivina).
+      const mBuscarML = p.match(/^\/api\/sync-ml\/buscar\/([\w-]+)$/);
+      if (mBuscarML && req.method === 'POST') {
+        const prod = leer('productos.json', []).find(x => x.id === mBuscarML[1]);
+        if (!prod) return json(res, 404, { error: 'producto no existe' });
+        const q = `${prod.marca || ''} ${prod.modelo || ''}`.trim();
+        try {
+          const tok = await meli.token();
+          const MH = { Authorization: 'Bearer ' + tok };
+          const s = await (await fetch(`https://api.mercadolibre.com/users/467205904/items/search?q=${encodeURIComponent(q)}&limit=30`, { headers: MH })).json();
+          const ids = s.results || [];
+          const cand = [];
+          for (let i = 0; i < ids.length; i += 20) {
+            const r = await (await fetch('https://api.mercadolibre.com/items?ids=' + ids.slice(i, i + 20).join(',') + '&attributes=id,title,thumbnail,status,pictures,permalink', { headers: MH })).json();
+            r.forEach(x => { const it = x.body || x; cand.push({ id: it.id, title: it.title, thumbnail: it.thumbnail, status: it.status, fotos: (it.pictures || []).length, permalink: it.permalink }); });
+          }
+          return json(res, 200, { q, candidatos: cand });
+        } catch (e) { return json(res, 502, { error: 'MELI: ' + e.message }); }
+      }
+      const mPushML = p.match(/^\/api\/sync-ml\/push\/([\w-]+)$/);
+      if (mPushML && req.method === 'POST') {
+        const { itemIds } = await body(req);
+        if (!Array.isArray(itemIds) || !itemIds.length) return json(res, 400, { error: 'elegí al menos una publicación' });
+        const dominio = String(cfg.dominio || '').replace(/\/$/, '');
+        const fotos = listaFotos(mPushML[1]).map(u => /^https?:/.test(u) ? u : dominio + u);
+        if (!fotos.length) return json(res, 400, { error: 'el producto no tiene fotos' });
+        try {
+          const tok = await meli.token();
+          const resultados = [];
+          for (const itemId of itemIds) {
+            const r = await fetch('https://api.mercadolibre.com/items/' + itemId, {
+              method: 'PUT', headers: { Authorization: 'Bearer ' + tok, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ pictures: fotos.map(u => ({ source: u })) })
+            });
+            resultados.push({ id: itemId, ok: r.ok, error: r.ok ? null : ((await r.json().catch(() => ({}))).message || r.status) });
+          }
+          return json(res, 200, { ok: true, resultados, fotos: fotos.length });
+        } catch (e) { return json(res, 502, { error: 'MELI: ' + e.message }); }
+      }
+
       if (p === '/api/productos' && req.method === 'GET')
         return json(res, 200, productos
           .filter(x => x.estado !== 'pausado')
