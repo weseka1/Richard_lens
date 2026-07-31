@@ -415,6 +415,25 @@ const server = http.createServer(async (req, res) => {
         }
         return json(res, 200, { ok: true, id: b.id });
       }
+      // variantes (colores/talles/stock) — estilo MercadoLibre. REEMPLAZA el set completo:
+      // lo que mandás es lo que queda (agregar Y quitar funcionan). Awaita Supabase y confirma.
+      const mVar = p.match(/^\/api\/productos\/([\w-]+)\/variantes$/);
+      if (mVar && req.method === 'PUT') {
+        const { variantes } = await body(req);
+        if (!Array.isArray(variantes)) return json(res, 400, { error: 'falta variantes[]' });
+        const id = mVar[1];
+        const limpias = variantes.filter(v => (v.color || '').trim());
+        if (supa.activo()) supa.marcarEdicion();
+        const prods = leer('productos.json', []);
+        const i = prods.findIndex(x => x.id === id);
+        if (i >= 0) { prods[i].variantes = limpias; guardar('productos.json', prods); }
+        let n = limpias.length;
+        if (supa.activo()) {
+          try { n = await supa.setVariantes(id, limpias); }
+          catch (err) { return json(res, 500, { error: err.message }); }
+        }
+        return json(res, 200, { ok: true, n });
+      }
       const mProd = p.match(/^\/api\/productos\/([\w-]+)$/);
       if (mProd && req.method === 'PUT') {
         const cambios = await body(req);

@@ -81,6 +81,9 @@ module.exports = {
   actualizarProducto: seguro((id, campos) => rpc('rl_admin_update_producto', { p_id: id, campos })),
   upsertProductos: seguro(filas => rpc('rl_admin_upsert_productos', { filas })),
   upsertVariantes: seguro(filas => rpc('rl_admin_upsert_variantes', { filas })),
+  /* reemplaza el SET completo de variantes de un producto (borra las que ya no están
+   * e inserta las nuevas). Sin `seguro`: el panel necesita saber si guardó. */
+  setVariantes: (id, filas) => rpc('rl_admin_set_variantes', { p_id: id, filas }),
   borrarProducto: seguro(id => rpc('rl_admin_delete_producto', { p_id: id })),
   pedidoUpdate: seguro((localId, campos) => rpc('rl_admin_pedido_update', { p_local: localId, campos })),
   pedidoDelete: seguro(localId => rpc('rl_admin_pedido_delete', { p_local: localId })),

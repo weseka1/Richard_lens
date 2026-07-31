@@ -105,15 +105,19 @@ function EditorVariantes({ producto, onCerrar, onGuardado }) {
   const quitar = i => setFilas(f => f.filter((_, j) => j !== i));
 
   async function guardar() {
-    const limpias = filas.filter(v => (v.color || '').trim());
-    const skus = limpias.map(v => v.sku);
-    if (new Set(skus).size !== skus.length) return alert('Hay SKUs repetidos. Cada variante necesita el suyo.');
+    const conColor = filas.filter(v => (v.color || '').trim());
+    const sinColor = filas.length - conColor.length;
+    if (!conColor.length) return alert('Agregá al menos un color. El color es lo que el cliente elige en la ficha.');
+    const skus = conColor.map(v => (v.sku || '').trim()).filter(Boolean);
+    if (new Set(skus).size !== skus.length) return alert('Hay SKUs repetidos. Cada variante necesita el suyo (o dejalo vacío y se genera solo).');
     setGuardando(true);
     try {
-      await api('productos/' + producto.id, 'PUT', { ...producto, variantes: limpias });
+      // endpoint dedicado: REEMPLAZA el set completo (agregar y quitar funcionan)
+      const r = await api('productos/' + producto.id + '/variantes', 'PUT', { variantes: conColor });
       invalidarProductos();
       onGuardado();
       onCerrar();
+      alert(`✓ Guardado: ${r.n} ${r.n === 1 ? 'variante' : 'variantes'}${sinColor ? ` (${sinColor} sin color no se guardaron)` : ''}`);
     } catch (e) { alert('No se pudo guardar: ' + e.message); }
     finally { setGuardando(false); }
   }
