@@ -129,3 +129,16 @@
 .side-user { font-size: .8rem; color: var(--p-tinta, #1D1D1F); font-weight: 600; }
 .side-salir { background: transparent; border: 1px solid var(--p-borde, rgba(0,0,0,.14)); color: var(--p-tinta-60, #666); padding: 7px 12px; border-radius: 10px; font-size: .78rem; cursor: pointer; font-family: inherit; transition: border-color .2s, color .2s; }
 .side-salir:hover { border-color: #B4531F; color: #B4531F; }
+
+/* ---- editor de variantes: chips de vista previa + tabla compacta ---- */
+.tabla-variantes td input,
+.tabla-variantes td select { padding: 7px 8px; font-size: .84rem; }
+.color-punto {
+  display: inline-block; width: 12px; height: 12px; border-radius: 50%;
+  border: 1px solid rgba(0,0,0,.18); margin-right: 6px; vertical-align: -1px; flex: 0 0 auto;
+}
+.var-chip {
+  display: inline-flex; align-items: center; gap: 2px; font-size: .78rem;
+  background: #F2EDE3; border: 1px solid #e3dccd; color: #3a352d;
+  padding: 3px 9px 3px 6px; border-radius: 999px; margin: 3px 6px 0 0;
+}

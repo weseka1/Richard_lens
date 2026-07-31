@@ -91,21 +91,74 @@ const sinTildes = s => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]
 
 const ESTADOS_STOCK = ['STOCK', 'POCO STOCK', 'POR ENTRAR', 'CONSULTAR'];
 
-/* Editor de variantes estilo Tiendanube: una fila por combinación color+talle.
- * Todo editable a mano — sin esto dependés de que el proveedor mande bien el xlsx. */
+/* Paleta de colores para anteojos (con matices). Escribís "verde" y aparecen los verdes. */
+const PALETA_COLORES = [
+  'Negro', 'Blanco', 'Gris', 'Gris oscuro', 'Gris claro', 'Gris humo', 'Plateado', 'Dorado', 'Gunmetal', 'Bronce', 'Nude',
+  'Marrón', 'Marrón oscuro', 'Marrón claro', 'Carey', 'Havana', 'Tortoise', 'Ámbar', 'Beige',
+  'Rojo', 'Bordó', 'Vino', 'Rosa', 'Rosa claro', 'Rosa viejo', 'Fucsia', 'Coral',
+  'Naranja', 'Naranja flúor', 'Amarillo', 'Mostaza', 'Ocre',
+  'Verde', 'Verde oscuro', 'Verde claro', 'Verde militar', 'Verde agua', 'Verde botella', 'Oliva', 'Menta',
+  'Azul', 'Azul oscuro', 'Azul marino', 'Azul claro', 'Celeste', 'Turquesa', 'Petróleo',
+  'Violeta', 'Lila', 'Morado', 'Púrpura',
+  'Transparente', 'Cristal', 'Ahumado', 'Degradado', 'Degradado marrón', 'Degradado gris',
+  'Espejado', 'Espejado azul', 'Espejado plata', 'Espejado dorado', 'Espejado rosa',
+  'Polarizado', 'Fotocromático', 'Prizm Sapphire', 'Prizm Ruby', 'Prizm Black', 'Prizm Rose Gold', 'G-15', 'B-15'
+];
+/* muestra de color para el puntito del menú (aproximado; default gris) */
+const MUESTRA = {
+  negro: '#111', blanco: '#fff', gris: '#8a8a8a', 'gris oscuro': '#555', 'gris claro': '#c8c8c8', 'gris humo': '#9a958f', plateado: '#cfd4d8', dorado: '#c9a227', gunmetal: '#4a4e54', bronce: '#8c6b3f', nude: '#e6c9b0',
+  marrón: '#6b4423', 'marrón oscuro': '#4a2e18', 'marrón claro': '#a9763f', carey: '#7a4a1e', havana: '#6e4423', tortoise: '#6e4423', ámbar: '#c47a1a', beige: '#e3cfa8',
+  rojo: '#c0392b', bordó: '#6d1a2a', vino: '#722f37', rosa: '#e58fb0', 'rosa claro': '#f3c6d6', 'rosa viejo': '#c98a92', fucsia: '#d81b8c', coral: '#f0765a',
+  naranja: '#e8720c', 'naranja flúor': '#ff6a00', amarillo: '#e8c20c', mostaza: '#c69214', ocre: '#b07a2a',
+  verde: '#2e8b57', 'verde oscuro': '#1f5133', 'verde claro': '#7ec98f', 'verde militar': '#4b5320', 'verde agua': '#8fd6c4', 'verde botella': '#13543a', oliva: '#6b6b23', menta: '#a9e6c9',
+  azul: '#2860c4', 'azul oscuro': '#16336b', 'azul marino': '#1b264f', 'azul claro': '#7fb0e6', celeste: '#68b8e0', turquesa: '#22b3b0', petróleo: '#1f5560',
+  violeta: '#7b3fbf', lila: '#b79ad6', morado: '#5e2b8a', púrpura: '#6a1b7a',
+  transparente: 'linear-gradient(135deg,#eee,#cfcfcf)', cristal: 'linear-gradient(135deg,#eef4f7,#cdd9de)', ahumado: '#5a5550',
+  degradado: 'linear-gradient(#8a6b4a,#efe6da)', espejado: 'linear-gradient(135deg,#bfe3f0,#e7cfe0)', polarizado: '#3a3f45', fotocromático: 'linear-gradient(135deg,#cfd6da,#7a7f86)',
+  'prizm sapphire': 'linear-gradient(135deg,#1f6bd6,#0a3f8a)', 'prizm ruby': 'linear-gradient(135deg,#e0561f,#b01030)', 'prizm black': '#2b2b2b', 'prizm rose gold': 'linear-gradient(135deg,#e6b98f,#c98a92)'
+};
+const muestraDe = c => MUESTRA[sinTildes(c)] || '#b9b3aa';
+
+/* Selector de color: input con datalist nativo — menú de todos los colores y, cuando
+ * escribís (ej. "verde"), el navegador filtra los que matchean. No se corta con el scroll. */
+function ColorCombo({ value, onChange, placeholder }) {
+  return (
+    <input
+      list="paleta-colores" value={value || ''} placeholder={placeholder}
+      onChange={e => onChange(e.target.value)}
+    />
+  );
+}
+
+/* Editor de variantes estilo MercadoLibre: color de marco / lente / varilla, con menú
+ * de colores + typeahead. La 1ª parte con dato arma el "color" que ve el cliente. */
 function EditorVariantes({ producto, onCerrar, onGuardado }) {
-  const [filas, setFilas] = useState(() => (producto.variantes || []).map(v => ({ ...v })));
+  // migración suave: una variante vieja (solo `color`) pasa ese color a "marco"
+  const [filas, setFilas] = useState(() => (producto.variantes || []).map(v => ({
+    ...v,
+    color_marco: v.color_marco || (!v.color_lente && !v.color_varilla ? (v.color || '') : ''),
+    color_lente: v.color_lente || '',
+    color_varilla: v.color_varilla || ''
+  })));
   const [guardando, setGuardando] = useState(false);
 
   const set = (i, campo, valor) => setFilas(f => f.map((x, j) => j === i ? { ...x, [campo]: valor } : x));
   const agregar = () => setFilas(f => [...f, {
-    color: '', talle: '', stock: 'CONSULTAR',
+    color_marco: '', color_lente: '', color_varilla: '', talle: '', stock: 'CONSULTAR',
     sku: `${producto.codigo || producto.id}-${f.length + 1}`, codigo: producto.codigo || ''
   }]);
   const quitar = i => setFilas(f => f.filter((_, j) => j !== i));
+  // el "color" que ve el cliente se arma con las partes (marco lidera; suma lente/varilla)
+  const componer = v => {
+    const p = [];
+    if ((v.color_marco || '').trim()) p.push(v.color_marco.trim());
+    if ((v.color_lente || '').trim()) p.push('lente ' + v.color_lente.trim());
+    if ((v.color_varilla || '').trim()) p.push('varilla ' + v.color_varilla.trim());
+    return p.join(' · ') || (v.color || '').trim();
+  };
 
   async function guardar() {
-    const conColor = filas.filter(v => (v.color || '').trim());
+    const conColor = filas.map(v => ({ ...v, color: componer(v) })).filter(v => v.color);
     const sinColor = filas.length - conColor.length;
     if (!conColor.length) return alert('Agregá al menos un color. El color es lo que el cliente elige en la ficha.');
     const skus = conColor.map(v => (v.sku || '').trim()).filter(Boolean);
@@ -125,19 +178,28 @@ function EditorVariantes({ producto, onCerrar, onGuardado }) {
   return (
     <div className="modal-fondo abierto" onClick={e => e.target === e.currentTarget && onCerrar()}>
       <div className="modal-caja" style={{ maxWidth: 860 }}>
+        <datalist id="paleta-colores">{PALETA_COLORES.map(c => <option key={c} value={c} />)}</datalist>
         <h2>Variantes — {producto.marca} {producto.modelo}</h2>
-        <p className="ayuda">Cada fila es un color + talle con su stock. Lo que ponés acá es lo que el cliente elige en la ficha. El color tiene que escribirse igual que el que le asignás a las fotos.</p>
+        <p className="ayuda">Cada fila es una variante. Elegí el color de cada parte: escribí (ej. "verde") y te salen los matices para elegir, o tocá el menú. El <b>marco</b> es el color principal que ve el cliente. Talle y stock a la derecha.</p>
         <div style={{ maxHeight: '52vh', overflowY: 'auto', margin: '12px 0' }}>
-          <table>
+          <table className="tabla-variantes">
             <thead>
-              <tr><th style={{ minWidth: 170 }}>Color</th><th>Talle</th><th>SKU</th><th>Stock</th><th></th></tr>
+              <tr>
+                <th style={{ minWidth: 130 }}>Color marco</th>
+                <th style={{ minWidth: 130 }}>Color lente</th>
+                <th style={{ minWidth: 130 }}>Color varilla</th>
+                <th style={{ minWidth: 90 }}>Talle</th>
+                <th style={{ minWidth: 110 }}>Stock</th>
+                <th></th>
+              </tr>
             </thead>
             <tbody>
               {filas.map((v, i) => (
                 <tr key={i}>
-                  <td><input value={v.color || ''} placeholder="Negro/verde" onChange={e => set(i, 'color', e.target.value)} /></td>
-                  <td><input value={v.talle || ''} placeholder="Standard (50-22)" onChange={e => set(i, 'talle', e.target.value)} /></td>
-                  <td><input value={v.sku || ''} onChange={e => set(i, 'sku', e.target.value)} /></td>
+                  <td><ColorCombo value={v.color_marco} placeholder="Negro…" onChange={val => set(i, 'color_marco', val)} /></td>
+                  <td><ColorCombo value={v.color_lente} placeholder="Verde…" onChange={val => set(i, 'color_lente', val)} /></td>
+                  <td><ColorCombo value={v.color_varilla} placeholder="opcional" onChange={val => set(i, 'color_varilla', val)} /></td>
+                  <td><input value={v.talle || ''} placeholder="Standard" onChange={e => set(i, 'talle', e.target.value)} /></td>
                   <td>
                     <select value={v.stock || 'CONSULTAR'} onChange={e => set(i, 'stock', e.target.value)}>
                       {ESTADOS_STOCK.map(s => <option key={s} value={s}>{s}</option>)}
@@ -146,10 +208,16 @@ function EditorVariantes({ producto, onCerrar, onGuardado }) {
                   <td><button className="btn-mini" onClick={() => quitar(i)}>×</button></td>
                 </tr>
               ))}
-              {!filas.length && <tr><td colSpan="5"><span className="ayuda">Sin variantes. Agregá la primera.</span></td></tr>}
+              {!filas.length && <tr><td colSpan="6"><span className="ayuda">Sin variantes. Agregá la primera.</span></td></tr>}
             </tbody>
           </table>
         </div>
+        {filas.some(v => componer(v)) && (
+          <div style={{ margin: '4px 0 12px' }}>
+            <span className="ayuda">Así lo verá el cliente: </span>
+            {filas.map((v, i) => { const c = componer(v); return c ? <span key={i} className="var-chip"><span className="color-punto" style={{ background: muestraDe(v.color_marco || v.color_lente || v.color_varilla) }} />{c}</span> : null; })}
+          </div>
+        )}
         <div className="modal-botones" style={{ justifyContent: 'space-between' }}>
           <button className="btn-sec" onClick={agregar}>+ Agregar variante</button>
           <div style={{ display: 'flex', gap: 10 }}>
