@@ -239,9 +239,36 @@ export default function Productos() {
   const [fEstado, setFEstado] = useState('');
   const [fCanal, setFCanal] = useState('');
   const [fFotos, setFFotos] = useState('');
+  const [sunbh, setSunbh] = useState(null);   // {items, rep, aplicando} para el sync de stock
 
   const cargar = () => api('admin/productos').then(setLista).catch(() => {});
   useEffect(() => { cargar(); }, []);
+
+  // Sincronizar stock de sun-bh: leés el Excel que bajás, matchea por código y actualiza
+  // qué está disponible / a pedido (a_pedido = sin stock). Vista previa antes de aplicar.
+  async function leerExcelSunbh(e) {
+    const file = e.target.files[0]; e.target.value = '';
+    if (!file) return;
+    setSunbh({ cargando: true });
+    try {
+      const XLSX = await import('xlsx');
+      const wb = XLSX.read(await file.arrayBuffer(), { type: 'array' });
+      const filas = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1 });
+      // col 1 = código, col 5 = estado de stock (verificado con el Excel real de sun-bh)
+      const items = filas.map(r => ({ codigo: r?.[1], stock: r?.[5] })).filter(x => x.codigo && x.stock);
+      if (!items.length) { setSunbh({ error: 'No encontré códigos/stock en el Excel. ¿Es el de sun-bh?' }); return; }
+      const rep = await api('stock-sync', 'POST', { items, aplicar: false });
+      setSunbh({ items, rep });
+    } catch (err) { setSunbh({ error: err.message }); }
+  }
+  async function aplicarSunbh() {
+    setSunbh(s => ({ ...s, aplicando: true }));
+    try {
+      const rep = await api('stock-sync', 'POST', { items: sunbh.items, aplicar: true });
+      invalidarProductos(); cargar();
+      setSunbh({ rep, hecho: true });
+    } catch (err) { setSunbh(s => ({ ...s, error: err.message, aplicando: false })); }
+  }
 
   const filtrada = lista.filter(p => {
     const txt = sinTildes(`${p.marca} ${p.modelo} ${p.codigo} ${p.id}`);
@@ -416,6 +443,10 @@ export default function Productos() {
       <div className="vista-head">
         <h1>Productos</h1>
         <div className="acciones">
+          <label className="btn-sec" style={{ cursor: 'pointer' }}>
+            🔄 Sincronizar stock sun-bh
+            <input type="file" accept=".xlsx,.xls" hidden onChange={leerExcelSunbh} />
+          </label>
           <button className="btn-sec" onClick={sync}>Importar STOCK.csv</button>
           <a className="btn-sec" href="/api/export-shopify.csv" download style={{ textDecoration: 'none', display: 'inline-block' }}>Exportar a Shopify</a>
           <button className="btn-oro" onClick={() => editar(null)}>+ Producto</button>
@@ -577,6 +608,48 @@ export default function Productos() {
                 <input type="file" accept="image/*" multiple hidden onChange={subirFotos} />
               </label>
               <button className="btn-sec" onClick={() => setFotosDe(null)}>Listo</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {sunbh && (
+        <div className="modal-fondo abierto" onClick={e => e.target === e.currentTarget && !sunbh.aplicando && setSunbh(null)}>
+          <div className="modal-caja" style={{ maxWidth: 640 }}>
+            <h2>Sincronizar stock — sun-bh</h2>
+            {sunbh.cargando && <p className="ayuda">Leyendo el Excel…</p>}
+            {sunbh.error && <p className="login-err">{sunbh.error}</p>}
+            {sunbh.rep && (
+              <>
+                <div style={{ display: 'flex', gap: 22, margin: '14px 0' }}>
+                  <div><b style={{ fontSize: '1.5rem', color: '#1D7A3E' }}>{sunbh.rep.conStock}</b><br /><span className="ayuda">con stock</span></div>
+                  <div><b style={{ fontSize: '1.5rem', color: '#B4531F' }}>{sunbh.rep.sinStock}</b><br /><span className="ayuda">sin stock</span></div>
+                  <div><b style={{ fontSize: '1.5rem' }}>{sunbh.rep.totalCambios}</b><br /><span className="ayuda">cambios</span></div>
+                  <div><b style={{ fontSize: '1.5rem', color: '#aaa' }}>{sunbh.rep.noMatch}</b><br /><span className="ayuda">no en Excel</span></div>
+                </div>
+                {sunbh.hecho
+                  ? <p style={{ color: '#1D7A3E', fontWeight: 600 }}>✓ Aplicado. Los sin stock quedaron "a pedido" — no se venden en la web.</p>
+                  : sunbh.rep.totalCambios > 0
+                    ? <>
+                        <p className="ayuda">Estos productos cambian de estado. "sin stock" = pasa a "a pedido" (no se vende):</p>
+                        <div style={{ maxHeight: 260, overflowY: 'auto', border: '1px solid #eee6d6', borderRadius: 8, margin: '8px 0' }}>
+                          {sunbh.rep.cambios.map(c => (
+                            <div key={c.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 9px', borderBottom: '1px solid #f3eee2', fontSize: '.8rem' }}>
+                              <span>{c.modelo}</span>
+                              <span>{c.de} → <b style={{ color: c.a === 'disponible' ? '#1D7A3E' : '#B4531F' }}>{c.a === 'disponible' ? 'disponible ✓' : 'sin stock'}</b></span>
+                            </div>
+                          ))}
+                          {sunbh.rep.totalCambios > sunbh.rep.cambios.length && <div style={{ padding: '5px 9px', fontSize: '.78rem' }} className="ayuda">…y {sunbh.rep.totalCambios - sunbh.rep.cambios.length} más</div>}
+                        </div>
+                      </>
+                    : <p className="ayuda">Todo ya estaba al día — no hay cambios que aplicar.</p>}
+              </>
+            )}
+            <div className="modal-botones">
+              {sunbh.rep && !sunbh.hecho && sunbh.rep.totalCambios > 0 && (
+                <button className="btn-oro" disabled={sunbh.aplicando} onClick={aplicarSunbh}>{sunbh.aplicando ? 'Aplicando…' : `Aplicar ${sunbh.rep.totalCambios} cambios`}</button>
+              )}
+              <button className="btn-sec" disabled={sunbh.aplicando} onClick={() => setSunbh(null)}>{sunbh.hecho ? 'Listo' : 'Cancelar'}</button>
             </div>
           </div>
         </div>

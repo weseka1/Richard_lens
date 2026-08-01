@@ -432,6 +432,43 @@ const server = http.createServer(async (req, res) => {
         } catch (e) { return json(res, 502, { error: 'MELI: ' + e.message }); }
       }
 
+      // ---- sincronizar stock desde el Excel de sun-bh (semi-automático) ----
+      // items = [{codigo, stock}]. HAY stock = STOCK/POCO STOCK; el resto = no vender.
+      // aplicar=false → vista previa (qué cambiaría); aplicar=true → lo persiste.
+      if (p === '/api/stock-sync' && req.method === 'POST') {
+        const { items, aplicar } = await body(req);
+        if (!Array.isArray(items)) return json(res, 400, { error: 'falta items[]' });
+        const HAY = new Set(['STOCK', 'POCO STOCK']);
+        // OJO: el código se normaliza SIN espacios (para matchear), pero el estado de stock
+        // se deja con su formato (trim+upper) — si le sacás el espacio, "POCO STOCK" deja de
+        // matchear con la lista de "hay stock" y esconderías productos vendibles.
+        const normCod = s => String(s || '').trim().toUpperCase().replace(/\s+/g, '');
+        const normStk = s => String(s || '').trim().toUpperCase();
+        const mapa = new Map();
+        for (const it of items) if (it && it.codigo) mapa.set(normCod(it.codigo), normStk(it.stock));
+        const prods = leer('productos.json', []);
+        let conStock = 0, sinStock = 0, noMatch = 0;
+        const cambios = [];
+        for (const prod of prods) {
+          if (prod.estado === 'proximamente') continue;   // no tocar el drop RICH001
+          const s = prod.codigo ? mapa.get(normCod(prod.codigo)) : null;
+          if (s == null) { noMatch++; continue; }
+          const hay = HAY.has(s);
+          if (hay) conStock++; else sinStock++;
+          const nuevo = hay ? 'disponible' : 'a_pedido';
+          if (prod.estado !== nuevo) cambios.push({ id: prod.id, modelo: `${prod.marca || ''} ${prod.modelo || ''}`.trim(), de: prod.estado, a: nuevo, stock: s });
+        }
+        if (aplicar && cambios.length) {
+          if (supa.activo()) supa.marcarEdicion();
+          const cm = new Map(cambios.map(c => [c.id, c.a]));
+          const prods2 = leer('productos.json', []);
+          for (const prod of prods2) if (cm.has(prod.id)) prod.estado = cm.get(prod.id);
+          guardar('productos.json', prods2);
+          if (supa.activo()) for (const c of cambios) supa.actualizarProducto(c.id, { estado: c.a });
+        }
+        return json(res, 200, { conStock, sinStock, noMatch, totalCambios: cambios.length, cambios: cambios.slice(0, 60), aplicado: !!(aplicar && cambios.length) });
+      }
+
       if (p === '/api/productos' && req.method === 'GET')
         return json(res, 200, productos
           .filter(x => x.estado !== 'pausado')
