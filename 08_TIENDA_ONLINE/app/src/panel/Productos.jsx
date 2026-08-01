@@ -145,7 +145,7 @@ function EditorVariantes({ producto, onCerrar, onGuardado }) {
   const set = (i, campo, valor) => setFilas(f => f.map((x, j) => j === i ? { ...x, [campo]: valor } : x));
   const agregar = () => setFilas(f => [...f, {
     color_marco: '', color_lente: '', color_varilla: '', talle: '', stock: 'CONSULTAR',
-    sku: `${producto.codigo || producto.id}-${f.length + 1}`, codigo: producto.codigo || ''
+    codigo: producto.codigo || '', sku: ''  // sku se autogenera en la base si queda vacío
   }]);
   const quitar = i => setFilas(f => f.filter((_, j) => j !== i));
   // el "color" que ve el cliente se arma con las partes (marco lidera; suma lente/varilla)
@@ -180,16 +180,17 @@ function EditorVariantes({ producto, onCerrar, onGuardado }) {
       <div className="modal-caja" style={{ maxWidth: 860 }}>
         <datalist id="paleta-colores">{PALETA_COLORES.map(c => <option key={c} value={c} />)}</datalist>
         <h2>Variantes — {producto.marca} {producto.modelo}</h2>
-        <p className="ayuda">Cada fila es una variante. Elegí el color de cada parte: escribí (ej. "verde") y te salen los matices para elegir, o tocá el menú. El <b>marco</b> es el color principal que ve el cliente. Talle y stock a la derecha.</p>
+        <p className="ayuda">Cada fila es una variante. Elegí el color de cada parte (escribí "verde" y salen los matices). El <b>marco</b> es el color principal. El <b>Código / SKU</b> es el de sun-bh (ej. OO9349-1353) — sirve para el stock y para matchear con el proveedor. Si lo dejás vacío, el SKU se genera solo.</p>
         <div style={{ maxHeight: '52vh', overflowY: 'auto', margin: '12px 0' }}>
           <table className="tabla-variantes">
             <thead>
               <tr>
-                <th style={{ minWidth: 130 }}>Color marco</th>
-                <th style={{ minWidth: 130 }}>Color lente</th>
-                <th style={{ minWidth: 130 }}>Color varilla</th>
-                <th style={{ minWidth: 90 }}>Talle</th>
-                <th style={{ minWidth: 110 }}>Stock</th>
+                <th style={{ minWidth: 115 }}>Color marco</th>
+                <th style={{ minWidth: 115 }}>Color lente</th>
+                <th style={{ minWidth: 115 }}>Color varilla</th>
+                <th style={{ minWidth: 80 }}>Talle</th>
+                <th style={{ minWidth: 120 }}>Código / SKU</th>
+                <th style={{ minWidth: 105 }}>Stock</th>
                 <th></th>
               </tr>
             </thead>
@@ -200,6 +201,7 @@ function EditorVariantes({ producto, onCerrar, onGuardado }) {
                   <td><ColorCombo value={v.color_lente} placeholder="Verde…" onChange={val => set(i, 'color_lente', val)} /></td>
                   <td><ColorCombo value={v.color_varilla} placeholder="opcional" onChange={val => set(i, 'color_varilla', val)} /></td>
                   <td><input value={v.talle || ''} placeholder="Standard" onChange={e => set(i, 'talle', e.target.value)} /></td>
+                  <td><input value={v.codigo || ''} placeholder="OO9349-1353" onChange={e => set(i, 'codigo', e.target.value)} /></td>
                   <td>
                     <select value={v.stock || 'CONSULTAR'} onChange={e => set(i, 'stock', e.target.value)}>
                       {ESTADOS_STOCK.map(s => <option key={s} value={s}>{s}</option>)}
@@ -208,7 +210,7 @@ function EditorVariantes({ producto, onCerrar, onGuardado }) {
                   <td><button className="btn-mini" onClick={() => quitar(i)}>×</button></td>
                 </tr>
               ))}
-              {!filas.length && <tr><td colSpan="6"><span className="ayuda">Sin variantes. Agregá la primera.</span></td></tr>}
+              {!filas.length && <tr><td colSpan="7"><span className="ayuda">Sin variantes. Agregá la primera.</span></td></tr>}
             </tbody>
           </table>
         </div>
